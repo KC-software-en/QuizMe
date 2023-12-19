@@ -1,4 +1,5 @@
 # Project name
+QuizMe
 
 # Project description
 *Importance of the project*
