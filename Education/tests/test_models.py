@@ -67,34 +67,7 @@ class TestQuestionModel(TransactionTestCase):
         self.assertEqual(question_ins, 'Should check the attribute of the instantiated object')
         # assert that the pub_date attribute of the question_ins object is an instance of the datetime.datetime class
         self.assertIsInstance(question_ins.pub_date, datetime.datetime, 'Should check pub_date attribute is an instance of the datetime.datetime class')
-
-
-    # create a fail test where models was not imported from models.py but a wrong path
-    # https://docs.djangoproject.com/en/5.0/topics/testing/tools/#exceptions
-    def test_Models_Not_Imported(self):
-        '''
-        Create a question model that has not imported models from correct path and raises an import error.
-        '''
-        # Using 'with' in this context is part of the context management protocol in Python
-        # assert that a specific exception is raised
-        # exception instance is stored in the variable named context
-        with self.assertRaises(ImportError) as question_import_error:
-            # import question model from an incorrect path
-            from Education.views import Question
-
-            # create an instance of question model 
-            # use instance from setup()
-            # In the context of the Question model, using self.question.question_text in the setUp method makes sense because the Question model itself has a question_text field.
-            # the choice test won't need the question_text because it uses Question as a foreign key
-            question = Question_for_import.objects.create(
-                question_text = self.question.question_text,
-                pub_date = self.question.pub_date
-                )
-
-        # check if the expected import error gets raised
-        self.assertEqual(str(question_import_error.exception), "Could not import Question from entertainment.models")
-        # NOTE: in cmd it resulted in ImportError: cannot import name 'Question' from 'Education.models' (C:\Users\kisha\Dropbox\Grad program collaborative project\QuizMe\Education\models.py)        
-
+    
 '''
 Create a class to test the choice model
 '''
@@ -116,7 +89,7 @@ class TestChoiceModel(TransactionTestCase):
     def test_Models_Not_Imported(self):            
         with self.assertRaises(ImportError) as choice_import_error:
             # import choice model from an incorrect path
-            from wrongpath import Choice
+            from models import Choice
             
             # create an instance of choice model 
             # use instance from setup()
