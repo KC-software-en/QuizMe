@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# add education app
 INSTALLED_APPS = [
     'Home',
     'user_auth',

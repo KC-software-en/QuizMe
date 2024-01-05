@@ -45,11 +45,11 @@ class TestQuestionModel(TransactionTestCase):
         # no necessary conditions
         pass
     
+    '''
+    A function to test if the question model creates successfully before it coding it in models.py.
+    '''
     # create a fail test where the functions in models.py do not exist
-    def test_question_model(self):
-        '''
-        A function to test if the question model creates successfully before it coding it in models.py.
-        '''
+    def test_question_model(self):        
         # create an instance of Question model with mixer
         question_ins = mixer.blend(Question, question_text = "Will this question show my educational future?",
                                 pub_date = datetime.datetime.now())
@@ -64,37 +64,25 @@ class TestQuestionModel(TransactionTestCase):
         self.assertIsInstance(question_ins, Question, 'Should confirm that the object instantiated is from the Question class')
         
         # check attributes of instance
-        self.assertEqual(question_ins, 'Should check the attribute of the instantiated object')
+        expected_question_text = 'Will this question show my educational future?'
+        self.assertEqual(question_ins.question_text, expected_question_text,
+                          'Should check the question_text attribute of the instantiated object')
         # assert that the pub_date attribute of the question_ins object is an instance of the datetime.datetime class
         self.assertIsInstance(question_ins.pub_date, datetime.datetime, 'Should check pub_date attribute is an instance of the datetime.datetime class')
 
+    '''
+    A function to test if the str method returns the question_text.
+    '''
+    def test_return_str_question(self):
+        # Create an instance of the Question model with a specific question_text
+        question_ins = Question(question_text = 'Select the shape within the matrix')
 
-    # create a fail test where models was not imported from models.py but a wrong path
-    # https://docs.djangoproject.com/en/5.0/topics/testing/tools/#exceptions
-    def test_Models_Not_Imported(self):
-        '''
-        Create a question model that has not imported models from correct path and raises an import error.
-        '''
-        # Using 'with' in this context is part of the context management protocol in Python
-        # assert that a specific exception is raised
-        # exception instance is stored in the variable named context
-        with self.assertRaises(ImportError) as question_import_error:
-            # import question model from an incorrect path
-            from Education.views import Question
+        # call __str__ method
+        str_outcome = str(question_ins)
 
-            # create an instance of question model 
-            # use instance from setup()
-            # In the context of the Question model, using self.question.question_text in the setUp method makes sense because the Question model itself has a question_text field.
-            # the choice test won't need the question_text because it uses Question as a foreign key
-            question = Question_for_import.objects.create(
-                question_text = self.question.question_text,
-                pub_date = self.question.pub_date
-                )
-
-        # check if the expected import error gets raised
-        self.assertEqual(str(question_import_error.exception), "Could not import Question from entertainment.models")
-        # NOTE: in cmd it resulted in ImportError: cannot import name 'Question' from 'Education.models' (C:\Users\kisha\Dropbox\Grad program collaborative project\QuizMe\Education\models.py)        
-
+        # assert that the result matches the question_ins 
+        self.assertEqual(str_outcome, 'Select the shape within the matrix')
+    
 '''
 Create a class to test the choice model
 '''
@@ -109,29 +97,7 @@ class TestChoiceModel(TransactionTestCase):
     def setUp(self):        
         # use mixer to create a question instance to associate with choice instance
         self.question_ins = mixer.blend(Question, question_text = "Select the length of time you want to study")
-
-    '''
-    A funtion that imports the choice model from an incorrect path and checks that a choice object was instantiated.
-    '''
-    def test_Models_Not_Imported(self):            
-        with self.assertRaises(ImportError) as choice_import_error:
-            # import choice model from an incorrect path
-            from wrongpath import Choice
-            
-            # create an instance of choice model 
-            # use instance from setup()
-            # with the Choice model, since it has a ForeignKey relationship with the Question model, 
-            # use the self.question instance directly in the method, as it represents the Question model instance
-            # the question field is a ForeignKey to the Question model.
-            choice = Choice.objects.create(
-                question = self.question,
-                choice_text = "Option i)",
-                votes = 5,
-                )
-
-        # check if the expected import error gets raised
-        self.assertEqual(str(choice_import_error.exception), "Could not import Choice from Education.urls")
-
+    
     '''
     A function that tests the creation of an instance for the Choice object
     '''      
@@ -155,3 +121,15 @@ class TestChoiceModel(TransactionTestCase):
         # assert whether the votes attribute of the choice_ins is equal to the expected value
         self.assertEqual(choice_ins.votes, 0, 'Should check that the votes attribute of choice_ins is the expected 0')
 
+    '''
+    A function to test if the str method returns the choice_text.
+    '''
+    def test_return_str_choice(self):
+        # Create an instance of the Choice model with a specific choice_text
+        choice_ins = Choice(choice_text = 'Pentagon')
+
+        # call __str__ method
+        str_outcome = str(choice_ins)
+
+        # assert that the result matches the choice_ins 
+        self.assertEqual(str_outcome, 'Pentagon')
