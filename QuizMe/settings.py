@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 # add education app
 INSTALLED_APPS = [
-    'Home',
     'user_auth',
     'Education',
     'django.contrib.admin',
