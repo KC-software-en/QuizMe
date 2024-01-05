@@ -19,6 +19,7 @@ A Django website for a Magazine providing quizzes for Education, entertainment a
 *Highlights and links to the authors of your project if the project has been created by more than one person*
 
 @KC-software-en
+@Deandre1dev
 
 # Add a URL to your GitHub repository
 https://github.com/KC-software-en/QuizMe
