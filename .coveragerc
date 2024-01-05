@@ -15,3 +15,8 @@ omit =
 # show line numbers of missing
 [report]
 show_missing = True
+
+# now run in cmd:
+# `coverage run manage.py test`
+# `coverage html`
+
