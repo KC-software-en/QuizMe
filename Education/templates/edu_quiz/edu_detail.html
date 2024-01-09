@@ -27,9 +27,9 @@
             <p><strong>{{error_message}}</strong></p>
         {% endif %}
 
-        <!--Method-calling happens in the {% for %} loop: 
+        <!--Method-calling happens in the { for } loop: 
         question.choice_set.all is interpreted as the Python code question.choice_set.all(), 
-        which returns an iterable of Choice objects and is suitable for use in the {% for %} tag.-->
+        which returns an iterable of Choice objects and is suitable for use in the { for } tag.-->
         <!--the post method was used to send data to the server
         the url in the action attribute was used to send data to the server-->
         <form action="{% url 'Education:vote' question.id %}" method="post">
@@ -52,7 +52,7 @@
                 </label>
                 <br/>
                 {% endfor %}
-                
+
                 <!-- A button that allows the user to submit their choice-->
                 <!--when somebody selects one of the radio buttons and submits the form, it’ll POST the data “choice=id” where id is the ID of the selected choice-->
                 <!--use margins to allow space above-under the button-->
