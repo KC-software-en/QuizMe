@@ -3,7 +3,7 @@ from Home.views import index
 
 # Failing test
 '''
-Create a class to test the Views.
+Create a class to test the Urls.
 ''' 
 class HomeViewTest(TestCase):
 
