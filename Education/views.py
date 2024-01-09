@@ -19,8 +19,11 @@ from django.urls import reverse
 
 # Create your views here.
 
-# create an index view that will be the home page for the project
-# loads the template called polls/poll.html and passes it a context. 
+# index view for home page of QuizMe project
+#def index(request): ############################################################add here
+
+# create an index view that will be the home page for Education
+# loads the template called edu_quiz/edu_quiz.html and passes it a context. 
 # The context is a dictionary that maps template variable names to Python objects.
 # comment out HttpResponse after checking it renders when running server
 def index_edu(request):
