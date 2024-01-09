@@ -1,35 +1,70 @@
 # https://docs.djangoproject.com/en/5.0/intro/tutorial05/#id7
 # reverse function is used in Django to generate URLs for views based on their names or patterns
+from urllib import request, response
 from django.urls import reverse
 
-# import views
+# import all views
+# (had to use this structure so that response object would recognise views)
 from .. import views
 
 # https://docs.djangoproject.com/en/5.0/topics/testing/tools/#transactiontestcase
 # import TransactionTestCase because
 # tests rely on database access such as creating or querying models, 
 # :. create test classes as subclasses of django.test.TestCase rather than unittest.TestCase
-from django.test import TransactionTestCase
+# import RequestFactory to generate a HttpRequest objects & simulate HTTP requests
+# https://docs.djangoproject.com/en/5.0/topics/testing/tools/#the-test-client
+# https://docs.djangoproject.com/en/5.0/topics/testing/advanced/#the-request-factory
+# import base class for all Django test cases (for writing tests, including test assertions, database setup and teardown, and other testing infrastructure)
+from django.test import TestCase, TransactionTestCase, RequestFactory
+
+# import AnonymousUser model - a special type of user object representing an unauthenticated user or a user who is not logged in
+from django.contrib.auth.models import AnonymousUser
+
+# import the Question model
+from ..models import Question
+
+# import timezone for Question instance
+from django.utils import timezone
 
 #############################################################################################
 #############################################################################################
+# Create your tests here. Use `py manage.py test to run tests in cmd
+# after writing a test, run in cmd & it will say fail. 
+# next, go to views.py and create the views. Then it should pass
+# run coverage after tests
 
 '''
-Create a class to test the behaviour of a view associated with the "index" endpoint of a education app.
+Create a class to test the views of the Education quiz application.
 '''
-# Create a class to test the index view
-class QuestionIndexViewTests(TransactionTestCase):
-    def test_no_questions(self):
-        """
-        A method responsible for testing a specific scenario related to the absence of questions.
-        """
-        # Send a GET request to the "index" endpoint using Django's client object
-        # use reverse("Education:index") to generate the URL for the "index" endpoint based on its name
+# test the views with RequestFactory
+class TestEducationViews(TestCase):
+    # setup RequestFactory for all views
+    # setup a user who is not logged in with AnonymousUser
+    def setUp(self):
+        self.factory = RequestFactory()
+        request.user = AnonymousUser()
+
+    def test_index_view(self):
+        # create an instance of index view
+        # test index view as if it were deployed at /edu_quiz/edu_quiz.html
         # Assert that the HTTP response status code is 200 (OK), indicating a successful request.
-        # Assert that the response body contains the specified text, indicating that there are no questions available
-        # If no questions exist, an appropriate message is displayed.
-        # Assert that the "latest_question_list" in the context of the response is an empty queryset, indicating that no questions are present
-        response = self.client.get(reverse("Education:index"))
-        self.assertEqual(response.status_code, 200, 'Should check for a successful GET request')        
-        self.assertContains(response, "No questions are available.", 'Should check that a message displays if no questions exist')
-        self.assertQuerySetEqual(response.context["latest_question_list"], [], 'Should check that no questions are present')       
+        request = self.factory.get("/edu_quiz/edu_quiz.html")
+        response = views.index(request)
+        self.assertEqual(response.status_code, 200, 'Should check for a successful GET request of index view for anyone')
+
+    def test_detail_view(self):
+        # create an instance of detail view
+        # test detail view as if it were deployed at /edu_quiz/edu_quiz.html
+        # place any number for id
+        # Assert that the HTTP response status code is 200 (OK), indicating a successful request.
+        question = Question.objects.create(question_text="Sample Question", pub_date=timezone.now())
+        question_id = question.id        
+        request = self.factory.get("/edu_quiz/edu_detail.html/{question_id}/")
+        response = views.detail(request, question_id=question_id)
+        self.assertEqual(response.status_code, 200, 'Should check for a successful GET request of detail view for anyone')
+
+    def test_results_view(self):
+        pass
+
+    def test_vote_view(self):
+        pass
