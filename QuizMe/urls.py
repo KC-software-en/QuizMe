@@ -32,7 +32,7 @@ Add paths for the modules in QuizMe.
 # edu has index.html so leave path open for it to render when server starts
 urlpatterns = [
     path('admin/', admin.site.urls),      
-    path('', include("Education.urls"))
+    path('', include("Education.urls")),
     path('user_auth/', include("user_auth.urls")),
 
 ]
