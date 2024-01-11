@@ -23,3 +23,11 @@ class TestAccountCreationForm(TestCase):
 
         self.assertTrue(form.is_valid())
         
+    def test_register_form_redirect(self):
+        response = self.client.post(reverse('user_auth:register'), data={
+            'username': 'testuser',            
+            'first_name': 'Usertest',
+            'password1': 'password321@1',
+            'password2': 'password321@1'
+        })
+        self.assertEqual(response.status_code, 302)    
