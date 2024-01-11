@@ -10,7 +10,6 @@
 # import TransactionTestCase because
 # tests rely on database access such as creating or querying models, 
 # :. create test classes as subclasses of django.test.TestCase rather than unittest.TestCase
-from venv import create
 from django.test import TransactionTestCase
 
 # import mixer
@@ -23,6 +22,9 @@ import datetime
 
 # import classes from models.py 
 from Education.models import Question, Choice 
+
+# import datetime for question instance
+import datetime
 
 #####################################################################################
 
