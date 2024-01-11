@@ -17,7 +17,7 @@ app_name = 'Education'
 # under urlpatterns, paste the code that references the functions in views.py
 urlpatterns = [
     path('', views.index, name='index'),    
-    path('Education/index_edu/', views.index_edu, name='index_edu'),        
+    path('Education/', views.index_edu, name='index_edu'),        
     path('Education/<int:question_id>/',views.detail, name='detail'),
     path('Education/<int:question_id>/results/',views.results, name='results'),
     path('Education/<int:question_id>/vote/',views.vote, name='vote'),
