@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 def index(request):
-    return HttpResponse("This is the Education quiz index.")
+    return render(request, 'index.html')
 
 def detail(request, question_id):
     return HttpResponse(f"You're looking at question {question_id}")

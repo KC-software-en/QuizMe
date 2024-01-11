@@ -1,78 +1,53 @@
-from django.test import SimpleTestCase
-from django.urls import reverse, resolve
-from user_auth.views import user_login, user_logout, user_register
+# Django documentation.
+#https://docs.djangoproject.com/en/5.0/topics/testing/tools/#simpletestcase
 
-# Failing test "If the user is directed to the wrong url"
+# Import SimpleTestCase.
+# This helps to avoid executing write queries which will affect other tests since each SimpleTestCase test isn’t run in a transaction.
+from django.test import SimpleTestCase
+# Import reverse is a utility function in Django that is used to generate URLs for views from their names and arguments
+# Import resolve which is used to resolve URL paths to a corresponding view.
+from django.urls import reverse, resolve
+#Import views.
+from .. import views
+
 '''
 Create a class to test the Urls.
 ''' 
-class TestUrls(SimpleTestCase):
-
-    def setup(self):
-        # no necessary conditions
-        pass
-    
-    '''
-        A function to test if the incorrect template is rendered if the user enters the login url path.
-    '''
-    def test_login_page_invalid(self):
-        url = reverse("login") 
-        # used to generate a URL based on view name.
-        self.assertNotEquals(resolve(url).func, 'user_login') 
-        # The assert equals function is used to take the url path and return a object based on the resolver match which is a veiw and not a string.
-        # The above Testing class will fail because the resolver match should return the user_login view and not the string 'user_login'.
-
-    
-    '''
-        A function to test if the incorrect template is rendered if the user enters the logout url path.
-    '''
-    def test_logout_page_invalid(self):
-        url = reverse("logout") 
-        # used to generate a URL based on view name.
-        self.assertNotEquals(resolve(url).func, 'user_logout') 
-        # The assert equals function is used to take the url path and return a object based on the resolver match which is a veiw and not a string.
-        # The above Testing class will fail because the resolver match should return the user_logout view and not the string 'user_logout'.
-
-    
-    '''
-        A function to test if the incorrect template is rendered if the user enters the register url path.
-    '''
-    def test_register_page_invalid(self):
-        url = reverse("register") 
-        # used to generate a URL based on view name.
-        self.assertNotEquals(resolve(url).func, 'user_register') 
-        # The assert equals function is used to take the url path and return a object based on the resolver match which is a veiw and not a string.
-        # The above Testing class will fail because the resolver match should return the user_register view and not the user_register 'index'.   
-
-# Positive test "If the user is directed to the correct url"
+# Failing test "If the user is directed to the wrong url"
+# After writing the fail tests, run in cmd terminal it should fail. 
+# Next, go to urls.py and create the urls and it should pass.
+# Create a class to test the home views.
+# run coverage after tests
+class TestUrls(SimpleTestCase):    
     '''
         A function to test if the correct template is rendered if the user enters the login url path.
+        
     '''    
+    # The test will Pass because the resolver match should return the user_login view.
     def test_login_page_valid(self):
-        url = reverse("login")
         # used to generate a URL based on view name.
-        self.assertEquals(resolve(url).func, user_login) 
+        url = reverse("user_auth:login")
         # The assert equals function is used to take the url path and return a object based on the resolver match which is a veiw.
-        # The above Testing class will Pass because the resolver match should return the user_login view.
-
-       
+        self.assertEquals(resolve(url).func, views.user_login) 
+    
     '''
         A function to test if the correct template is rendered if the user enters the logout url path.
     '''
+    # The test will Pass because the resolver match should return the user_logout view.
     def test_logout_page_valid(self):
-        url = reverse("logout") 
         # used to generate a URL based on view name.
-        self.assertEquals(resolve(url).func, user_logout) 
+        url = reverse("user_auth:logout") 
         # The assert equals function is used to take the url path and return a object based on the resolver match which is a view.
-        # The above Testing class will Pass because the resolver match should return the user_logout view.
-
+        self.assertEquals(resolve(url).func, views.user_logout) 
      
     '''
         A function to test if the correct template is rendered if the user enters the register url path.
     '''
+    # The test will Pass because the resolver match should return the user_register view.
     def test_register_page_valid(self):
-        url = reverse("register") 
         # used to generate a URL based on view name.
-        self.assertEquals(resolve(url).func, user_register) 
+        url = reverse("user_auth:register") 
         # The assert equals function is used to take the url path and return a object based on the resolver match which is a veiw.
-        # The above Testing class will Pass because the resolver match should return the user_register view.
+        self.assertEquals(resolve(url).func, views.user_register) 
+        
+        

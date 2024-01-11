@@ -33,12 +33,30 @@
                             </a>
                         </div>
                             <a class="nav-item">
-                                <a class="nav-link active" href="logout" tabindex="-1" aria-disabled="true">Logout</a>
+                                <a class="nav-link active" href="/user_auth/logout" tabindex="-1" aria-disabled="true">Logout</a>
                             </a>
                     </div>
                 </div>
             </nav>
             {% endblock %}
+
+            <div class="row" style="padding-top: 50pt;">
+                <div class="col-md-6" style="padding-left: 80pt;">
+                    <form action="{% url 'user_auth:authenticate_user' %}" method="post">
+                        {% csrf_token %}
+        
+                        <label>Username</label>
+                        <input type="text" name="username" placeholder="User" required>
+                        <br/><br/>
+        
+                        <label>Password</label>
+                        <input type="password" name="password" required>
+                        <br/><br/>
+        
+                        <input type="submit" value="Login" />
+                    </form>
+                </div>        
+            </div>  
 
             {% block footer %}
             <!--Copyright information-->
