@@ -1,0 +1,17 @@
+[run]
+source = Education
+
+# the files to be excluded from coverage report
+omit =     
+    Education/migrations/*
+    QuizMe/settings.py
+    Education/tests/*
+    Education/__init__.py
+    Education/urls.py
+    Education/apps.py
+    QuizMe/wsgi.py
+    manage.py
+
+# show line numbers of missing
+[report]
+show_missing = True

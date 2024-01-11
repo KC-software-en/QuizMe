@@ -1,0 +1,74 @@
+<!-- Base template for all templates !-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}QuizMe{% endblock %}</title>
+            <!-- Required meta tags -->
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <!-- Bootstrap CSS -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+        <body>
+            {% block header %}
+
+            {% endblock %}
+
+            {% block content %}
+            <!-- Nave bar template for all pages-->
+
+            <h1 align="center">Login</h1>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/" aria-disabled="true">Home </a>
+                            </li>
+                        </ul>
+                        <div class="d-flex">
+                            <a class="nav-item">
+                                <a class="nav-link disabled" href="login" tabindex="-1" aria-disabled="true">Login</a>
+                            </a>
+                        </div>
+                            <a class="nav-item">
+                                <a class="nav-link active" href="/user_auth/logout" tabindex="-1" aria-disabled="true">Logout</a>
+                            </a>
+                    </div>
+                </div>
+            </nav>
+            {% endblock %}
+
+            <div class="row" style="padding-top: 50pt;">
+                <div class="col-md-6" style="padding-left: 80pt;">
+                    <form action="{% url 'user_auth:authenticate_user' %}" method="post">
+                        {% csrf_token %}
+        
+                        <label>Username</label>
+                        <input type="text" name="username" placeholder="User" required>
+                        <br/><br/>
+        
+                        <label>Password</label>
+                        <input type="password" name="password" required>
+                        <br/><br/>
+        
+                        <input type="submit" value="Login" />
+                    </form>
+                </div>        
+            </div>  
+
+            {% block footer %}
+            <!--Copyright information-->
+            <div class="footer" style="color: rgb(255, 255, 255);" style="text-align: center;">
+                <div style="text-align: center;">
+                    <h7>Author : Deandre' Wright <br> &copy;copy right reserved <br></h7>
+                </div>
+            </div>
+            {% endblock %}
+        </body>
+</html>
+
+
+
+
