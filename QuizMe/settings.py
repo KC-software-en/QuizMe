@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-y_c$+sv5x#*m9*+as*r&zy%q9^@2x)$x=^^-rti-5h9*mxk+r5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# when debug=false,set to '*'
+# to allow requests from any host/domain name.
+# This is useful during development
+# or when you don't know the exact host/domain name that will be used to access your application.
+# NOTE: only do this in development environments or when certain the application is not exposed to the internet
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
