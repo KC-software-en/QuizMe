@@ -11,7 +11,7 @@ from django.test import RequestFactory, TestCase
 from .. import views
 
 '''
-Create a class to test the Views.
+Create a class to test the Urls.
 ''' 
 # Create a failing test.
 # After writing the fail test, run in cmd terminal it should fail. 
