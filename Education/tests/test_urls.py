@@ -30,7 +30,7 @@ class TestUrls(SimpleTestCase):
     # The test below will pass because the resolver match returns an index view and not the string 'index'.
     def test_home_page_valid(self):
         # Used to generate a Url based on the view name.
-        url = reverse("home")     
+        url = reverse('Education:index')     
         # The assert equals function is used to take the url path and return a object based on the resolver match which is a veiw.        
         self.assertEquals(resolve(url).func, views.index) 
         
