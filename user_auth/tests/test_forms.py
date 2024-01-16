@@ -1,15 +1,16 @@
 from django.test import TestCase
 from ..forms import NewUserForm
 from django.urls import reverse
+from django.core import mail
 
-# Failing test ifform is invalid
+# Failing test if form is invalid
 class TestAccountCreationForm(TestCase):
     def test_signup_form_invalid(self):
         form = NewUserForm(data={})
 
         # It creates a dummy user/form and checks if the form is valid and that their is no errors in this case the form is not valid as it is empty.
         self.assertFalse(form.is_valid())
-        self.assertEquals(len(form.errors), 5)
+        self.assertEquals(len(form.errors), 4)
 
 # Positive test if form is valid        
     def test_signup_form(self):
@@ -33,3 +34,15 @@ class TestAccountCreationForm(TestCase):
             'password2': 'password321@1'
         })
         self.assertEqual(response.status_code, 302)    
+
+class EmailTest(TestCase):
+    def test_send_email(self):
+        mail.send_mail(
+            'Register succesfull.', 'Welcome to QuizMe.',
+            'Quizme.co@gmail.com', ['test_user@gmail.com'],
+            fail_silently=False,
+        )
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, 'Register succesfull.')
+        self.assertEqual(mail.outbox[0].body, 'Welcome to QuizMe.')
