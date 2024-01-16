@@ -33,10 +33,8 @@ class UserAuthViewTest(TestCase):
     # Positive tests "If the correct template is used (logout.html)"
     def test_logout_view_valid(self):
         # Create an instance of a GET request.
-        req = RequestFactory().get('/user_auth/logout')
-        # Check if the template can be accessed through the user_logout view. 
-        resp = views.user_logout(req)
-        # The test will pass as the Index view is not rendered in the /user_auth/logout url.      
+        resp = self.client.get(reverse('user_auth:logout'))
+        # The test will pass as the url is rendered at the /user_auth/login url       
         assert resp.status_code == 200 , 'The logout page should be rendered to anyone '  
 
     '''
