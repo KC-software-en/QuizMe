@@ -15,26 +15,24 @@
 
 <body>
 	{% block content %}
-	<section>
-
-        {% if latest_question_list %}
+	<section>       
+        <h1>Education Quiz Categories</h1> 
         <ul>
-            {% for question in latest_question_list %}
+            {% if selected_category %}
             <li>
-                <!--remove the hardcode "/Education/{{ question.id }}" and replace it with template tag
-                This is because it becomes challenging to change URLs on projects with many templates-->
-                <!--alter the url 'detail' question.id to include the app_name=Education 
-                because namespaces are used to differentiate detail views between apps & create a url with the template tag-->
-                <a href = "{% url 'Education:detail' question.id %}">
-                    {{ question.question_text }}
+                <!--############# might have to add category_id at a later stage################################# -->
+                <!--alter the url to include the app_name=Education 
+                because namespaces are used to differentiate views between apps & create a url with the template tag-->
+                <a href = "{% url 'Education:get_choices' %}"> <!--category_id=selected_category.id-->
+                    {{ category_name }}
                 </a>
             </li>
-            {% endfor %}
+            {% endif %}
         </ul>
         
         {% else %}
         <p>No quizzes are available.</p>
-        {% endif %}
+        
     
     </section>
 	{% endblock %}
