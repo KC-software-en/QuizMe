@@ -53,7 +53,7 @@ def index_edu(request, category_id=20):
     # write Categories to a json file
     # use an indent to ensure each category prints on separate lines
     with open("quiz_categories.json", "w") as f:
-        json.dump(response, f, indent=4)
+    json.dump(response, f, indent=4)
     
     # get the trivia categories values from dictionary provided in json response
     # place an empty list as the default argument if the key is not found - should avoid errors in subsequent code
