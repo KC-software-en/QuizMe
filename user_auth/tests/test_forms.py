@@ -46,3 +46,11 @@ class EmailTest(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].subject, 'Register succesfull.')
         self.assertEqual(mail.outbox[0].body, 'Welcome to QuizMe.')
+
+class NewUserFormTestCase(TestCase):
+    def test_save_method(self):
+        form_data = {'username': 'testuser', 'email': 'testuser@example.com', 'password1': 'testpass123', 'password2': 'testpass123'}
+        form = NewUserForm(data=form_data)
+        self.assertTrue(form.is_valid())
+        user = form.save()
+        self.assertEqual(user.email, 'testuser@example.com')        
