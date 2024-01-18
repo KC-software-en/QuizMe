@@ -8,6 +8,8 @@
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.test import Client
 # import views.
 from .. import views
 '''
@@ -48,3 +50,33 @@ class UserAuthViewTest(TestCase):
         resp = views.user_register(req)
         # The test will pass as the Index view is not rendered in the /user_auth/register url.      
         assert resp.status_code == 200 , 'The register page should be rendered to anyone '
+
+
+    '''
+        A function to test if the correct template is rendered from the show_user view.
+    '''       
+   # Positive tests "If the correct template is used (show_user.html) and it displays the signed in user details."      
+    def test_show_user(self):
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(
+            username='testuser', email='testuser@example.com', password='testpass')
+        self.url = reverse('user_auth:show_user')
+
+        request = self.factory.get(self.url)
+        request.user = self.user
+        response = views.show_user(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.user.username)
+
+    '''
+        A function to test if a user is authentificated.
+    '''       
+    # Positive tests "If the correct template is used (show_user.html) and it displays the signed in user details."  
+    def test_authenticate_user(self):
+        self.client = Client()
+        self.user = User.objects.create_user(username='testuser', password='testpass')
+
+        response = self.client.post(reverse('user_auth:authenticate_user'), {'username': 'testuser', 'password': 'testpass'})
+        user = authenticate(username='testuser', password='testpass')
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(user, self.user) 
