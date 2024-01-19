@@ -55,3 +55,40 @@ def get_json_categories():
         json.dump(response, f, indent=4)
 
     return response
+
+'''
+Create a view for the home page of education quizzes.
+'''
+# display the category of the education quiz
+# https://www.youtube.com/watch?v=sgEhb50YSTE
+# get json reponse for trivia categories from open trivia db
+# index category from the dictionary id
+def index_edu(request, category_id=20):
+    # call the categories function & save its response in an assigned variable - NameError if you don't assign it
+    response = get_json_categories()
+    
+    # get the trivia categories values from dictionary provided in json response
+    # place an empty list as the default argument if the key is not found - should avoid errors in subsequent code
+    trivia_categories = response.get("trivia_categories", [])
+
+    # initialise a variable for the chosen category from the json response
+    selected_category = None
+    category_name = None
+
+    # iterate over trivia categories to find the category id specified in the function as a parameter
+    for category in trivia_categories:
+        # cast category_id to int for error handling
+        if category.get("id") == int(category_id):
+            # assign the current category to the selected_category variable
+            selected_category = category            
+            
+            # get the name of the category if the id exists for the selected category
+            if selected_category:
+                category_name = selected_category.get("name")
+            
+            # exit the loop when the desired category is found            
+            break
+
+    # the response is the dictionary for trivia categories
+    # pass all the context variables into a single dictionary to render in the template correctly
+    return render(request, 'edu_quiz/edu_quiz.html', {'selected_category':selected_category, 'category_name': category_name}) 
