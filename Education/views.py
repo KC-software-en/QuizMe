@@ -40,3 +40,18 @@ def index(request): ############################################################
     # Render your template and map a URL to it
     return render(request, "index.html")
 
+'''
+'''
+#
+def get_json_categories():
+    # get Category Lookup url
+    category_lookup = 'https://opentdb.com/api_category.php'
+    # store url in a variable as a json response
+    response = requests.get(category_lookup).json()
+
+    # write Categories to a json file
+    # use an indent to ensure each category prints on separate lines
+    with open("quiz_categories.json", "w") as f:
+        json.dump(response, f, indent=4)
+
+    return response
