@@ -28,8 +28,9 @@
                                 <a class="nav-link active" aria-current="page" href="quiz" aria-disabled="true">Quiz</a>
                             </li>
 
-                            <!-- link to Education quiz home page -->
-                            <a class="nav-link" href="{% url 'Education:index_edu' %}">Education</a>
+                            <!-- link to Education quiz home page 
+                            include category_id in tag to avoid a NoReverseMatch error in template rendering-->
+                            <a class="nav-link" href="{% url 'Education:index_edu' category_id=20 %}">Education</a>
 
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="user_auth/register" aria-disabled="true">Register</a>
