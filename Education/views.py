@@ -33,16 +33,18 @@ import json
 # Create your views here.
 
 '''
+Create a view for the home page of QuizMe project.
 '''
 # define index view for home page of QuizMe project referenced in Education/urls.py
-def index(request): ############################################################add here
+def index(request): 
     # comment out HttpResponse once confirmed the page shows        
     # Render your template and map a URL to it
     return render(request, "index.html")
 
 '''
+Create a function that returns the json response for the available categories on Open Trivia DB.
 '''
-#
+# define a function that returns the json response for Open Trivia DB
 def get_json_categories():
     # get Category Lookup url
     category_lookup = 'https://opentdb.com/api_category.php'
@@ -92,3 +94,18 @@ def index_edu(request, category_id=20):
     # the response is the dictionary for trivia categories
     # pass all the context variables into a single dictionary to render in the template correctly
     return render(request, 'edu_quiz/edu_quiz.html', {'selected_category':selected_category, 'category_name': category_name}) 
+
+'''
+Create a function that returns the json response for a specific category on Open Trivia DB.
+'''
+# define a function that returns the json response for Open Trivia DB when requesting a specific category
+# create a varible to store the API url for the myth quizzes
+# use an f-str to pass in the parameter for quantity
+# -> place {} around 50 in the url then replace '50' with 'quantity'
+# then place {} around the category id (from quiz_cat.json)for myth & replace '20' with 'category'
+# return a list
+def get_specific_json_category(quantity: int, category: int):
+    mythology_url = f"https://opentdb.com/api.php?amount={quantity}&category={category}"
+    response = requests.get(mythology_url)
+
+    return response
