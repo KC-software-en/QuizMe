@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.contrib.messages import get_messages
 
 
 # Create your views here.
@@ -39,7 +40,9 @@ def user_register(request):
             )
             user.save()
             messages.success(request, "Registration successful."),
-            return redirect("user_auth:login")
+            storage = get_messages(request)
+            for message in storage:
+                return redirect("user_auth:login")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(
