@@ -1,19 +1,5 @@
+# import render to render an HTML template with a given context and return an HttpResponse object
 from django.shortcuts import render
-
-# import HttpResponse then comment out after confirming the views rendered
-# import HttpResponseRedirect
-from django.http import HttpResponse, HttpResponseRedirect
-
-# import the Question model
-from .models import Question, Choice
-
-# the view renders an HTTP 404 error if a question with the requested ID doesn’t exist.
-# import render
-from django.shortcuts import get_object_or_404, render
-
-# import reverse to generate a URL for a given view function 
-# to avoid hardcoding URLs in the code, making the app more maintainable and flexible
-from django.urls import reverse
 
 # import requests to use the API for edu quiz
 import requests
@@ -107,5 +93,94 @@ Create a function that returns the json response for a specific category on Open
 def get_specific_json_category(quantity: int, category: int):
     mythology_url = f"https://opentdb.com/api.php?amount={quantity}&category={category}"
     response = requests.get(mythology_url)
+    
+    # a successful request will give a 200 status code
+    # get a json response or else there will only be a status code        
+    if response.status_code == 200:
+        json_response = response.json()
+    
+        # write chosen category to a json file - has to be after getting a json response (converting to a dictionary) 
+        # - because writing to a file needs to be done on a serialisable object
+        # use an indent to ensure each category prints on separate lines
+        with open("chosen_quiz_category.json", "w") as f:
+            json.dump(json_response, f, indent=4)
 
-    return response
+        return json_response
+
+    else:
+        # print error if unsuccessful request
+        # return None to signal that there's no valid data to work with
+        error_message = f"Unable to retrieve the specific category - Status code:{response.status_code}"
+        print(error_message)
+        return None    
+
+# rearrange the options of answers
+# use the random module & its shuffle function to rearrange
+# return a list of choices
+def mix_choices(choices: list):
+    random.shuffle(choices)
+    return choices
+
+'''
+Create a function to generate a selection of questions & choices from the selected category.
+'''
+# create a function to generate a selection of questions
+# include parameters (expected variables) for the number of questions you want & the category for them
+def get_questions_and_choices(request, quantity:int, category:int):
+    # call the specific category function & save its response in an assigned variable - NameError if you don't assign it
+    json_response = get_specific_json_category(quantity=50, category=20)
+
+    # check if there are questions
+    if json_response:        
+        # save json response as a variable to pass into template
+        questions = json_response["results"]
+
+        # check if question retrieval was successful
+        if questions:
+            # iterate over each question in the results dictionary 
+            for question in questions:                        
+                # add new question text key for each question in results dictionary(AKA questions) by indexing its key                
+                # - index question text - access the value associated with the key "question" in each dictionary
+                # - use html.unescape to handle potential HTML entities and ensure accurate rendering in templates
+                question["question_text"] = html.unescape(question["question"]) 
+            
+                # iterate over the incorrect answers with html.unescape and place them into a list with list comprehension                
+                # use html.unescape & handle potential HTML entities for accurate rendering of templates
+                # place the answers from the response in a variable - index it from the list of key:value pairs available for each question(result)
+                choice_texts = [html.unescape(answer) for answer in question["incorrect_answers"]] 
+                # use html.unescape for the correct answer
+                # add the correct answer to the list of incorrect answers
+                choice_texts.append(html.unescape(question["correct_answer"]))
+
+                # call the function to rearrange choices and make the extended choice list the argument
+                mixed_choices = mix_choices(choice_texts)            
+
+                # save the mixed choices to each question in the results dictionary        
+                # add a key-value pair to the question dictionary (from the category json response)
+                question['mixed_choices'] = mixed_choices
+
+            # assign a context dictionary that will be passed as an argument in template
+            context = {'questions': questions,                       
+                       'mixed_choices': mixed_choices, 
+                       'error_message': None}
+            
+            # return the list of dictionaries in the json response which contains the questions/answers
+            # note the json response is a dictionary where its :value ("results") contains a list of dictionaries            
+            return render(request, 'edu_quiz/edu_detail.html', context)
+
+        # render error message if no questions were found
+        else:
+            error_message = f"Unable to retrieve the questions from the json response" 
+            context = {'questions': None,                       
+                       'mixed_choices': None, 
+                       'error_message': error_message}            
+            return render(request, 'edu_quiz/edu_detail.html', context)                
+    
+    # render an error message if calling the specific category function doesn't return the results dictionary 
+    else:
+        error_message = "Unable to return a json response for a specific category"
+        return render(request, 'edu_quiz/edu_detail.html', {'error_message': error_message})
+    
+# create a view that saves your selected choice
+    
+# create a view that displays the quiz result    
