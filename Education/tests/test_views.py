@@ -1,7 +1,5 @@
-# Regular expressions are powerful tools for pattern matching and manipulation of strings
-# U flag is used to indicate that the regular expression pattern should be treated as a Unicode string. 
-# Unicode is a standard for representing characters from most of the world's languages, 
-from re import U # delete if not used later
+# import requests to use the API for edu quiz
+import requests
 
 # import from urllib to work with URL requests & the response handling process when making HTTP requests
 from urllib import request, response
@@ -14,6 +12,9 @@ from django.urls import reverse
 # (had to use this structure so that response object would recognise views)
 from .. import views
 
+# import json to work with the data retrieved from the open trivia db API
+import json
+
 # https://docs.djangoproject.com/en/5.0/topics/testing/tools/#transactiontestcase
 # import TransactionTestCase because
 # tests rely on database access such as creating or querying models, 
@@ -22,213 +23,217 @@ from .. import views
 # https://docs.djangoproject.com/en/5.0/topics/testing/tools/#the-test-client
 # https://docs.djangoproject.com/en/5.0/topics/testing/advanced/#the-request-factory
 # import base class for all Django test cases (for writing tests, including test assertions, database setup and teardown, and other testing infrastructure)
-from django.test import TestCase, TransactionTestCase, RequestFactory, Client
+from django.test import TestCase, RequestFactory, Client
+
+#  import unittest to write tests that are not necessarily tied to Django and can be used in any Python project e.g. get API response from open trivia db
+import unittest
 
 # import AnonymousUser model - a special type of user object representing an unauthenticated user or a user who is not logged in
 from django.contrib.auth.models import AnonymousUser
 
-# import the Question model
-from ..models import Question
-
-# import timezone for Question instance
-from django.utils import timezone
-
-# the view renders an HTTP 404 error if a question with the requested ID doesn’t exist.
-from django.shortcuts import get_object_or_404
-from django.http import Http404
-
 # import logging then comment out after debugging view response to pass assertions
-# import logging
+#import logging######
+
+# import TemplateResponse because it is a specialised HttpResponse subclass that is specifically designed for representing responses generated from rendering templates
+# use the render function in Django views & it typically returns a TemplateResponse instance
+from django.template.response import TemplateResponse  
+
+# import random to shuffle choices rendered in the form
+import random
 
 #############################################################################################
 #############################################################################################
-# Create your tests here. Use `py manage.py test to run tests in cmd
+# Create your tests here. Use `py manage.py test Education.tests.test_views` to run tests in cmd
 # after writing a test, run in cmd & it will say fail. 
 # next, go to views.py and create the views. Then it should pass
 # run coverage after tests
 
-'''
-Create a class to test the views of the Education quiz application.
-'''
-# test the views with RequestFactory
-class TestEducationViews(TransactionTestCase):
-    '''
-    Setup the required data to test the views of Education.
-    '''
-    # setup RequestFactory for all views
-    # setup a user who is not logged in with AnonymousUser
+# https://www.django-rest-framework.org/api-guide/testing/#api-test-cases ######## refer back ###
+class TestJsonResponse(unittest.TestCase):
     def setUp(self):
-        self.factory = RequestFactory()
-        request.user = AnonymousUser()
-
-    '''
-    Create a test to check for a successful GET request of the Edu index view for an anonymous user.
-    '''
-    def test_index_view(self):
-        # create questions for testing
-        # use a for loop to create 5 questions as the view cutoff is [:5]
-        for i in range(1,6):
-            Question.objects.create(question_text=f"Question {i+1}", pub_date=timezone.now())
-
-        # create an instance of index_edu view
-        # test index view as if it were deployed at /edu_quiz/edu_quiz.html but i left it as / since not using urls.py in test + no computation for index_edu        
-        request = self.factory.get(reverse('Education:index_edu'))
-        
-        # Simulate an anonymous user because Edu is accessible to unauthenticated users
-        request.user = AnonymousUser()
-
-        # simulate a request to index_edu view and capture the resulting HTTP response
-        response = views.index_edu(request)
-
-        # assert that the HTTP response status code is 200 (OK), indicating a successful request.
-        self.assertEqual(response.status_code, 200, 'Should check for a successful GET request of index view for anyone')
-        
-        # comment out logging after debugging
-        # Add the following line to print to the console
-        # logging.basicConfig(level=logging.DEBUG)
-
-        # comment out logging
-        # Log the content of the response
-        # logging.debug(response.content.decode())
-
-        # assert that the rendered HTML contains the content from the latest questions
-        # note the range isn't (5) because it gave an error saying Question wasn't there
-        # after importing logging to print the view response to cmd, (2,6) printed Q 2-6 & passed the test
-        for i in range(2,6):
-            self.assertContains(response, f"Question {int(i)}", msg_prefix="Should check that the last 5 questions are list.")
-
-    '''
-    Display a message if there are no questions for Education.
-    '''
-    # https://docs.djangoproject.com/en/5.0/intro/tutorial05/#id8
-    def test_no_questions(self):        
-        # create an instance of the client
-        client = Client()        
-
-        # assert there are no questions in database
-        self.assertEqual(Question.objects.count(), 0)
-
-        #
-        # assert ...
-        # note assertQuerysetEqual for django version 3.2 instead of assertQuerySetEqual for django version 1.7 like
-        response = self.client.get(reverse("Education:index_edu"))
-        self.assertEqual(response.status_code, 200, msg= "Check that the server received the request")
-        self.assertContains(response, "No quizzes are available.", msg_prefix='Should give a response that there are no quizzes')
-        self.assertQuerysetEqual(response.context["latest_question_list"], [])
-
-    '''
-    Create a test to check for a successful GET request of the Edu detail view for an anonymous user.
-    '''
-    # ...
-    # https://docs.djangoproject.com/en/5.0/topics/testing/advanced/#example
-    def test_detail_view(self):        
-        # create an instance of detail view
-        # test detail view as if it were deployed at /edu_quiz/edu_quiz.html
-        # place any number for id
-        # Assert that the HTTP response status code is 200 (OK), indicating a successful request.
-        question = Question.objects.create(question_text="Sample Question", pub_date=timezone.now())
-        question_id = question.id        
-        request = self.factory.get("/{question_id}/")
-        response = views.detail(request, question_id=question_id)
-        self.assertEqual(response.status_code, 200, 'Should check for a successful GET request of detail view for anyone')
-
-    '''
-    Create a test that checks if the detail view will render with the correct question id.
-    '''
-    # Create a test that checks if the detail view will render with the correct question id
-    def test_valid_id_for_detailview(self):
-        # create a Question instance for testing.
-        question = Question.objects.create(question_text='Test Question', pub_date = timezone.now())
-
-        # create an instance of a GET request.
-        # question_id as a keyword argument to the reverse function, to match the URL pattern in Edu app's urls.py
-        request = self.factory.get(reverse('Education:detail', kwargs={'question_id':question.id}))
-
-        # simulate an anonymous user.
-        request.user = AnonymousUser()
-
-        # call the detail view with the request
-        response = views.detail(request, question_id=question.id)
-
-        # use get_object_or_404 to ensure the Question exists because the object is expected to exist
-        question_from_db = get_object_or_404(Question, pk=question.id)
-
-        # assert that the HTTP response status code is 200 (OK), indicating a successful request
-        # assert that the question text attribute is in the response
-        # assert that the whole question object passed to the template context in the response is identical to the one retrieved from the database
-        self.assertEqual(response.status_code, 200,
-                          "Should check for a successful GET request of detail view with correct question_id")
-        self.assertEqual(question_from_db.question_text, 'Test Question',
-                          msg_prefix='Should check that the question text is in the detail view response')
-        self.assertEqual(response.context['question'], question_from_db,
-                          msg_prefix='Should check that question object passed to the template matches that in the database')
-
-    '''
-    '''
-    #
-    def test_invalid_id_for_detailview(self):
-        # set an invalid question id
-        invalid_question_id = 2373
-
-        # create an instance of a GET request
-        # question_id is a keyword argument to the reverse function, to match the URL pattern in Edu app's urls.py
-        request = self.factory.get(reverse('Education:detail', kwargs={'question_id':invalid_question_id}))
-
-        # simulate an anonymous user
-        request.user = AnonymousUser()
-
-        # assert that an error raises if a request is made for an invalid id
-        # when testing an invalid ID, the expected behavior is a Http404 exception
-        with self.assertRaises(Http404):
-            views.detail(request, question_id=invalid_question_id)
-
-
-    def test_past_questions(self):
-        '''
-        Display text of question detail view.
-        '''
-        #https://docs.djangoproject.com/en/3.2/intro/tutorial05/#id10
-        # Create a question for testing
-        past_question = Question(question_text='Past Question.', days=-5)
-
-        # Create a request with the URL for the past question
-        url = reverse('Education:detail', args=(past_question.id,))
-        request = self.factory.get(url)
-
-        # Call the detail view with the request
-        response = views.detail(request, question_id=past_question.id)
-
-        # Check if the response contains the past question's text
-        self.assertContains(response, past_question.question_text)
-
-    '''
-    '''
-    #
-    def test_results_view_with_valid_id(self):     
-        # create a Question instance for testing.
-        question = Question.objects.create(question_text='Test Question', pub_date = timezone.now())
-
-        # create an instance of a GET request.
-        # question_id as a keyword argument to the reverse function, to match the URL pattern in Edu app's urls.py
-        request = self.factory.get(reverse('Education:results', kwargs={'question_id':question.id}))
-
-        # simulate an anonymous user.
-        request.user = AnonymousUser()
-
-        # call the detail view with the request
-        response = views.results(request, question_id=question.id)
-
-        # use get_object_or_404 to ensure the Question exists because the object is expected to exist
-        question_from_db = get_object_or_404(Question, pk=question.id)
-
-        # assert that the HTTP response status code is 200 (OK), indicating a successful request        
-        # assert that the whole question object passed to the template context in the response is identical to the one retrieved from the database
-        self.assertEqual(response.status_code, 200,
-                          "Should check for a successful GET request of results view with correct question_id")        
-        self.assertEqual(response.context['question'], question_from_db,
-                          msg_prefix='Should check that question object passed to the template matches that in the database')
-
-    def test_results_view_with_invalid_id(self):     
         pass
-    #def test_vote_view(self):
-        # pass
+
+    # https://www.django-rest-framework.org/api-guide/testing/#requestsclient
+    def test_get_json_categories_with_unittest(self):  
+        # use unittest to simulate an external API request    
+        category_lookup = 'https://opentdb.com/api_category.php'        
+        response = requests.get(category_lookup)         
+        if response.status_code == 200:
+            json_response = response.json()            
+                
+        # assert that the HTTP response status code is 200 (OK), indicating a successful request.
+        # assert that API response was successfully received and parsed into a JSON format
+        # assert that the type of json_response is a dict (dictionary) - ensure a python dictionary
+        # - https://docs.python.org/3.7/library/unittest.html?highlight=assertisinstance#unittest.TestCase.assertIsInstance
+        # - in Python, everything is an object, and data types are implemented as classes
+        # - dict is the class representing dictionaries in Python
+        # assert that the key "trivia_categories" is in the dictionary json_response [a in b where assertIn(a,b)]
+        self.assertEqual(response.status_code, 200, msg='Should check that mythology has a successful response.')
+        self.assertIsNotNone(json_response, msg="Should check that an API response was successfully received and parsed into a JSON format.")        
+        self.assertIsInstance(json_response, dict, msg='Should check that json_response is a dictionary.')
+        self.assertIn("trivia_categories", json_response, msg='Should check that the trivia_categories key is present in the dictionary json_response.')
+
+    # test specific json category with unittest
+    def test_get_specific_json_category_with_unittest(self):
+        # use unittest to simulate an external API request    
+        mythology_url = f"https://opentdb.com/api.php?amount=50&category=20"
+        response = requests.get(mythology_url)
+
+        # test if there's a successful get request for a specific category
+        if response.status_code == 200:
+            json_response = response.json()
+
+        # test if there's an unsuccessful get request for a specific category
+        else:
+            error_message = f"Unable to retrieve the specific category - Status code:{response.status_code}"
+            print(error_message)
+            json_response = None
+
+        # assert that get request renders succesfully
+        # 
+        self.assertEqual(response.status_code, 200, msg='Should check that mythology has a successful response.')
+        self.assertIsNotNone(json_response, msg="Should check that the mythology API response was successfully received and parsed into a JSON format.")        
+        self.assertIsInstance(json_response, dict, msg='Should check that the json_response is a dictionary.')
+        self.assertIn("results", json_response, msg='Should check that the results key is present in the dictionary json_response.')
+
+    # test json categories by calling its function from views 
+    def test_get_json_categories_call(self):      
+        response = views.get_json_categories()
+        self.assertIsNotNone(response)
+        self.assertIsInstance(response, dict)
+        self.assertIn('trivia_categories', response)
+
+    # test json specific categories by calling its function from views  
+    def test_get_specific_json_category_call(self):
+        response = views.get_specific_json_category(quantity=5, category=20)
+        self.assertIsNotNone(response)
+        self.assertIsInstance(response, dict)
+        self.assertIn('results', response)        
+
+'''
+Create ...
+'''
+#
+class TestEducationViews(TestCase):
+    def setUp(self):
+        # create fake requests with a RequestFactory instance - sets up the test environment
+        # set up a Django test client for making HTTP requests in the tests
+        # setup a user who is not logged in with AnonymousUser
+        self.factory = RequestFactory()   
+        self.client = Client()     #######
+        self.anonymous_user = AnonymousUser()
+
+    def test_index_view(self):
+        # create an instance of index view
+        # test index view as if it were deployed at /index.html
+        request = self.factory.get(reverse('Education:index'))
+
+        # simulate a request to index view and capture the resulting HTTP response
+        response = views.index(request)
+
+        # Simulate an anonymous user because Edu is accessible to unauthenticated users
+        request.user = self.anonymous_user
+
+        # assert that the HTTP response status code is 200 (OK), indicating a successful request.        
+        self.assertEqual(response.status_code, 200, msg='Should check for a successful GET request of index view for anyone')        
+
+    # test the 'index_edu' view with RequestFactory to create a fake GET request
+    def test_index_edu_view_with_reqfac(self):
+        # create a fake GET request to the 'index_edu' view with a specified category_id 
+        # simulate a request to index_edu view and capture the resulting HTTP response
+        request = self.factory.get(reverse('Education:index_edu', kwargs={'category_id': 20}))
+        request.user = AnonymousUser()
+
+        # simulate a request to index_edu view and capture the resulting HTTP response 
+        response = views.index_edu(request.user)
+
+        # assert that the HTTP response status code is 200 (OK), indicating a successful request.        
+        # (need request to use status_code)
+        self.assertEqual(response.status_code, 200, msg='Should check for a successful GET request of index_edu view for anyone')
+
+    # test the 'index_edu' view using the Django test client
+    def test_index_edu_view_with_client(self):    
+        # make a GET request to the 'index_edu' view using the Django test client
+        response = self.client.get(reverse('Education:index_edu', kwargs={'category_id': 20}))
+
+        # assert that the view renders the edu_quiz template - use path from template directory
+        self.assertTemplateUsed(response, 'edu_quiz/edu_quiz.html', msg_prefix='Should check that the edu_quiz template was used')    
+
+    # test the mix_choices function
+    def test_mix_choices_function(self):
+        # create a list of choices to test
+        # use random to check that it will rearrange the list
+        choices = ['Choice1', 'Choice2', 'Choice3']
+        random.shuffle(choices) 
+
+        # call the function from views.py to test it
+        mixed_choices = views.mix_choices(choices)
+
+        # assert that the length of the list is the same after shuffling
+        # assert that the order of items in the original test list differs from the shuffled choices list
+        # assert that both lists contain the same items, regardless of their order
+        self.assertEqual(len(choices), 3, msg='Should check that the shuffled choices is the length of original choice list')
+        self.assertNotEqual(['Choice1', 'Choice2', 'Choice3'], choices,
+                             msg='Should check that the order of items in the original test list differs from the shuffled choices list.')
+        self.assertCountEqual(mixed_choices, choices,
+                               msg='Should check that the two lists contain the same items, regardless of their order')
+
+    def test_get_questions_and_choices(self):
+        pass
+###################################################################################    
+
+
+class TestGetQuestionsAndChoices(TestCase):
+    def setUp(self):
+        pass
+        
+
+    def test_get_questions_and_choices_success(self):
+        # Create a GET request for the view
+        request = self.factory.get('/path/to/your/view/50/20/')
+        
+        # Call the view function with the GET request
+        response = get_questions_and_choices(request, quantity=50, category=20)
+
+        # Assert that the response has a status code of 200
+        self.assertEqual(response.status_code, 200)
+
+        # add more assertions 
+
+    def test_get_questions_and_choices_no_questions(self):
+        # Create a GET request for the view
+        request = self.factory.get('/path/to/your/view/50/20/')
+        
+        # Mock the get_specific_json_category function to return a response without questions
+        with patch('your_app.views.get_specific_json_category') as mock_get_specific_json:
+            mock_get_specific_json.return_value = {'results': []}
+
+            # Call the view function with the GET request
+            response = get_questions_and_choices(request, quantity=50, category=20)
+
+        # Assert that the response has a status code of 200
+        self.assertEqual(response.status_code, 200)
+
+        # add more assertions 
+
+    # Add more test cases as needed
+####################################################################################
+'''
+possible assertions
+    def test_get_questions_view(self):
+        response = self.client.get(reverse('get_questions', kwargs={'quantity': 50, 'category': 20}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'edu_quiz/edu_detail.html')
+        self.assertIn('question_texts', response.context)
+        self.assertIsNone(response.context['mixed_choices'])
+        self.assertIsNone(response.context['error_message'])
+
+    def test_get_choices_view(self):
+        response = self.client.get(reverse('get_choices', kwargs={'category_id': 20}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'edu_quiz/edu_detail.html')
+        self.assertIsNone(response.context['question_texts'])
+        self.assertIn('mixed_choices', response.context)
+        self.assertIsNone(response.context['error_message'])
+'''
+
