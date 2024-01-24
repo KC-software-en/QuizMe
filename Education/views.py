@@ -22,8 +22,7 @@ import json
 Create a view for the home page of QuizMe project.
 '''
 # define index view for home page of QuizMe project referenced in Education/urls.py
-def index(request): 
-    # comment out HttpResponse once confirmed the page shows        
+def index(request):     
     # Render your template and map a URL to it
     return render(request, "index.html")
 
@@ -35,14 +34,16 @@ def get_json_categories():
     # get Category Lookup url
     category_lookup = 'https://opentdb.com/api_category.php'
     # store url in a variable as a json response
-    response = requests.get(category_lookup).json()
+    response = requests.get(category_lookup)
+    if response.status_code == 200:
+        json_response = response.json()
+    
+        # write Categories to a json file
+        # use an indent to ensure each category prints on separate lines
+        with open("quiz_categories.json", "w") as f:
+            json.dump(json_response, f, indent=4)
 
-    # write Categories to a json file
-    # use an indent to ensure each category prints on separate lines
-    with open("quiz_categories.json", "w") as f:
-        json.dump(response, f, indent=4)
-
-    return response
+    return json_response
 
 '''
 Create a view for the home page of education quizzes.
