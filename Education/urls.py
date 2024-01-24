@@ -18,9 +18,9 @@ app_name = 'Education'
 # include the category id from the json response of trivia categories on open trivia db
 urlpatterns = [
     path('', views.index, name='index'),    
-    path('Education/<int:category_id>', views.index_edu, name='index_edu'),     
-    path('Education/<int:category_id>/MythologyQuiz',views.get_choices, name='choices'),   
-    #path('Education/quiz',views.mix_choices, name='choices'),
+    path('Education/<int:category_id>/', views.index_edu, name='index_edu'),         
+    path('Education/<int:quantity>/<int:category>/MythologyQuiz/',views.get_questions_and_choices, name='detail'),
+    #path('Education/<int:quantity>/<int:category>/MythologyQuiz/detail/',views.get_choices, name='choices'),   
     #path('Education/results/',views.results, name='results'),
     #path('Education/<int:question_id>/vote/',views.vote, name='vote'),
 ]
