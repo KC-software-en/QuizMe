@@ -80,3 +80,13 @@ class UserAuthViewTest(TestCase):
         user = authenticate(username='testuser', password='testpass')
         self.assertEqual(response.status_code, 302)
         self.assertEqual(user, self.user) 
+
+    '''
+        A function to test if a user is not authentificated and redirected to login page.
+    '''       
+    # Positive tests "If the correct template is used (show_user.html) and it displays the signed in user details."  
+    def test_redirect_if_not_authenticated(self):
+        # Create an instance of a GET request.
+        response = self.client.get(reverse('user_auth:show_user'))
+        self.assertRedirects(response, '/user_auth/login/?next=%2Fuser_auth%2Fauthenticate_user%2Fshow_user')
+  
