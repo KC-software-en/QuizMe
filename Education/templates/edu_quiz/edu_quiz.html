@@ -15,26 +15,25 @@
 
 <body>
 	{% block content %}
-	<section>       
-        <h1>Education Quiz Categories</h1> 
-        <ul>
-            {% if selected_category %}
-            <li>
-                <!--############# might have to add category_id at a later stage################################# -->
-                <!--alter the url to include the app_name=Education 
-                because namespaces are used to differentiate views between apps & create a url with the template tag-->
-                <a href = "{% url 'Education:get_choices' %}"> <!--category_id=selected_category.id-->
-                    {{ category_name }}
-                </a>
-            </li>
-            {% endif %}
-        </ul>
-        
-        {% else %}
-        <p>No quizzes are available.</p>
-        
-    
-    </section>
+	    <section>       
+            <h1>Education Quiz Categories</h1> 
+            <ul>
+                {% if selected_category %}
+                <li>                    
+                    <!--alter the url to include the app_name=Education 
+                    because namespaces are used to differentiate views between apps & create a url with the template tag-->
+                    <!-- pass parameters from view without spaces or commas -->
+                    <a href = "{% url 'Education:detail' quantity=50 category=20 %}"> 
+                        {{ category_name }}
+                    </a>
+                </li>                
+            </ul>
+
+                {% else %}
+                    <p>No quizzes are available.</p>
+                {% endif %}
+
+        </section>
 	{% endblock %}
     
 </body>

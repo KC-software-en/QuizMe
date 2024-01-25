@@ -16,19 +16,16 @@
 <body>
 	{% block content %}
 	<section>
-        <h1> {{ question.question_text }} </h1>
+        <h1> Your results </h1>
 
-        <ul>
-            {% for choice in question.choice_set.all %}
-            <li>
-                {{ choice.choice_text }} -- {{ choice.votes}}
-                vote{{choice.votes|pluralize}}
-            </li>
-            {% endfor %}
-        </ul>
+        <!-- show score-->
+        {% if request.method == "POST" %}
+            <h2>Score: {{result}} / {{quantity}}</h2>
+        {% endif %}
 
-        <a href="{% url 'Education:detail' question.id %}">
-            Vote again?
+        <!-- enter a view url here -->
+        <a href="">
+            Try again?
         </a>
     </section>
 	{% endblock %}

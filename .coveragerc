@@ -1,3 +1,6 @@
+# `coverage run manage.py test *App*` where App is optional
+# then run `coverage report`
+
 [run]
 source = Education
 

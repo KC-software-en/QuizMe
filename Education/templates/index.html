@@ -22,11 +22,15 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link disabled" aria-current="page"  aria-disabled="true">Home </a>
-                            </li>
+                                <a class="nav-link active" aria-current="page" href="{% url 'Education:index' %}" aria-disabled="true">Home </a>
+                            </li>                            
+
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="Education/<int:category_id>" aria-disabled="true">Quiz</a>
+                                <!-- link to Education quiz home page 
+                                include category_id in tag to avoid a NoReverseMatch error in template rendering-->
+                                <a class="nav-link active" href="{% url 'Education:index_edu' category_id=20 %}">Education</a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="user_auth/register" aria-disabled="true">Register</a>
                             </li>
