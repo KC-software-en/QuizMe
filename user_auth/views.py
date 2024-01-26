@@ -6,6 +6,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.contrib.messages import get_messages
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -23,8 +25,8 @@ def user_logout(request):
 # This veiw is used to register a new user.
 def user_register(request):
     if request.method == "POST":
-        form = NewUserForm(request.POST)
-        if form.is_valid():
+        form = NewUserForm(request.POST)        
+        if form.is_valid():            
             username = request.POST["username"]
             email = request.POST["email"]
             password = request.POST["password1"]
@@ -39,7 +41,9 @@ def user_register(request):
             )
             user.save()
             messages.success(request, "Registration successful."),
-            return redirect("user_auth:login")
+            storage = get_messages(request)
+            for message in storage:
+                return redirect("user_auth:login")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(
@@ -58,7 +62,7 @@ def authenticate_user(request):
         login(request, user)
     return HttpResponseRedirect(reverse("user_auth:show_user"))
 
-
+@login_required(login_url='user_auth:login')
 def show_user(request):
     print(request.user.username)
     return render(request, 'user.html', {
