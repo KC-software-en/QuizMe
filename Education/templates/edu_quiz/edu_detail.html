@@ -16,49 +16,66 @@
 <body>
 	{% block content %}
 	<section>
-
-        <!--The template system uses dot-lookup syntax to access variable attributes.-->
-        <!--In the example of {{ question.question_text }}, first Django does a dictionary lookup on the object question.-->
-        <!--Failing that, it tries an attribute lookup – which works, in this case. -->
-        <!--If attribute lookup has failed, it would’ve tried a list-index lookup.-->
-        <h1> {{question.question_text}}</h1>
-
-        {% if error_message %}
-            <p><strong>{{error_message}}</strong></p>
-        {% endif %}
-
-        <!--Method-calling happens in the { for } loop: 
-        question.choice_set.all is interpreted as the Python code question.choice_set.all(), 
-        which returns an iterable of Choice objects and is suitable for use in the { for } tag.-->
-        <!--the post method was used to send data to the server
-        the url in the action attribute was used to send data to the server-->
-        <form action="{% url 'Education:vote' question.id %}" method="post">
-            <!--add the csrf_token to all post forms targeted at internal urls to protect against Cross Site Forgery-->
-            {% csrf_token %}
-            <div class="form-group">
-                <!--Method-calling happens in the for loop: question.choice_set.all is
-                interpreted as the Python code question.choice_set.all(), which returns an
-                iterable of Choice objects and is suitable for use in the for tag.-->
-                <!--use a for loop to add a radio button for each choice associated with a specific question in the database-->
-                {% for choice in question.choice_set.all %}
-                <!--Radio buttons. Each choice that is associated with that particular question is
-                then displayed using a radio button in a form.-->
-                <!--The name of each radio button is choice-->
-                <!--the id attribute for each radio button is the Choice’s ID (from the database)-->
-                <input type="radio" name="choice" 
-                id="choice {{forloop.counter}}" value="{{ choice.id }}" />
-                <label for="choice {{ forloop.counter }}">
-                    {{ choice.choice_text }}
-                </label>
-                <br/>
-                {% endfor %}
-
-                <!-- A button that allows the user to submit their choice-->
-                <!--when somebody selects one of the radio buttons and submits the form, it’ll POST the data “choice=id” where id is the ID of the selected choice-->
-                <!--use margins to allow space above-under the button-->
-                <input type="submit" value="Vote"/>	
-            </div>
-        </form>	
+        <div class="container-fluid text-center">
+            <div class="row my-5 align-items-center justify-content-center">			
+                <div class = "col d-flex justify-content-center">
+                    <div class="card" style="width: 40rem;">		
+                        <div class="card-body" id="no-underline">
+                            <h1 class="card-title"><i>Mythology quiz!</i></h1>		
+                            
+                            <!--The template system uses dot-lookup syntax to access variable attributes.-->
+                            <!--In the example of {{ question_text }}, first Django does a dictionary lookup on the object question.-->
+                            <!--Failing that, it tries an attribute lookup – which works, in this case. -->
+                            <!--If attribute lookup has failed, it would’ve tried a list-index lookup.-->
+                            <!--iterate through the questions list and display the question and the choices-->                    
+                            {% if questions %}
+                                {% for question in questions %}
+                                    <h3> {{ question.question_text }}</h3>  
+                                
+                                    <!--Method-calling happens in the { for } loop: 
+                                    question.choice_set.all is interpreted as the Python code question.choice_set.all(), 
+                                    which returns an iterable of Choice objects and is suitable for use in the { for } tag.-->
+                                    <!--the post method was used to send data to the server
+                                    the url in the action attribute was used to send data to the server-->
+                                    <form action="" method="POST">
+                                        <!--add the csrf_token to all post forms targeted at internal urls to protect against Cross Site Forgery-->
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            
+                                            <!--Method-calling happens in the for loop: question.choice_set.all is
+                                            interpreted as the Python code question.choice_set.all(), which returns an
+                                            iterable of Choice objects and is suitable for use in the for tag.-->
+                                            <!--use a for loop to add a radio button for each choice associated with a specific question in the database-->
+                                            {% for mixed_choice in question.mixed_choices %}
+                                                <!--Radio buttons. Each choice that is associated with that particular question is
+                                                then displayed using a radio button in a form.-->
+                                                <!--The name of each radio button is choice-->
+                                                <!--selected value for each question will be sent to the server-->                                                                                                
+                                                <input type="radio" name="mixed_choice" id="mixed_choice {{forloop.counter}}" value="{{ mixed_choice.id }}" />                        
+                                                <label for="mixed_choice {{forloop.counter}}">
+                                                    {{ mixed_choice }} 
+                                                </label>                                                                                                                                                                                                
+                                                <br/><br/>
+                                            {% endfor %}                                                                                
+                                                
+                                            <!-- A button that allows the user to submit their choice-->
+                                            <!--when somebody selects one of the radio buttons and submits the form, it’ll POST the data “choice=id” where id is the ID of the selected choice-->
+                                            <!--use margins to allow space above-under the button-->
+                                            <input type="submit" value="Submit"/>	
+                                            <br/><br/>
+                                        </div>
+                                    </form>      
+                                {% endfor %}
+                            
+                            {% else %}
+                                <p><strong>{{ error_message }}</strong></p>
+                            {% endif %}
+                        
+                        </div>	
+                    </div>	
+                </div>
+            </div>	                
+        </div>
     </section>
 	{% endblock %}
 </body>
