@@ -44,7 +44,8 @@ from django.template.response import TemplateResponse
 # import random to shuffle choices rendered in the form
 import random
 
-
+# import APIRequestFactory for the question & choices view which requests a response from an API
+from rest_framework.test import APIRequestFactory
 
 #############################################################################################
 #############################################################################################
@@ -57,7 +58,7 @@ import random
 Create a class to test the functions that request an API response for categorties on Open Trivia DB.
 '''
 # https://www.django-rest-framework.org/api-guide/testing/#api-test-cases ######## refer back ###
-# use patch class decorator & provide the import path to the requests.get function in your actual codebase
+# use patch class decorator & provide the import path to the requests.get function in views.py
 # patch the external get function within the requests module, which is used in the views.get_json_categories function
 # - to intercept the HTTP request made by the code and control the response during testing
 @patch('Education.views.requests.get')
@@ -196,7 +197,7 @@ class TestEducationViews(TestCase):
         # setup a user who is not logged in with AnonymousUser
         self.factory = RequestFactory()   
         self.client = Client()     #######
-        self.anonymous_user = AnonymousUser()
+        self.anonymous_user = AnonymousUser()        
 
     def test_index_view(self):
         # create an instance of index view
@@ -217,6 +218,8 @@ class TestEducationViews(TestCase):
         # create a fake GET request to the 'index_edu' view with a specified category_id 
         # simulate a request to index_edu view and capture the resulting HTTP response
         request = self.factory.get(reverse('Education:index_edu', kwargs={'category_id': 20}))
+        
+        # Simulate an anonymous user because Edu is accessible to unauthenticated users
         request.user = AnonymousUser()
 
         # simulate a request to index_edu view and capture the resulting HTTP response 
@@ -253,107 +256,122 @@ class TestEducationViews(TestCase):
         self.assertCountEqual(mixed_choices, choices,
                                msg='Should check that the two lists contain the same items, regardless of their order')
 
-    def test_get_questions_and_choices(self):
-        pass
-###################################################################################    
+    # test the successful retrieval of questions and choices with RequestFactory
+    # add a patch decorator with the import path to the get_specific_json_category as the argument
+    # - because the get_specific_json_category object should be temporarily replaced
+    # mock_get_specific_json_category represents the mocked version of the get_specific_json_category function 
+    # - specified in the @patch decorator & used within the get_questions_and_choices function
+    #@patch('Education.views.get_specific_json_category')
+    def test_get_questions_and_choices_success(self):        
+        with patch('Education.views.get_specific_json_category') as mock_get_specific_json_category:
+            # set up a successful mock response for the mock_get_specific_json_category function
+            mock_response_ok = {
+                "results":[
+                    {"type":"type1",
+                     "difficulty":"level",
+                     "category":"category1",
+                     "question":"question1",
+                     "correct_answer":"correct_answer1",
+                     "incorrect_answers":[
+                         "incorrect_answer",
+                         "incorrect_answer2",
+                         "incorrect_answer3",                     
+                     ]
+                     }
+                ]
+            }
 
+            # add a new key value pair to the response dictionary after calling the mix choices function
+            mock_response_ok['results'][0]['mixed_choices'] = ['mixed choice1', 'mixed choice2', 'mixed choice3', 'mixed choice4']
 
-class TestGetQuestionsAndChoices(TestCase):
-    def setUp(self):
-        pass
-        
+            # set the return value for response of mock_get_specific_json_category as mock_response_ok
+            mock_get_specific_json_category.return_value = mock_response_ok
 
-    def test_get_questions_and_choices_success(self):
-        # Create a GET request for the view
-        request = self.factory.get('/path/to/your/view/50/20/')
-        
-        # Call the view function with the GET request
-        response = views.get_questions_and_choices(request, quantity=50, category=20)
+            # Create a GET request for the view with reverse 
+            # use the name defined in urls.py with the arguments passed in the view in view.py
+            request = self.factory.get(reverse('Education:detail', args=[50, 20]))
+            response = views.get_questions_and_choices(request, quantity=50, category=20) #?do i have to call the jsoncat func?
+            
+            self.assertIsInstance(response, dict, 'Check for a dictionary')
 
-        # Assert that the response has a status code of 200
-        self.assertEqual(response.status_code, 200)
+            # create a mock variable that indexes a question in questions (i.e. 'results') from the response
+            # index the first question in the :value for questions
+            a_question = response['questions'][0]
 
-        # add more assertions 
+            # assert that the response is successful with a status code of 200
+            # the view will set up a context variable called questions (the name representing 'results') 
+            # - response.context is passed to the template
+            # - assert that questions is in the response context
+            # assert that the value for questions (i.e. results) is a list
+            self.assertEqual(response.status_code, 200, msg='')        
+            self.assertIn('questions', response, msg='')
+            self.assertIsInstance(response['questions'], list, msg='')
 
+            # assert that the mixed_choices are a list in the dictionary for each question
+            # assert that the key for 'mixed_choices' is in the mock question variable
+            # assert that the length of the mixed choices in the list equals 4        
+            self.assertIsInstance(response['mixed_choices'], list, msg='') 
+            self.assertIn(a_question['mixed_choices'], response, msg='') 
+            self.assertEqual(len(a_question['mixed_choices']), 4, msg='') 
+
+            # assert that the context for the error_message & passed to the template returns None
+            self.assertIsNone(response['error_message']) 
+
+    # test the unsuccessful retrieval of questions and choices with RequestFactory    
     def test_get_questions_and_choices_no_questions(self):
-        # Create a GET request for the view
-        request = self.factory.get('/path/to/your/view/50/20/')
+        # use context manager to mock the get_specific_json_category function & return a response without questions
+        with patch('Education.views.get_specific_json_category') as mock_get_specific_json_category:
+            # set up an empty dictionary for a 200-OK mock response from the mock_get_specific_json_category function
+            mock_response_empty = {
+                "results":[]
+            }
+
+            # set the return value for response of mock_get_specific_json_category as mock_response_empty
+            mock_get_specific_json_category.return_value = mock_response_empty
+            
+            # Create a GET request for the view
+            request = self.factory.get(reverse('Education:detail', args=[50, 20]))
         
-        # Mock the get_specific_json_category function to return a response without questions
-        with patch('Education.views.get_specific_json_category') as mock_get_specific_json:
-            mock_get_specific_json.return_value = {'results': []}
-
             # Call the view function with the GET request
-            response = views.get_questions_and_choices(request, quantity=50, category=20)
+            response = views.get_questions_and_choices(request, quantity=50, category=20)                
+                                
+            # assert that the response has a status code of 200
+            # assert that the response returns an empty list where questions should be
+            # assert that the context variable for the error_message is present when passed to the template
+            # - check if the string is present in the HTML content of the response after it has been decoded from bytes to a Unicode string 
+            # - easier to work with text-based content in your tests
+            self.assertEqual(response.status_code, 200, msg='Should check that the status code for the questions & choices response is OK.')
+            self.assertEqual(len(mock_response_empty['results']), 0, msg='Should check that there is an empty list where questions should be.')            
+            self.assertIn("Unable to retrieve the questions from the json response", response.content.decode('utf-8'))
 
-        # Assert that the response has a status code of 200
-        self.assertEqual(response.status_code, 200)
+    #  test that the edu_detail template is used for the    
+    def test_detail_view_with_client(self):
+        # make a GET request to the 'detail' view using the Django test client
+        with patch('Education.views.get_specific_json_category') as mock_get_specific_json:
+            mock_response = {
+                            "results":[
+                                        {
+                                        "type":"type1",
+                                        "difficulty":"level",
+                                        "category":"category1",
+                                        "question":"question1",
+                                        "correct_answer":"correct_answer1",
+                                        "incorrect_answers":[
+                                            "incorrect_answer",
+                                            "incorrect_answer2",
+                                            "incorrect_answer3",
+                                            ]
+                                        }
+                                    ]
+                            }
+            
+            # 
+            mock_get_specific_json.return_value = mock_response
 
-        # add more assertions 
+            # make a GET request to the detail view
+            response = self.client.get(reverse('Education:detail', args=[50, 20]))            
 
-    # Add more test cases as needed
-####################################################################################
-'''
-possible assertions
-    def test_get_questions_view(self):
-        response = self.client.get(reverse('get_questions', kwargs={'quantity': 50, 'category': 20}))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'edu_quiz/edu_detail.html')
-        self.assertIn('question_texts', response.context)
-        self.assertIsNone(response.context['mixed_choices'])
-        self.assertIsNone(response.context['error_message'])
+            # assert that the view renders the edu_quiz template - use path from template directory
+            self.assertTemplateUsed(response, 'edu_quiz/edu_detail.html') # can only be used with Client() not ReqFac()
 
-    def test_get_choices_view(self):
-        response = self.client.get(reverse('get_choices', kwargs={'category_id': 20}))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'edu_quiz/edu_detail.html')
-        self.assertIsNone(response.context['question_texts'])
-        self.assertIn('mixed_choices', response.context)
-        self.assertIsNone(response.context['error_message'])
-'''
 
-#removed these tests after implementing mock, patch
-'''
-# https://www.django-rest-framework.org/api-guide/testing/#requestsclient
-    def test_get_json_categories_with_unittest(self):  
-        # use unittest to simulate an external API request    
-        category_lookup = 'https://opentdb.com/api_category.php'        
-        response = requests.get(category_lookup)         
-        if response.status_code == 200:
-            json_response = response.json()                    
-                
-        # assert that the HTTP response status code is 200 (OK), indicating a successful request.
-        # assert that API response was successfully received and parsed into a JSON format
-        # assert that the type of json_response is a dict (dictionary) - ensure a python dictionary
-        # - https://docs.python.org/3.7/library/unittest.html?highlight=assertisinstance#unittest.TestCase.assertIsInstance
-        # - in Python, everything is an object, and data types are implemented as classes
-        # - dict is the class representing dictionaries in Python
-        # assert that the key "trivia_categories" is in the dictionary json_response [a in b where assertIn(a,b)]
-        self.assertEqual(response.status_code, 200, msg='Should check that mythology has a successful response.')
-        self.assertIsNotNone(json_response, msg="Should check that an API response was successfully received and parsed into a JSON format.")        
-        self.assertIsInstance(json_response, dict, msg='Should check that json_response is a dictionary.')
-        self.assertIn("trivia_categories", json_response, msg='Should check that the trivia_categories key is present in the dictionary json_response.')
-
-    # test specific json category with unittest
-    def test_get_specific_json_category_with_unittest(self):
-        # use unittest to simulate an external API request    
-        mythology_url = f"https://opentdb.com/api.php?amount=50&category=20"
-        response = requests.get(mythology_url)
-
-        # test if there's a successful get request for a specific category
-        if response.status_code == 200:
-            json_response = response.json()
-
-        # test if there's an unsuccessful get request for a specific category
-        else:
-            error_message = f"Unable to retrieve the specific category - Status code:{response.status_code}"
-            print(error_message)
-            json_response = None
-
-        # assert that get request renders succesfully
-        # 
-        self.assertEqual(response.status_code, 200, msg='Should check that mythology has a successful response.')
-        self.assertIsNotNone(json_response, msg="Should check that the mythology API response was successfully received and parsed into a JSON format.")        
-        self.assertIsInstance(json_response, dict, msg='Should check that the json_response is a dictionary.')
-        self.assertIn("results", json_response, msg='Should check that the results key is present in the dictionary json_response.')
-'''
