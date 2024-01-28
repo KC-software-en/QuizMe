@@ -25,9 +25,9 @@ class HomeViewTest(TestCase):
         pass
     
     '''
-        A function to test if the incorrect template is rendered from the view.
+        A function to test if the correct template is rendered from the view.
     '''
-    def test_view_using_template_invalid(self):
+    def test_index_view_valid(self):
         # Create an instance of a GET request.
         req = RequestFactory().get('/')
         # Check if the template can be accessed through the index view. 

@@ -15,6 +15,38 @@
 
 <body>
 	{% block content %}
+    <!-- Nav bar template for all pages-->
+
+    <h1 align="center">QuizMe</h1>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'Education:index' %}" aria-disabled="true">Home </a>
+                    </li>                            
+                </ul>
+                <div class="item" style="color: #27a5ff;">
+                {% if user.is_authenticated %}
+                    {{user.username}}
+                {% endif %}
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Account
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'user_auth:logout' %}">Logout</a>
+                        {% else %}
+                            <a href="{% url 'user_auth:login' %}">Login</a>
+                            <a href="{% url 'user_auth:register' %}">Register</a>                                                                  
+                        {% endif %}
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </nav>
 	    <section>       
             <h1>Education Quiz Categories</h1> 
             <ul>
