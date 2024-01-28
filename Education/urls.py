@@ -20,6 +20,6 @@ urlpatterns = [
     path('', views.index, name='index'),    
     path('Education/<int:category_id>/', views.index_edu, name='index_edu'),         
     path('Education/<int:quantity>/<int:category>/MythologyQuiz/',views.get_questions_and_choices, name='detail'),    
-    #path('Education/results/',views.results, name='results'),
+    path('Education/results/', views.results, name='results'),
     #path('Education/<int:question_id>/vote/',views.vote, name='vote'),
 ]

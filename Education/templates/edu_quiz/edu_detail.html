@@ -37,7 +37,7 @@
                                     which returns an iterable of Choice objects and is suitable for use in the { for } tag.-->
                                     <!--the post method was used to send data to the server
                                     the url in the action attribute was used to send data to the server-->
-                                    <form action="" method="POST">
+                                    <form action="{% url 'Education:results' %}" method="POST">
                                         <!--add the csrf_token to all post forms targeted at internal urls to protect against Cross Site Forgery-->
                                         {% csrf_token %}
                                         <div class="form-group">
@@ -61,7 +61,7 @@
                                             <!-- A button that allows the user to submit their choice-->
                                             <!--when somebody selects one of the radio buttons and submits the form, it’ll POST the data “choice=id” where id is the ID of the selected choice-->
                                             <!--use margins to allow space above-under the button-->
-                                            <input type="submit" value="Submit"/>	
+                                            <input type="Submit" value="Save"/>	
                                             <br/><br/>
                                         </div>
                                     </form>      

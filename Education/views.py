@@ -43,7 +43,14 @@ def get_json_categories():
         with open("quiz_categories.json", "w") as f:
             json.dump(json_response, f, indent=4)
 
-    return json_response
+        return json_response
+    
+    else:
+        # print error if unsuccessful request
+        # return None to signal that there's no valid data to work with
+        error_message = f"Unable to retrieve the specific category - Status code:{response.status_code}"
+        print(error_message)
+        return None
 
 '''
 Create a view for the home page of education quizzes.
@@ -175,13 +182,18 @@ def get_questions_and_choices(request, quantity:int, category:int):
             context = {'questions': None,                       
                        'mixed_choices': None, 
                        'error_message': error_message}            
-            return render(request, 'edu_quiz/edu_detail.html', context)                
-    
-    # render an error message if calling the specific category function doesn't return the results dictionary 
-    else:
-        error_message = "Unable to return a json response for a specific category"
-        return render(request, 'edu_quiz/edu_detail.html', {'error_message': error_message})
+            return render(request, 'edu_quiz/edu_detail.html', context)                        
     
 # create a view that saves your selected choice
     
 # create a view that displays the quiz result    
+def results(request):
+    if request.method == "POST":
+        result = 0
+        json_response = get_specific_json_category(quantity=50, category=20)
+        questions = json_response["results"]
+        for question in questions:
+            if request.POST[question["question"]] == question["correct_answer"]:
+                result += 1
+        return render(request, 'edu_quiz/edu_result.html', {'questions': questions, "result": result})       
+        
