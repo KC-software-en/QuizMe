@@ -56,7 +56,6 @@ Create a view for the home page of education quizzes.
 # get json reponse for trivia categories from open trivia db
 # index category from the dictionary id
 # Add tjhe login required decorator to prevent access to the index_edu view.
-@login_required(login_url='user_auth:login')
 def index_edu(request, category_id=20):
     # call the categories function & save its response in an assigned variable - NameError if you don't assign it
     response = get_json_categories()
