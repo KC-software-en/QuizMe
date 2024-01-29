@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Had to add the CSS formating internaly as my external css file could not be picked up.-->
         <style>
             
@@ -46,13 +47,136 @@
             
             /* Add a hover effect to dropdown links */
             .dropdown-content a:hover {
-              background-color: #ddd;
+              background-color: #00c0fb;
             }
             
             /* Show the dropdown menu on hover */
             .dropdown:hover .dropdown-content {
               display: block;
             }
+
+            /* Css styling for slideshow */
+                /**
+      * Base
+      */
+      body {
+        font-size: 100%;
+        background: #00aaff;
+      }
+      
+      /* Fallback for hidden attribute */
+      hidden {
+        display: none;
+      }
+
+      .slider {
+        position: relative;
+        margin-top: 3rem;
+        margin-right: auto;
+        margin-left: auto;
+        overflow: hidden;
+        width: 40.625rem;
+        height: 26.25rem;
+        box-shadow: 0 4px 14px rgba(0, 247, 255, 0.25);
+      }
+      .slider__list {
+        position: absolute;
+        left: 0;
+        width: 162.5rem;
+      }
+      .slider__slide {
+        float: left;
+      }
+
+      .slider__control {
+        margin-right: auto;
+        margin-left: auto;
+        width: 4.5rem;
+        font-family: sans-serif;
+      }
+      .slider__control label {
+        position: relative;
+        display: block;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        width: 4.5rem;
+        height: 2rem;
+        font-size: 1rem;
+        font-weight: normal;
+        line-height: 1.5;
+        color: transparent;
+        background: #50bfff;
+        border-radius: 2rem;
+        cursor: pointer;
+        -webkit-transition: left 0.15s ease-out;
+        transition: left 0.15s ease-out;
+      }
+      .slider__control label:before {
+        content: "autoplay";
+        position: absolute;
+        top: 2.5rem;
+        left: 0;
+        color: #333;
+      font-size: .95rem;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      .slider__control label:after {
+        content: "";
+        position: absolute;
+      top: .25rem;
+      left: .25rem;
+        display: block;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 2rem;
+        background: #fff;
+        -webkit-transition: left 0.15s ease-out;
+        transition: left 0.15s ease-out;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      .slider__switch:checked + .slider > .slider__list {
+        -webkit-animation-name: autoplay;
+        animation-name: autoplay;
+        /* This will change the time it takes to move to next slide */
+        -webkit-animation-duration: 15s;
+        animation-duration: 15s;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+      }
+      .slider__switch:checked + .slider + .slider__control > label { background: #455a64; }
+      .slider__switch:checked + .slider + .slider__control > label:after { left: 2.75rem; }
+
+      @-webkit-keyframes 
+      autoplay {   /* position of the first slide */
+        0% {
+      left: 0;
+      }
+        /* position of the second slide */
+        25% {
+      left: -40.625rem;
+      }
+        /* position of the third slide */
+        50% {
+      left: -81.25rem;
+      }
+      }
+      @keyframes 
+      autoplay {   /* position of the first slide */
+        0% {
+      left: 0;
+      }
+        /* position of the second slide */
+        20% {
+      left: -40.625rem;
+      }
+        /* position of the third slide */
+        50% {
+      left: -81.25rem;
+      }
+
+      }
             </style>
         <title>{% block title %}QuizMe{% endblock %}</title>
             <!-- Required meta tags -->
@@ -106,16 +230,65 @@
             
        
             <div class="row">
-                <div class="col-md-6" style="padding-left: 20pt;">
-                    <h1>Home page</h1>
+                <div class="col-md-12"  style="text-align: center;">
+                    <h1>Welcome to QuizMe</h1>
+                </div> 
+            </div>    
 
-                    <h3>Info about QuizMe</h3>
+            <div class="container"  style="text-align: center;">    
+                <p style="font-family: sans-serif">QuizMe is the ultimate quiz app for curious minds! 🧠.
+
+                    QuizMe is a fun and easy way to test your knowledge 
+                    <br> 
+                    on various topics, from Education, Entertainment and General Knowledge.
+                   
+                    You can choose from hundreds  
+                    <br> 
+                    of quizzes
                     
-                    <p>Check out all our quizzes <a href="/Entertainment">Quizzes</a></p>
+                    QuizMe is more than just a game. It's a learning tool that helps you discover new facts and improve 
+                    <br>
+                     your skills. Whether you want to brush up on your trivia, prepare for an exam, or just have some fun, 
+                    <br> 
+                     QuizMe has something for you. 😊
+                    
+                    So what are you waiting for? <a href="/user_auth/register">Register</a> on QuizMe today and start quizzing! 🚀
+                    </p>
+            </div>
+                <div class="col-md-12"  style="text-align: center;">
+                    <h1 id="Quiz">Quiz Categories</h1>
+                </div>
+
+                <input id="sliderSwitch" class="slider__switch" type="checkbox" name="sliderSwitch" hidden />
+                    
+                <div class="slider">
+                    <ul class="slider__list">
+                        <li class="slider__slide"><a href="{% url 'Education:index_edu' category_id=20 %}"><img src="/static/assets/Education.jpg" alt="Slide image number 1 " width="650" height="420"/></a></li>
+                        <li class="slider__slide"><a href=""><img src="/static/assets/Entertainment.jpg" alt="Slide image number 2" width="650" height="420"/></li>
+                        <li class="slider__slide"><a href=""><img src="/static/assets/General.jpg" alt="Slide image number 3" width="650" height="420"/></a></li>
+                    </ul>
+                  </div>
+
+                  <div class="slider__control">
+                    <label for="sliderSwitch"></label>
+                  </div>
+
+                  <br>
+
+                  <div class="col-md-12"  style="text-align: center;">
+                    <h4>Select one of the images above to view it's quiz.</h4>
+                </div>    
+
+                <br>
+
+                <div class="col-md-12"  style="text-align: center;">
+                    <h3>Information about QuizMe</h3>
+                    <p>Information about quizme goes here.</p>
+                </div>    
+                <div class="col-md-12"  style="text-align: center;">
+                    <p>Check out all our quizzes <a href="#Quiz">Quizzes</a></p>
                 </div>
             </div>  
-         
-
 
     <!--Copyright information-->
                 <div class="footer" style="color: rgb(0, 0, 0);" style="text-align: center;">
