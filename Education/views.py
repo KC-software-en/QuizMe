@@ -189,8 +189,7 @@ def get_questions_and_choices(request, quantity:int, category:int):
                        'error_message': error_message}            
             return render(request, 'edu_quiz/edu_detail.html', context)                        
     
-# create a view that saves your selected choice
-    
+# create a view that saves your selected choice/    #alter##    
 # create a view that displays the quiz result    
 def results(request):
     if request.method == "POST":
