@@ -56,7 +56,7 @@
                                     which returns an iterable of Choice objects and is suitable for use in the { for } tag.-->
                                     <!--the post method was used to send data to the server
                                     the url in the action attribute was used to send data to the server-->
-                                    <form action="{% url 'Education:results' %}" method="POST">
+                                    <form action="{% url 'Education:selection' %}" method="POST">
                                         <!--add the csrf_token to all post forms targeted at internal urls to protect against Cross Site Forgery-->
                                         {% csrf_token %}
                                         <div class="form-group">
@@ -69,14 +69,24 @@
                                                 <!--Radio buttons. Each choice that is associated with that particular question is
                                                 then displayed using a radio button in a form.-->
                                                 <!--The name of each radio button is choice-->
-                                                <!--selected value for each question will be sent to the server-->                                                                                                
-                                                <input type="radio" name="mixed_choice" id="mixed_choice {{forloop.counter}}" value="{{ mixed_choice.id }}" />                        
+                                                <!--selected value for each question will be sent to the server-->  
+                                                <!-- uniquely identify the radio button within the form
+                                                    selected value (which is the question_id of the chosen mixed_choice) will be sent to the server
+                                                    the '.question' is refering to the question_id key created in results()
+                                                    when the form is submitted, the server-side code can construct the key using the same question.id to retrieve the selected choice from request.POST
+                                                    value attribute is the identifier for the user's choice associated with the question
+                                                 -->                                                                                              
+                                                <input type="radio" name="mixed_choice_{{question.question}}" value="{{ mixed_choice.question}}" />                        
                                                 <label for="mixed_choice {{forloop.counter}}">
                                                     {{ mixed_choice }} 
                                                 </label>                                                                                                                                                                                                
                                                 <br/><br/>
                                             {% endfor %}                                                                                
                                                 
+                                            <!--add a hidden input field to include the question_id from results() in the form
+                                            value of the hidden input field is the unique identifier (question ID) for each question in the loop-->
+                                            <input type="hidden" name="question_{{question.question}}" value="{{question.question}}"/>	                                            
+                                        
                                             <!-- A button that allows the user to submit their choice-->
                                             <!--when somebody selects one of the radio buttons and submits the form, it’ll POST the data “choice=id” where id is the ID of the selected choice-->
                                             <!--use margins to allow space above-under the button-->
@@ -84,8 +94,18 @@
                                             <br/><br/>
                                         </div>
                                     </form>      
+                                    
                                 {% endfor %}
-                            
+                                
+                                <!--move button to the center with d-flex & mx-auto-->
+								<div class="d-flex">
+									<button class="btn mx-auto no-underline">
+                                        <a href="{% url 'Education:results' %}" style="" id="">
+                                            View Results
+                                        </a>
+                                    </button>								
+								</div>
+
                             {% else %}
                                 <p><strong>{{ error_message }}</strong></p>
                             {% endif %}
