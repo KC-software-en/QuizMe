@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.test import Client
+from django.contrib.messages import get_messages
 # import views.
 from .. import views
 '''
@@ -89,4 +90,22 @@ class UserAuthViewTest(TestCase):
         # Create an instance of a GET request.
         response = self.client.get(reverse('user_auth:show_user'))
         self.assertRedirects(response, '/user_auth/login/?next=%2Fuser_auth%2Fauthenticate_user%2Fshow_user')
-  
+
+    
+    '''
+        A function to test if a error message is displyed when a user enters invalid data in the register form.
+    '''  
+    def test_registration_with_invalid_data(self):
+        # Create a new user.
+        self.url = reverse('user_auth:register')
+        self.invalid_data = {
+            'username': 'testuser',
+            'email': 'testuser@example.com',
+            'password1': 'testpassword',
+            'password2': 'testpassword123'
+        }
+
+        response = self.client.post(self.url, self.invalid_data)
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), "Unsuccessful registration. Invalid information.")
