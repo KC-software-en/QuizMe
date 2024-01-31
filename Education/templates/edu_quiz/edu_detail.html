@@ -50,17 +50,18 @@
                                 <form action="{% url 'Education:selection' %}" method="POST">
                                     <!--add the csrf_token to all post forms targeted at internal urls to protect against Cross Site Forgery-->
                                     {% csrf_token %}
-                                    <div class="form-group">
+                                                                            
+                                    <!--The template system uses dot-lookup syntax to access variable attributes.-->
+                                    <!--In the example of {{ question_text }}, first Django does a dictionary lookup on the object question.-->
+                                    <!--Failing that, it tries an attribute lookup – which works, in this case. -->
+                                    <!--If attribute lookup has failed, it would’ve tried a list-index lookup.-->
+                                    <!--iterate through the questions list and display the question and the choices-->                    
+                                    {% if questions %}
+                                        {% for question in questions %}
+                                            <h3> {{ question.question_text }}</h3>  
                                         
-                                        <!--The template system uses dot-lookup syntax to access variable attributes.-->
-                                        <!--In the example of {{ question_text }}, first Django does a dictionary lookup on the object question.-->
-                                        <!--Failing that, it tries an attribute lookup – which works, in this case. -->
-                                        <!--If attribute lookup has failed, it would’ve tried a list-index lookup.-->
-                                        <!--iterate through the questions list and display the question and the choices-->                    
-                                        {% if questions %}
-                                            {% for question in questions %}
-                                                <h3> {{ question.question_text }}</h3>  
-                                        
+                                            <!--group related elements in a form with fieldset-->
+                                            <fieldset>
                                                 <!--Method-calling happens in the for loop: question.choice_set.all is
                                                 interpreted as the Python code question.choice_set.all(), which returns an
                                                 iterable of Choice objects and is suitable for use in the for tag.-->
@@ -92,14 +93,14 @@
                                                 <!--use margins to allow space above-under the button-->
                                                 <input type="Submit" value="Save"/>	
                                                 <br/><br/>
+                                            </fieldset>                                        
 
-                                            {% endfor %}
+                                        {% endfor %}
                                         
-                                        {% else %}
-                                            <p><strong>{{ error_message }}</strong></p>
-                                        {% endif %}
-
-                                    </div>                                        
+                                    {% else %}
+                                        <p><strong>{{ error_message }}</strong></p>
+                                    {% endif %}
+                                    
                                 </form>      
                             
                             <!--results button -->                                                                                    

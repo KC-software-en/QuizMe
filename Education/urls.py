@@ -19,8 +19,8 @@ app_name = 'Education'
 urlpatterns = [
     path('', views.index, name='index'),    
     path('Education/<int:category_id>/', views.index_edu, name='index_edu'),   
-    path('Education/<int:quantity>/<int:category>/MythologyQuiz/', views.get_questions_and_choices, name='detail'),              
     path('Education/MythologyQuiz/selection/', views.selection, name='selection'),    
+    path('Education/<int:quantity>/<int:category>/MythologyQuiz/', views.get_questions_and_choices, name='detail'),                  
     path('Education/MythologyQuiz/results/<int:result>/<int:question_quantity>', views.results, name='results')
     
 ]
