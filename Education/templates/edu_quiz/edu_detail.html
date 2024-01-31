@@ -109,7 +109,7 @@
                                 <!--move button to the center with d-flex & mx-auto-->
 								<div class="d-flex">
 									<button class="btn mx-auto no-underline">
-                                        <a href="{% url 'Education:results' result=result question_quantity=question_quantity %}" style="" id="">
+                                        <a href="Education/MythologyQuiz/results/<int:result>/<int:question_quantity>" style="" id="">
                                             View Results
                                         </a>
                                     </button>								
