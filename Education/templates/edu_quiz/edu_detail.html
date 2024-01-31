@@ -97,14 +97,16 @@
                                     
                                 {% endfor %}
                                 
+                            <div class="card-footer">
                                 <!--move button to the center with d-flex & mx-auto-->
 								<div class="d-flex">
 									<button class="btn mx-auto no-underline">
-                                        <a href="{% url 'Education:results' %}" style="" id="">
+                                        <a href="{% url 'Education:results' result=result question_quantity=question_quantity %}" style="" id="">
                                             View Results
                                         </a>
                                     </button>								
 								</div>
+                            </div>
 
                             {% else %}
                                 <p><strong>{{ error_message }}</strong></p>

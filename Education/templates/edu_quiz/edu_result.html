@@ -38,12 +38,19 @@
         <h1> Your results </h1>
 
         <!-- show score-->
-        {% if request.method == "POST" %}
-            <h2>Score: {{result}} / {{quantity}}</h2>
+        {% if result %}
+            <h2>Score: {{result}} / {{question_quantity}}</h2>
+
+        <!-- display an error message if score is unavailable-->
+        {% else %}
+            <p>
+                <b>No score calculated</b>
+            </p>
+
         {% endif %}
 
         <!-- enter a view url here -->
-        <a href="">
+        <a href="{% url 'Education:detail' quantity=5 category=20 %}">
             Try again?
         </a>
     </section>

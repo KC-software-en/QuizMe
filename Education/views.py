@@ -1,4 +1,6 @@
 # import render to render an HTML template with a given context and return an HttpResponse object
+from multiprocessing import context
+from unittest import result
 from django.shortcuts import render
 
 # import requests to use the API for edu quiz
@@ -15,6 +17,12 @@ import json
 
 # Import the login required decorator to prevent unaouthorised access to cetrain views.
 from django.contrib.auth.decorators import login_required
+
+# import HttpResponseRedirect
+from django.http import HttpResponseRedirect
+
+# import reverse
+from django.urls import reverse
 
 #######################################################################################
 #######################################################################################
@@ -99,7 +107,7 @@ Create a function that returns the json response for a specific category on Open
 # define a function that returns the json response for Open Trivia DB when requesting a specific category
 # create a varible to store the API url for the myth quizzes
 # use an f-str to pass in the parameter for quantity
-# -> place {} around 50 in the url then replace '50' with 'quantity'
+# -> place {} around 5 in the url then replace '5' with 'quantity'
 # then place {} around the category id (from quiz_cat.json)for myth & replace '20' with 'category'
 # return a list
 def get_specific_json_category(quantity: int, category: int):
@@ -140,7 +148,7 @@ Create a function to generate a selection of questions & choices from the select
 # include parameters (expected variables) for the number of questions you want & the category for them
 def get_questions_and_choices(request, quantity:int, category:int):
     # call the specific category function & save its response in an assigned variable - NameError if you don't assign it
-    json_response = get_specific_json_category(quantity=50, category=20)
+    json_response = get_specific_json_category(quantity=5, category=20)
 
     # check if there are questions
     if json_response:        
@@ -172,9 +180,13 @@ def get_questions_and_choices(request, quantity:int, category:int):
                 question['mixed_choices'] = mixed_choices
 
             # assign a context dictionary that will be passed as an argument in template
+            # intended to be calculated in subsequent views (such as selection and results), include result & question_quantity in the context with default values of None
             context = {'questions': questions,                       
                        'mixed_choices': mixed_choices, 
-                       'error_message': None}
+                       'error_message': None
+                       #'result': None,
+                       #'question_quantity': None
+                       }
             
             # return the list of dictionaries in the json response which contains the questions/answers
             # note the json response is a dictionary where its :value ("results") contains a list of dictionaries            
@@ -185,18 +197,99 @@ def get_questions_and_choices(request, quantity:int, category:int):
             error_message = f"Unable to retrieve the questions from the json response" 
             context = {'questions': None,                       
                        'mixed_choices': None, 
-                       'error_message': error_message}            
+                       'error_message': error_message,
+                       'result': None,
+                       'question_quantity': None}            
             return render(request, 'edu_quiz/edu_detail.html', context)                        
-    
-# create a view that saves your selected choice/    #alter##    
-# create a view that displays the quiz result    
-def results(request):
-    if request.method == "POST":
-        result = 0
-        json_response = get_specific_json_category(quantity=50, category=20)
-        questions = json_response["results"]
-        for question in questions:
-            if request.POST[question["question"]] == question["correct_answer"]:
-                result += 1
-        return render(request, 'edu_quiz/edu_result.html', {'questions': questions, "result": result})       
+
+# create a function to calculate the quiz result
+# make the questions and the user's selection the arguments needed to calculate the score      
+def calculate_result(questions, user_selections):
+    # set the counter for the results
+    result = 0   
+
+    for question in questions:
+        # assign an ID for each question in a form that has request.POST
+        # where question_ is the string literal prefix of the key id & embed the index for 'question' from the results (AKA questions) dictionary
+        question_id = f"question_{question['question']}"
         
+        # try checking if the user's selected choice for a specific question, identified by the constructed q_id, matches the correct answer for that question in the questions dictionary
+        # add a point to the score
+        try:                
+            if question_id in request.POST and request.POST[question_id] == question["correct_answer"]:
+                result += 1   
+        
+        # raise an error if the user has not selected a choice
+        # redisplay the quiz form
+        except(KeyError):
+            return render(request, 'edu_quiz/edu_detail.html', 
+                          {
+                              'questions': questions,
+                              'mixed_choices':None,
+                              'error_message': "You didn't select a choice.",
+                              'result': None,
+                              'question_quantity': None
+                              }
+                              )
+    
+    # return result for the results view
+    return result
+
+# create a view that displays the quiz result 
+def results(request, result, question_quantity):    
+    # get the data for each question & its selected choice
+    # pass the data as a context variable in the results template
+    # render the result template 
+    context = {'result': result,
+                'question_quantity': question_quantity}
+    return render(request, 'edu_quiz/edu_result.html', context)
+
+# create a view that saves your selected choice
+def selection(request):
+    # initialise context with default values # to fix error but it didnt work
+    context = {'error_message': None,
+               'questions': None,
+               'mixed_choices': None,
+               'result': None,
+               'question_quantity': None
+               }
+    
+    if request.method == "POST":                
+        json_response = get_specific_json_category(quantity=5, category=20)
+        questions = json_response["results"]
+        #
+        context['question_quantity']= len(questions)
+        
+        # get the user's selections from request.POST
+        user_selections = request.POST
+
+        # create an object to instantiate the function that calculates the result
+        result = calculate_result(questions, user_selections)
+
+        if result:
+            #
+            context['result']= result
+            # pass the result for each question to the results template 
+            # use HttpResponseRedirect instead of HttpResponse;
+            # HttpResponseRedirect takes the URL to which the user will be redirected as an argument
+            # Always return an HttpResponseRedirect after successfully
+            # dealing with POST data. This prevents data from being
+            # posted twice if a user hits the Back button.
+            # use reverse function to take the name of the view and return the str value that represents the actual url            
+            # include the number of questions in the argument passed to results so that the score has a denominator
+            return HttpResponseRedirect(
+                reverse('Education:results', args=(result, len(questions))
+                        )
+            )       
+   
+    # display an error message on the detail template if its an invalid request 
+    else:
+        context = {'error_message': "The request method is invalid.",
+                   'questions': None,
+                   'mixed_choices': None,
+                   'result': None,
+                   'question_quantity': None
+                   }
+    return render(request, 'edu_quiz/edu_detail', context)
+
+
