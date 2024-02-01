@@ -183,9 +183,9 @@ def get_questions_and_choices(request, quantity:int, category:int):
             # intended to be calculated in subsequent views (such as selection and results), include result & question_quantity in the context with default values of None
             context = {'questions': questions,                       
                        'mixed_choices': mixed_choices, 
-                       'error_message': None
-                       #'result': None,
-                       #'question_quantity': None
+                       'error_message': None,
+                       'result': None,
+                       'question_quantity': None
                        }
             
             # return the list of dictionaries in the json response which contains the questions/answers
@@ -203,8 +203,9 @@ def get_questions_and_choices(request, quantity:int, category:int):
             return render(request, 'edu_quiz/edu_detail.html', context)                        
 
 # create a function to calculate the quiz result
+# pass request object as an argument to resolve NameError: name 'request' is not defined - pass explicitly        
 # make the questions and the user's selection the arguments needed to calculate the score      
-def calculate_result(questions, user_selections):
+def calculate_result(request, questions, user_selections):
     # set the counter for the results
     result = 0   
 
@@ -258,13 +259,13 @@ def selection(request):
         json_response = get_specific_json_category(quantity=5, category=20)
         questions = json_response["results"]
         #
-        context['question_quantity']= len(questions)
+        context['question_quantity']= len(questions)        
         
         # get the user's selections from request.POST
         user_selections = request.POST
 
         # create an object to instantiate the function that calculates the result
-        result = calculate_result(questions, user_selections)
+        result = calculate_result(request, questions, user_selections)        
 
         if result:
             #
@@ -277,11 +278,14 @@ def selection(request):
             # posted twice if a user hits the Back button.
             # use reverse function to take the name of the view and return the str value that represents the actual url            
             # include the number of questions in the argument passed to results so that the score has a denominator
-            return HttpResponseRedirect(
-                reverse('Education:results', args=(result, len(questions))
-                        )
-            )       
-   
+            return HttpResponseRedirect(reverse('Education:results', kwargs={'result':result, 'question_quantity':context['question_quantity']}))        
+        
+        else:
+            # ensure that if there's an issue with calculating the result, the view will return a valid response
+            # to resolve ValueError- The view Education.views.selection didn't return an HttpResponse object. It returned None instead
+            context['error_message'] = "The result was not calculated."
+            return render(request, 'edu_quiz/edu_detail.html', context)
+                                       
     # display an error message on the detail template if its an invalid request 
     else:
         context = {'error_message': "The request method is invalid.",
@@ -290,6 +294,4 @@ def selection(request):
                    'result': None,
                    'question_quantity': None
                    }
-    return render(request, 'edu_quiz/edu_detail', context)
-
-
+        return render(request, 'edu_quiz/edu_detail.html', context)
