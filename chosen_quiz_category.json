@@ -3,21 +3,33 @@
     "results": [
         {
             "type": "multiple",
-            "difficulty": "easy",
+            "difficulty": "hard",
             "category": "Mythology",
-            "question": "The Nike apparel and footwear brand takes it&#039;s name from the Greek goddess of what?",
-            "correct_answer": "Victory",
+            "question": "Talos, the mythical giant bronze man, was the protector of which island?",
+            "correct_answer": "Crete",
             "incorrect_answers": [
-                "Courage",
-                "Strength",
-                "Honor"
+                "Sardinia",
+                "Sicily",
+                "Cyprus"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "What is the name of the first human being in Norse mythology?",
+            "correct_answer": "Ask",
+            "incorrect_answers": [
+                "Asmund",
+                "Ake",
+                "Asger"
             ]
         },
         {
             "type": "boolean",
-            "difficulty": "medium",
+            "difficulty": "easy",
             "category": "Mythology",
-            "question": "According to Norse mythology, Loki is a mother.",
+            "question": "According to Greek Mythology, Zeus can control lightning.",
             "correct_answer": "True",
             "incorrect_answers": [
                 "False"
@@ -25,38 +37,26 @@
         },
         {
             "type": "multiple",
-            "difficulty": "medium",
-            "category": "Mythology",
-            "question": "According to the Egyptian Myth of Osiris, who murdered Osiris?",
-            "correct_answer": "Set",
-            "incorrect_answers": [
-                "Horus",
-                "Ra",
-                "Anhur"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "medium",
-            "category": "Mythology",
-            "question": "According to Japanese folklore, what is the favorite food of the Kappa.",
-            "correct_answer": "Cucumbers",
-            "incorrect_answers": [
-                "Kabocha",
-                "Nasu",
-                "Soba"
-            ]
-        },
-        {
-            "type": "multiple",
             "difficulty": "easy",
             "category": "Mythology",
-            "question": "Who in Greek mythology, who led the Argonauts in search of the Golden Fleece?",
-            "correct_answer": "Jason",
+            "question": "What mythology did the god &quot;Apollo&quot; come from?",
+            "correct_answer": "Greek and Roman",
             "incorrect_answers": [
-                "Castor",
-                "Daedalus",
-                "Odysseus"
+                "Roman and Spanish",
+                "Greek and Chinese",
+                "Greek, Roman and Norse"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Mythology",
+            "question": "In Greek Mythology, who was the daughter of King Minos?",
+            "correct_answer": "Ariadne",
+            "incorrect_answers": [
+                "Athena",
+                "Ariel",
+                "Alana"
             ]
         }
     ]
