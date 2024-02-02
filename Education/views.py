@@ -213,11 +213,15 @@ def calculate_result(request, questions, user_selections):
         # assign an ID for each question in a form that has request.POST
         # where question_ is the string literal prefix of the key id & embed the index for 'question' from the results (AKA questions) dictionary
         question_id = f"question_{question['question']}"
+
+        # use html.unescape & handle potential HTML entities for accurate rendering of templates
+        # place the answers from the response in a variable - index it from the list of key:value pairs available for each question(result)
+        correct_answer = html.unescape(question["correct_answer"])
         
         # try checking if the user's selected choice for a specific question, identified by the constructed q_id, matches the correct answer for that question in the questions dictionary
         # add a point to the score
         try:                
-            if question_id in request.POST and request.POST[question_id] == question["correct_answer"]:
+            if (question_id in user_selections) and (user_selections[question_id] == correct_answer):
                 result += 1   
         
         # raise an error if the user has not selected a choice

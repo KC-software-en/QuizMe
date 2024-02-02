@@ -3,60 +3,62 @@
     "results": [
         {
             "type": "multiple",
-            "difficulty": "hard",
+            "difficulty": "medium",
             "category": "Mythology",
-            "question": "Talos, the mythical giant bronze man, was the protector of which island?",
-            "correct_answer": "Crete",
+            "question": "Which of the following is not one of the Greek Fates?",
+            "correct_answer": "Narcissus",
             "incorrect_answers": [
-                "Sardinia",
-                "Sicily",
-                "Cyprus"
+                "Clotho",
+                "Atropos",
+                "Lachesis"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Mythology",
+            "question": "Who was the only god from Greece who did not get a name change in Rome?",
+            "correct_answer": "Apollo",
+            "incorrect_answers": [
+                "Demeter",
+                "Zeus",
+                "Athena"
             ]
         },
         {
             "type": "multiple",
             "difficulty": "medium",
             "category": "Mythology",
-            "question": "What is the name of the first human being in Norse mythology?",
-            "correct_answer": "Ask",
+            "question": "This Greek mythological figure is the god/goddess of battle strategy (among other things).",
+            "correct_answer": "Athena",
             "incorrect_answers": [
-                "Asmund",
-                "Ake",
-                "Asger"
-            ]
-        },
-        {
-            "type": "boolean",
-            "difficulty": "easy",
-            "category": "Mythology",
-            "question": "According to Greek Mythology, Zeus can control lightning.",
-            "correct_answer": "True",
-            "incorrect_answers": [
-                "False"
+                "Ares",
+                "Artemis",
+                "Apollo"
             ]
         },
         {
             "type": "multiple",
             "difficulty": "easy",
             "category": "Mythology",
-            "question": "What mythology did the god &quot;Apollo&quot; come from?",
-            "correct_answer": "Greek and Roman",
+            "question": "Which of these mythological creatures is said to be half-man and half-horse?",
+            "correct_answer": "Centaur",
             "incorrect_answers": [
-                "Roman and Spanish",
-                "Greek and Chinese",
-                "Greek, Roman and Norse"
+                "Minotaur",
+                "Pegasus",
+                "Gorgon"
             ]
         },
         {
             "type": "multiple",
-            "difficulty": "hard",
+            "difficulty": "easy",
             "category": "Mythology",
-            "question": "In Greek Mythology, who was the daughter of King Minos?",
-            "correct_answer": "Ariadne",
+            "question": "The Nike apparel and footwear brand takes it&#039;s name from the Greek goddess of what?",
+            "correct_answer": "Victory",
             "incorrect_answers": [
-                "Athena",
-                "Ariel",
-                "Alana"
+                "Courage",
+                "Strength",
+                "Honor"
             ]
         }
     ]
