@@ -61,23 +61,22 @@
       */
       body {
         font-size: 100%;
-        background: #00aaff;
+        background: #00806a;
       }
       
       /* Fallback for hidden attribute */
-      hidden {
+      .hidden {
         display: none;
       }
 
       .slider {
         position: relative;
-        margin-top: 3rem;
+        margin-top: 2rem;
         margin-right: auto;
         margin-left: auto;
         overflow: hidden;
         width: 40.625rem;
         height: 26.25rem;
-        box-shadow: 0 4px 14px rgba(0, 247, 255, 0.25);
       }
       .slider__list {
         position: absolute;
@@ -105,7 +104,7 @@
         font-weight: normal;
         line-height: 1.5;
         color: transparent;
-        background: #50bfff;
+        background: #042d45;
         border-radius: 2rem;
         cursor: pointer;
         -webkit-transition: left 0.15s ease-out;
@@ -116,7 +115,7 @@
         position: absolute;
         top: 2.5rem;
         left: 0;
-        color: #333;
+        color: #000000;
       font-size: .95rem;
         font-weight: bold;
         text-transform: uppercase;
@@ -130,7 +129,7 @@
         width: 1.5rem;
         height: 1.5rem;
         border-radius: 2rem;
-        background: #fff;
+        background: #ffffff;
         -webkit-transition: left 0.15s ease-out;
         transition: left 0.15s ease-out;
         -webkit-transform: translate3d(0, 0, 0);
@@ -140,12 +139,12 @@
         -webkit-animation-name: autoplay;
         animation-name: autoplay;
         /* This will change the time it takes to move to next slide */
-        -webkit-animation-duration: 15s;
-        animation-duration: 15s;
+        -webkit-animation-duration: 18s;
+        animation-duration: 18s;
         -webkit-animation-iteration-count: infinite;
         animation-iteration-count: infinite;
       }
-      .slider__switch:checked + .slider + .slider__control > label { background: #455a64; }
+      .slider__switch:checked + .slider + .slider__control > label { background: rgb(143, 150, 254); }
       .slider__switch:checked + .slider + .slider__control > label:after { left: 2.75rem; }
 
       @-webkit-keyframes 
@@ -177,6 +176,18 @@
       }
 
       }
+
+      /* This is paragraph formatting */
+      p {
+        font-family: Arial, sans-serif; /* This sets the font of the paragraph */
+        font-size: 18px; /* This sets the font size of the paragraph */
+        color: rgb(0, 0, 0); /* This sets the text color of the paragraph */
+        text-align: center; /* This aligns the text to the center of the paragraph */
+        margin: 100px; /* This adds some space around the paragraph */
+        padding: 15px; /* This adds some space inside the paragraph */
+        border: 3px solid rgb(147, 154, 255); /* This adds a solid black border around the paragraph */
+        background-color: rgb(174, 227, 255); /* This sets the background color of the paragraph */
+      }
             </style>
         <title>{% block title %}QuizMe{% endblock %}</title>
             <!-- Required meta tags -->
@@ -186,11 +197,11 @@
             <!-- Bootstrap CSS -->
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
-        <body>            
+        <body style="background: #d8fdff;">            
         {% block content %}
         <!-- Nav bar template for all pages-->
 
-            <h1 align="center">QuizMe</h1>
+            <h1 style="text-align: center;">QuizMe</h1>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -228,6 +239,7 @@
                 </div>
             </nav>
             
+            <br>
        
             <div class="row">
                 <div class="col-md-12"  style="text-align: center;">
@@ -239,22 +251,24 @@
                 <p style="font-family: sans-serif">QuizMe is the ultimate quiz app for curious minds! 🧠.
 
                     QuizMe is a fun and easy way to test your knowledge 
-                    <br> 
+                     
                     on various topics, from Education, Entertainment and General Knowledge.
                    
                     You can choose from hundreds  
-                    <br> 
+                   
                     of quizzes
                     
                     QuizMe is more than just a game. It's a learning tool that helps you discover new facts and improve 
-                    <br>
+                    
                      your skills. Whether you want to brush up on your trivia, prepare for an exam, or just have some fun, 
-                    <br> 
+                  
                      QuizMe has something for you. 😊
                     
                     So what are you waiting for? <a href="/user_auth/register">Register</a> on QuizMe today and start quizzing! 🚀
                     </p>
             </div>
+
+            <br>
                 <div class="col-md-12"  style="text-align: center;">
                     <h1 id="Quiz">Quiz Categories</h1>
                 </div>
@@ -276,19 +290,43 @@
                   <br>
 
                   <div class="col-md-12"  style="text-align: center;">
-                    <h4>Select one of the images above to view it's quiz.</h4>
+                    <h5>Select one of the images above to view it's quiz.</h5>
                 </div>    
 
                 <br>
 
+                <div class="container"  style="text-align: center;">    
+                    <h1>About Us</h1>
+                    <p style="font-family: sans-serif">In a world where traditional media is making way for digital experiences,
+                    
+                       we recognize the need for a platform that caters to the growing demand for 
+                       
+                       quizzes in education, entertainment, and general knowledge.QuizMe is here to fill 
+                  
+                        that void, offering a diverse range of quizzes designed to challenge, entertain, and enlighten.
+                    </p>
+                
+                    <br>
+
+                    <h1>Our Mission</h1>
+                      <p style="font-family: sans-serif">At QuizMe, we aim to provide quiz masters with a user-friendly interface to define quizzes,
+                       
+                         ensuring seamless conversion between graphical representation and human-readable data formats.
+                        
+                          Whether you're an educator, an enthusiast, or just someone looking for a mental workout,
+                       
+                           our platform is designed to meet your needs. 
+                      </p>
+                  </div>    
+
+                  <br>
+
                 <div class="col-md-12"  style="text-align: center;">
-                    <h3>Information about QuizMe</h3>
-                    <p>Information about quizme goes here.</p>
-                </div>    
-                <div class="col-md-12"  style="text-align: center;">
-                    <p>Check out all our quizzes <a href="#Quiz">Quizzes</a></p>
+                    <h4>Check out all our quizzes <a href="#Quiz">Quizzes</a></h4>
                 </div>
             </div>  
+
+            <br>
 
     <!--Copyright information-->
                 <div class="footer" style="color: rgb(0, 0, 0);" style="text-align: center;">
@@ -296,6 +334,9 @@
                         <h7>Authors : Deandre' Wright,  Kisha Cairncross<br> &copy;copy right reserved <br></h7>
                     </div>
                 </div> 
+
+                <br>
+
         {% endblock %}                
     </body>
 </html>
