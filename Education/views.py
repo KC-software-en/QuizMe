@@ -25,7 +25,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 # import Quiz
-from .models import Quiz
+from .models import Mythology
 
 #######################################################################################
 #######################################################################################
