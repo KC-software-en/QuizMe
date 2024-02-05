@@ -3,14 +3,38 @@
     "results": [
         {
             "type": "multiple",
+            "difficulty": "easy",
+            "category": "Mythology",
+            "question": "The ancient Roman god of war was commonly known as which of the following?",
+            "correct_answer": "Mars",
+            "incorrect_answers": [
+                "Jupiter",
+                "Juno",
+                "Ares"
+            ]
+        },
+        {
+            "type": "multiple",
             "difficulty": "medium",
             "category": "Mythology",
-            "question": "Which of the following is not one of the Greek Fates?",
-            "correct_answer": "Narcissus",
+            "question": "Which of the following Mesopotamian mythological figures was NOT a deity?",
+            "correct_answer": "Enkidu",
             "incorrect_answers": [
-                "Clotho",
-                "Atropos",
-                "Lachesis"
+                "Enki",
+                "Enlil",
+                "Enkimdu"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "In Greek Mythology, who killed Achilles?",
+            "correct_answer": "Paris",
+            "incorrect_answers": [
+                "Hector",
+                "Helen",
+                "Pericles"
             ]
         },
         {
@@ -26,39 +50,13 @@
             ]
         },
         {
-            "type": "multiple",
-            "difficulty": "medium",
-            "category": "Mythology",
-            "question": "This Greek mythological figure is the god/goddess of battle strategy (among other things).",
-            "correct_answer": "Athena",
-            "incorrect_answers": [
-                "Ares",
-                "Artemis",
-                "Apollo"
-            ]
-        },
-        {
-            "type": "multiple",
+            "type": "boolean",
             "difficulty": "easy",
             "category": "Mythology",
-            "question": "Which of these mythological creatures is said to be half-man and half-horse?",
-            "correct_answer": "Centaur",
+            "question": "According to Greek Mythology, Atlas was an Olympian God.",
+            "correct_answer": "False",
             "incorrect_answers": [
-                "Minotaur",
-                "Pegasus",
-                "Gorgon"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "easy",
-            "category": "Mythology",
-            "question": "The Nike apparel and footwear brand takes it&#039;s name from the Greek goddess of what?",
-            "correct_answer": "Victory",
-            "incorrect_answers": [
-                "Courage",
-                "Strength",
-                "Honor"
+                "True"
             ]
         }
     ]
