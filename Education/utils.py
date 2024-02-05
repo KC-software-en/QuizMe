@@ -10,8 +10,8 @@ import random
 # import json to work with the data retrieved from the open trivia db API
 import json
 
-# import Quiz
-from .models import Quiz
+# import models
+from .models import Mythology
 
 #######################################################################################
 #######################################################################################
@@ -74,7 +74,10 @@ def get_specific_json_category(quantity: int, category: int):
         error_message = f"Unable to retrieve the specific category - Status code:{response.status_code}"
         print(error_message)
         return None 
-    
+
+'''
+Create a function that will mix the choices for each question in a quiz.
+'''    
 # rearrange the options of answers
 # use the random module & its shuffle function to rearrange
 # return a list of choices
@@ -82,8 +85,18 @@ def mix_choices(choices: list):
     random.shuffle(choices)
     return choices
 
-def create_quiz_object():    
-    json_response = get_specific_json_category(quantity=5, category=20)
+'''
+Create a function that will create an object for the mythology quiz.
+'''
+# create an object for the mythology quiz data
+# in django shell import the util functions needed for the creation of the obj then call the obj
+# In project directory cmd: `python manage.py shell`, 
+# `from Education.utils import get_specific_json_category, mix_choices, create_mythology_object`
+# `create_mythology_object()`, then `exit()`
+# this will populate the mythology table on the admin site with the quiz data
+def create_mythology_object():   
+    # call the get_specific_json_category function to get the data for the mythology category
+    json_response = get_specific_json_category(quantity=50, category=20)
     
     # check if there are questions
     if json_response:        
@@ -136,7 +149,7 @@ def create_quiz_object():
                     
                 # create a question object with the above data
                 # this will show on the admin site with the models created for questions & choices
-                question_object = Quiz.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
+                question_object = Mythology.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
     
                 # save the object to the database
                 question_object.save()
