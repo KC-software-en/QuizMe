@@ -12,11 +12,25 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def user_login(request):
+    """
+    Renders the login.html template for user login.
+    
+    request: The HTTP request object.
+        
+    Returns: A rendered HTML page for user login.
+    """
     return render(request, "login.html")
 
 
 # This veiw logs the user out.
 def user_logout(request):
+    """
+    Logs out the user and displays a success message.
+
+    request: The HTTP request object.
+
+    Returns: A rendered response with the 'logout.html' template.
+    """
     logout(request)
     messages.success(request, ("You were successfully logged out."))
     return render(request, 'logout.html')
@@ -24,6 +38,14 @@ def user_logout(request):
 
 # This veiw is used to register a new user.
 def user_register(request):
+    """
+    Handles user registration.
+
+    request: The HTTP request object.
+
+    Returns: If successful, redirects to the login page.
+             If unsuccessful, displays an error message and renders the registration form.
+    """
     if request.method == "POST":
         form = NewUserForm(request.POST)        
         if form.is_valid():            
@@ -53,6 +75,14 @@ def user_register(request):
 
 #  This veiw is used to authenticate and check if the user already exists.
 def authenticate_user(request):
+    """
+    Authenticates a user based on the provided username and password.
+
+    request: The HTTP request object containing POST data.
+
+    Returns: If authentication is successful, redirects to the "show_user" page.
+             If authentication fails, redirects to the "login" page.
+    """
     username = request.POST["username"]
     password = request.POST["password"]
     user = authenticate(username=username, password=password)
@@ -64,6 +94,13 @@ def authenticate_user(request):
 
 @login_required(login_url='user_auth:login')
 def show_user(request):
+    """
+    Displays user information.
+
+    request: (HttpRequest): The HTTP request object.
+
+    Returns: HttpResponse: Rendered template with user data (username and password).
+    """
     print(request.user.username)
     return render(request, 'user.html', {
         "username": request.user.username,
