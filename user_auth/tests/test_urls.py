@@ -18,33 +18,32 @@ Create a class to test the Urls.
 # Next, go to urls.py and create the urls and it should pass.
 # Create a class to test the home views.
 # run coverage after tests
-class TestUrls(SimpleTestCase):    
-    '''
-        A function to test if the correct template is rendered if the user enters the login url path.
-        
-    '''    
+class TestUrls(SimpleTestCase):       
     # The test will Pass because the resolver match should return the user_login view.
     def test_login_page_valid(self):
+        '''
+            A function to test if the correct template is rendered if the user enters the login url path.
+        ''' 
         # used to generate a URL based on view name.
         url = reverse("user_auth:login")
         # The assert equals function is used to take the url path and return a object based on the resolver match which is a veiw.
         self.assertEquals(resolve(url).func, views.user_login) 
     
-    '''
-        A function to test if the correct template is rendered if the user enters the logout url path.
-    '''
     # The test will Pass because the resolver match should return the user_logout view.
     def test_logout_page_valid(self):
+        '''
+            A function to test if the correct template is rendered if the user enters the logout url path.
+        '''
         # used to generate a URL based on view name.
         url = reverse("user_auth:logout") 
         # The assert equals function is used to take the url path and return a object based on the resolver match which is a view.
         self.assertEquals(resolve(url).func, views.user_logout) 
-     
-    '''
-        A function to test if the correct template is rendered if the user enters the register url path.
-    '''
+    
     # The test will Pass because the resolver match should return the user_register view.
     def test_register_page_valid(self):
+        '''
+            A function to test if the correct template is rendered if the user enters the register url path.
+        '''
         # used to generate a URL based on view name.
         url = reverse("user_auth:register") 
         # The assert equals function is used to take the url path and return a object based on the resolver match which is a veiw.
