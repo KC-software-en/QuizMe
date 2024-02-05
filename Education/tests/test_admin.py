@@ -13,7 +13,7 @@ from django.contrib.admin.sites import site
 from .. import admin
 
 # import the question & choice models
-from ..models import Question, Choice
+from ..models import Quiz
 
 ######################################################################################################
 ######################################################################################################
@@ -24,18 +24,13 @@ Create a class to test the model registration on the Admin site.
 # test that the models were registered on admin site
 class TestModelRegistration(TransactionTestCase):
     '''
-    Create a method to test the Question model registration.
+    Create a method to test the Quiz model registration.
     '''
-    # assert that question model was registered with the admin site
+    # assert that Quiz model was registered with the admin site
     # - by examining the internal attribute of the AdminSite class in Django - the _registry attribute of the site object.
     # _registry is a dictionary where {model classes:admin classes associated with those models}
-    def test_question_registration(self):
-        self.assertIn(Question,site._registry, 'Should check Question is on the admin site')
+    def test_quiz_registration(self):
+        self.assertIn(Quiz, site._registry, 'Should check Quiz is on the admin site')
     
-    '''
-    Create a method to test the Choice model registration.
-    '''
-    # assert that Choice model was registered with the admin site
-    def test_choice_registration(self):
-        self.assertIn(Choice, site._registry, 'Should check Choice is on the admin site')
+    
     

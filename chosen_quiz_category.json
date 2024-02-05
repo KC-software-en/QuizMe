@@ -3,60 +3,60 @@
     "results": [
         {
             "type": "multiple",
-            "difficulty": "hard",
+            "difficulty": "easy",
             "category": "Mythology",
-            "question": "Talos, the mythical giant bronze man, was the protector of which island?",
-            "correct_answer": "Crete",
+            "question": "The ancient Roman god of war was commonly known as which of the following?",
+            "correct_answer": "Mars",
             "incorrect_answers": [
-                "Sardinia",
-                "Sicily",
-                "Cyprus"
+                "Jupiter",
+                "Juno",
+                "Ares"
             ]
         },
         {
             "type": "multiple",
             "difficulty": "medium",
             "category": "Mythology",
-            "question": "What is the name of the first human being in Norse mythology?",
-            "correct_answer": "Ask",
+            "question": "Which of the following Mesopotamian mythological figures was NOT a deity?",
+            "correct_answer": "Enkidu",
             "incorrect_answers": [
-                "Asmund",
-                "Ake",
-                "Asger"
+                "Enki",
+                "Enlil",
+                "Enkimdu"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "In Greek Mythology, who killed Achilles?",
+            "correct_answer": "Paris",
+            "incorrect_answers": [
+                "Hector",
+                "Helen",
+                "Pericles"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Mythology",
+            "question": "Who was the only god from Greece who did not get a name change in Rome?",
+            "correct_answer": "Apollo",
+            "incorrect_answers": [
+                "Demeter",
+                "Zeus",
+                "Athena"
             ]
         },
         {
             "type": "boolean",
             "difficulty": "easy",
             "category": "Mythology",
-            "question": "According to Greek Mythology, Zeus can control lightning.",
-            "correct_answer": "True",
+            "question": "According to Greek Mythology, Atlas was an Olympian God.",
+            "correct_answer": "False",
             "incorrect_answers": [
-                "False"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "easy",
-            "category": "Mythology",
-            "question": "What mythology did the god &quot;Apollo&quot; come from?",
-            "correct_answer": "Greek and Roman",
-            "incorrect_answers": [
-                "Roman and Spanish",
-                "Greek and Chinese",
-                "Greek, Roman and Norse"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "hard",
-            "category": "Mythology",
-            "question": "In Greek Mythology, who was the daughter of King Minos?",
-            "correct_answer": "Ariadne",
-            "incorrect_answers": [
-                "Athena",
-                "Ariel",
-                "Alana"
+                "True"
             ]
         }
     ]

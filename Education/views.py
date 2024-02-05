@@ -24,6 +24,9 @@ from django.http import HttpResponseRedirect
 # import reverse
 from django.urls import reverse
 
+# import Quiz
+from .models import Quiz
+
 #######################################################################################
 #######################################################################################
 
@@ -36,32 +39,6 @@ Create a view for the home page of QuizMe project.
 def index(request):     
     # Render your template and map a URL to it
     return render(request, "index.html")
-
-'''
-Create a function that returns the json response for the available categories on Open Trivia DB.
-'''
-# define a function that returns the json response for Open Trivia DB
-def get_json_categories():
-    # get Category Lookup url
-    category_lookup = 'https://opentdb.com/api_category.php'
-    # store url in a variable as a json response
-    response = requests.get(category_lookup)
-    if response.status_code == 200:
-        json_response = response.json()
-    
-        # write Categories to a json file
-        # use an indent to ensure each category prints on separate lines
-        with open("quiz_categories.json", "w") as f:
-            json.dump(json_response, f, indent=4)
-
-        return json_response
-    
-    else:
-        # print error if unsuccessful request
-        # return None to signal that there's no valid data to work with
-        error_message = f"Unable to retrieve the specific category - Status code:{response.status_code}"
-        print(error_message)
-        return None
 
 '''
 Create a view for the home page of education quizzes.
@@ -101,45 +78,7 @@ def index_edu(request, category_id=20):
     # pass all the context variables into a single dictionary to render in the template correctly
     return render(request, 'edu_quiz/edu_quiz.html', {'selected_category':selected_category, 'category_name': category_name}) 
 
-'''
-Create a function that returns the json response for a specific category on Open Trivia DB.
-'''
-# define a function that returns the json response for Open Trivia DB when requesting a specific category
-# create a varible to store the API url for the myth quizzes
-# use an f-str to pass in the parameter for quantity
-# -> place {} around 5 in the url then replace '5' with 'quantity'
-# then place {} around the category id (from quiz_cat.json)for myth & replace '20' with 'category'
-# return a list
-def get_specific_json_category(quantity: int, category: int):
-    mythology_url = f"https://opentdb.com/api.php?amount={quantity}&category={category}"
-    response = requests.get(mythology_url)
-    
-    # a successful request will give a 200 status code
-    # get a json response or else there will only be a status code        
-    if response.status_code == 200:
-        json_response = response.json()
-    
-        # write chosen category to a json file - has to be after getting a json response (converting to a dictionary) 
-        # - because writing to a file needs to be done on a serialisable object
-        # use an indent to ensure each category prints on separate lines
-        with open("chosen_quiz_category.json", "w") as f:
-            json.dump(json_response, f, indent=4)
-
-        return json_response
-
-    else:
-        # print error if unsuccessful request
-        # return None to signal that there's no valid data to work with
-        error_message = f"Unable to retrieve the specific category - Status code:{response.status_code}"
-        print(error_message)
-        return None    
-
-# rearrange the options of answers
-# use the random module & its shuffle function to rearrange
-# return a list of choices
-def mix_choices(choices: list):
-    random.shuffle(choices)
-    return choices
+############### %%%%%%%%%%%%%%%%%%%%%%%%%%%% #########################
 
 '''
 Create a function to generate a selection of questions & choices from the selected category.
@@ -213,11 +152,15 @@ def calculate_result(request, questions, user_selections):
         # assign an ID for each question in a form that has request.POST
         # where question_ is the string literal prefix of the key id & embed the index for 'question' from the results (AKA questions) dictionary
         question_id = f"question_{question['question']}"
+
+        # use html.unescape & handle potential HTML entities for accurate rendering of templates
+        # place the answers from the response in a variable - index it from the list of key:value pairs available for each question(result)
+        correct_answer = html.unescape(question["correct_answer"])
         
         # try checking if the user's selected choice for a specific question, identified by the constructed q_id, matches the correct answer for that question in the questions dictionary
         # add a point to the score
         try:                
-            if question_id in request.POST and request.POST[question_id] == question["correct_answer"]:
+            if (question_id in user_selections) and (user_selections[question_id] == correct_answer):
                 result += 1   
         
         # raise an error if the user has not selected a choice

@@ -17,18 +17,13 @@ from django.test import TransactionTestCase
 # It’s useful for testing and fixture replacement
 from mixer.backend.django import mixer
 
-# import datetime for question instance
-import datetime
-
 # import classes from models.py 
-from Education.models import Question, Choice 
+from ..models import Quiz
 
-# import datetime for question instance
-import datetime
 
 #####################################################################################
 
-# Create your tests here. Use `py manage.py test to run tests in cmd
+# Create your tests here. Use `py manage.py test Education.tests.test_models` to run tests in cmd
 # after writing a test, run in cmd & it will say fail. 
 # next, go to models.py and create the Question model & then it should pass
 # run coverage after tests
@@ -37,7 +32,7 @@ import datetime
 Create a class to test the question model.
 '''        
 # create a class to test the question model
-class TestQuestionModel(TransactionTestCase):
+class TestQuizModel(TransactionTestCase):
     '''
     Setup data for question model
     '''
@@ -48,90 +43,65 @@ class TestQuestionModel(TransactionTestCase):
         pass
     
     '''
-    A function to test if the question model creates successfully before it coding it in models.py.
+    A function to test if the quiz model creates successfully before it coding it in models.py.
     '''
     # create a fail test where the functions in models.py do not exist
-    def test_question_model(self):        
-        # create an instance of Question model with mixer
-        question_ins = mixer.blend(Question, question_text = "Will this question show my educational future?",
-                                pub_date = datetime.datetime.now())
+    def test_quiz_model(self):        
+        # create an instance of quiz model with mixer
+        # textfield stores data as a str so the list of choices will read as a str
+        quiz_ins = mixer.blend(Quiz, question = "Question example",
+                             choices = 'choice1, choice2, choice3, choice4',
+                               correct_answer = 'choice1')
         
         # assert instance was correctly created
         # incl a descriptive message with assertion
         # When the test fails, the message will be displayed along with the default error message, 
         # providing more context about what went wrong & helpful for future debugging
-        self.assertIsNotNone(question_ins, 'Should confirm question instance was created')
+        self.assertIsNotNone(quiz_ins, msg='Should confirm question instance was created')
         # Test that obj is (or is not) an instance of cls (which can be a class or a tuple of classes, as supported by isinstance()). 
         # To check for the exact type, use assertIs(type(obj), cls). --class(cls)
-        self.assertIsInstance(question_ins, Question, 'Should confirm that the object instantiated is from the Question class')
+        self.assertIsInstance(quiz_ins, Quiz, msg='Should confirm that the object instantiated is from the Quiz class')
         
         # check attributes of instance
-        expected_question_text = 'Will this question show my educational future?'
-        self.assertEqual(question_ins.question_text, expected_question_text,
-                          'Should check the question_text attribute of the instantiated object')
-        # assert that the pub_date attribute of the question_ins object is an instance of the datetime.datetime class
-        self.assertIsInstance(question_ins.pub_date, datetime.datetime, 'Should check pub_date attribute is an instance of the datetime.datetime class')
+        # the choices are expected to be a list from the json response
+        # - so use split on the choices str to return a list of substrings
+        expected_question = 'Question example'
+        expected_choices = ['choice1', 'choice2', 'choice3', 'choice4']
+        actual_choices = quiz_ins.choices.split(', ')
+        expected_correct_answer = 'choice1'
+
+        # assert
+        self.assertEqual(quiz_ins.question, expected_question,
+                          msg='Should check the question attribute of the instantiated object')
+        self.assertEqual(actual_choices, expected_choices, 
+                             msg='Should check the choices attribute of the instantiated object')
+        self.assertEqual(quiz_ins.correct_answer, expected_correct_answer, 
+                         msg='Should check the correct answer attribute of the instantiated object')
+        
 
     '''
     A function to test if the str method returns the question_text.
     '''
-    def test_return_str_question(self):
-        # Create an instance of the Question model with a specific question_text
-        question_ins = Question(question_text = 'Select the shape within the matrix')
+    def test_return_str_quiz(self):
+        # Create an instance of the Quiz model with a specific question
+        quiz_ins = Quiz(question = 'Question example')
 
         # call __str__ method
-        str_outcome = str(question_ins)
+        str_outcome = str(quiz_ins)
 
         # assert that the result matches the question_ins 
-        self.assertEqual(str_outcome, 'Select the shape within the matrix')
-    
-'''
-Create a class to test the choice model
-'''
-# create a class to test the choice model
-class TestChoiceModel(TransactionTestCase):
-    '''
-    Setup data for choice model
-    '''
-    # setup the required data for tests
-    # use database foreign keys to indicate relationships between question and choices
-    # - a ForeignKey field to show this many-to-one relationship
-    def setUp(self):        
-        # use mixer to create a question instance to associate with choice instance
-        self.question_ins = mixer.blend(Question, question_text = "Select the length of time you want to study")
+        self.assertEqual(str_outcome, quiz_ins.question, msg='Question example')
     
     '''
-    A function that tests the creation of an instance for the Choice object
-    '''      
-    # create a fail test for Choice
-    # after writing a test, run in cmd & it will say fail. 
-    # next, go to models.py and create the Question model & then it should pass
-    # use mixer to create an instance of choice associated with question in setup
-    def test_choice_model(self):
-        choice_ins = mixer.blend(Choice, question = self.question_ins, choice_text = "Option 1", votes = 0)
-
-        # assert instance was correctly created
-        # incl a descriptive message with assertion
-        self.assertIsNotNone(choice_ins, 'Should confirm choice instance was created')
-        # Test that obj is (or is not) an instance of cls (which can be a class or a tuple of classes, as supported by isinstance()). 
-        # To check for the exact type, use assertIs(type(obj), cls). --class(cls)
-        self.assertIsInstance(choice_ins, Choice, 'Should confirm that the object instantiated is from the Choice class')
-
-        # check attributes of choice instance  
-        # assert whether the choice_text attribute of the choice_ins matches the expected value, which is 'Option 1'  
-        self.assertEqual(choice_ins.choice_text, "Option 1", 'Should verify that the data saved as an attribute for choice_ins is Option 1')
-        # assert whether the votes attribute of the choice_ins is equal to the expected value
-        self.assertEqual(choice_ins.votes, 0, 'Should check that the votes attribute of choice_ins is the expected 0')
-
+    Create a test to check an instance of the quiz model.
     '''
-    A function to test if the str method returns the choice_text.
-    '''
-    def test_return_str_choice(self):
-        # Create an instance of the Choice model with a specific choice_text
-        choice_ins = Choice(choice_text = 'Pentagon')
+    # create a test to check an instance of the quiz model
+    def test_quiz_instance(self):
+        # use mixer to create an instance of the Quiz model
+        quiz_instance = mixer.blend(Quiz)
 
-        # call __str__ method
-        str_outcome = str(choice_ins)
-
-        # assert that the result matches the choice_ins 
-        self.assertEqual(str_outcome, 'Pentagon')
+        # assert that the instance was successful
+        self.assertIsInstance(quiz_instance, Quiz, msg='Should confirm that the object instantiated is from the Quiz class')
+    
+    
+    
