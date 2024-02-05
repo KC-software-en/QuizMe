@@ -11,7 +11,7 @@ Create a model for the questions in the education quiz.
 # use Django's built-in object-relational mapping (ORM) & define the relevant classes
 # -each entry in a SQL table represents a single object, this can be converted to a class instance in Python.  
 # create a Quiz class that inherits from django.db.models.Model
-class Quiz(models.Model):
+class Mythology(models.Model):
     '''
     Create a model for the questions in the education quiz.
     '''
