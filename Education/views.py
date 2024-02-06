@@ -16,7 +16,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 # import get_json_categories for the index_edu view
-from .utils import get_json_categories
+from .utils import get_json_categories, get_specific_json_category, mix_choices
 
 #######################################################################################
 #######################################################################################
