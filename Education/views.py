@@ -3,17 +3,8 @@ from multiprocessing import context
 from unittest import result
 from django.shortcuts import render
 
-# import requests to use the API for edu quiz
-import requests
-
 # import html to handle potential HTML entities and aid rendering
 import html
-
-# import random to shuffle choices rendered in the form
-import random
-
-# import json to work with the data retrieved from the open trivia db API
-import json
 
 # Import the login required decorator to prevent unaouthorised access to cetrain views.
 from django.contrib.auth.decorators import login_required
@@ -24,8 +15,8 @@ from django.http import HttpResponseRedirect
 # import reverse
 from django.urls import reverse
 
-# import Quiz
-from .models import Mythology
+# import get_json_categories for the index_edu view
+from .utils import get_json_categories
 
 #######################################################################################
 #######################################################################################
@@ -45,10 +36,10 @@ Create a view for the home page of education quizzes.
 '''
 # display the category of the education quiz
 # https://www.youtube.com/watch?v=sgEhb50YSTE
+# make the category_id a parameter set to None
 # get json reponse for trivia categories from open trivia db
 # index category from the dictionary id
-# Add tjhe login required decorator to prevent access to the index_edu view.
-def index_edu(request, category_id=20):
+def index_edu(request):
     # call the categories function & save its response in an assigned variable - NameError if you don't assign it
     response = get_json_categories()
     
@@ -56,14 +47,20 @@ def index_edu(request, category_id=20):
     # place an empty list as the default argument if the key is not found - should avoid errors in subsequent code
     trivia_categories = response.get("trivia_categories", [])
 
+    # specify the id of the categories to include in the Education app's quizzes
+    selected_category_id = [20]
+
+    # collect the categories based on selected_category_id
+    selected_categories = [category for category in trivia_categories if category.get("id") in selected_category_id]    
+
     # initialise a variable for the chosen category from the json response
     selected_category = None
     category_name = None
 
-    # iterate over trivia categories to find the category id specified in the function as a parameter
-    for category in trivia_categories:
-        # cast category_id to int for error handling
-        if category.get("id") == int(category_id):
+    # iterate over trivia categories to find the category id specified 
+    for category in selected_categories:
+        # check if the id in selected_category_id is in the trivia_categories
+        if category.get("id") in selected_category_id:
             # assign the current category to the selected_category variable
             selected_category = category            
             
@@ -76,7 +73,9 @@ def index_edu(request, category_id=20):
 
     # the response is the dictionary for trivia categories
     # pass all the context variables into a single dictionary to render in the template correctly
-    return render(request, 'edu_quiz/edu_quiz.html', {'selected_category':selected_category, 'category_name': category_name}) 
+    context = {'selected_category':selected_category, 'category_name': category_name}
+    print(f"context:{context}")
+    return render(request, 'edu_quiz/edu_quiz.html', context) 
 
 ############### %%%%%%%%%%%%%%%%%%%%%%%%%%%% #########################
 

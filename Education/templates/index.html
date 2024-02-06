@@ -213,7 +213,7 @@
                             <li class="nav-item">
                                 <!-- link to Education quiz home page 
                                 include category_id in tag to avoid a NoReverseMatch error in template rendering-->
-                                <a class="nav-link active" href="{% url 'Education:index_edu' category_id=20 %}">Education</a>
+                                <a class="nav-link active" href="{% url 'Education:index_edu' %}">Education</a>
                             </li>
 
                         </ul>
@@ -277,7 +277,7 @@
                     
                 <div class="slider">
                     <ul class="slider__list">
-                        <li class="slider__slide"><a href="{% url 'Education:index_edu' category_id=20 %}"><img src="/static/assets/Education.jpg" alt="Slide image number 1 " width="650" height="420"/></a></li>
+                        <li class="slider__slide"><a href="{% url 'Education:index_edu' %}"><img src="/static/assets/Education.jpg" alt="Slide image number 1 " width="650" height="420"/></a></li>
                         <li class="slider__slide"><a href=""><img src="/static/assets/Entertainment.jpg" alt="Slide image number 2" width="650" height="420"/></li>
                         <li class="slider__slide"><a href=""><img src="/static/assets/General.jpg" alt="Slide image number 3" width="650" height="420"/></a></li>
                     </ul>
