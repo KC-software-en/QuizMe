@@ -112,31 +112,30 @@ def detail(request, category_name, question_id):
     except LookupError:
         raise Http404("Cannot locate the model for the selected category.")
 
-    # get the questions for the specific category
-    # question_id is the specific identifier passed in the URL when accessing this view
-    # it uniquely identifies and retrieves the specific question to display
-    all_questions = get_object_or_404(model, pk=question_id)
+    # get the 50 questions for the specific category
+    # ##question_id is the specific identifier passed in the URL when accessing this view
+    # ##it uniquely identifies and retrieves the specific question to display
+    all_questions = model.objects.all()
+    
+    # create a list containing the pk for each obj
+    category_question_ids = [question.id for question in all_questions]
 
+    # get the ids for the selection of 10 questions
     # use random to select 10 questions
     # https://docs.python.org/3.7/library/random.html?highlight=random#random.sample
-    # convert the queryset into a list because random.sample requires a list as its first argument
-    question_selection = random.sample(list(all_questions), 10)
+    # note: random.sample requires a list as its first argument
+    question_selection_ids = random.sample(category_question_ids, 10)
+    
+    # filter the objects based on question_selection_ids
+    question_selection = model.objects.filter(id__in=question_selection_ids)
 
     # use shuffle to mix questions each time
-    random.shuffle(question_selection)
-
-    #debugging
-    logger = logging.getLogger(__name__)
-    logger.debug(f"Category Name: {category_name}")
-    logger.debug(f"question_selection:{question_selection}")
-    for question in question_selection:
-        question_id = question.id
-        logger.debug(f"Question ID: {question_id}")
+    random.shuffle(question_selection)    
     
     # render the edu_detail template & pass the 10 questions, their ids & category as context 
     context = {'question': question_selection, 
                'category_name': category_name, 
-               'question_id':question_selection[0].id}
+               'question_id':question_selection_ids}
     return render(request, 'edu_quiz/edu_detail.html', context)
 
 '''
@@ -208,5 +207,14 @@ def selection(request, category_name, question_id):
                 )
 
 # start new quiz function
+def try_new_quiz(request):
+    # delete the result & session data of the current quiz before starting a new quiz
+    if 'quiz_result' in request.session:
+        del request.session['quiz_result']
+
+    # render the template for the home page of education      
+    return HttpResponseRedirect(
+                reverse('Education:index_edu')
+                )  
         
 
