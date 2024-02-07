@@ -32,6 +32,9 @@ from django.http import Http404
 # import random to shuffle questions in detail view, rendered in the form
 import random
 
+# import logging for debugging
+import logging
+
 #######################################################################################
 #######################################################################################
 
@@ -123,16 +126,17 @@ def detail(request, category_name, question_id):
     random.shuffle(question_selection)
 
     #debugging
-    print(f"Category Name: {category_name}")
-    print(f"question_selection:{question_selection}")
+    logger = logging.getLogger(__name__)
+    logger.debug(f"Category Name: {category_name}")
+    logger.debug(f"question_selection:{question_selection}")
     for question in question_selection:
         question_id = question.id
-        print(f"Question ID: {question.id}")
+        logger.debug(f"Question ID: {question_id}")
     
     # render the edu_detail template & pass the 10 questions, their ids & category as context 
     context = {'question': question_selection, 
                'category_name': category_name, 
-               'question_id':question_id}
+               'question_id':question_selection[0].id}
     return render(request, 'edu_quiz/edu_detail.html', context)
 
 '''

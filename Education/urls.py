@@ -21,10 +21,10 @@ urlpatterns = [
     # set a path for the home view of education
     path('Education/', views.index_edu, name='index_edu'),   
     # set a path for the detail view
-    path('Education/<str:category_name>/<int:question_id>/detail/', views.detail, name='edu_detail'),
+    path('<str:category_name>/<int:question_id>/detail/', views.detail, name='edu_detail'),
     # set a path for the selection view
-    path('Education/<str:category_name>/<int:question_id>/selection/', views.selection, name='selection'),    
+    path('<str:category_name>/<int:question_id>/selection/', views.selection, name='selection'),    
     # set a path for the results view
-    path('Education/<str:category_name>results/', views.results, name='results')
+    path('<str:category_name>results/', views.results, name='results')
     
 ]
