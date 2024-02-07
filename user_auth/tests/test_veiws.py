@@ -13,16 +13,17 @@ from django.test import Client
 from django.contrib.messages import get_messages
 # import views.
 from .. import views
-'''
-Create a class to test the use_auth views.
-'''
+
 # The test will fail as the user_login view is used as an inccorect template to render then home page it should use the Home page.html string as an assertion templatename.  
 class UserAuthViewTest(TestCase):
     '''
-        A function to test if the correct template is rendered from the login view.
-    '''               
+        Create a class to test the use_auth views.
+    '''                  
     # Positive tests "If the correct template is used (login.html)"
     def test_login_view_valid(self):
+        '''
+            A function to test if the correct template is rendered from the login view.
+        ''' 
         # Create an instance of a GET request.
         req = RequestFactory().get('/user_auth/login')
         # Check if the template can be accessed through the user_login view. 
@@ -30,34 +31,33 @@ class UserAuthViewTest(TestCase):
         # The test will pass as the Index view is not rendered in the /user_auth/login url.      
         assert resp.status_code == 200 , 'The login page should be rendered to anyone '           
 
-    '''
-        A function to test if the correct template is rendered from the logout view.
-    '''
     # Positive tests "If the correct template is used (logout.html)"
     def test_logout_view_valid(self):
+        '''
+            A function to test if the correct template is rendered from the logout view.
+        '''
         # Create an instance of a GET request.
         resp = self.client.get(reverse('user_auth:logout'))
         # The test will pass as the url is rendered at the /user_auth/login url       
         assert resp.status_code == 200 , 'The logout page should be rendered to anyone '  
-
-    '''
-        A function to test if the correct template is rendered from the register view.
-    '''       
+      
    # Positive tests "If the correct template is used (register.html)"
     def test_register_view_valid(self):
+        '''
+            A function to test if the correct template is rendered from the register view.
+        ''' 
         # Create an instance of a GET request.
         req = RequestFactory().get('/user_auth/register')
         # Check if the template can be accessed through the user_register view. 
         resp = views.user_register(req)
         # The test will pass as the Index view is not rendered in the /user_auth/register url.      
         assert resp.status_code == 200 , 'The register page should be rendered to anyone '
-
-
-    '''
-        A function to test if the correct template is rendered from the show_user view.
-    '''       
+      
    # Positive tests "If the correct template is used (show_user.html) and it displays the signed in user details."      
     def test_show_user(self):
+        '''
+            A function to test if the correct template is rendered from the show_user view.
+        ''' 
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='testuser', email='testuser@example.com', password='testpass')
@@ -68,12 +68,12 @@ class UserAuthViewTest(TestCase):
         response = views.show_user(request)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.user.username)
-
-    '''
-        A function to test if a user is authentificated.
-    '''       
+     
     # Positive tests "If the correct template is used (show_user.html) and it displays the signed in user details."  
     def test_authenticate_user(self):
+        '''
+            A function to test if a user is authentificated.
+        '''  
         self.client = Client()
         self.user = User.objects.create_user(username='testuser', password='testpass')
 
@@ -81,22 +81,21 @@ class UserAuthViewTest(TestCase):
         user = authenticate(username='testuser', password='testpass')
         self.assertEqual(response.status_code, 302)
         self.assertEqual(user, self.user) 
-
-    '''
-        A function to test if a user is not authentificated and redirected to login page.
-    '''       
+      
     # Positive tests "If the correct template is used (show_user.html) and it displays the signed in user details."  
     def test_redirect_if_not_authenticated(self):
+        '''
+            A function to test if a user is not authentificated and redirected to login page.
+        ''' 
         # Create an instance of a GET request.
         response = self.client.get(reverse('user_auth:show_user'))
         self.assertRedirects(response, '/user_auth/login/?next=%2Fuser_auth%2Fauthenticate_user%2Fshow_user')
 
-    
-    '''
-        A function to test if a error message is displyed when a user enters invalid data in the register form.
-    '''  
     def test_registration_with_invalid_data(self):
-        # Create a new user.
+        # Create a new user.        
+        '''
+            A function to test if a error message is displyed when a user enters invalid data in the register form.
+        '''  
         self.url = reverse('user_auth:register')
         self.invalid_data = {
             'username': 'testuser',
