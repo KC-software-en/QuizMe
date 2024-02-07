@@ -9,14 +9,14 @@ import html
 # Import the login required decorator to prevent unaouthorised access to cetrain views.
 from django.contrib.auth.decorators import login_required
 
-# import HttpResponseRedirect
+# imported HttpResponseRedirect 
 from django.http import HttpResponseRedirect
 
-# import reverse
+# imported reverse
 from django.urls import reverse
 
 # import get_json_categories for the index_edu view
-from .utils import get_json_categories
+from .utils import get_json_categories, get_specific_json_category, mix_choices
 
 #######################################################################################
 #######################################################################################
