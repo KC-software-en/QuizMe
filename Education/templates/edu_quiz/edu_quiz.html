@@ -56,13 +56,16 @@
 	    <section>       
             <h1>Education Quiz Categories</h1> 
             <ul>
+                <p>Question ID: {{ question.id }}</p>
                 {% if selected_category %}
                 <li>                    
                     <!--alter the url to include the app_name=Education 
                     because namespaces are used to differentiate views between apps & create a url with the template tag-->
-                    <!-- pass parameters from view without spaces or commas -->
-                    <a href = "{% url 'Education:detail' quantity=5 category=20 %}"> 
-                        {{ category_name }}
+                    <!-- pass parameters from view without spaces or commas 
+                    generate links with the appropriate category_id. 
+                    the category_id is extracted from the selected_category object.-->
+                    <a href = "{% url 'Education:edu_detail' category_name=selected_category.name question_id=question_id|default:"" %}"> 
+                        {{ selected_category.name }}
                     </a>
                 </li>                
             </ul>

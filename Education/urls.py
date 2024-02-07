@@ -15,12 +15,16 @@ from . import views
 app_name = 'Education'
 
 # under urlpatterns, paste the code that references the functions in views.py
-# include the category id from the json response of trivia categories on open trivia db
 urlpatterns = [
-    path('', views.index, name='index'),    
+    # set a path for the home page of QuizMe
+    path('', views.index, name='index'),   
+    # set a path for the home view of education
     path('Education/', views.index_edu, name='index_edu'),   
-    path('Education/MythologyQuiz/selection/', views.selection, name='selection'),    
-    path('Education/<int:quantity>/<int:category>/MythologyQuiz/', views.get_questions_and_choices, name='detail'),                  
-    path('Education/MythologyQuiz/results/<int:result>/<int:question_quantity>', views.results, name='results')
+    # set a path for the detail view
+    path('Education/<str:category_name>/<int:question_id>/detail/', views.detail, name='edu_detail'),
+    # set a path for the selection view
+    path('Education/<str:category_name>/<int:question_id>/selection/', views.selection, name='selection'),    
+    # set a path for the results view
+    path('Education/<str:category_name>results/', views.results, name='results')
     
 ]
