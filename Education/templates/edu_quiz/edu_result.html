@@ -39,7 +39,7 @@
 
         <!-- show score-->
         {% if result %}
-            <h2>Score: {{result}} / {{question_quantity}}</h2>
+            <h2>Score: {{result}} / 10 </h2>
 
         <!-- display an error message if score is unavailable-->
         {% else %}
@@ -50,7 +50,7 @@
         {% endif %}
 
         <!-- enter a view url here -->
-        <a href="{% url 'Education:detail' quantity=5 category=20 %}">
+        <a href="{% url 'Education:try_new_quiz' %}">
             Try again?
         </a>
     </section>

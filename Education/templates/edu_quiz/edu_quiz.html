@@ -60,9 +60,11 @@
                 <li>                    
                     <!--alter the url to include the app_name=Education 
                     because namespaces are used to differentiate views between apps & create a url with the template tag-->
-                    <!-- pass parameters from view without spaces or commas -->
-                    <a href = "{% url 'Education:detail' quantity=5 category=20 %}"> 
-                        {{ category_name }}
+                    <!-- pass parameters from view without spaces or commas 
+                    generate links with the appropriate category_id. 
+                    the category_id is extracted from the selected_category object.-->
+                    <a href = "Education/<str:category_name>/<int:question_id>/detail/"> 
+                        {{ selected_category.name }}
                     </a>
                 </li>                
             </ul>
