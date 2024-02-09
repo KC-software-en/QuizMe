@@ -198,6 +198,7 @@ def see_objects():
     # ##question_id is the specific identifier passed in the URL when accessing this view
     # ##it uniquely identifies and retrieves the specific question to display
     all_questions = Mythology.objects.all()
+    print(f"all_questions:{all_questions}\n\n")
     
     # create a list containing the pk for each obj
     category_question_ids = [question.id for question in all_questions]
@@ -207,7 +208,7 @@ def see_objects():
     # https://docs.python.org/3.7/library/random.html?highlight=random#random.sample
     # note: random.sample requires a list as its first argument
     question_selection_ids = random.sample(category_question_ids, 10)
-    print(f"question_selection_ids:{question_selection_ids}") ##
+    print(f"question_selection_ids:{question_selection_ids}\n\n") ##
     
     # filter the objects based on question_selection_ids
     # https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut
@@ -216,16 +217,21 @@ def see_objects():
     print(f"question_selection:{question_selection}\n\n")
 
     # convert queryset to a list to be able to use shuffle
-    question_selection_list = list(question_selection)
-    print(f"question_selection_list:{question_selection_list}\n\n")
+    ##question_selection_list = list(question_selection)
+    ##print(f"question_selection_list:{question_selection_list}\n\n")
 
     # use shuffle to mix questions each time
-    random.shuffle(question_selection_list)    
-    print(f"shuffle_question_selection_list:{question_selection_list}\n\n")
+    ##random.shuffle(question_selection_list)    
+    ##print(f"shuffle_question_selection_list:{question_selection_list}\n\n")
     
     # get the object for the 1st question_selection in the selection do that its id attribute can be accessed and 
     # - used to direct the user the the view for the 1st question in edu_quiz url
     first_question = question_selection.first()
     print(f"first_question:{first_question}\n\n") ####    
+    first_question_id = first_question.id
+    print(f"first_question_id:{first_question_id}")
 
-    print(f"first_question in list:{question_selection_list[0]}\n\n")                  
+    ##print(f"first_question in list:{question_selection_list[0]}\n\n")                  
+
+objects= see_objects()
+print(objects)
