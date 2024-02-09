@@ -172,3 +172,60 @@ def get_next_question_id(category_name, question_id, question_selection):
                return question_selection[i + 1].id
            else:
                return None
+
+# import apps to dynamically fetch a model in detail() view
+from django.apps import apps       
+# import Http404 to raise an error message if a model is not located in detail view
+from django.http import Http404
+# import random to shuffle questions in detail view, rendered in the form
+import random    
+#
+def see_objects():    
+    # use the category_name selected on edu_quiz.html to determine the model to get questions from
+    # replace spaces in the event category names have spaces to create a valid model name
+    ##model_name = category_name.replace(" ", "_")
+
+    # use a try-except block to find a model that matches the category name
+    # use apps module to dynamically retrieve a model
+    # - dynamically:instead of explicitly specifying a fixed model in the code, generate or determine the model to use at runtime based on certain conditions/data
+    #try:
+    #    model = apps.get_model('Education', 'Mythology')
+    #except LookupError:
+    #    raise Http404("Cannot locate the model for the selected category.")
+
+    # get the 50 questions for the specific category
+    # https://docs.djangoproject.com/en/3.2/topics/db/queries/#retrieving-all-objects
+    # ##question_id is the specific identifier passed in the URL when accessing this view
+    # ##it uniquely identifies and retrieves the specific question to display
+    all_questions = Mythology.objects.all()
+    
+    # create a list containing the pk for each obj
+    category_question_ids = [question.id for question in all_questions]
+
+    # get the ids for the selection of 10 questions
+    # use random to select 10 questions
+    # https://docs.python.org/3.7/library/random.html?highlight=random#random.sample
+    # note: random.sample requires a list as its first argument
+    question_selection_ids = random.sample(category_question_ids, 10)
+    print(f"question_selection_ids:{question_selection_ids}") ##
+    
+    # filter the objects based on question_selection_ids
+    # https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut
+    question_selection = Mythology.objects.filter(pk__in=question_selection_ids)
+
+    print(f"question_selection:{question_selection}\n\n")
+
+    # convert queryset to a list to be able to use shuffle
+    question_selection_list = list(question_selection)
+    print(f"question_selection_list:{question_selection_list}\n\n")
+
+    # use shuffle to mix questions each time
+    random.shuffle(question_selection_list)    
+    print(f"shuffle_question_selection_list:{question_selection_list}\n\n")
+    
+    # get the object for the 1st question_selection in the selection do that its id attribute can be accessed and 
+    # - used to direct the user the the view for the 1st question in edu_quiz url
+    first_question = question_selection.first()
+    print(f"first_question:{first_question}\n\n") ####    
+
+    print(f"first_question in list:{question_selection_list[0]}\n\n")                  
