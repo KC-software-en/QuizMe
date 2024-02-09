@@ -88,19 +88,6 @@ def index_edu(request):
             # exit the loop when the desired category is found            
             break
 
-    # the response is the dictionary for trivia categories
-    # pass all the context variables into a single dictionary to render in the template correctly
-    context = {'selected_category':selected_category, 
-               'category_name': category_name}    
-    return render(request, 'edu_quiz/edu_quiz.html', context) 
-
-# write a view for the quiz question, incl the argument question_id
-# question_id is the specific identifier passed in the URL when accessing this view
-# it uniquely identifies and retrieves the specific question to display
-# Django automatically adds an id field as the primary key for each model (i.e. question.id)
-# display the question text 
-# render an HTTP 404 error if a question with the requested ID doesn’t exist
-def detail(request, category_name, question_id):    
     # use the category_name selected on edu_quiz.html to determine the model to get questions from
     # replace spaces in the event category names have spaces to create a valid model name
     model_name = category_name.replace(" ", "_")
@@ -118,7 +105,7 @@ def detail(request, category_name, question_id):
     # ##question_id is the specific identifier passed in the URL when accessing this view
     # ##it uniquely identifies and retrieves the specific question to display
     all_questions = model.objects.all()
-    
+
     # create a list containing the pk for each obj
     category_question_ids = [question.id for question in all_questions]
 
@@ -134,20 +121,30 @@ def detail(request, category_name, question_id):
 
     print(f"question_selection:{question_selection}")
 
-    # use shuffle to mix questions each time
-    random.shuffle(question_selection)    
+    # the response is the dictionary for trivia categories
+    # pass all the context variables into a single dictionary to render in the template correctly
+    context = {'selected_category':selected_category, 
+               'category_name': category_name,
+               'all_questions': all_questions,
+               'question_selection': question_selection
+               }    
     
-    # get the object for the 1st question_selection in the selection do that its id attribute can be accessed and 
-    # - used to direct the user the the view for the 1st question in edu_quiz url
-    first_question = question_selection.first()
+    return render(request, 'edu_quiz/edu_quiz.html', context) 
 
-    print(f"first_question:{first_question}") ####
+# write a view for the quiz question, incl the argument question_id
+# question_id is the specific identifier passed in the URL when accessing this view
+# it uniquely identifies and retrieves the specific question to display
+# Django automatically adds an id field as the primary key for each model (i.e. question.id)
+# display the question text 
+# render an HTTP 404 error if a question with the requested ID doesn’t exist
+def detail(request, category_name, question_id):  
+    question = get_object_or_404(Mythology, pk=question_id)    
 
     # render the edu_detail template & pass the 10 questions, their ids & category as context 
-    context = {'questions': question_selection, 
-               'first_question': first_question,
-               'category_name': category_name, 
-               'question_id':question_selection_ids}
+    context = {'question': question,
+               'category_name': category_name 
+               }
+    
     return render(request, 'edu_quiz/edu_detail.html', context)
 
 '''
@@ -160,7 +157,9 @@ def results(request, category_name):
            
     # render the result template  
     # pass the quiz result for the session as a context variable
-    context = {'result':result}   
+    context = {'result':result,
+               'category_name': category_name
+               }   
     return render(request, 'edu_quiz/edu_result.html', context)
 
 # write a view to answer a question, incl the argument question_id
