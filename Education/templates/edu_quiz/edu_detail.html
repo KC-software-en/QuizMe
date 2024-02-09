@@ -64,8 +64,8 @@
                                     <!--Failing that, it tries an attribute lookup – which works, in this case. -->
                                     <!--If attribute lookup has failed, it would’ve tried a list-index lookup.-->
                                     <!--iterate through the questions list and display the question and the choices-->                    
-                                    {% if questions %}
-                                        {% for question in questions %}
+                                    {% if question %}
+                                        
                                             <h3> {{ question.question }} ID:{{question.id}}</h3>  
                                         
                                             <!--group related elements in a form with fieldset-->
@@ -74,7 +74,7 @@
                                                 interpreted as the Python code question.choice_set.all(), which returns an
                                                 iterable of Choice objects and is suitable for use in the for tag.-->
                                                 <!--use a for loop to add a radio button for each choice associated with a specific question in the database-->
-                                                {% for choice in question.choice_set.all %}
+                                                {% for choice in question.choices %}
                                                     <!--Radio buttons. Each choice that is associated with that particular question is
                                                     then displayed using a radio button in a form.-->
                                                     <!--The name of each radio button is choice-->
@@ -105,7 +105,7 @@
                                                 <!--a button that takes the user to the next question -->
                                                 {% if not forloop.last %}
                                                     <button class="btn mx-auto no-underline">                                        
-                                                        <a href="{% url 'Education:edu_detail' category_name=category_name question_id=question.id.forloop.counter  %}" style="" id="">
+                                                        <a href="" style="" id="">
                                                             Next question
                                                         </a>
                                                     </button>	
@@ -120,7 +120,7 @@
                                                 {% endif %}                                            
                                             </div>
 
-                                        {% endfor %}
+                                        
 
                                         
                                     <!--display error message if there are no questions-->                                                                                        
