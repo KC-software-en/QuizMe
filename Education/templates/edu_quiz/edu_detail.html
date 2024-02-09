@@ -48,7 +48,7 @@
                 <div class = "col d-flex justify-content-center">
                     <div class="card" style="width: 40rem;">		
                         <div class="card-body" id="no-underline">
-                            <h1 class="card-title"><i>{{ selected_category.name }} quiz!</i></h1>		
+                            <h1 class="card-title"><i>{{ category_name }} quiz!</i></h1>		
                                                                                         
                                 <!--Method-calling happens in the { for } loop: 
                                 question.choice_set.all is interpreted as the Python code question.choice_set.all(), 
@@ -65,8 +65,8 @@
                                     <!--If attribute lookup has failed, it would’ve tried a list-index lookup.-->
                                     <!--iterate through the questions list and display the question and the choices-->                    
                                     {% if questions %}
-                                        
-                                            <h3> {{ question.question }} {{question.id}}</h3>  
+                                        {% for question in questions %}
+                                            <h3> {{ question.question }} ID:{{question.id}}</h3>  
                                         
                                             <!--group related elements in a form with fieldset-->
                                             <fieldset>
@@ -98,27 +98,41 @@
                                                 <!--use margins to allow space above-under the button-->
                                                 <input type="Submit" value="Save"/>	
                                                 <br/><br/>
-                                            </fieldset>                                        
+                                            </fieldset>    
+                                            
+                                            <!--move button to the center with d-flex & mx-auto-->
+								            <div class="d-flex">
+                                                <!--a button that takes the user to the next question -->
+                                                {% if not forloop.last %}
+                                                    <button class="btn mx-auto no-underline">                                        
+                                                        <a href="{% url 'Education:edu_detail' category_name=category_name question_id=question.id.forloop.counter  %}" style="" id="">
+                                                            Next question
+                                                        </a>
+                                                    </button>	
+                                                
+                                                <!--result button visible if its the last question -->
+                                                {% else %}	
+                                                    <button class="btn mx-auto no-underline">                                        
+                                                        <a href="{% url 'Education:results' category_name=category_name %}" style="" id="">
+                                                            View quiz result
+                                                        </a>
+                                                    </button>
+                                                {% endif %}                                            
+                                            </div>
+
+                                        {% endfor %}
 
                                         
-                                        
+                                    <!--display error message if there are no questions-->                                                                                        
                                     {% else %}
                                         <p><strong>{{ error_message }}</strong></p>
                                     {% endif %}
                                     
                                 </form>      
                             
-                            <!--results button -->                                                                                    
+                            <!-- -->                                                                                    
                             <div class="card-footer">
-                                <!--move button to the center with d-flex & mx-auto-->
-								<div class="d-flex">
-                                    <button class="btn mx-auto no-underline">
-                                        
-                                        <a href="{% url 'Education:results' category_name %}" style="" id="">
-                                            View Results
-                                        </a>
-                                    </button>								
-                                </div>
+                                
                             </div>  
 
                         </div>	
