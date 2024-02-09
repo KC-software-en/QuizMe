@@ -90,7 +90,8 @@ def index_edu(request):
 
     # the response is the dictionary for trivia categories
     # pass all the context variables into a single dictionary to render in the template correctly
-    context = {'selected_category':selected_category, 'category_name': category_name}    
+    context = {'selected_category':selected_category, 
+               'category_name': category_name}    
     return render(request, 'edu_quiz/edu_quiz.html', context) 
 
 # write a view for the quiz question, incl the argument question_id
@@ -113,6 +114,7 @@ def detail(request, category_name, question_id):
         raise Http404("Cannot locate the model for the selected category.")
 
     # get the 50 questions for the specific category
+    # https://docs.djangoproject.com/en/3.2/topics/db/queries/#retrieving-all-objects
     # ##question_id is the specific identifier passed in the URL when accessing this view
     # ##it uniquely identifies and retrieves the specific question to display
     all_questions = model.objects.all()
@@ -127,13 +129,23 @@ def detail(request, category_name, question_id):
     question_selection_ids = random.sample(category_question_ids, 10)
     
     # filter the objects based on question_selection_ids
-    question_selection = model.objects.filter(id__in=question_selection_ids)
+    # https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut
+    question_selection = model.objects.filter(pk__in=question_selection_ids)
+
+    print(f"question_selection:{question_selection}")
 
     # use shuffle to mix questions each time
     random.shuffle(question_selection)    
     
+    # get the object for the 1st question_selection in the selection do that its id attribute can be accessed and 
+    # - used to direct the user the the view for the 1st question in edu_quiz url
+    first_question = question_selection.first()
+
+    print(f"first_question:{first_question}") ####
+
     # render the edu_detail template & pass the 10 questions, their ids & category as context 
-    context = {'question': question_selection, 
+    context = {'questions': question_selection, 
+               'first_question': first_question,
                'category_name': category_name, 
                'question_id':question_selection_ids}
     return render(request, 'edu_quiz/edu_detail.html', context)
@@ -183,16 +195,16 @@ def selection(request, category_name, question_id):
             selected_choice.save()
 
         # get the next question
-        next_question = get_next_question_id(category_name, question_id)
+        ##next_question = get_next_question_id(category_name, question_id)
 
         # if there is another question available from the question_selection redirect to the detail view again
         # - to display that question 
-        if next_question is not None:
-            return HttpResponseRedirect(
-                reverse('Education:edu_detail', category_name=category_name, question_id=next_question)
-                )
+        ##if next_question is not None:
+        ##    return HttpResponseRedirect(
+        ##        reverse('Education:edu_detail', category_name=category_name, question_id=next_question)
+        ##        )
 
-        else:
+        #else:
             # store the calculated result in the session
             request.session['quiz_result'] = result
 
@@ -202,9 +214,9 @@ def selection(request, category_name, question_id):
             # dealing with POST data. This prevents data from being
             # posted twice if a user hits the Back button.
             # use reverse function to take the name of the view and return the str value that represents the actual url                        
-            return HttpResponseRedirect(
-                reverse('Education:results', args=(category_name))
-                )
+            ##return HttpResponseRedirect(
+            ##    reverse('Education:results', args=(category_name))
+            ##    )
 
 # start new quiz function
 def try_new_quiz(request):
