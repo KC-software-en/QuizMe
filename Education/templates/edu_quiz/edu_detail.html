@@ -66,7 +66,7 @@
                                     <!--iterate through the questions list and display the question and the choices-->                    
                                     {% if question %}
                                         
-                                            <h3> {{ question.question }} ID:{{question.id}}</h3>  
+                                            <h3> {{ question.question }} #ID:{{question.id}}</h3>  
                                         
                                             <!--group related elements in a form with fieldset-->
                                             <fieldset>
@@ -74,7 +74,7 @@
                                                 interpreted as the Python code question.choice_set.all(), which returns an
                                                 iterable of Choice objects and is suitable for use in the for tag.-->
                                                 <!--use a for loop to add a radio button for each choice associated with a specific question in the database-->
-                                                {% for choice in question.choices %}
+                                                {% for choice in choices %}
                                                     <!--Radio buttons. Each choice that is associated with that particular question is
                                                     then displayed using a radio button in a form.-->
                                                     <!--The name of each radio button is choice-->
@@ -86,9 +86,10 @@
                                                         value attribute is the identifier for the user's choice associated with the question
                                                         -->                                                                                              
                                                     <input type="radio" name="choice" 
-                                                    id="choice {{forloop.counter}}" value="{{ choice.id }}" />                        
-                                                    <label for="choice {{ forloop.counter }}">
-                                                        {{ choice }} 
+                                                    id="choice{{forloop.counter}}" value="{{ choice.id }}" />                        
+                                                    <!-- access the value associated with the 'choice' key in the question.choices dictionary-->
+                                                    <label for="choice{{ forloop.counter }}">
+                                                        {{ choice.choice }} 
                                                     </label>                                                                                                                                                                                                
                                                     <br/><br/>
                                                 {% endfor %}                                                                                                                                                                            
