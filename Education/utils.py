@@ -233,5 +233,5 @@ def see_objects():
 
     ##print(f"first_question in list:{question_selection_list[0]}\n\n")                  
 
-objects= see_objects()
-print(objects)
+##objects= see_objects()
+##print(objects)
