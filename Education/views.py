@@ -35,6 +35,10 @@ import random
 # import logging for debugging
 import logging
 
+# import ast safely evaluate strings containing Python literal structures e.g.strings, lists, dicts
+# use to convert str into list
+import ast 
+
 #######################################################################################
 #######################################################################################
 
@@ -117,9 +121,7 @@ def index_edu(request):
     
     # filter the objects based on question_selection_ids
     # https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut
-    question_selection = model.objects.filter(pk__in=question_selection_ids)
-
-    print(f"question_selection:{question_selection}")
+    question_selection = model.objects.filter(pk__in=question_selection_ids)    
 
     # the response is the dictionary for trivia categories
     # pass all the context variables into a single dictionary to render in the template correctly
@@ -139,9 +141,18 @@ def index_edu(request):
 # render an HTTP 404 error if a question with the requested ID doesn’t exist
 def detail(request, category_name, question_id):  
     question = get_object_or_404(Mythology, pk=question_id)    
+    
+    # use the helper function literal_eval of the ast module to convert the str representation of the choices list
+    # - in the textfield of the category model into a list
+    # https://python.readthedocs.io/en/latest/library/ast.html#ast.literal_eval
+    # note:ast.literal_eval is safer than eval. it only evaluates literals & not arbitrary expressions, 
+    # - reducing the risk of code injection
+    # use in template to iterate over the list of choices dictionaries and access the values for the 'choice' key
+    convert_choices_textfield_into_list = ast.literal_eval(question.choices)    
 
     # render the edu_detail template & pass the 10 questions, their ids & category as context 
     context = {'question': question,
+               'choices':convert_choices_textfield_into_list,
                'category_name': category_name 
                }
     
