@@ -56,7 +56,7 @@
 	    <section>       
             <h1>Education Quiz Categories</h1> 
             
-            {% if selected_category %}
+            {% if category_name %}
                 {% if question_selection %}
                     <ul>
                         {% for question in question_selection %}
@@ -67,8 +67,8 @@
                                 <!-- pass parameters from view without spaces or commas 
                                 generate links with the appropriate category_id. 
                                 the category_id is extracted from the selected_category object.-->
-                                <a href = "{% url 'Education:edu_detail' category_name=selected_category.name question_id=question.id %}"> 
-                                    {{ selected_category.name }}
+                                <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=question.id %}"> 
+                                    {{ category_name }}
                                 </a>                    
                             </li> 
                         {% endfor %}

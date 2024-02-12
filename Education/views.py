@@ -17,8 +17,8 @@ from django.http import HttpResponseRedirect
 # imported reverse
 from django.urls import reverse
 
-# import get_json_categories for the index_edu view
-from .utils import get_json_categories, get_specific_json_category, get_next_question_id
+# import functions from utils.py called in views
+from .utils import get_json_categories, get_specific_json_category, get_next_question_id, get_category_names, category_objects
 
 # import models
 from .models import *
@@ -63,35 +63,34 @@ Create a view for the home page of education quizzes.
 def index_edu(request):
     # call the categories function & save its response in an assigned variable - NameError if you don't assign it
     response = get_json_categories()
+            
+    # call the function to return the chosen categories to present a quiz for on the homepage
+    category_name = get_category_names(response)       
+
+    # call the function to retrieve the objects from the django database - viewable on admin site
+    question_selection =  category_objects(category_name)
+
+    # the response is the dictionary for trivia categories
+    # pass all the context variables into a single dictionary to render in the template correctly
+    context = {'category_name': category_name,               
+               'question_selection': question_selection
+               }    
     
-    # get the trivia categories values from dictionary provided in json response
-    # place an empty list as the default argument if the key is not found - should avoid errors in subsequent code
-    trivia_categories = response.get("trivia_categories", [])
+    # pass context to 2 templates because edu_detail will have to iterate over the question_selection
+    context_used_in_detail = render(request, 'edu_quiz/edu_detail.html', context) 
+    
+    # render the context to the homepage of education
+    return render(request, 'edu_quiz/edu_quiz.html', context) 
 
-    # specify the id of the categories to include in the Education app's quizzes
-    selected_category_id = [20]
-
-    # collect the categories based on selected_category_id
-    selected_categories = [category for category in trivia_categories if category.get("id") in selected_category_id]    
-
-    # initialise a variable for the chosen category from the json response
-    selected_category = None
-    category_name = None
-
-    # iterate over trivia categories to find the category id specified 
-    for category in selected_categories:
-        # check if the id in selected_category_id is in the trivia_categories
-        if category.get("id") in selected_category_id:
-            # assign the current category to the selected_category variable
-            selected_category = category            
-            
-            # get the name of the category if the id exists for the selected category
-            if selected_category:
-                category_name = selected_category.get("name")
-            
-            # exit the loop when the desired category is found            
-            break
-
+# write a view for the quiz question, incl the argument question_id
+# question_id is the specific identifier passed in the URL when accessing this view
+# it uniquely identifies and retrieves the specific question to display
+# Django automatically adds an id field as the primary key for each model (i.e. question.id)
+# display the question text 
+# render an HTTP 404 error if a question with the requested ID doesn’t exist
+def detail(request, category_name, question_id):  
+    response = get_json_categories()
+    category_name = get_category_names(response)  
     # use the category_name selected on edu_quiz.html to determine the model to get questions from
     # replace spaces in the event category names have spaces to create a valid model name
     model_name = category_name.replace(" ", "_")
@@ -102,45 +101,9 @@ def index_edu(request):
     try:
         model = apps.get_model('Education', model_name)
     except LookupError:
-        raise Http404("Cannot locate the model for the selected category.")
-
-    # get the 50 questions for the specific category
-    # https://docs.djangoproject.com/en/3.2/topics/db/queries/#retrieving-all-objects
-    # ##question_id is the specific identifier passed in the URL when accessing this view
-    # ##it uniquely identifies and retrieves the specific question to display
-    all_questions = model.objects.all()
-
-    # create a list containing the pk for each obj
-    category_question_ids = [question.id for question in all_questions]
-
-    # get the ids for the selection of 10 questions
-    # use random to select 10 questions
-    # https://docs.python.org/3.7/library/random.html?highlight=random#random.sample
-    # note: random.sample requires a list as its first argument
-    question_selection_ids = random.sample(category_question_ids, 10)
+        raise Http404("Cannot locate the model for the selected category.")     
     
-    # filter the objects based on question_selection_ids
-    # https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut
-    question_selection = model.objects.filter(pk__in=question_selection_ids)    
-
-    # the response is the dictionary for trivia categories
-    # pass all the context variables into a single dictionary to render in the template correctly
-    context = {'selected_category':selected_category, 
-               'category_name': category_name,
-               'all_questions': all_questions,
-               'question_selection': question_selection
-               }    
-    
-    return render(request, 'edu_quiz/edu_quiz.html', context) 
-
-# write a view for the quiz question, incl the argument question_id
-# question_id is the specific identifier passed in the URL when accessing this view
-# it uniquely identifies and retrieves the specific question to display
-# Django automatically adds an id field as the primary key for each model (i.e. question.id)
-# display the question text 
-# render an HTTP 404 error if a question with the requested ID doesn’t exist
-def detail(request, category_name, question_id):  
-    question = get_object_or_404(Mythology, pk=question_id)    
+    question = get_object_or_404(model, pk=question_id)    
     
     # use the helper function literal_eval of the ast module to convert the str representation of the choices list
     # - in the textfield of the category model into a list
@@ -155,6 +118,8 @@ def detail(request, category_name, question_id):
                'choices':convert_choices_textfield_into_list,
                'category_name': category_name 
                }
+    
+    #response_for_selection_view = 
     
     return render(request, 'edu_quiz/edu_detail.html', context)
 
@@ -178,16 +143,26 @@ def results(request, category_name):
 def selection(request, category_name, question_id):    
     # pk refers to the primary key field of a database table
     # django automatically creates a primary key for each model
+    response = get_json_categories()
+    category_name = get_category_names(response)
     model_name = category_name.replace(" ", "_")
     model = apps.get_model('Education', model_name)
     question = get_object_or_404(model, pk=question_id)
 
     # access submitted data by key name with a dictionary-like object- request.POST
-    # use the key name choice which returns the ID of the selected choice
+    # use the key name 'choice' (defined in edu_detail form input) which returns the ID of the selected choice
+    # retrieve the selected choice instance from the database based on the primary key
+    # - obtained from the 'choice' key in the submitted form data (request.POST)
+    # assumes that the 'id' attribute of the choice in the model is an integer
     try:
-        selected_choice = question.choice_set.get(
+        selected_choice = model.objects.get(
             pk=request.POST['choice']
             )
+        #
+        # Evaluate the DeferredAttribute to get the actual value
+        correct_answer_for_model = model.correct_answer
+        convert_correct_answer_textfield_into_dict = ast.literal_eval(correct_answer_for_model)
+
     # raise a KeyError if the ID of the choice isn’t found
     # an error occurs if the mapping (dictionary) key was not located in the set of existing keys
     except (KeyError, model.DoesNotExist):
@@ -200,7 +175,7 @@ def selection(request, category_name, question_id):
         # else add the point for a correct choice & save the choice
         # (in utils.py the id for the correct answer is 1)
         result = 0
-        if selected_choice.id == question.correct_answer['id']:
+        if selected_choice.id == convert_correct_answer_textfield_into_dict['id']: #might have to use ast
             result += 1
             selected_choice.save()
 
