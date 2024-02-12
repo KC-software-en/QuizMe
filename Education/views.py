@@ -77,7 +77,7 @@ def index_edu(request):
                }    
     
     # pass context to 2 templates because edu_detail will have to iterate over the question_selection
-    context_used_in_detail = render(request, 'edu_quiz/edu_detail.html', context) 
+    ##context_used_in_detail = render(request, 'edu_quiz/edu_detail.html', context) 
     
     # render the context to the homepage of education
     return render(request, 'edu_quiz/edu_quiz.html', context) 
@@ -166,9 +166,19 @@ def selection(request, category_name, question_id):
     # raise a KeyError if the ID of the choice isn’t found
     # an error occurs if the mapping (dictionary) key was not located in the set of existing keys
     except (KeyError, model.DoesNotExist):
+        # use the helper function literal_eval of the ast module to convert the str representation of the choices list
+        # - in the textfield of the category model into a list
+        # https://python.readthedocs.io/en/latest/library/ast.html#ast.literal_eval
+        # note:ast.literal_eval is safer than eval. it only evaluates literals & not arbitrary expressions, 
+        # - reducing the risk of code injection
+        # use in template to iterate over the list of choices dictionaries and access the values for the 'choice' key
+        convert_choices_textfield_into_list = ast.literal_eval(question.choices) 
+
         # Redisplay the question voting form
         return render(request, 'edu_quiz/edu_detail.html', {
+            'category_name': category_name,
             'question': question,
+            'choices': convert_choices_textfield_into_list,
             'error_message': "You didn't select a choice."
             })
     else:
@@ -180,16 +190,16 @@ def selection(request, category_name, question_id):
             selected_choice.save()
 
         # get the next question
-        ##next_question = get_next_question_id(category_name, question_id)
+        next_question = get_next_question_id(category_name, question_id)
 
         # if there is another question available from the question_selection redirect to the detail view again
         # - to display that question 
-        ##if next_question is not None:
-        ##    return HttpResponseRedirect(
-        ##        reverse('Education:edu_detail', category_name=category_name, question_id=next_question)
-        ##        )
+        if next_question is not None:
+            return HttpResponseRedirect(
+                reverse('Education:edu_detail', category_name=category_name, question_id=next_question)
+                )
 
-        #else:
+        else:
             # store the calculated result in the session
             request.session['quiz_result'] = result
 
@@ -199,9 +209,9 @@ def selection(request, category_name, question_id):
             # dealing with POST data. This prevents data from being
             # posted twice if a user hits the Back button.
             # use reverse function to take the name of the view and return the str value that represents the actual url                        
-            ##return HttpResponseRedirect(
-            ##    reverse('Education:results', args=(category_name))
-            ##    )
+            return HttpResponseRedirect(
+                reverse('Education:results', args=(category_name))
+                )
 
 # start new quiz function
 def try_new_quiz(request):
