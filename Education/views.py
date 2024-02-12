@@ -148,7 +148,17 @@ def selection(request, category_name, question_id):
     model_name = category_name.replace(" ", "_")
     model = apps.get_model('Education', model_name)
     question = get_object_or_404(model, pk=question_id)
-
+    #    
+    print(f"correct_answer:{question.correct_answer}")    
+    # use the helper function literal_eval of the ast module to convert the str representation of the choices list
+    # - in the textfield of the category model into a list
+    # https://python.readthedocs.io/en/latest/library/ast.html#ast.literal_eval
+    # note:ast.literal_eval is safer than eval. it only evaluates literals & not arbitrary expressions, 
+    # - reducing the risk of code injection
+    # use in template to iterate over the list of choices dictionaries and access the values for the 'choice' key
+    convert_choices_textfield_into_list = ast.literal_eval(question.choices)             
+    
+    
     # access submitted data by key name with a dictionary-like object- request.POST
     # use the key name 'choice' (defined in edu_detail form input) which returns the ID of the selected choice
     # retrieve the selected choice instance from the database based on the primary key
@@ -158,22 +168,10 @@ def selection(request, category_name, question_id):
         selected_choice = model.objects.get(
             pk=request.POST['choice']
             )
-        #
-        # Evaluate the DeferredAttribute to get the actual value
-        correct_answer_for_model = model.correct_answer
-        convert_correct_answer_textfield_into_dict = ast.literal_eval(correct_answer_for_model)
-
+        
     # raise a KeyError if the ID of the choice isn’t found
     # an error occurs if the mapping (dictionary) key was not located in the set of existing keys
-    except (KeyError, model.DoesNotExist):
-        # use the helper function literal_eval of the ast module to convert the str representation of the choices list
-        # - in the textfield of the category model into a list
-        # https://python.readthedocs.io/en/latest/library/ast.html#ast.literal_eval
-        # note:ast.literal_eval is safer than eval. it only evaluates literals & not arbitrary expressions, 
-        # - reducing the risk of code injection
-        # use in template to iterate over the list of choices dictionaries and access the values for the 'choice' key
-        convert_choices_textfield_into_list = ast.literal_eval(question.choices) 
-
+    except (KeyError, model.DoesNotExist):        
         # Redisplay the question voting form
         return render(request, 'edu_quiz/edu_detail.html', {
             'category_name': category_name,
@@ -181,13 +179,17 @@ def selection(request, category_name, question_id):
             'choices': convert_choices_textfield_into_list,
             'error_message': "You didn't select a choice."
             })
+    
     else:
-        # else add the point for a correct choice & save the choice
-        # (in utils.py the id for the correct answer is 1)
         result = 0
-        if selected_choice.id == convert_correct_answer_textfield_into_dict['id']: #might have to use ast
-            result += 1
-            selected_choice.save()
+        # iterate over the list of dictionaries for choices and compare the 'id' values
+        # check if the id in the queryset for choices is 1 & that the id for the selected_choice is 1                      
+        # (in utils.py the id for the correct answer is 1)
+        # else add the point for a correct choice & save the choice        
+        for choice_dict in convert_choices_textfield_into_list:
+            if selected_choice.id == choice_dict['id']: #
+                result += 1
+                selected_choice.save()
 
         # get the next question
         next_question = get_next_question_id(category_name, question_id)
