@@ -173,6 +173,36 @@ def get_next_question_id(category_name, question_id, question_selection):
            else:
                return None
 
+def get_category_names(response):    
+    # get the trivia categories values from dictionary provided in json response
+    # place an empty list as the default argument if the key is not found - should avoid errors in subsequent code
+    trivia_categories = response.get("trivia_categories", [])
+
+    # specify the id of the categories to include in the Education app's quizzes
+    selected_category_id = [20]
+
+    # collect the categories based on selected_category_id
+    selected_categories = [category for category in trivia_categories if category.get("id") in selected_category_id]    
+
+    # initialise a variable for the chosen category from the json response
+    selected_category = None
+    category_name = None
+
+    # iterate over trivia categories to find the category id specified 
+    for category in selected_categories:
+        # check if the id in selected_category_id is in the trivia_categories
+        if category.get("id") in selected_category_id:
+            # assign the current category to the selected_category variable
+            selected_category = category            
+            
+            # get the name of the category if the id exists for the selected category
+            if selected_category:
+                category_name = selected_category.get("name")
+                return category_name
+            
+            # exit the loop when the desired category is found            
+            break
+
 # import apps to dynamically fetch a model in detail() view
 from django.apps import apps       
 # import Http404 to raise an error message if a model is not located in detail view
@@ -180,25 +210,25 @@ from django.http import Http404
 # import random to shuffle questions in detail view, rendered in the form
 import random    
 #
-def see_objects():    
+def category_objects(category_name):    
     # use the category_name selected on edu_quiz.html to determine the model to get questions from
     # replace spaces in the event category names have spaces to create a valid model name
-    ##model_name = category_name.replace(" ", "_")
+    model_name = category_name.replace(" ", "_")
 
     # use a try-except block to find a model that matches the category name
     # use apps module to dynamically retrieve a model
     # - dynamically:instead of explicitly specifying a fixed model in the code, generate or determine the model to use at runtime based on certain conditions/data
-    #try:
-    #    model = apps.get_model('Education', 'Mythology')
-    #except LookupError:
-    #    raise Http404("Cannot locate the model for the selected category.")
+    try:
+        model = apps.get_model('Education', model_name)
+    except LookupError:
+        raise Http404("Cannot locate the model for the selected category.")
 
     # get the 50 questions for the specific category
     # https://docs.djangoproject.com/en/3.2/topics/db/queries/#retrieving-all-objects
     # ##question_id is the specific identifier passed in the URL when accessing this view
     # ##it uniquely identifies and retrieves the specific question to display
-    all_questions = Mythology.objects.all()
-    
+    all_questions = model.objects.all()
+
     # create a list containing the pk for each obj
     category_question_ids = [question.id for question in all_questions]
 
@@ -207,25 +237,16 @@ def see_objects():
     # https://docs.python.org/3.7/library/random.html?highlight=random#random.sample
     # note: random.sample requires a list as its first argument
     question_selection_ids = random.sample(category_question_ids, 10)
-    print(f"question_selection_ids:{question_selection_ids}") ##
     
     # filter the objects based on question_selection_ids
     # https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut
-    question_selection = Mythology.objects.filter(pk__in=question_selection_ids)
-
-    print(f"question_selection:{question_selection}\n\n")
-
-    # convert queryset to a list to be able to use shuffle
-    question_selection_list = list(question_selection)
-    print(f"question_selection_list:{question_selection_list}\n\n")
-
-    # use shuffle to mix questions each time
-    random.shuffle(question_selection_list)    
-    print(f"shuffle_question_selection_list:{question_selection_list}\n\n")
+    question_selection = model.objects.filter(pk__in=question_selection_ids)
     
     # get the object for the 1st question_selection in the selection do that its id attribute can be accessed and 
     # - used to direct the user the the view for the 1st question in edu_quiz url
     first_question = question_selection.first()
     print(f"first_question:{first_question}\n\n") ####    
+    first_question_id = first_question.id
+    print(f"first_question_id:{first_question_id}")
 
-    print(f"first_question in list:{question_selection_list[0]}\n\n")                  
+    return question_selection
