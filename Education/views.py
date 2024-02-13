@@ -185,12 +185,9 @@ def selection(request, category_name, question_id):
                 result += 1
                 selected_choice.save()
 
-        ## retrieve question_selection_pks from the session (from utils.category_objects)
-        question_selection_pks = request.session['question_selection_ids']
-        ##get_context_index_edu = index_edu(request)                
-        ##print(f"get_context_index_edu:{get_context_index_edu}")
-        ##question_selection = get_context_index_edu.get('question_selection')        
-        print(f"question_selection_ids in session:{question_selection_pks}")
+        # retrieve question_selection_pks from the session (from utils.category_objects)
+        question_selection_pks = request.session['question_selection_ids']        
+        print(f"question_selection_ids in session:{question_selection_pks}") ##
 
         # get the next question
         next_question = get_next_question_id(category_name, question_id, question_selection_pks)
