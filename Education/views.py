@@ -68,16 +68,13 @@ def index_edu(request):
     category_name = get_category_names(response)       
 
     # call the function to retrieve the objects from the django database - viewable on admin site
-    question_selection =  category_objects(category_name)
+    question_selection =  category_objects(request, category_name)    
 
     # the response is the dictionary for trivia categories
     # pass all the context variables into a single dictionary to render in the template correctly
     context = {'category_name': category_name,               
                'question_selection': question_selection
-               }    
-    
-    # pass context to 2 templates because edu_detail will have to iterate over the question_selection
-    ##context_used_in_detail = render(request, 'edu_quiz/edu_detail.html', context) 
+               }            
     
     # render the context to the homepage of education
     return render(request, 'edu_quiz/edu_quiz.html', context) 
@@ -119,8 +116,6 @@ def detail(request, category_name, question_id):
                'category_name': category_name 
                }
     
-    #response_for_selection_view = 
-    
     return render(request, 'edu_quiz/edu_detail.html', context)
 
 '''
@@ -157,8 +152,7 @@ def selection(request, category_name, question_id):
     # - reducing the risk of code injection
     # use in template to iterate over the list of choices dictionaries and access the values for the 'choice' key
     convert_choices_textfield_into_list = ast.literal_eval(question.choices)             
-    
-    
+        
     # access submitted data by key name with a dictionary-like object- request.POST
     # use the key name 'choice' (defined in edu_detail form input) which returns the ID of the selected choice
     # retrieve the selected choice instance from the database based on the primary key
@@ -187,12 +181,19 @@ def selection(request, category_name, question_id):
         # (in utils.py the id for the correct answer is 1)
         # else add the point for a correct choice & save the choice        
         for choice_dict in convert_choices_textfield_into_list:
-            if selected_choice.id == choice_dict['id']: #
+            if selected_choice.id and choice_dict['id'] == 1: 
                 result += 1
                 selected_choice.save()
 
+        ## retrieve question_selection_pks from the session (from utils.category_objects)
+        question_selection_pks = request.session['question_selection_ids']
+        ##get_context_index_edu = index_edu(request)                
+        ##print(f"get_context_index_edu:{get_context_index_edu}")
+        ##question_selection = get_context_index_edu.get('question_selection')        
+        print(f"question_selection_ids in session:{question_selection_pks}")
+
         # get the next question
-        next_question = get_next_question_id(category_name, question_id)
+        next_question = get_next_question_id(category_name, question_id, question_selection_pks)
 
         # if there is another question available from the question_selection redirect to the detail view again
         # - to display that question 
@@ -211,8 +212,10 @@ def selection(request, category_name, question_id):
             # dealing with POST data. This prevents data from being
             # posted twice if a user hits the Back button.
             # use reverse function to take the name of the view and return the str value that represents the actual url                        
+            # put a comma after category_name since its a str & needs to be treated as a tuple by args 
+            # - resolves NoReverseMatch error
             return HttpResponseRedirect(
-                reverse('Education:results', args=(category_name))
+                reverse('Education:results', args=(category_name,))
                 )
 
 # start new quiz function
