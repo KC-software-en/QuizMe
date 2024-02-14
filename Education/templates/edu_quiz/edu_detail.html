@@ -66,12 +66,7 @@
                                     <!--iterate through the questions list and display the question and the choices-->                    
                                     {% if question %}
                                         
-                                            <h3> {{ question.question }} #ID:{{question.id}}</h3> 
-                                            
-                                            <!--display error message if user did not select a choice -->
-                                            {% if error_message %}
-								                <p><strong>{{error_message}}</strong></p>
-								            {% endif %}
+                                            <h3> {{ question.question }} <b style="color: white;">{{question.id}}</b></h3>  
                                         
                                             <!--group related elements in a form with fieldset-->
                                             <fieldset>
@@ -105,7 +100,7 @@
                                                 <!-- A button that allows the user to submit their choice-->
                                                 <!--when somebody selects one of the radio buttons and submits the form, it’ll POST the data “choice=id” where id is the ID of the selected choice-->
                                                 <!--use margins to allow space above-under the button-->
-                                                <input type="Submit" value="Save"/>	
+                                                <input type="Submit" value="Save"/>	                               
                                                 <br/><br/>
                                             </fieldset>    
                                             
