@@ -189,11 +189,12 @@ def selection(request, category_name, question_id):
         result = request.session.get('quiz_result', 0)
         
         # iterate over the list of dictionaries for choices and compare the 'id' values
-        # check if the id in the queryset for choices is 1 & that the id for the selected_choice is 1                      
+        # check that the id of the selected_choice and the id of the current choice_dict is equal
+        # - & that the id in the choice_dict is 1                       
         # (in utils.py the id for the correct answer is 1)
         # else add the point for a correct choice & save the choice        
         for choice_dict in convert_choices_textfield_into_list:
-            if selected_choice.id and choice_dict['id'] == 1: 
+            if selected_choice.id == choice_dict['id'] and choice_dict['id'] == 1: 
                 result += 1
                 selected_choice.save()
                 
