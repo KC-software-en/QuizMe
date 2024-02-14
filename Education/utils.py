@@ -171,10 +171,8 @@ def get_next_question_id(category_name, question_id, question_selection_pks):
     # - & display the specific question that matches the question_id in the URL
     # question_pk refers to the automatically generated primary key (id) of each question in question_selection, 
     # and question_id is the identifier passed in the URL
-    # use enumerate to give each question in the selection an idx                
-    print(f"question_selection_pks:{question_selection_pks}") ##
-    for i, question_pk in enumerate(question_selection_pks, start=1):                
-        print(f"idx:{i}, question_pk:{question_pk}")
+    # use enumerate to give each question in the selection an idx                    
+    for i, question_pk in enumerate(question_selection_pks, start=1):                        
         if question_pk == question_id:
            # save i to a variable. previously it wasn't being preserved properly for the last question
            # - giving an idx out of range error
