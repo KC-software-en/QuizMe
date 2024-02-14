@@ -57,7 +57,6 @@ Create a view for the home page of education quizzes.
 '''
 # display the category of the education quiz
 # https://www.youtube.com/watch?v=sgEhb50YSTE
-# make the category_id a parameter set to None
 # get json reponse for trivia categories from open trivia db
 # index category from the dictionary id
 def index_edu(request):
@@ -70,10 +69,16 @@ def index_edu(request):
     # call the function to retrieve the objects from the django database - viewable on admin site
     question_selection =  category_objects(request, category_name)    
 
+    # get the object for the 1st question_selection in the selection do that its id attribute can be accessed and 
+    # - used to direct the user the the view for the 1st question in edu_quiz url
+    first_question_id = question_selection.first().id
+    print(f"first_question_id:{first_question_id}\n\n") ####        
+
     # the response is the dictionary for trivia categories
     # pass all the context variables into a single dictionary to render in the template correctly
     context = {'category_name': category_name,               
-               'question_selection': question_selection
+               'question_selection': question_selection,
+               'first_question_id': first_question_id
                }            
     
     # render the context to the homepage of education
@@ -133,6 +138,8 @@ def results(request, category_name):
                }   
     return render(request, 'edu_quiz/edu_result.html', context)
 
+'''
+'''
 # write a view to answer a question, incl the argument question_id
 # it handles the submitted data
 def selection(request, category_name, question_id):    
@@ -144,7 +151,8 @@ def selection(request, category_name, question_id):
     model = apps.get_model('Education', model_name)
     question = get_object_or_404(model, pk=question_id)
     #    
-    print(f"correct_answer:{question.correct_answer}")    
+    print(f"correct_answer:{question.correct_answer}") ##
+
     # use the helper function literal_eval of the ast module to convert the str representation of the choices list
     # - in the textfield of the category model into a list
     # https://python.readthedocs.io/en/latest/library/ast.html#ast.literal_eval
@@ -191,12 +199,14 @@ def selection(request, category_name, question_id):
 
         # get the next question
         next_question = get_next_question_id(category_name, question_id, question_selection_pks)
+        print(f"next_question:{next_question}") ##
 
         # if there is another question available from the question_selection redirect to the detail view again
         # - to display that question 
+        # args was used because the urls have positional arguments to pass i.e <str><int>
         if next_question is not None:
             return HttpResponseRedirect(
-                reverse('Education:edu_detail', category_name=category_name, question_id=next_question)
+                reverse('Education:edu_detail', args=(category_name, next_question))
                 )
 
         else:
@@ -209,6 +219,7 @@ def selection(request, category_name, question_id):
             # dealing with POST data. This prevents data from being
             # posted twice if a user hits the Back button.
             # use reverse function to take the name of the view and return the str value that represents the actual url                        
+            # args was used because the urls have positional arguments to pass i.e <str>
             # put a comma after category_name since its a str & needs to be treated as a tuple by args 
             # - resolves NoReverseMatch error
             return HttpResponseRedirect(
