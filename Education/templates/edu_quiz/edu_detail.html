@@ -50,46 +50,39 @@
                         <div class="card-body" id="no-underline">
                             <h1 class="card-title"><i>{{ category_name }} quiz!</i></h1>		
                                                                                         
-                                <!--Method-calling happens in the { for } loop: 
-                                question.choice_set.all is interpreted as the Python code question.choice_set.all(), 
-                                which returns an iterable of Choice objects and is suitable for use in the { for } tag.-->
-                                <!--the post method was used to send data to the server
-                                the url in the action attribute was used to send data to the server-->
+                                <!--show a form for each question in the quiz -->
+                                <!--the post method was used to send data to the server-->
+                                <!--the url in the action attribute was used to send data to the server-->
                                 <form action="{% url 'Education:selection' category_name=category_name question_id=question.id %}" method="POST">
                                     <!--add the csrf_token to all post forms targeted at internal urls to protect against Cross Site Forgery-->
                                     {% csrf_token %}
                                                                             
                                     <!--The template system uses dot-lookup syntax to access variable attributes.-->
-                                    <!--In the example of {{ question_text }}, first Django does a dictionary lookup on the object question.-->
+                                    <!-- Django does a dictionary lookup on the object question.-->
                                     <!--Failing that, it tries an attribute lookup – which works, in this case. -->
                                     <!--If attribute lookup has failed, it would’ve tried a list-index lookup.-->
-                                    <!--iterate through the questions list and display the question and the choices-->                    
+                                    <!--check if there are question objects passed as context-->                    
                                     {% if question %}
-                                        
-                                            <h3> {{ question.question }} #ID:{{question.id}}</h3> 
+
+                                            <!--display the question text by accessing its question attribute -->
+                                            <h3> {{ question.question }} </h3> 
                                             
-                                            <!--display error message if user did not select a choice -->
+                                            <!--display error message if user did not select a choice before submitting-->
                                             {% if error_message %}
 								                <p><strong>{{error_message}}</strong></p>
 								            {% endif %}
                                         
                                             <!--group related elements in a form with fieldset-->
-                                            <fieldset>
-                                                <!--Method-calling happens in the for loop: question.choice_set.all is
-                                                interpreted as the Python code question.choice_set.all(), which returns an
-                                                iterable of Choice objects and is suitable for use in the for tag.-->
-                                                <!--use a for loop to add a radio button for each choice associated with a specific question in the database-->
+                                            <fieldset>                                                
+                                                <!--iterate over the choices attribute to add a radio button for each choice
+                                                 associated with a specific question in the database-->
                                                 {% for choice in choices %}
                                                     <!--Radio buttons. Each choice that is associated with that particular question is
                                                     then displayed using a radio button in a form.-->
                                                     <!--The name of each radio button is choice-->
                                                     <!--selected value for each question will be sent to the server-->  
-                                                    <!-- uniquely identify the radio button within the form
-                                                        selected value (which is the question_id of the chosen mixed_choice) will be sent to the server
-                                                        the '.question' is refering to the question_id key created in results()
-                                                        when the form is submitted, the server-side code can construct the key using the same question.id to retrieve the selected choice from request.POST
-                                                        value attribute is the identifier for the user's choice associated with the question
-                                                        -->                                                                                              
+                                                    <!-- uniquely identify the radio button within the form-->
+                                                    <!--the value attribute is the identifier for the user's choice associated with the question-->                                                                                              
                                                     <input type="radio" name="choice" 
                                                     id="choice{{forloop.counter}}" value="{{ choice.id }}" />                        
                                                     <!-- access the value associated with the 'choice' key in the question.choices dictionary-->
@@ -99,50 +92,20 @@
                                                     <br/><br/>
                                                 {% endfor %}                                                                                                                                                                            
                                                 
-                                                <!--hidden field for question_selection retrieved in selection view-->
-                                                <input type="hidden" name="question_selection" value="{{question_selection}}"
-                                                
-                                                <!-- A button that allows the user to submit their choice-->
-                                                <!--when somebody selects one of the radio buttons and submits the form, it’ll POST the data “choice=id” where id is the ID of the selected choice-->
+                                                <!-- a button that allows the user to submit their choice-->
+                                                <!--when a user selects one of the radio buttons and submits the form,
+                                                     it’ll POST the data “choice=id” where id is the ID of the selected choice-->
                                                 <!--use margins to allow space above-under the button-->
                                                 <input type="Submit" value="Save"/>	
                                                 <br/><br/>
                                             </fieldset>    
-                                            
-                                            <!--move button to the center with d-flex & mx-auto-->
-								            <div class="d-flex">
-                                                <!--a button that takes the user to the next question -->
-                                                {% if not forloop.last %}<!--REMOVE MAYBE -->
-                                                    <button class="btn mx-auto no-underline">                                        
-                                                        <a href="" style="" id="">
-                                                            Next question
-                                                        </a>
-                                                    </button>	
-                                                
-                                                <!--result button visible if its the last question -->
-                                                {% else %}	
-                                                    <button class="btn mx-auto no-underline">                                        
-                                                        <a href="{% url 'Education:results' category_name=category_name %}" style="" id="">
-                                                            View quiz result
-                                                        </a>
-                                                    </button>
-                                                {% endif %}                                            
-                                            </div>
-
-                                        
-
-                                        
+                                                                                     
                                     <!--display error message if there are no questions-->                                                                                        
                                     {% else %}
                                         <p><strong>{{ error_message }}</strong></p>
                                     {% endif %}
                                     
-                                </form>      
-                            
-                            <!-- -->                                                                                    
-                            <div class="card-footer">
-                                
-                            </div>  
+                                </form>                                                                
 
                         </div>	
                     </div>	
