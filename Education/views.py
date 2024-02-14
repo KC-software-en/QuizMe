@@ -67,18 +67,19 @@ def index_edu(request):
     category_name = get_category_names(response)       
 
     # call the function to retrieve the objects from the django database - viewable on admin site
-    question_selection =  category_objects(request, category_name)    
-
-    # get the object for the 1st question_selection in the selection do that its id attribute can be accessed and 
-    # - used to direct the user the the view for the 1st question in edu_quiz url
-    first_question_id = question_selection.first().id
-    print(f"first_question_id:{first_question_id}\n\n") ####        
+    question_selection =  category_objects(request, category_name)           
+    
+    # retrieve question_selection_pks from the session (from utils.category_objects)
+    # because the 1st pk needs to be indexed for the 1st question rendered
+    # question_selection.first().id chose the 1st question numerically in the database, not the 1st from the randomised list
+    question_selection_pks = request.session['question_selection_ids']        
+    print(f"index_edu=question_selection_ids in session:{question_selection_pks}") ##     
 
     # the response is the dictionary for trivia categories
     # pass all the context variables into a single dictionary to render in the template correctly
     context = {'category_name': category_name,               
                'question_selection': question_selection,
-               'first_question_id': first_question_id
+               'first_question_id': question_selection_pks[0]
                }            
     
     # render the context to the homepage of education
@@ -192,7 +193,10 @@ def selection(request, category_name, question_id):
             if selected_choice.id and choice_dict['id'] == 1: 
                 result += 1
                 selected_choice.save()
-
+                
+                # store the calculated result in the session
+                request.session['quiz_result'] = result
+                    
         # retrieve question_selection_pks from the session (from utils.category_objects)
         question_selection_pks = request.session['question_selection_ids']        
         print(f"question_selection_ids in session:{question_selection_pks}") ##
@@ -210,9 +214,6 @@ def selection(request, category_name, question_id):
                 )
 
         else:
-            # store the calculated result in the session
-            request.session['quiz_result'] = result
-
             # use HttpResponseRedirect instead of HttpResponse;
             # HttpResponseRedirect takes the URL to which the user will be redirected as an argument
             # Always return an HttpResponseRedirect after successfully
