@@ -53,12 +53,12 @@
             </div>
         </div>
     </nav>
-	    <section>       
+	    <section style="padding-left: 10pt;">       
             <h1>Education Quiz Categories</h1> 
             
             {% if category_name %}
                 {% if question_selection %}
-                    <ul>
+                    <ol>
                         {% for question in question_selection %}
                             <li>  
                                 <!-- iterate over the queryset of question objects & list of q selection ids simultaneously -->                    
@@ -68,11 +68,11 @@
                                 generate links with the appropriate category_id. 
                                 the category_id is extracted from the selected_category object.-->
                                 <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=question.id %}"> 
-                                    {{ category_name }}
+                                    {{ category_name }} 
                                 </a>                    
                             </li> 
                         {% endfor %}
-                    </ul> 
+                    </ol> 
                 {% endif %}
         
             {% else %}
