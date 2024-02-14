@@ -68,16 +68,13 @@ def index_edu(request):
     category_name = get_category_names(response)       
 
     # call the function to retrieve the objects from the django database - viewable on admin site
-    question_selection =  category_objects(category_name)
+    question_selection =  category_objects(request, category_name)    
 
     # the response is the dictionary for trivia categories
     # pass all the context variables into a single dictionary to render in the template correctly
     context = {'category_name': category_name,               
                'question_selection': question_selection
-               }    
-    
-    # pass context to 2 templates because edu_detail will have to iterate over the question_selection
-    context_used_in_detail = render(request, 'edu_quiz/edu_detail.html', context) 
+               }            
     
     # render the context to the homepage of education
     return render(request, 'edu_quiz/edu_quiz.html', context) 
@@ -119,8 +116,6 @@ def detail(request, category_name, question_id):
                'category_name': category_name 
                }
     
-    #response_for_selection_view = 
-    
     return render(request, 'edu_quiz/edu_detail.html', context)
 
 '''
@@ -148,7 +143,16 @@ def selection(request, category_name, question_id):
     model_name = category_name.replace(" ", "_")
     model = apps.get_model('Education', model_name)
     question = get_object_or_404(model, pk=question_id)
-
+    #    
+    print(f"correct_answer:{question.correct_answer}")    
+    # use the helper function literal_eval of the ast module to convert the str representation of the choices list
+    # - in the textfield of the category model into a list
+    # https://python.readthedocs.io/en/latest/library/ast.html#ast.literal_eval
+    # note:ast.literal_eval is safer than eval. it only evaluates literals & not arbitrary expressions, 
+    # - reducing the risk of code injection
+    # use in template to iterate over the list of choices dictionaries and access the values for the 'choice' key
+    convert_choices_textfield_into_list = ast.literal_eval(question.choices)             
+        
     # access submitted data by key name with a dictionary-like object- request.POST
     # use the key name 'choice' (defined in edu_detail form input) which returns the ID of the selected choice
     # retrieve the selected choice instance from the database based on the primary key
@@ -158,38 +162,44 @@ def selection(request, category_name, question_id):
         selected_choice = model.objects.get(
             pk=request.POST['choice']
             )
-        #
-        # Evaluate the DeferredAttribute to get the actual value
-        correct_answer_for_model = model.correct_answer
-        convert_correct_answer_textfield_into_dict = ast.literal_eval(correct_answer_for_model)
-
+        
     # raise a KeyError if the ID of the choice isn’t found
     # an error occurs if the mapping (dictionary) key was not located in the set of existing keys
-    except (KeyError, model.DoesNotExist):
+    except (KeyError, model.DoesNotExist):        
         # Redisplay the question voting form
         return render(request, 'edu_quiz/edu_detail.html', {
+            'category_name': category_name,
             'question': question,
+            'choices': convert_choices_textfield_into_list,
             'error_message': "You didn't select a choice."
             })
+    
     else:
-        # else add the point for a correct choice & save the choice
-        # (in utils.py the id for the correct answer is 1)
         result = 0
-        if selected_choice.id == convert_correct_answer_textfield_into_dict['id']: #might have to use ast
-            result += 1
-            selected_choice.save()
+        # iterate over the list of dictionaries for choices and compare the 'id' values
+        # check if the id in the queryset for choices is 1 & that the id for the selected_choice is 1                      
+        # (in utils.py the id for the correct answer is 1)
+        # else add the point for a correct choice & save the choice        
+        for choice_dict in convert_choices_textfield_into_list:
+            if selected_choice.id and choice_dict['id'] == 1: 
+                result += 1
+                selected_choice.save()
+
+        # retrieve question_selection_pks from the session (from utils.category_objects)
+        question_selection_pks = request.session['question_selection_ids']        
+        print(f"question_selection_ids in session:{question_selection_pks}") ##
 
         # get the next question
-        ##next_question = get_next_question_id(category_name, question_id)
+        next_question = get_next_question_id(category_name, question_id, question_selection_pks)
 
         # if there is another question available from the question_selection redirect to the detail view again
         # - to display that question 
-        ##if next_question is not None:
-        ##    return HttpResponseRedirect(
-        ##        reverse('Education:edu_detail', category_name=category_name, question_id=next_question)
-        ##        )
+        if next_question is not None:
+            return HttpResponseRedirect(
+                reverse('Education:edu_detail', category_name=category_name, question_id=next_question)
+                )
 
-        #else:
+        else:
             # store the calculated result in the session
             request.session['quiz_result'] = result
 
@@ -199,9 +209,11 @@ def selection(request, category_name, question_id):
             # dealing with POST data. This prevents data from being
             # posted twice if a user hits the Back button.
             # use reverse function to take the name of the view and return the str value that represents the actual url                        
-            ##return HttpResponseRedirect(
-            ##    reverse('Education:results', args=(category_name))
-            ##    )
+            # put a comma after category_name since its a str & needs to be treated as a tuple by args 
+            # - resolves NoReverseMatch error
+            return HttpResponseRedirect(
+                reverse('Education:results', args=(category_name,))
+                )
 
 # start new quiz function
 def try_new_quiz(request):

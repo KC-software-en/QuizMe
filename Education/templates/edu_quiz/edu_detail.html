@@ -66,7 +66,12 @@
                                     <!--iterate through the questions list and display the question and the choices-->                    
                                     {% if question %}
                                         
-                                            <h3> {{ question.question }} #ID:{{question.id}}</h3>  
+                                            <h3> {{ question.question }} #ID:{{question.id}}</h3> 
+                                            
+                                            <!--display error message if user did not select a choice -->
+                                            {% if error_message %}
+								                <p><strong>{{error_message}}</strong></p>
+								            {% endif %}
                                         
                                             <!--group related elements in a form with fieldset-->
                                             <fieldset>
@@ -94,6 +99,9 @@
                                                     <br/><br/>
                                                 {% endfor %}                                                                                                                                                                            
                                                 
+                                                <!--hidden field for question_selection retrieved in selection view-->
+                                                <input type="hidden" name="question_selection" value="{{question_selection}}"
+                                                
                                                 <!-- A button that allows the user to submit their choice-->
                                                 <!--when somebody selects one of the radio buttons and submits the form, it’ll POST the data “choice=id” where id is the ID of the selected choice-->
                                                 <!--use margins to allow space above-under the button-->
@@ -104,7 +112,7 @@
                                             <!--move button to the center with d-flex & mx-auto-->
 								            <div class="d-flex">
                                                 <!--a button that takes the user to the next question -->
-                                                {% if not forloop.last %}
+                                                {% if not forloop.last %}<!--REMOVE MAYBE -->
                                                     <button class="btn mx-auto no-underline">                                        
                                                         <a href="" style="" id="">
                                                             Next question
