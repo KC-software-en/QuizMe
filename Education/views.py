@@ -196,7 +196,7 @@ def selection(request, category_name, question_id):
         # - to display that question 
         if next_question is not None:
             return HttpResponseRedirect(
-                reverse('Education:edu_detail', category_name=category_name, question_id=next_question)
+                reverse('Education:edu_detail', args=(category_name,next_question))
                 )
 
         else:
