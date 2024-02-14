@@ -54,27 +54,32 @@
         </div>
     </nav>
 	    <section>       
+            <!-- show a heading for the categories in education-->
             <h1>Education Quiz Categories</h1> 
             
-            {% if category_name %}
-                {% if question_selection %}
-                    <ul>
-                        {% for question in question_selection %}
+            <!--check if there are category names -->            
+            <!-- list the categories-->
+            {% if category_name %}  
+                
+                    <!--check if there are 10 questions for the category -->
+                    {% if question_selection %}
+                        <ul>                              
                             <li>  
-                                <!-- iterate over the queryset of question objects & list of q selection ids simultaneously -->                    
+                                <!-- call the url for the detail view of the first object in the question_selection queryset -->                    
                                 <!--alter the url to include the app_name=Education 
                                 because namespaces are used to differentiate views between apps & create a url with the template tag-->
-                                <!-- pass parameters from view without spaces or commas 
-                                generate links with the appropriate category_id. 
-                                the category_id is extracted from the selected_category object.-->
-                                <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=question.id %}"> 
+                                <!-- pass parameters as keyword arguments from detail view without spaces or commas 
+                                generate links with the appropriate category_name. 
+                                the category_name is extracted from the selected_category object in utils.get_category_names-->
+                                <!-- display the name of the category as the button that takes you to the quiz -->
+                                <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=first_question_id %}"> 
                                     {{ category_name }}
                                 </a>                    
-                            </li> 
-                        {% endfor %}
-                    </ul> 
-                {% endif %}
-        
+                            </li>                                
+                        </ul> 
+                    {% endif %}                
+                
+            <!--display an error message if a quiz was not found for a category -->
             {% else %}
                 <p>No quizzes are available.</p>
             {% endif %}
