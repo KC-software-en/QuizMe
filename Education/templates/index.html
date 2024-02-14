@@ -263,9 +263,11 @@
                      your skills. Whether you want to brush up on your trivia, prepare for an exam, or just have some fun, 
                   
                      QuizMe has something for you. 😊
-                    
-                    So what are you waiting for? <a href="/user_auth/register">Register</a> on QuizMe today and start quizzing! 🚀
                     </p>
+                    {% if user.is_authenticated %}
+                    {% else %} 
+                    <p>So what are you waiting for? <a href="/user_auth/register">Register</a> on QuizMe today and start quizzing! 🚀</p>         
+                    {% endif %}         
             </div>
 
             <br>
