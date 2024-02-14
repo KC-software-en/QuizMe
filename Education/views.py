@@ -183,8 +183,11 @@ def selection(request, category_name, question_id):
             'error_message': "You didn't select a choice."
             })
     
-    else:
-        result = 0
+    finally:
+        # retrieve the quiz result of the session
+        # or let it initialise to 0 in the event its the 1st question
+        result = request.session.get('quiz_result', 0)
+        
         # iterate over the list of dictionaries for choices and compare the 'id' values
         # check if the id in the queryset for choices is 1 & that the id for the selected_choice is 1                      
         # (in utils.py the id for the correct answer is 1)
@@ -194,8 +197,8 @@ def selection(request, category_name, question_id):
                 result += 1
                 selected_choice.save()
                 
-                # store the calculated result in the session
-                request.session['quiz_result'] = result
+        # store the calculated result in the session
+        request.session['quiz_result'] = result
                     
         # retrieve question_selection_pks from the session (from utils.category_objects)
         question_selection_pks = request.session['question_selection_ids']        
