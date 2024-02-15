@@ -97,7 +97,7 @@ Create a function that will create an object for the sub-categories of the Educa
 '''
 # create an object for the sub-category (e.g.mythology) quiz data
 # in django shell import the util functions needed for the creation of the obj then call the obj
-# place the category id from the json response as the argument for the function (e.g. 20)
+# place the category id from the quiz_categories.json file as the argument for the function (e.g. 20)
 # In project directory cmd: `python manage.py shell`, 
 # `from Education.utils import get_specific_json_category, mix_choices, create_mythology_object`
 # `create_mythology_object(20)`, then `exit()`
