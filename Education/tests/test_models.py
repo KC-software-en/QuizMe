@@ -18,7 +18,7 @@ from django.test import TransactionTestCase
 from mixer.backend.django import mixer
 
 # import classes from models.py 
-from ..models import Quiz
+from ..models import Mythology
 
 
 #####################################################################################
@@ -29,10 +29,10 @@ from ..models import Quiz
 # run coverage after tests
 
 '''
-Create a class to test the question model.
+Create a class to test the Mythology model.
 '''        
-# create a class to test the question model
-class TestQuizModel(TransactionTestCase):
+# create a class to test the Mythology model
+class TestMythologyModel(TransactionTestCase):
     '''
     Setup data for question model
     '''
@@ -43,13 +43,13 @@ class TestQuizModel(TransactionTestCase):
         pass
     
     '''
-    A function to test if the quiz model creates successfully before it coding it in models.py.
+    A function to test if the Mythology model creates successfully before it coding it in models.py.
     '''
     # create a fail test where the functions in models.py do not exist
-    def test_quiz_model(self):        
-        # create an instance of quiz model with mixer
+    def test_mythology_model(self):        
+        # create an instance of Mythology model with mixer
         # textfield stores data as a str so the list of choices will read as a str
-        quiz_ins = mixer.blend(Quiz, question = "Question example",
+        quiz_ins = mixer.blend(Mythology, question = "Question example",
                              choices = 'choice1, choice2, choice3, choice4',
                                correct_answer = 'choice1')
         
@@ -60,7 +60,7 @@ class TestQuizModel(TransactionTestCase):
         self.assertIsNotNone(quiz_ins, msg='Should confirm question instance was created')
         # Test that obj is (or is not) an instance of cls (which can be a class or a tuple of classes, as supported by isinstance()). 
         # To check for the exact type, use assertIs(type(obj), cls). --class(cls)
-        self.assertIsInstance(quiz_ins, Quiz, msg='Should confirm that the object instantiated is from the Quiz class')
+        self.assertIsInstance(quiz_ins, Mythology, msg='Should confirm that the object instantiated is from the Mythology class')
         
         # check attributes of instance
         # the choices are expected to be a list from the json response
@@ -70,7 +70,7 @@ class TestQuizModel(TransactionTestCase):
         actual_choices = quiz_ins.choices.split(', ')
         expected_correct_answer = 'choice1'
 
-        # assert
+        # assertions
         self.assertEqual(quiz_ins.question, expected_question,
                           msg='Should check the question attribute of the instantiated object')
         self.assertEqual(actual_choices, expected_choices, 
@@ -83,8 +83,8 @@ class TestQuizModel(TransactionTestCase):
     A function to test if the str method returns the question_text.
     '''
     def test_return_str_quiz(self):
-        # Create an instance of the Quiz model with a specific question
-        quiz_ins = Quiz(question = 'Question example')
+        # Create an instance of the Mythology model with a specific question
+        quiz_ins = Mythology(question = 'Question example')
 
         # call __str__ method
         str_outcome = str(quiz_ins)
@@ -93,15 +93,15 @@ class TestQuizModel(TransactionTestCase):
         self.assertEqual(str_outcome, quiz_ins.question, msg='Question example')
     
     '''
-    Create a test to check an instance of the quiz model.
+    Create a test to check an instance of the Mythology model.
     '''
-    # create a test to check an instance of the quiz model
-    def test_quiz_instance(self):
-        # use mixer to create an instance of the Quiz model
-        quiz_instance = mixer.blend(Quiz)
+    # create a test to check an instance of the Mythology model
+    def test_mythology_instance(self):
+        # use mixer to create an instance of the Mythology model
+        quiz_instance = mixer.blend(Mythology)
 
         # assert that the instance was successful
-        self.assertIsInstance(quiz_instance, Quiz, msg='Should confirm that the object instantiated is from the Quiz class')
+        self.assertIsInstance(quiz_instance, Mythology, msg='Should confirm that the object instantiated is from the Mythology class')
     
     
     
