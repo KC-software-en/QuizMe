@@ -93,17 +93,18 @@ def mix_choices(choices: list):
     return choices
 
 '''
-Create a function that will create an object for the mythology quiz.
+Create a function that will create an object for the sub-categories of the Education quiz.
 '''
-# create an object for the mythology quiz data
+# create an object for the sub-category (e.g.mythology) quiz data
 # in django shell import the util functions needed for the creation of the obj then call the obj
+# place the category id from the quiz_categories.json file as the argument for the function (e.g. 20)
 # In project directory cmd: `python manage.py shell`, 
 # `from Education.utils import get_specific_json_category, mix_choices, create_mythology_object`
-# `create_mythology_object()`, then `exit()`
-# this will populate the mythology table on the admin site with the quiz data
-def create_mythology_object():   
+# `create_mythology_object(20)`, then `exit()`
+# this will populate the sub-category (e.g. mythology) table on the admin site with the quiz data
+def create_subcategory_object(category):   
     # call the get_specific_json_category function to get the data for the mythology category
-    json_response = get_specific_json_category(quantity=50, category=20)
+    json_response = get_specific_json_category(quantity=50, category=category)
     
     # check if there are questions
     if json_response:        
