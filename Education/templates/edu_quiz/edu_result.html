@@ -34,25 +34,27 @@
              </div>
          </div>
      </nav>
-	<section>
-        <h1> Your results </h1>
+	<section style="padding: 50pt;">
+        <p style="font-size: 26pt;", style="margin: 100pt;">Your results
+            <br>
 
-        <!-- show score-->
-        {% if result %}
-            <h2>Score: {{result}} / 10 </h2>
+            <!-- show score-->
+            {% if result %}
+                Score: {{result}} / 10 
 
-        <!-- display an error message if score is unavailable-->
-        {% else %}
-            <p>
-                <b>No score calculated</b>
-            </p>
+            <!-- display an error message if score is unavailable-->
+            {% else %}
+                <p>
+                    <b>No score calculated</b>
+                </p>
 
-        {% endif %}
+            {% endif %}
 
-        <!-- enter a view url here -->
-        <a href="{% url 'Education:try_new_quiz' %}">
-            Try again?
-        </a>
+            <!-- enter a view url here -->
+            <a style="font-size: 20pt;" href="{% url 'Education:try_new_quiz' %}">
+                Try again?
+            </a>
+        </p>
     </section>
 	{% endblock %}
 </body>
