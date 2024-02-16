@@ -183,7 +183,8 @@ def selection(request, category_name, question_id):
             'error_message': "You didn't select a choice."
             })
     
-    finally:
+    # use else instead of finally because the selection view for submitting without a choice selection won't render
+    else:
         # retrieve the quiz result of the session
         # or let it initialise to 0 in the event its the 1st question
         result = request.session.get('quiz_result', 0)
