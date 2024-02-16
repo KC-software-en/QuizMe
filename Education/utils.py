@@ -11,7 +11,7 @@ import random
 import json
 
 # import models
-from .models import Mythology
+from .models import Mythology, History
 
 # import apps to dynamically fetch a model in category_objects() for the detail() view
 from django.apps import apps      
@@ -161,6 +161,73 @@ def create_mythology_object():
                 # save the object to the database
                 question_object.save()
 
+# create an object for the mythology quiz data
+# in django shell import the util functions needed for the creation of the obj then call the obj
+# In project directory cmd: `python manage.py shell`, 
+# `from Education.utils import get_specific_json_category, mix_choices, create_mythology_object`
+# `from Education.utils import get_specific_json_category, mix_choices, create_History_object`
+# `create_History_object()`, then `exit()`
+# this will populate the mythology table on the admin site with the quiz data
+def create_History_object():   
+    # call the get_specific_json_category function to get the data for the mythology category
+    json_response = get_specific_json_category(quantity=50, category=23)
+    
+    # check if there are questions
+    if json_response:        
+        # save json response as a variable to pass into template
+        questions = json_response["results"]
+    
+        # check if question retrieval was successful
+        if questions:
+            # iterate over each question in the results dictionary 
+            for question in questions:                        
+                # add new question text key for each question in results dictionary(AKA questions) by indexing its key                
+                # - index question text - access the value associated with the key "question" in each dictionary
+                # - use html.unescape to handle potential HTML entities and ensure accurate rendering in templates
+                question_text = html.unescape(question["question"]) 
+                            
+                # iterate over the incorrect answers with html.unescape and place them into a list with list comprehension                
+                # use html.unescape & handle potential HTML entities for accurate rendering of templates
+                # place the answers from the response in a variable 
+                # - index it from the list of key:value pairs available for each question(result)
+                incorrect_answers = [html.unescape(answer) for answer in question["incorrect_answers"]]             
+                # use html.unescape for the correct answer
+                correct_answer = html.unescape(question["correct_answer"])                                
+                # append the correct answer to the list of choices
+                # slice the incorrect_answers & extend it to the choices list - prevents nested lists                               
+                choice_texts = []
+                choice_texts.append(correct_answer)
+                choice_texts.extend(incorrect_answers[:])                                
+    
+                # initialise an empty list to append the dictionaries containing an id for each choice
+                # - else the list will be overwritten each loop, only saving the last dictionary iterated over
+                # enumerate each choice to assign an id
+                # note: since correct_answer was appended at the start, the id will be 1
+                choices_dict = []
+                for i, choice in enumerate(choice_texts, start=1):
+                    choices_dict.append({'choice': choice, 'id': i})                
+
+                # call the function to rearrange choices and make the extended choice list the argument
+                mixed_choices = mix_choices(choices_dict)            
+    
+                # save the mixed choices to each question in the results dictionary        
+                # add a key-value pair to the question dictionary (from the category json response)
+                question['mixed_choices'] = mixed_choices
+    
+                # find the correct answer in mixed_choices
+                correct_choice = None
+                for choice in mixed_choices:
+                    if choice['id'] == 1:
+                        correct_choice = choice
+                        break
+                    
+                # create a question object with the above data
+                # this will show on the admin site with the models created for questions & choices
+                question_object = History.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
+    
+                # save the object to the database
+                question_object.save()
+
 '''
 Create a function that find the question id for the next question in the quiz.
 '''
@@ -191,35 +258,35 @@ def get_next_question_id(category_name, question_id, question_selection_pks):
 A function that retrieves the desired category names from the Open Trivia DB json response.
 '''
 # define a function that will retrieve category names based on the category id for it in the json response
-def get_category_names(response):    
-    # get the trivia categories values from dictionary provided in json response
-    # place an empty list as the default argument if the key is not found - should avoid errors in subsequent code
+def get_category_names(response):
+    # Get the trivia categories values from the dictionary provided in the JSON response
+    # Place an empty list as the default argument if the key is not found - this avoids errors in subsequent code
     trivia_categories = response.get("trivia_categories", [])
-
-    # specify the id of the categories to include in the Education app's quizzes
-    selected_category_id = [20]
-
-    # collect the categories based on selected_category_id
-    selected_categories = [category for category in trivia_categories if category.get("id") in selected_category_id]    
-
-    # initialise a variable for the chosen category from the json response
+    
+    # Specify the IDs of the categories to include in the Education app's quizzes
+    selected_category_ids = [23]
+    
+    # Collect the categories based on the selected_category_ids
+    selected_categories = [category for category in trivia_categories if category.get("id") in selected_category_ids]
+    
+    # Initialize variables for the chosen category from the JSON response
     selected_category = None
     category_name = None
-
-    # iterate over trivia categories to find the category id specified 
+    
+    # Iterate over trivia categories to find the category ID specified
     for category in selected_categories:
-        # check if the id in selected_category_id is in the trivia_categories
-        if category.get("id") in selected_category_id:
-            # assign the current category to the selected_category variable
-            selected_category = category            
+        print(category)
+        # Check if the ID in selected_category_ids is in the trivia_categories
+        if category.get("id") in selected_category_ids:
+            # Assign the current category to the selected_category variable
+            selected_category = category
             
-            # get the name of the category if the id exists for the selected category
+            # Get the name of the category if the ID exists for the selected category
             if selected_category:
                 category_name = selected_category.get("name")
-                return category_name
-            
-            # exit the loop when the desired category is found            
-            break
+                return category_name            
+            # Exit the loop when the desired category is found  
+            break  
 
 '''
 A function that retrieves the category queryset from the database based on its category name.
