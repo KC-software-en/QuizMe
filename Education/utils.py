@@ -18,7 +18,6 @@ from django.apps import apps
 
 # import Http404 to raise an error message if a model is not located in category_objects()
 from django.http import Http404
-  
 
 #######################################################################################
 #######################################################################################
@@ -102,6 +101,7 @@ Create a function that will create an object for the sub-categories of the Educa
 # `from Education.utils import get_specific_json_category, mix_choices, create_mythology_object`
 # `create_mythology_object(20)`, then `exit()`
 # this will populate the sub-category (e.g. mythology) table on the admin site with the quiz data
+'''
 def create_subcategory_object(category):   
     # call the get_specific_json_category function to get the data for the mythology category
     json_response = get_specific_json_category(quantity=50, category=category)
@@ -161,6 +161,7 @@ def create_subcategory_object(category):
     
                 # save the object to the database
                 question_object.save()
+'''
 
 '''
 Create a function that find the question id for the next question in the quiz.
@@ -198,34 +199,40 @@ def get_category_names(response):
     trivia_categories = response.get("trivia_categories", [])
 
     # specify the id of the categories to include in the Education app's quizzes
-    selected_category_id = [20]
+    selected_category_id = [20, 23]
 
     # collect the categories based on selected_category_id
     selected_categories = [category for category in trivia_categories if category.get("id") in selected_category_id]    
+    print(f"selected_categories:{selected_categories}")
 
     # initialise a variable for the chosen category from the json response
     selected_category = None
-    category_name = None
+    
+    # create an empty list for the category names
+    category_names =[]
 
     # iterate over trivia categories to find the category id specified 
     for category in selected_categories:
         # check if the id in selected_category_id is in the trivia_categories
         if category.get("id") in selected_category_id:
             # assign the current category to the selected_category variable
-            selected_category = category            
+            selected_category = category      
+            print(f"selected_category:{selected_category}")      
             
             # get the name of the category if the id exists for the selected category
+            # append each category name to a list
             if selected_category:
                 category_name = selected_category.get("name")
-                return category_name
-            
-            # exit the loop when the desired category is found            
-            break
+                category_names.append(category_name) 
+
+    # return the list of category_names
+    return category_names
 
 '''
 A function that retrieves the category queryset from the database based on its category name.
 '''  
 # define a function that returns the queryset for 10 random objects from the database for each category 
+# https://stackoverflow.com/questions/27270958/patch-multiple-methods-from-different-modules-using-python-mock#:~:text=The%20short%20answer%20is%20no%20you%20cannot%20use,one%20of%20the%20time%20by%20single%20patch%20calls.
 def category_objects(request, category_name):    
     # use the category_name selected on edu_quiz.html to determine the model to get questions from
     # replace spaces in the event category names have spaces to create a valid model name
@@ -236,6 +243,7 @@ def category_objects(request, category_name):
     # - dynamically:instead of explicitly specifying a fixed model in the code, generate or determine the model to use at runtime based on certain conditions/data
     try:
         model = apps.get_model('Education', model_name)
+        print(f"type:{type(model)}")
     except LookupError:
         raise Http404("Cannot locate the model for the selected category.")
 
