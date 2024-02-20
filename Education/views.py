@@ -89,6 +89,8 @@ def index_edu(request):
 def detail(request, category_name, question_id):  
     response = get_json_categories()
     category_names = get_category_names(response)  
+
+    # check if the category_name is in the list of category_names then locate its model    
     if category_name in category_names:
         # use the category_name selected on edu_quiz.html to determine the model to get questions from
         # replace spaces and '&' in the event category names have spaces to create a valid model name
@@ -106,6 +108,7 @@ def detail(request, category_name, question_id):
         except LookupError:
             raise Http404("Cannot locate the model for the selected category.")     
     
+        # get the question object associated with a specific question_id in the database
         question = get_object_or_404(model, pk=question_id)    
         print(f"\n\nquestion:{question}")
     
@@ -151,9 +154,15 @@ def selection(request, category_name, question_id):
     # django automatically creates a primary key for each model
     response = get_json_categories()
     category_names = get_category_names(response)
+
+    # check if the category_name is in the list of category_names then locate its model
+    # use globals module instead of apps to access the global namespace for models
+    # - since a model name was altered from its original category_name to create a valid model with 'and'
     if category_name in category_names:
         model_name = category_name.replace(" ", "_").replace("&", "and")
         model = globals()[model_name] # not model = apps.get_model('Education', model_name)
+
+        # get the question object associated with a specific question_id in the database
         question = get_object_or_404(model, pk=question_id)
         #    
         print(f"correct_answer:{question.correct_answer}") ##
