@@ -4,10 +4,11 @@ from django.contrib import admin
 ##############################################################################################
 
 # import Question & Choice classes from models.py
-from .models import Mythology
+from .models import Mythology, Science_and_Nature
 
 # Register your models here.
-# Register the Question class, so that it will be available when we login
-# to the admin page of our site.
-# Register the Choice class
+# Register the Mythology class, so that it will be available on the admin site
+# Register the Science_and_Nature class
 admin.site.register(Mythology)
+admin.site.register(Science_and_Nature)
+
