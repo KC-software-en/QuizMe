@@ -36,6 +36,22 @@ def user_logout(request):
     return render(request, 'logout.html')
 
 
+@login_required(login_url='user_auth:login')
+def show_user(request):
+    """
+    Displays user information.
+
+    request: (HttpRequest): The HTTP request object.
+
+    Returns: HttpResponse: Rendered template with user data (username and password).
+    """
+    print(request.user.username)
+    return render(request, 'user.html', {
+        "username": request.user.username,
+        "password": request.user.password
+})
+
+
 # This veiw is used to register a new user.
 def user_register(request):
     """
@@ -90,20 +106,5 @@ def authenticate_user(request):
         return HttpResponseRedirect(reverse("user_auth:login"))
     else:
         login(request, user)
-    return HttpResponseRedirect(reverse("user_auth:show_user"))
-
-@login_required(login_url='user_auth:login')
-def show_user(request):
-    """
-    Displays user information.
-
-    request: (HttpRequest): The HTTP request object.
-
-    Returns: HttpResponse: Rendered template with user data (username and password).
-    """
-    print(request.user.username)
-    return render(request, 'user.html', {
-        "username": request.user.username,
-        "password": request.user.password
-})
+        return HttpResponseRedirect(reverse("user_auth:show_user"))
 
