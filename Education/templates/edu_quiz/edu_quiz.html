@@ -59,8 +59,8 @@
             
             <!--check if there are category names -->            
             <!-- list the categories-->
-            {% if category_name %}  
-                
+            {% if category_names %}  
+                {% for category_name in category_names %}
                     <!--check if there are 10 questions for the category -->
                     {% if question_selection %}
                         <ul>                              
@@ -78,7 +78,7 @@
                             </li>                                
                         </ul> 
                     {% endif %}                
-                
+                {% endfor %}
             <!--display an error message if a quiz was not found for a category -->
             {% else %}
                 <p>No quizzes are available.</p>

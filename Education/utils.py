@@ -1,7 +1,7 @@
 # import requests to use the API for edu quiz
 import requests
 
-# import html to handle potential HTML entities and aid rendering
+# import html to handle potential HTML entities and aid rendering for create_subcategory_object
 import html
 
 # import random to shuffle questions & choices rendered in the form
@@ -11,14 +11,13 @@ import random
 import json
 
 # import models
-from .models import Mythology, History
+from .models import Mythology, History, Science_and_Nature 
 
 # import apps to dynamically fetch a model in category_objects() for the detail() view
 from django.apps import apps      
 
 # import Http404 to raise an error message if a model is not located in category_objects()
 from django.http import Http404
-  
 
 #######################################################################################
 #######################################################################################
@@ -99,9 +98,10 @@ Create a function that will create an object for the sub-categories of the Educa
 # in django shell import the util functions needed for the creation of the obj then call the obj
 # place the category id from the quiz_categories.json file as the argument for the function (e.g. 20)
 # In project directory cmd: `python manage.py shell`, 
-# `from Education.utils import get_specific_json_category, mix_choices, create_mythology_object`
+# `from Education.utils import get_specific_json_category, mix_choices, create_subcategory_object`
 # `create_mythology_object(20)`, then `exit()`
 # this will populate the sub-category (e.g. mythology) table on the admin site with the quiz data
+'''
 def create_subcategory_object(category):   
     # call the get_specific_json_category function to get the data for the mythology category
     json_response = get_specific_json_category(quantity=50, category=category)
@@ -157,10 +157,11 @@ def create_subcategory_object(category):
                     
                 # create a question object with the above data
                 # this will show on the admin site with the models created for questions & choices
-                question_object = Mythology.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
+                question_object = Science_and_Nature.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
     
                 # save the object to the database
                 question_object.save()
+'''
 
 # create an object for the mythology quiz data
 # in django shell import the util functions needed for the creation of the obj then call the obj
@@ -230,7 +231,7 @@ def create_History_object():
                 question_object.save()
 
 '''
-Create a function that find the question id for the next question in the quiz.
+Create a function that finds the question id for the next question in the quiz.
 '''
 # define a function that returns the django pk for the next question in the quiz
 def get_next_question_id(category_name, question_id, question_selection_pks):
@@ -263,46 +264,59 @@ def get_category_names(response):
     # Get the trivia categories values from the dictionary provided in the JSON response
     # Place an empty list as the default argument if the key is not found - this avoids errors in subsequent code
     trivia_categories = response.get("trivia_categories", [])
-    
-    # Specify the IDs of the categories to include in the Education app's quizzes
-    selected_category_ids = [23]
-    
-    # Collect the categories based on the selected_category_ids
-    selected_categories = [category for category in trivia_categories if category.get("id") in selected_category_ids]
-    
-    # Initialize variables for the chosen category from the JSON response
+
+    # specify the id of the categories to include in the Education app's quizzes
+    selected_category_id = [20, 17]
+
+    # collect the categories based on selected_category_id
+    selected_categories = [category for category in trivia_categories if category.get("id") in selected_category_id]    
+    print(f"selected_categories:{selected_categories}")
+
+    # initialise a variable for the chosen category from the json response
     selected_category = None
-    category_name = None
-    
-    # Iterate over trivia categories to find the category ID specified
+
+    # create an empty list for the category names
+    category_names =[]
+
+    # iterate over trivia categories to find the category id specified 
     for category in selected_categories:
-        print(category)
-        # Check if the ID in selected_category_ids is in the trivia_categories
-        if category.get("id") in selected_category_ids:
-            # Assign the current category to the selected_category variable
-            selected_category = category
+        # check if the id in selected_category_id is in the trivia_categories
+        if category.get("id") in selected_category_id:
+            # assign the current category to the selected_category variable
+            selected_category = category      
+            print(f"selected_category:{selected_category}")      
             
-            # Get the name of the category if the ID exists for the selected category
+            # get the name of the category if the id exists for the selected category
+            # append each category name to a list
             if selected_category:
                 category_name = selected_category.get("name")
-                return category_name            
-            # Exit the loop when the desired category is found  
-            break  
+                category_names.append(category_name) 
+
+    # return the list of category_names
+    return category_names
 
 '''
 A function that retrieves the category queryset from the database based on its category name.
 '''  
 # define a function that returns the queryset for 10 random objects from the database for each category 
+# https://stackoverflow.com/questions/27270958/patch-multiple-methods-from-different-modules-using-python-mock#:~:text=The%20short%20answer%20is%20no%20you%20cannot%20use,one%20of%20the%20time%20by%20single%20patch%20calls.
 def category_objects(request, category_name):    
     # use the category_name selected on edu_quiz.html to determine the model to get questions from
-    # replace spaces in the event category names have spaces to create a valid model name
-    model_name = category_name.replace(" ", "_")
+    # replace spaces and '&' in the event category names have spaces to create a valid model name
+    model_name = category_name.replace(" ", "_").replace("&", "and")    
 
     # use a try-except block to find a model that matches the category name
-    # use apps module to dynamically retrieve a model
+    # use globals()[model_name], it directly accesses the global namespace and doesn't rely on the apps registry. 
+    # this approach was more flexible than apps.get_model module since the model name was modified when replacing '&' 
+    # - this is not directly compatible with how models are stored in the apps registry
+    # the apps module worked to dynamically retrieve a model when only ' ' was being replaced
     # - dynamically:instead of explicitly specifying a fixed model in the code, generate or determine the model to use at runtime based on certain conditions/data
-    try:
-        model = apps.get_model('Education', model_name)
+    # use the globals() function to access the global symbol table in Python & retrieve the model with the model name as a key
+    # - Note: it relies on the fact that the model class is in the global namespace
+    try:        
+        model = globals()[model_name]
+        
+    # raise an error if the model is not found
     except LookupError:
         raise Http404("Cannot locate the model for the selected category.")
 
