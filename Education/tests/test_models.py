@@ -18,7 +18,7 @@ from django.test import TransactionTestCase
 from mixer.backend.django import mixer
 
 # import classes from models.py 
-from ..models import Mythology
+from ..models import Mythology, Science_and_Nature
 
 
 #####################################################################################
@@ -76,11 +76,10 @@ class TestMythologyModel(TransactionTestCase):
         self.assertEqual(actual_choices, expected_choices, 
                              msg='Should check the choices attribute of the instantiated object')
         self.assertEqual(quiz_ins.correct_answer, expected_correct_answer, 
-                         msg='Should check the correct answer attribute of the instantiated object')
-        
+                         msg='Should check the correct answer attribute of the instantiated object')        
 
     '''
-    A function to test if the str method returns the question_text.
+    A function to test if the str method returns the question_text for Mythology.
     '''
     def test_return_str_quiz(self):
         # Create an instance of the Mythology model with a specific question
@@ -103,5 +102,30 @@ class TestMythologyModel(TransactionTestCase):
         # assert that the instance was successful
         self.assertIsInstance(quiz_instance, Mythology, msg='Should confirm that the object instantiated is from the Mythology class')
     
+'''
+Create a class to test the Science_and_Nature model.
+'''        
+# create a class to test the Science_and_Nature model
+class TestScienceAndNatureModel(TransactionTestCase):
+    '''
+    Setup data for question model
+    '''
+    # setup the required data for tests
+    # https://docs.djangoproject.com/en/5.0/topics/testing/overview/#writing-tests
+    def setUp(self):
+        # no necessary conditions
+        pass    
     
+    '''
+    A function to test if the str method returns the question_text for Science_and_Nature.
+    '''
+    def test_return_str_quiz(self):
+        # Create an instance of the Mythology model with a specific question
+        quiz_ins = Science_and_Nature(question = 'Question example')
+
+        # call __str__ method
+        str_outcome = str(quiz_ins)
+
+        # assert that the result matches the question_ins 
+        self.assertEqual(str_outcome, quiz_ins.question, msg='Question example')
     
