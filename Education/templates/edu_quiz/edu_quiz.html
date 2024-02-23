@@ -25,12 +25,6 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'Education:index' %}" aria-disabled="true">Home </a>
                     </li>  
-                    
-                    <li class="nav-item">
-                        <!-- link to Education quiz home page 
-                        include category_id in tag to avoid a NoReverseMatch error in template rendering-->
-                        <a class="nav-link active" href="{% url 'Education:index_edu' %}">Education</a>
-                    </li>
                 </ul>
                 <div class="item" style="color: #27a5ff;">
                 {% if user.is_authenticated %}
