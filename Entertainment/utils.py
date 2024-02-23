@@ -36,7 +36,7 @@ def get_json_categories():
     
         # write Categories to a json file
         # use an indent to ensure each category prints on separate lines
-        with open("en_categories.json", "w") as f:
+        with open("quiz_categories.json", "w") as f:
             json.dump(json_response, f, indent=4)
 
         return json_response
