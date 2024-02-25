@@ -88,7 +88,7 @@
                                                 alt = "Mythology" 
                                                 class = "float-left"
                                                 width = "200"
-                                                height = "200"
+                                                height = "300"
                                                 style = "border-radius: 5%">
 
                                                 {{ category_name }}
@@ -102,7 +102,7 @@
                                                 alt = "Science & Nature" 
                                                 class = "float-left"
                                                 width = "200"
-                                                height = "200"
+                                                height = "300"
                                                 style = "border-radius: 5%">
 
                                                 {{ category_name }}
@@ -111,11 +111,30 @@
                                         {% endif %} 
                                     </li>  
                                 </div>
-
-                                <!--a description for the category -->                    
+                                
                                 <div class = "col-md-6">
-                                    <p>category description</p>
+                                    <!--a description for the Mythology category -->                    
+                                    {% if category_name == "Mythology" %}
+                                        <p>Embark on a captivating journey into the realms of ancient myths and legends with our Literature Studies Quiz on Mythology. 
+                                            Delve into the rich tapestry of stories that have transcended time and culture, shaping the way we perceive the world and understand the human experience.
+                                            <br><br>
+                                            This quiz is designed for literature enthusiasts, students, and anyone with a passion for exploring the profound narratives that have woven themselves into the fabric of literary history. 
+                                            From Greek and Roman epics to Norse sagas, immerse yourself in the fascinating world of gods, heroes, and mythical creatures.
+                                        </p>
+
+                                    <!--a description for the Science & Nature category -->                    
+                                    {% elif category_name == "Science & Nature" %}
+                                        <p>Embark on a fascinating journey through the wonders of Science and Nature with our comprehensive quiz that spans the realms of physics, biology, chemistry, and the mysteries of the natural world. 
+                                            Test your knowledge on a wide range of topics, from the elements on the Periodic Table to the secrets hidden within the human body.
+                                            <br><br>
+                                            This quiz is designed to challenge your understanding of the world around you. 
+                                            From the mysteries of space to the intricate details of cellular biology, each question will unlock a new realm of knowledge. 
+                                            Whether you're a science enthusiast or just curious about the natural world, our Science and Nature Quiz promises an engaging and educational experience.
+                                        </p>
+                                    
+                                    {% endif %} 
                                 </div>
+
                             </div>                                                         
                         </ul> 
                     {% endif %}                
