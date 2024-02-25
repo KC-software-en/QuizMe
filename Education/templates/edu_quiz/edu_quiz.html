@@ -53,9 +53,14 @@
             </div>
         </div>
     </nav>
-	    <section>       
-            <!-- show a heading for the categories in education-->
-            <h1>Education Quiz Categories</h1> 
+	    <section>     
+            <div class = "row">
+                <div class = "col-md-12">
+                    <!-- show a heading for the categories in education-->
+                    <h1>Education Quiz Categories</h1> 
+                </div>
+            </div>
+            
             
             <!--check if there are category names -->            
             <!-- list the categories-->
@@ -63,19 +68,55 @@
                 {% for category_name in category_names %}
                     <!--check if there are 10 questions for the category -->
                     {% if question_selection %}
-                        <ul>                              
-                            <li>  
-                                <!-- call the url for the detail view of the first object in the question_selection queryset -->                    
-                                <!--alter the url to include the app_name=Education 
-                                because namespaces are used to differentiate views between apps & create a url with the template tag-->
-                                <!-- pass parameters as keyword arguments from detail view without spaces or commas 
-                                generate links with the appropriate category_name. 
-                                the category_name is extracted from the selected_category object in utils.get_category_names-->
-                                <!-- display the name of the category as the button that takes you to the quiz -->
-                                <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=first_question_id %}"> 
-                                    {{ category_name }}
-                                </a>                    
-                            </li>                                
+                        <ul>   
+                            <div class = "row">
+                                <!--an image button for the category -->                    
+                                <div class = "col-md-6">
+                                    <li>  
+                                        <!--Mythology category-->
+                                        {% if category_name == "Mythology" %}
+                                            <!-- call the url for the detail view of the first object in the question_selection queryset -->                    
+                                            <!--alter the url to include the app_name=Education 
+                                            because namespaces are used to differentiate views between apps & create a url with the template tag-->
+                                            <!-- pass parameters as keyword arguments from detail view without spaces or commas 
+                                            generate links with the appropriate category_name. 
+                                            the category_name is extracted from the selected_category object in utils.get_category_names-->
+                                            <!-- display the name of the category as the button that takes you to the quiz -->
+                                            <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
+                                                
+                                                <img src ="{% static 'assets/mythology.png' %}" 
+                                                alt = "Mythology" 
+                                                class = "float-left"
+                                                width = "200"
+                                                height = "200"
+                                                style = "border-radius: 5%">
+
+                                                {{ category_name }}
+                                            </a>    
+
+                                        <!--Science & Nature category-->
+                                        {% elif category_name == "Science & Nature" %}
+                                            <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
+                                                
+                                                <img src ="{% static 'assets/science_and_nature.png' %}" 
+                                                alt = "Science & Nature" 
+                                                class = "float-left"
+                                                width = "200"
+                                                height = "200"
+                                                style = "border-radius: 5%">
+
+                                                {{ category_name }}
+                                            </a>  
+                                                                                            
+                                        {% endif %} 
+                                    </li>  
+                                </div>
+
+                                <!--a description for the category -->                    
+                                <div class = "col-md-6">
+                                    <p>category description</p>
+                                </div>
+                            </div>                                                         
                         </ul> 
                     {% endif %}                
                 {% endfor %}
