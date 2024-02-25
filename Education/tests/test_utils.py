@@ -16,7 +16,7 @@ import random
 # import RequestFactory to generate a HttpRequest objects & simulate HTTP requests (faster than using Client)
 # https://docs.djangoproject.com/en/5.0/topics/testing/advanced/#the-request-factory
 # import base class for all Django test cases (for writing tests, including test assertions, database setup and teardown, and other testing infrastructure)
-from django.test import RequestFactory, TestCase
+from django.test import RequestFactory
 
 # Import reverse is a utility function in Django that is used to generate URLs for views from their names and arguments
 from django.urls import reverse
@@ -27,6 +27,7 @@ import json
 # import Http404 to raise an error message if a model is not located in category_objects()
 from django.http import Http404
 
+#
 from unittest import TestCase
 
 # AttributeError: 'HttpRequest' object has no attribute 'session'
