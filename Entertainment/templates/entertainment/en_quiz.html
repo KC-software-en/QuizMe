@@ -10,13 +10,12 @@
 	<link href="{% static 'CSS/StyleSheet_edu.css' %}" rel = "stylesheet" type = "text/css"> 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}Education Quiz{% endblock %}</title>	
+    <title>{% block title %}Entertainment Quiz{% endblock %}</title>	
 </head>    
 
 <body>
 	{% block content %}
     <!-- Nav bar template for all pages-->
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -47,8 +46,8 @@
         </div>
     </nav>
 	    <section style="padding-left: 10pt;">       
-            <!-- show a heading for the categories in education-->
-            <h1>Education Quiz Categories</h1> 
+            <!-- show a heading for the categories in Entertainment-->
+            <h1>Entertainment Quiz Categories</h1> 
             
             <!--check if there are category names -->            
             <!-- list the categories-->
@@ -59,13 +58,13 @@
                         <ul>                              
                             <li>  
                                 <!-- call the url for the detail view of the first object in the question_selection queryset -->                    
-                                <!--alter the url to include the app_name=Education 
+                                <!--alter the url to include the app_name=Entertainment 
                                 because namespaces are used to differentiate views between apps & create a url with the template tag-->
                                 <!-- pass parameters as keyword arguments from detail view without spaces or commas 
                                 generate links with the appropriate category_name. 
                                 the category_name is extracted from the selected_category object in utils.get_category_names-->
                                 <!-- display the name of the category as the button that takes you to the quiz -->
-                                <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=first_question_id %}"> 
+                                <a href = "{% url 'Entertainment:en_detail' category_name=category_name question_id=first_question_id %}"> 
                                     {{ category_name }}
                                 </a>                    
                             </li>                                
