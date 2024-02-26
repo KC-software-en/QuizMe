@@ -59,8 +59,7 @@
                     <!-- show a heading for the categories in education-->
                     <h1>Education Quiz Categories</h1> 
                 </div>
-            </div>
-            
+            </div>            
             
             <!--check if there are category names -->            
             <!-- list the categories-->
@@ -68,75 +67,81 @@
                 {% for category_name in category_names %}
                     <!--check if there are 10 questions for the category -->
                     {% if question_selection %}
-                        <ul>   
-                            <div class = "row">
-                                <!--an image button for the category -->                    
-                                <div class = "col-md-6">
-                                    <li>  
-                                        <!--Mythology category-->
-                                        {% if category_name == "Mythology" %}
-                                            <!-- call the url for the detail view of the first object in the question_selection queryset -->                    
-                                            <!--alter the url to include the app_name=Education 
-                                            because namespaces are used to differentiate views between apps & create a url with the template tag-->
-                                            <!-- pass parameters as keyword arguments from detail view without spaces or commas 
-                                            generate links with the appropriate category_name. 
-                                            the category_name is extracted from the selected_category object in utils.get_category_names-->
-                                            <!-- display the name of the category as the button that takes you to the quiz -->
-                                            <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
-                                                
-                                                <img src ="{% static 'assets/mythology.png' %}" 
-                                                alt = "Mythology" 
-                                                class = "float-left"
-                                                width = "200"
-                                                height = "300"
-                                                style = "border-radius: 5%">
-
-                                                {{ category_name }}
-                                            </a>    
-
-                                        <!--Science & Nature category-->
-                                        {% elif category_name == "Science & Nature" %}
-                                            <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
-                                                
-                                                <img src ="{% static 'assets/science_and_nature.png' %}" 
-                                                alt = "Science & Nature" 
-                                                class = "float-left"
-                                                width = "200"
-                                                height = "300"
-                                                style = "border-radius: 5%">
-
-                                                {{ category_name }}
-                                            </a>  
-                                                                                            
-                                        {% endif %} 
-                                    </li>  
-                                </div>
-                                
-                                <div class = "col-md-6">
-                                    <!--a description for the Mythology category -->                    
-                                    {% if category_name == "Mythology" %}
-                                        <p>Embark on a captivating journey into the realms of ancient myths and legends with our Literature Studies Quiz on Mythology. 
-                                            Delve into the rich tapestry of stories that have transcended time and culture, shaping the way we perceive the world and understand the human experience.
-                                            <br><br>
-                                            This quiz is designed for literature enthusiasts, students, and anyone with a passion for exploring the profound narratives that have woven themselves into the fabric of literary history. 
-                                            From Greek and Roman epics to Norse sagas, immerse yourself in the fascinating world of gods, heroes, and mythical creatures.
-                                        </p>
-
-                                    <!--a description for the Science & Nature category -->                    
-                                    {% elif category_name == "Science & Nature" %}
-                                        <p>Embark on a fascinating journey through the wonders of Science and Nature with our comprehensive quiz that spans the realms of physics, biology, chemistry, and the mysteries of the natural world. 
-                                            Test your knowledge on a wide range of topics, from the elements on the Periodic Table to the secrets hidden within the human body.
-                                            <br><br>
-                                            This quiz is designed to challenge your understanding of the world around you. 
-                                            From the mysteries of space to the intricate details of cellular biology, each question will unlock a new realm of knowledge. 
-                                            Whether you're a science enthusiast or just curious about the natural world, our Science and Nature Quiz promises an engaging and educational experience.
-                                        </p>
+                        
+                        <div class = "row">
+                            <!--an image button for the category -->                    
+                            <div class = "col-md-6">
+                                <!--let the image adapt to viewport width- fluid layout expands to fill the available space -->                    
+                                <div class="container-fluid">
                                     
-                                    {% endif %} 
-                                </div>
+                                    <!--Mythology category-->
+                                    {% if category_name == "Mythology" %}
+                                        <!-- call the url for the detail view of the first object in the question_selection queryset -->                    
+                                        <!--alter the url to include the app_name=Education 
+                                        because namespaces are used to differentiate views between apps & create a url with the template tag-->
+                                        <!-- pass parameters as keyword arguments from detail view without spaces or commas 
+                                        generate links with the appropriate category_name. 
+                                        the category_name is extracted from the selected_category object in utils.get_category_names-->
+                                        <!-- display the name of the category as the button that takes you to the quiz -->
+                                        <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
 
-                            </div>                                                         
-                        </ul> 
+                                            <img src ="{% static 'assets/mythology.png' %}" 
+                                                alt = "Mythology" 
+                                                class = "subcategory_image">
+                                                
+                                            <div class="subcategory_overlay">
+                                                <div class="subcategory_text">
+                                                    {{ category_name }}
+                                                </div>
+                                            </div>
+
+                                        </a>    
+
+                                    <!--Science & Nature category-->
+                                    {% elif category_name == "Science & Nature" %}
+                                        <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
+
+                                            <img src ="{% static 'assets/science_and_nature.png' %}" 
+                                            alt = "Science & Nature" 
+                                            class = "subcategory_image">
+
+                                            <div class="subcategory_overlay">
+                                                <div class="subcategory_text">
+                                                    {{ category_name }}
+                                                </div>
+                                            </div>
+                                            
+                                        </a>  
+
+                                    {% endif %} 
+                                    
+                                </div>
+                            </div>
+                            
+                            <div class = "col-md-6">
+                                <!--a description for the Mythology category -->                    
+                                {% if category_name == "Mythology" %}
+                                    <p>Embark on a captivating journey into the realms of ancient myths and legends with our Literature Studies Quiz on Mythology. 
+                                        Delve into the rich tapestry of stories that have transcended time and culture, shaping the way we perceive the world and understand the human experience.
+                                        <br><br>
+                                        This quiz is designed for literature enthusiasts, students, and anyone with a passion for exploring the profound narratives that have woven themselves into the fabric of literary history. 
+                                        From Greek and Roman epics to Norse sagas, immerse yourself in the fascinating world of gods, heroes, and mythical creatures.
+                                    </p>
+
+                                <!--a description for the Science & Nature category -->                    
+                                {% elif category_name == "Science & Nature" %}
+                                    <p>Embark on a fascinating journey through the wonders of Science and Nature with our comprehensive quiz that spans the realms of physics, biology, chemistry, and the mysteries of the natural world. 
+                                        Test your knowledge on a wide range of topics, from the elements on the Periodic Table to the secrets hidden within the human body.
+                                        <br><br>
+                                        This quiz is designed to challenge your understanding of the world around you. 
+                                        From the mysteries of space to the intricate details of cellular biology, each question will unlock a new realm of knowledge. 
+                                        Whether you're a science enthusiast or just curious about the natural world, our Science and Nature Quiz promises an engaging and educational experience.
+                                    </p>
+                                
+                                {% endif %} 
+                            </div>
+                        </div>                                                         
+                        
                     {% endif %}                
                 {% endfor %}
             <!--display an error message if a quiz was not found for a category -->
