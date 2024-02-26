@@ -204,21 +204,26 @@
         <body style="background: #d8fdff;">            
         {% block content %}
         <!-- Nav bar template for all pages-->
-
-            <h1 style="text-align: center;">QuizMe</h1>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{% url 'Education:index' %}" aria-disabled="true">Home </a>
-                            </li>                            
-                          
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" aria-disabled="true">QuizMe </a>
+                        </li>
                             <li class="nav-item">
                                 <!-- link to Education quiz home page 
                                 include category_id in tag to avoid a NoReverseMatch error in template rendering-->
                                 <a class="nav-link active" href="{% url 'Education:index_edu' %}">Education</a>
+                                
                             </li>
+                            
+                            <li class="nav-item">
+                              <!-- link to Education quiz home page 
+                              include category_id in tag to avoid a NoReverseMatch error in template rendering-->
+                              <a class="nav-link active" href="{% url 'Entertainment:index_en' %}">Entertainment</a>
+
+                          </li>
 
                         </ul>
                         <div class="item" style="color: #27a5ff;">
@@ -284,7 +289,7 @@
                 <div class="slider">
                     <ul class="slider__list">
                         <li class="slider__slide"><a href="{% url 'Education:index_edu' %}"><img src="{% static 'assets/Education.jpg' %}" alt="Slide image number 1 " width="650" height="420"/></a></li>
-                        <li class="slider__slide"><a href=""><img src="{% static 'assets/Entertainment.jpg' %}" alt="Slide image number 2" width="650" height="420"/></li>
+                        <li class="slider__slide"><a href="{% url 'Entertainment:index_en' %}"><img src="{% static 'assets/Entertainment.jpg' %}" alt="Slide image number 2" width="650" height="420"/></li>
                         <li class="slider__slide"><a href=""><img src="{% static 'assets/General.jpg' %}" alt="Slide image number 3" width="650" height="420"/></a></li>
                     </ul>
                   </div>

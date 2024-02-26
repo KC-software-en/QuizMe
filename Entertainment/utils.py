@@ -11,7 +11,7 @@ import random
 import json
 
 # import models
-from .models import Mythology, History, Science_and_Nature 
+from Entertainment.models import *
 
 # import apps to dynamically fetch a model in category_objects() for the detail() view
 from django.apps import apps      
@@ -48,18 +48,14 @@ def get_json_categories():
         print(error_message)
         return None
     
-'''
-Create a function that returns the json response for a specific category on Open Trivia DB.
-'''
+
 # define a function that returns the json response for Open Trivia DB when requesting a specific category
-# create a varible to store the API url for the myth quizzes
-# use an f-str to pass in the parameter for quantity
-# -> place {} around 5 in the url then replace '5' with 'quantity'
-# then place {} around the category id (from quiz_cat.json)for myth & replace '20' with 'category'
-# return a list
 def get_specific_json_category(quantity: int, category: int):
-    mythology_url = f"https://opentdb.com/api.php?amount={quantity}&category={category}"
-    response = requests.get(mythology_url)
+    '''
+        Create a function that returns the json response for a specific category on Open Trivia DB.
+    '''
+    api_url = f"https://opentdb.com/api.php?amount={quantity}&category={category}"
+    response = requests.get(api_url)
     
     # a successful request will give a 200 status code
     # get a json response or else there will only be a status code        
@@ -81,28 +77,25 @@ def get_specific_json_category(quantity: int, category: int):
         print(error_message)
         return None 
 
-'''
-Create a function that will mix the choices for each question in a quiz.
-'''    
+
 # rearrange the options of answers
 # use the random module & its shuffle function to rearrange
 # return a list of choices
 def mix_choices(choices: list):
+    '''
+        Create a function that will mix the choices for each question in a quiz.
+    '''    
     random.shuffle(choices)
     return choices
-
-'''
-Create a function that will create an object for the sub-categories of the Education quiz.
-The function & its test is called in Django shell so its placed in a docstring.
 
 # create an object for the sub-category (e.g.mythology) quiz data
 # in django shell import the util functions needed for the creation of the obj then call the obj
 # place the category id from the quiz_categories.json file as the argument for the function (e.g. 20)
 # In project directory cmd: `python manage.py shell`, 
-# `from Education.utils import get_specific_json_category, mix_choices, create_subcategory_object`
-# `create_subcategory_object(20)`, then `exit()`
+# `from Entertainment.utils import get_specific_json_category, mix_choices, create_subcategory_object`
+# `create_mythology_object(20)`, then `exit()`
 # this will populate the sub-category (e.g. mythology) table on the admin site with the quiz data
-
+'''
 def create_subcategory_object(category):   
     # call the get_specific_json_category function to get the data for the mythology category
     json_response = get_specific_json_category(quantity=50, category=category)
@@ -158,7 +151,7 @@ def create_subcategory_object(category):
                     
                 # create a question object with the above data
                 # this will show on the admin site with the models created for questions & choices
-                question_object = Mythology.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
+                question_object = Science_and_Nature.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
     
                 # save the object to the database
                 question_object.save()
@@ -167,13 +160,16 @@ def create_subcategory_object(category):
 # create an object for the mythology quiz data
 # in django shell import the util functions needed for the creation of the obj then call the obj
 # In project directory cmd: `python manage.py shell`, 
-# `from Education.utils import get_specific_json_category, mix_choices, create_mythology_object`
-# `from Education.utils import get_specific_json_category, mix_choices, create_History_object`
-# `create_History_object()`, then `exit()`
+# `from Entertainment.utils import get_specific_json_category, mix_choices, create_Video_games_object`
+# `from Entertainment.utils import get_specific_json_category, mix_choices, create_History_object`
+# `create_Video_games_object()`, then `exit()`
 # this will populate the mythology table on the admin site with the quiz data
-def create_History_object():   
+def create_Video_games_object():   
+    '''
+        Create a function that will create an object for the sub-categories of the Entertainment quiz.
+    '''
     # call the get_specific_json_category function to get the data for the mythology category
-    json_response = get_specific_json_category(quantity=50, category=23)
+    json_response = get_specific_json_category(quantity=50, category=15)
     
     # check if there are questions
     if json_response:        
@@ -226,16 +222,17 @@ def create_History_object():
                     
                 # create a question object with the above data
                 # this will show on the admin site with the models created for questions & choices
-                question_object = History.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
+                question_object = Video_games.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
     
                 # save the object to the database
                 question_object.save()
 
-'''
-Create a function that finds the question id for the next question in the quiz.
-'''
+
 # define a function that returns the django pk for the next question in the quiz
 def get_next_question_id(category_name, question_id, question_selection_pks):
+    '''
+        Create a function that finds the question id for the next question in the quiz.
+    '''
     # iterate over the list of question ids in question_selection_ids from utils.category_objects()
     # - to check if the id generated by django matches the question_id parameter in the url  
     # - & display the specific question that matches the question_id in the URL
@@ -257,17 +254,18 @@ def get_next_question_id(category_name, question_id, question_selection_pks):
            else:
                return None
 
-'''
-A function that retrieves the desired category names from the Open Trivia DB json response.
-'''
+
 # define a function that will retrieve category names based on the category id for it in the json response
 def get_category_names(response):
+    '''
+        Create a function that finds the question id for the next question in the quiz.
+    '''
     # Get the trivia categories values from the dictionary provided in the JSON response
     # Place an empty list as the default argument if the key is not found - this avoids errors in subsequent code
     trivia_categories = response.get("trivia_categories", [])
 
-    # specify the id of the categories to include in the Education app's quizzes
-    selected_category_id = [20, 17, 23]
+    # specify the id of the categories to include in the Entertainment app's quizzes
+    selected_category_id = [12, 11, 15]
 
     # collect the categories based on selected_category_id
     selected_categories = [category for category in trivia_categories if category.get("id") in selected_category_id]    
@@ -284,8 +282,13 @@ def get_category_names(response):
         # check if the id in selected_category_id is in the trivia_categories
         if category.get("id") in selected_category_id:
             # assign the current category to the selected_category variable
-            selected_category = category      
-            print(f"selected_category:{selected_category}")      
+            selected_category = category
+            # use this to get music only and remove entertainment.
+            new_value = category['name'].split(':')[1].strip()
+            # Update the dictionary with the new value
+            category['name'] = new_value
+                        
+            print(f"selected_category:{selected_category}")       
             
             # get the name of the category if the id exists for the selected category
             # append each category name to a list
@@ -296,18 +299,20 @@ def get_category_names(response):
     # return the list of category_names
     return category_names
 
-'''
-A function that retrieves the category queryset from the database based on its category name.
-'''  
+
 # define a function that returns the queryset for 10 random objects from the database for each category 
 # https://stackoverflow.com/questions/27270958/patch-multiple-methods-from-different-modules-using-python-mock#:~:text=The%20short%20answer%20is%20no%20you%20cannot%20use,one%20of%20the%20time%20by%20single%20patch%20calls.
-def category_objects(request, category_name):    
+def category_objects(request, category_name):   
+    '''
+        A function that retrieves the category queryset from the database based on its category name.
+    '''   
     # use the category_name selected on edu_quiz.html to determine the model to get questions from
     # replace spaces and '&' in the event category names have spaces to create a valid model name
-    model_name = category_name.replace(" ", "_").replace("&", "and")    
+    model_name = category_name.replace(" ", "_").replace("&", "and") 
+    print('model name : ', model_name)   
 
     # use a try-except block to find a model that matches the category name
-    # use globals()[model_name], it directly accesses the global namespace and doesn't rely on the apps registry
+    # use globals()[model_name], it directly accesses the global namespace and doesn't rely on the apps registry. 
     # this approach was more flexible than apps.get_model module since the model name was modified when replacing '&' 
     # - this is not directly compatible with how models are stored in the apps registry
     # the apps module worked to dynamically retrieve a model when only ' ' was being replaced
@@ -316,6 +321,7 @@ def category_objects(request, category_name):
     # - Note: it relies on the fact that the model class is in the global namespace
     try:        
         model = globals()[model_name]
+        print('model name globals: ', model) 
         
     # raise an error if the model is not found
     except LookupError:
@@ -323,11 +329,11 @@ def category_objects(request, category_name):
 
     # get the 50 questions for the specific category
     # https://docs.djangoproject.com/en/3.2/topics/db/queries/#retrieving-all-objects    
-    all_questions = model.objects.all()    
+    all_questions = model.objects.all()
 
     # create a list containing the pk for each obj
     category_question_ids = [question.id for question in all_questions]
-    
+
     # get the ids for the selection of 10 questions
     # use random to select 10 questions
     # https://docs.python.org/3.7/library/random.html?highlight=random#random.sample
@@ -342,5 +348,5 @@ def category_objects(request, category_name):
     # https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut
     question_selection = model.objects.filter(pk__in=question_selection_ids)        
 
-    # return the selected 10 questions from the database
+    # return the selected 10 questions from thr database
     return question_selection

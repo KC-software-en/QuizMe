@@ -10,7 +10,7 @@
 	<link href="{% static 'CSS/StyleSheet_edu.css' %}" rel = "stylesheet" type = "text/css"> 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}Education Detail{% endblock %}</title>	
+    <title>{% block title %}Entertainment Detail{% endblock %}</title>	
 </head>    
 
 <body>
@@ -35,7 +35,7 @@
                   <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">                
-                        <a href="{% url 'Education:try_new_quiz' %}">Exit</a>
+                        <a href="{% url 'Entertainment:try_new_quiz' %}">Exit</a>
                 </div>
               </div>
          </div>
@@ -51,7 +51,7 @@
                                 <!--show a form for each question in the quiz -->
                                 <!--the post method was used to send data to the server-->
                                 <!--the url in the action attribute was used to send data to the server-->
-                                <form action="{% url 'Education:selection' category_name=category_name question_id=question.id %}" method="POST">
+                                <form action="{% url 'Entertainment:selection' category_name=category_name question_id=question.id %}" method="POST">
                                     <!--add the csrf_token to all post forms targeted at internal urls to protect against Cross Site Forgery-->
                                     {% csrf_token %}
                                                                             

@@ -10,7 +10,7 @@
 	<link href="{% static 'CSS/StyleSheet_edu.css' %}" rel = "stylesheet" type = "text/css"> 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}Education Result{% endblock %}</title>	
+    <title>{% block title %}Entertainment Result{% endblock %}</title>	
 </head>    
 
 <body>
@@ -51,7 +51,7 @@
             {% endif %}
 
             <!-- enter a view url here -->
-            <a style="font-size: 20pt;" href="{% url 'Education:try_new_quiz' %}">
+            <a style="font-size: 20pt;" href="{% url 'Entertainment:try_new_quiz' %}">
                 Try again?
             </a>
         </p>

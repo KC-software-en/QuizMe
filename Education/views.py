@@ -14,7 +14,7 @@ from django.urls import reverse
 # import functions from utils.py called in views
 from .utils import get_json_categories, get_next_question_id, get_category_names, category_objects
 
-# import models
+# import all models
 from .models import *
 
 # import apps to dynamically fetch a model in detail() view
@@ -111,6 +111,7 @@ def detail(request, category_name, question_id):
         # get the question object associated with a specific question_id in the database
         question = get_object_or_404(model, pk=question_id)    
         print(f"\n\nquestion:{question}")
+        print(f"correct_answer:{question.correct_answer}")
     
         # use the helper function literal_eval of the ast module to convert the str representation of the choices list
         # - in the textfield of the category model into a list
