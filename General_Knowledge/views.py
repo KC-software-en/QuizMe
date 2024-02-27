@@ -63,7 +63,7 @@ def index_gen(request):
         print(f"context:{context}") ##
         
         # render the context to the homepage of General_Knowledge
-        return render(request, 'edu_quiz/edu_quiz.html', context) 
+        return render(request, 'gen_quiz/gen_quiz.html', context) 
 
 # write a view for the quiz question, incl the argument question_id
 # question_id is the specific identifier passed in the URL when accessing this view
@@ -77,7 +77,7 @@ def detail(request, category_name, question_id):
 
     # check if the category_name is in the list of category_names then locate its model    
     if category_name in category_names:
-        # use the category_name selected on edu_quiz.html to determine the model to get questions from
+        # use the category_name selected on gen_quiz.html to determine the model to get questions from
         # replace spaces and '&' in the event category names have spaces to create a valid model name
         model_name = category_name.replace(" ", "_").replace("&", "and")
         print(f"Model Name: {model_name}") ##
@@ -113,7 +113,8 @@ def detail(request, category_name, question_id):
                    }
         print(f"context:{context}") ##
 
-        return render(request, 'edu_quiz/gen_detail.html', context)
+        # render the context to the detail template of General_Knowledge
+        return render(request, 'gen_quiz/gen_detail.html', context)
 
 '''
 Create a view that displays the quiz result.
@@ -128,7 +129,9 @@ def results(request, category_name):
     context = {'result':result,
                'category_name': category_name
                }   
-    return render(request, 'edu_quiz/edu_result.html', context)
+    
+    # render the context to the result template of General_Knowledge
+    return render(request, 'gen_quiz/gen_result.html', context)
 
 '''
 Write a selection view that handles the submission of form data, goes to the next question and redirects to the results view."
@@ -175,7 +178,7 @@ def selection(request, category_name, question_id):
         # an error occurs if the mapping (dictionary) key was not located in the set of existing keys
         except (KeyError, model.DoesNotExist):        
             # Redisplay the question voting form
-            return render(request, 'edu_quiz/gen_detail.html', {
+            return render(request, 'gen_quiz/gen_detail.html', {
                 'category_name': category_name,
                 'question': question,
                 'choices': convert_choices_textfield_into_list,
