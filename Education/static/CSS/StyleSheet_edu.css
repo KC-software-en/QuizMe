@@ -1,3 +1,8 @@
+/*style heading*/	
+h2{		
+	text-align: center;	
+	}
+    
 /* Set the positioning and width for the container that holds the subcategory image and text. */
 /* Position the subcategory_image container relative to its normal position.*/
 /* Set the container width to 50% of its containing element.*/
