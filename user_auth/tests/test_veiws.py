@@ -5,12 +5,16 @@
 # RequestFactory provides a way to generate a request instance that can be used as the first argument to any view.
 # Import TestCase.
 # TestCase is a set of actions executed to verify a particular functionality.
+import unittest
+from unittest.mock import MagicMock, patch
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
 from django.test import Client
 from django.contrib.messages import get_messages
+from user_auth.views import authenticate_user
 # import views.
 from .. import views
   
@@ -188,4 +192,29 @@ class test_authenticate_user_view(TestCase):
         self.assertEquals(response.status_code, 302, "Redirects the user if not logged in")
 
        
-    
+class TestAuthenticateUser(unittest.TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    @patch('user_auth.views.authenticate')
+    @patch('user_auth.views.login')
+    def test_successful_authentication(self, mock_login, mock_authenticate):
+        request = self.factory.post('/login/', {'username': 'testuser', 'password': 'password'})
+        mock_user = MagicMock()
+        mock_authenticate.return_value = mock_user
+        response = authenticate_user(request)
+        mock_authenticate.assert_called_once_with(username='testuser', password='password')
+        mock_login.assert_called_once_with(request, mock_user)
+        self.assertIsInstance(response, HttpResponseRedirect)
+        self.assertEqual(response.url, reverse("user_auth:show_user"))
+
+    @patch('user_auth.views.authenticate')
+    def test_failed_authentication(self, mock_authenticate):
+        request = self.factory.post('/login/', {'username': 'testuser', 'password': 'password'})
+        mock_authenticate.return_value = None
+        response = authenticate_user(request)
+        mock_authenticate.assert_called_once_with(username='testuser', password='password')
+        self.assertIsInstance(response, HttpResponseRedirect)
+        self.assertEqual(response.url, reverse("user_auth:login"))
+
+  
