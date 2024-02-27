@@ -1,8 +1,11 @@
-/*style heading*/	
-h2{		
-	text-align: center;	
-	}
-    
+/*style font for h1 text of education heading*/
+#edu_heading{	
+	color: teal;
+    text-shadow: 2px 2px 10px lavenderblush;
+	font-weight: bold;
+	text-align: center !important;	
+}
+
 /* Set the positioning and width for the container that holds the subcategory image and text. */
 /* Position the subcategory_image container relative to its normal position.*/
 /* Set the container width to 50% of its containing element.*/
@@ -38,6 +41,7 @@ width: 50%;
 /* use block display to ensure consistent behaviour & that any default styles or behaviours associated with block-level elements are applied.*/
 /* set a smooth transition effect over 0.5 seconds with ease timing function */
 /* Ensure that the back face of the image is not visible during transitions */
+/* set the box-shadow of the paragraph */
 .subcategory_image{
     width : 100%;
     height : auto;
@@ -46,12 +50,13 @@ width: 50%;
     display: block;
     transition: 0.5s ease;
     backface-visibility: hidden;
+    box-shadow: 0 0 40px teal;
 }
 
 /* Define the styles for the subcategory image when hovering over the container */
 /* let the opacity of the image decrease to 0.3 to make it partially transparent */
 .container-fluid:hover .subcategory_image{
-    opacity: 0.3;
+    opacity: 0.3;    
 }
 
 /* Define the styles for the subcategory overlay when hovering over the container */
@@ -70,4 +75,28 @@ width: 50%;
     color: lightcyan;
     font-size: 16px;
     padding: 16px 32px;
+}
+
+/* style the subcategory description */
+/* set the font of the paragraph */
+/* set the font size of the paragraph */
+/* set the text color of the paragraph */
+/* align the text to the center of the paragraph */
+/* add space outside the paragraph border with margin*/
+/* add space around the paragraph text within the border*/
+/* add a solid border around the paragraph */
+/* set the background color of the paragraph */
+/* set the box-shadow of the paragraph */
+/* set the border-radius of the paragraph to round the edges*/
+.edu_p{
+    font-family: Arial, sans-serif; 
+    font-size: 18px; 
+    color: teal; 
+    text-align: center; 
+    margin: 60px; 
+    padding: 25px; 
+    border: .5px solid teal; 
+    background-color: lavenderblush; 
+    box-shadow: 0 0 30px teal;
+    border-radius: 5%;
 }
