@@ -106,6 +106,29 @@
                                             
                                         </a>  
 
+                                    <!--History category-->
+                                    {% elif category_name == "History" %}
+                                        <!-- call the url for the detail view of the first object in the question_selection queryset -->                    
+                                        <!--alter the url to include the app_name=Education 
+                                        because namespaces are used to differentiate views between apps & create a url with the template tag-->
+                                        <!-- pass parameters as keyword arguments from detail view without spaces or commas 
+                                        generate links with the appropriate category_name. 
+                                        the category_name is extracted from the selected_category object in utils.get_category_names-->
+                                        <!-- display the name of the category as the button that takes you to the quiz -->
+                                        <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
+
+                                            <img src ="{% static 'assets/history.png' %}" 
+                                                alt = "History" 
+                                                class = "subcategory_image">
+                                                
+                                            <div class="subcategory_overlay">
+                                                <div class="subcategory_text">
+                                                    {{ category_name }}
+                                                </div>
+                                            </div>
+
+                                        </a> 
+
                                     {% endif %} 
                                     
                                 </div>
@@ -130,6 +153,16 @@
                                         From the mysteries of space to the intricate details of cellular biology, each question will unlock a new realm of knowledge. 
                                         Whether you're a science enthusiast or just curious about the natural world, our Science and Nature Quiz promises an engaging and educational experience.
                                     </p>
+
+                                <!--a description for the History category -->                    
+                                {% elif category_name == "History" %}
+                                    <p>Embark on a journey through the corridors of time with our History Quiz! 
+                                        Uncover the depths of historical events, the rise and fall of empires, and the stories of influential figures that have shaped our world. 
+                                        Challenge yourself with a diverse range of questions spanning different eras, civilizations, and pivotal moments in human history. 
+                                        Whether you're a history enthusiast or just curious about the past, this quiz will take you on a captivating exploration of the rich tapestry of our shared heritage. 
+                                        Get ready to test your knowledge and discover the fascinating narratives that have left an indelible mark on the pages of history. 
+                                        Are you up for the challenge? Let the journey begin!
+                                    </p>
                                 
                                 {% endif %} 
                             </div>
@@ -137,6 +170,7 @@
                         
                     {% endif %}                
                 {% endfor %}
+
             <!--display an error message if a quiz was not found for a category -->
             {% else %}
                 <p>No quizzes are available.</p>
