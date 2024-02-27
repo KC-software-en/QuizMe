@@ -93,15 +93,16 @@ def mix_choices(choices: list):
 
 '''
 Create a function that will create an object for the sub-categories of the Education quiz.
-'''
+The function & its test is called in Django shell so its placed in a docstring.
+
 # create an object for the sub-category (e.g.mythology) quiz data
 # in django shell import the util functions needed for the creation of the obj then call the obj
 # place the category id from the quiz_categories.json file as the argument for the function (e.g. 20)
 # In project directory cmd: `python manage.py shell`, 
 # `from Education.utils import get_specific_json_category, mix_choices, create_subcategory_object`
-# `create_mythology_object(20)`, then `exit()`
+# `create_subcategory_object(20)`, then `exit()`
 # this will populate the sub-category (e.g. mythology) table on the admin site with the quiz data
-'''
+
 def create_subcategory_object(category):   
     # call the get_specific_json_category function to get the data for the mythology category
     json_response = get_specific_json_category(quantity=50, category=category)
@@ -157,7 +158,7 @@ def create_subcategory_object(category):
                     
                 # create a question object with the above data
                 # this will show on the admin site with the models created for questions & choices
-                question_object = Science_and_Nature.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
+                question_object = Mythology.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
     
                 # save the object to the database
                 question_object.save()
@@ -306,7 +307,7 @@ def category_objects(request, category_name):
     model_name = category_name.replace(" ", "_").replace("&", "and")    
 
     # use a try-except block to find a model that matches the category name
-    # use globals()[model_name], it directly accesses the global namespace and doesn't rely on the apps registry. 
+    # use globals()[model_name], it directly accesses the global namespace and doesn't rely on the apps registry
     # this approach was more flexible than apps.get_model module since the model name was modified when replacing '&' 
     # - this is not directly compatible with how models are stored in the apps registry
     # the apps module worked to dynamically retrieve a model when only ' ' was being replaced
@@ -322,11 +323,11 @@ def category_objects(request, category_name):
 
     # get the 50 questions for the specific category
     # https://docs.djangoproject.com/en/3.2/topics/db/queries/#retrieving-all-objects    
-    all_questions = model.objects.all()
+    all_questions = model.objects.all()    
 
     # create a list containing the pk for each obj
     category_question_ids = [question.id for question in all_questions]
-
+    
     # get the ids for the selection of 10 questions
     # use random to select 10 questions
     # https://docs.python.org/3.7/library/random.html?highlight=random#random.sample
@@ -341,5 +342,5 @@ def category_objects(request, category_name):
     # https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut
     question_selection = model.objects.filter(pk__in=question_selection_ids)        
 
-    # return the selected 10 questions from thr database
+    # return the selected 10 questions from the database
     return question_selection
