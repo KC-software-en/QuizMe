@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'Education:index' %}" aria-disabled="true">Home </a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'Education:index' %}" aria-disabled="true">QuizMe </a>
                     </li>  
                 </ul>
                 <div class="item" style="color: #27a5ff;">
@@ -48,12 +48,33 @@
     </nav>
 	    <section style="padding-left: 10pt;">     
             <div class = "row">
-                <div class = "col-md-12">
-                    <!-- show a heading for the categories in education-->
-                    <h1>Education Quiz Categories</h1> 
+                <!--use the text-center class because text-align: center; in .category_heading did not work-->		
+                <!-- set padding above & below the heading -->		
+                <div class = "col-md-12 text-center py-4">
+                    <!-- show a heading for the categories in education-->                    
+                    <header>
+                        <h1 id="edu_heading"><span>Education Quiz Categories</span></h1>
+                    </header>                    
                 </div>
-            </div>            
+            </div>     
             
+            <!-- describe the Education category -->
+            <div class = "row">
+                <div class = "col-md-12 text-center">
+                    <p class="edu_p" style="font-size: 20px;"><i>
+                        Welcome to the captivating world of our Education Category! 
+                        Immerse yourself in a diverse array of quizzes designed to challenge and expand your knowledge across three intriguing subcategories: Science & Nature, Literature Studies and History.
+                        Each quiz comprises 10 unique questions carefully curated from a diverse selection of 50 questions, ensuring a dynamic and engaging experience every time.
+                        <br><br>
+                        Receive a personalized result at the end of each quiz, providing insights into your knowledge and encouraging further exploration. 
+                        Whether you're a history buff, a science enthusiast, or a mythology aficionado, our Education Category quizzes are designed to entertain, educate, and leave you craving more knowledge. 
+                        Start your educational adventure now!
+                    </i></p>
+                </div>            
+            </div>             
+        </section>
+
+        <section>
             <!--check if there are category names -->            
             <!-- list the categories-->
             {% if category_names %}  
@@ -61,10 +82,14 @@
                     <!--check if there are 10 questions for the category -->
                     {% if question_selection %}
                         
-                        <div class = "row">
-                            <!--an image button for the category -->                    
-                            <div class = "col-md-6">
-                                <!--let the image adapt to viewport width- fluid layout expands to fill the available space -->                    
+                        <!-- set padding above & below each subcategory -->		
+                        <div class = "row py-3">
+                            <!--an image button for the category -->  
+                            <!--Add the d-flex and justify-content-center classes to the column. 
+							This will make the column a flex container and center its contents horizontally--> 
+                            <!-- vertically center the content with align-items-center--> 
+                            <div class = "col-md-6 d-flex justify-content-center align-items-center">
+                                <!--let the image adapt to viewport width- fluid layout expands to fill the available space -->                                                    
                                 <div class="container-fluid">
                                     
                                     <!--Mythology category-->
@@ -137,7 +162,7 @@
                             <div class = "col-md-6">
                                 <!--a description for the Mythology category -->                    
                                 {% if category_name == "Mythology" %}
-                                    <p>Embark on a captivating journey into the realms of ancient myths and legends with our Literature Studies Quiz on Mythology. 
+                                    <p class="edu_p">Embark on a captivating journey into the realms of ancient myths and legends with our Literature Studies Quiz on Mythology. 
                                         Delve into the rich tapestry of stories that have transcended time and culture, shaping the way we perceive the world and understand the human experience.
                                         <br><br>
                                         This quiz is designed for literature enthusiasts, students, and anyone with a passion for exploring the profound narratives that have woven themselves into the fabric of literary history. 
@@ -146,7 +171,7 @@
 
                                 <!--a description for the Science & Nature category -->                    
                                 {% elif category_name == "Science & Nature" %}
-                                    <p>Embark on a fascinating journey through the wonders of Science and Nature with our comprehensive quiz that spans the realms of physics, biology, chemistry, and the mysteries of the natural world. 
+                                    <p class="edu_p">Embark on a fascinating journey through the wonders of Science and Nature with our comprehensive quiz that spans the realms of physics, biology, chemistry, and the mysteries of the natural world. 
                                         Test your knowledge on a wide range of topics, from the elements on the Periodic Table to the secrets hidden within the human body.
                                         <br><br>
                                         This quiz is designed to challenge your understanding of the world around you. 
@@ -156,7 +181,7 @@
 
                                 <!--a description for the History category -->                    
                                 {% elif category_name == "History" %}
-                                    <p>Embark on a journey through the corridors of time with our History Quiz! 
+                                    <p class="edu_p">Embark on a journey through the corridors of time with our History Quiz! 
                                         Uncover the depths of historical events, the rise and fall of empires, and the stories of influential figures that have shaped our world. 
                                         Challenge yourself with a diverse range of questions spanning different eras, civilizations, and pivotal moments in human history. 
                                         Whether you're a history enthusiast or just curious about the past, this quiz will take you on a captivating exploration of the rich tapestry of our shared heritage. 
