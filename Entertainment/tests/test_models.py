@@ -29,7 +29,7 @@ from ..models import Music, Film, Video_Games
 # run coverage after tests
 
        
-# create a class to test the Mythology model
+# create a class to test the Music model
 class TestMusicModel(TransactionTestCase):
     '''
         Create a class to test the Music model.
@@ -85,7 +85,7 @@ class TestMusicModel(TransactionTestCase):
         '''
             A function to test if the str method returns the question_text for Music.
         '''
-        # Create an instance of the Mythology model with a specific question
+        # Create an instance of the Music model with a specific question
         quiz_ins = Music(question = 'Question example')
 
         # call __str__ method
@@ -96,7 +96,7 @@ class TestMusicModel(TransactionTestCase):
     
     
     # create a test to check an instance of the Music model
-    def test_mythology_instance(self):
+    def test_Music_instance(self):
         '''
             Create a test to check an instance of the Music model.
         '''
@@ -154,7 +154,7 @@ class TestVideoGamesModel(TransactionTestCase):
         '''
             A function to test if the str method returns the question_text for Video games.
         '''
-        # Create an instance of the Mythology model with a specific question
+        # Create an instance of the Music model with a specific question
         quiz_ins = Video_Games(question = 'Question example')
 
         # call __str__ method
