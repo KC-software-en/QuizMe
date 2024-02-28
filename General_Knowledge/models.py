@@ -1,8 +1,11 @@
 from django.db import models
 
+############################################################################################
+
 # Create your models here.
+
 '''
-Create a General Knowledge model for the subcategory in the education quiz.
+Create a General Knowledge model for the quiz.
 '''
 # use Django's built-in object-relational mapping (ORM) & define the relevant classes
 # -each entry in a SQL table represents a single object, this can be converted to a class instance in Python.  
