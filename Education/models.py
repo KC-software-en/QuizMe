@@ -49,11 +49,11 @@ class Science_and_Nature(models.Model):
     def __str__(self):
         return self.question
     
-
+'''
+Create a History model for the subcategory in the education quiz.
+'''
+# create a History class that inherits from django.db.models.Model
 class History(models.Model):
-    '''
-    Create a model for the Science and nature questions in the education quiz.
-    '''
     # set variables that represent question, choices & correct_answer in the quiz
     # use TextField to store the questions
     question = models.TextField()    
