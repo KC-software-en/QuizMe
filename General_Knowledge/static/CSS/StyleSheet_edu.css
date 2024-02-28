@@ -1,0 +1,102 @@
+/*style font for h1 text of education heading*/
+#edu_heading{	
+	color: teal;
+    text-shadow: 2px 2px 10px lavenderblush;
+	font-weight: bold;
+	text-align: center !important;	
+}
+
+/* Set the positioning and width for the container that holds the subcategory image and text. */
+/* Position the subcategory_image container relative to its normal position.*/
+/* Set the container width to 50% of its containing element.*/
+.container-fluid{
+position: relative;
+width: 50%;
+}
+
+/* Define the styles for the overlay that appears in the middle of the image on hover. */
+/* Add a smooth transition effect over 0.5 seconds with ease timing function */
+/* Set the initial opacity of the overlay to fully transparent */
+/* Position the overlay absolutely within the container based on a specified position, regardless of the normal flow of the document. 
+    top & left will determine its position */
+/* Center the overlay at 50% of the container's width and height. */
+/* Further center the overlay precisely in the middle with transformb */
+/* include the Microsoft Internet Explorer support for the transform property */
+/* Center the subcategory text content horizontally */
+.subcategory_overlay{
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* Define the styles for the subcategory image inside the container */
+/* let the image fill the entire width of its container. */
+/* the image's height adjusts proportionally based on its width with auto */
+/* Set the initial opacity of the subcategory_image to fully opaque */
+/* use block display to ensure consistent behaviour & that any default styles or behaviours associated with block-level elements are applied.*/
+/* set a smooth transition effect over 0.5 seconds with ease timing function */
+/* Ensure that the back face of the image is not visible during transitions */
+/* set the box-shadow of the paragraph */
+.subcategory_image{
+    width : 100%;
+    height : auto;
+    border-radius: 5%;
+    opacity: 1;
+    display: block;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
+    box-shadow: 0 0 40px teal;
+}
+
+/* Define the styles for the subcategory image when hovering over the container */
+/* let the opacity of the image decrease to 0.3 to make it partially transparent */
+.container-fluid:hover .subcategory_image{
+    opacity: 0.3;    
+}
+
+/* Define the styles for the subcategory overlay when hovering over the container */
+/* let opacity of the overlay increase to 1 to make it fully visible */
+.container-fluid:hover .subcategory_overlay{
+    opacity: 1;
+}
+
+/* Define the styles for the subcategory text within the overlay */
+/* Set the background colour */
+/* Set the text colour */
+/* Set the font size */
+/* Add padding to the text */
+.subcategory_text{
+    background-color: teal;
+    color: lightcyan;
+    font-size: 16px;
+    padding: 16px 32px;
+}
+
+/* style the subcategory description */
+/* set the font of the paragraph */
+/* set the font size of the paragraph */
+/* set the text color of the paragraph */
+/* align the text to the center of the paragraph */
+/* add space outside the paragraph border with margin*/
+/* add space around the paragraph text within the border*/
+/* add a solid border around the paragraph */
+/* set the background color of the paragraph */
+/* set the box-shadow of the paragraph */
+/* set the border-radius of the paragraph to round the edges*/
+.edu_p{
+    font-family: Arial, sans-serif; 
+    font-size: 18px; 
+    color: teal; 
+    text-align: center; 
+    margin: 60px; 
+    padding: 25px; 
+    border: .5px solid teal; 
+    background-color: lavenderblush; 
+    box-shadow: 0 0 30px teal;
+    border-radius: 5%;
+}
