@@ -1,3 +1,5 @@
+/* style Education */
+
 /*style font for h1 text of education heading*/
 #edu_heading{	
 	color: teal;
@@ -50,7 +52,7 @@ width: 50%;
     display: block;
     transition: 0.5s ease;
     backface-visibility: hidden;
-    box-shadow: 0 0 40px teal;
+    box-shadow: 0 0 40px teal !important;
 }
 
 /* Define the styles for the subcategory image when hovering over the container */
@@ -71,8 +73,8 @@ width: 50%;
 /* Set the font size */
 /* Add padding to the text */
 .subcategory_text{
-    background-color: teal;
-    color: lightcyan;
+    background-color: teal !important;
+    color: lightcyan !important;
     font-size: 16px;
     padding: 16px 32px;
 }
@@ -100,3 +102,265 @@ width: 50%;
     box-shadow: 0 0 30px teal;
     border-radius: 5%;
 }
+
+/****************************************************************************************/
+/* style General Knowledge */
+
+/*style font for h1 text of General Knowledge heading */
+#gen_heading{	
+	color: gold;
+    text-shadow: 2px 2px 10px lavenderblush;
+	font-weight: bold;
+	text-align: center !important;	
+}
+
+/* Define the styles for the subcategory image inside the container */
+/* let the image fill the entire width of its container. */
+/* the image's height adjusts proportionally based on its width with auto */
+/* Set the initial opacity of the subcategory_image to fully opaque */
+/* use block display to ensure consistent behaviour & that any default styles or behaviours associated with block-level elements are applied.*/
+/* set a smooth transition effect over 0.5 seconds with ease timing function */
+/* Ensure that the back face of the image is not visible during transitions */
+/* set the box-shadow of the paragraph */
+.gen_subcategory_image{
+    width : 100%;
+    height : auto;
+    border-radius: 5%;
+    opacity: 1;
+    display: block;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
+    box-shadow: 0 0 40px gold;
+}
+
+/* Define the styles for the subcategory text within the overlay */
+/* Set the background colour */
+/* Set the text colour */
+/* Set the font size */
+/* Add padding to the text */
+.gen_subcategory_text{
+    background-color: gold;
+    color: black;
+    font-size: 16px;
+    padding: 16px 32px;
+}
+
+/* style the subcategory description */
+/* set the font of the paragraph */
+/* set the font size of the paragraph */
+/* set the text color of the paragraph */
+/* align the text to the center of the paragraph */
+/* add space outside the paragraph border with margin*/
+/* add space around the paragraph text within the border*/
+/* add a solid border around the paragraph */
+/* set the background color of the paragraph */
+/* set the box-shadow of the paragraph */
+/* set the border-radius of the paragraph to round the edges*/
+.gen_p{
+    font-family: Arial, sans-serif; 
+    font-size: 18px; 
+    color: goldenrod; 
+    text-align: center; 
+    margin: 60px; 
+    padding: 25px; 
+    border: .5px solid gold; 
+    background-color: lavenderblush; 
+    box-shadow: 0 0 30px gold;
+    border-radius: 5%;
+}
+
+/****************************************************************************************/
+/*style the QuizMe homepage*/
+
+/* style the QuizMe description */
+/* set the font of the paragraph */
+/* set the font size of the paragraph */
+/* set the text color of the paragraph */
+/* align the text to the center of the paragraph */
+/* add space outside the paragraph border with margin*/
+/* add space around the paragraph text within the border*/
+/* add a solid border around the paragraph */
+/* set the background color of the paragraph */
+/* set the box-shadow of the paragraph */
+/* set the border-radius of the paragraph to round the edges*/
+p{
+    font-family: Arial, sans-serif; 
+    font-size: 18px; 
+    color: black; 
+    text-align: center; 
+    margin: 60px; 
+    padding: 25px; 
+    border: .5px black; 
+    background-color: lavenderblush; 
+    box-shadow: 0 0 30px black;
+    border-radius: 5%;
+}
+
+/* Style the dropdown button */
+.dropdown {
+    float: left;
+    overflow:visible;
+  }
+  
+  .dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: 1pt;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+  
+  /* Style the dropdown content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Style the links inside the dropdown */
+  .dropdown-content a {
+    float: none;
+    color: rgb(0, 0, 0);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  /* Add a hover effect to dropdown links */
+  .dropdown-content a:hover {
+    background-color: #00c0fb;
+  }
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Css styling for slideshow */
+      /**
+* Base
+*/
+body {
+font-size: 100%;
+background: #00806a;
+}
+
+/* Fallback for hidden attribute */
+.hidden {
+display: none;
+}
+
+.slider {
+position: relative;
+margin-top: 2rem;
+margin-right: auto;
+margin-left: auto;
+overflow: hidden;
+width: 40.625rem;
+height: 26.25rem;
+}
+.slider__list {
+position: absolute;
+left: 0;
+width: 162.5rem;
+}
+.slider__slide {
+float: left;
+}
+
+.slider__control {
+margin-right: auto;
+margin-left: auto;
+width: 4.5rem;
+font-family: sans-serif;
+}
+.slider__control label {
+position: relative;
+display: block;
+margin-top: 2rem;
+margin-bottom: 1rem;
+width: 4.5rem;
+height: 2rem;
+font-size: 1rem;
+font-weight: normal;
+line-height: 1.5;
+color: transparent;
+background: #042d45;
+border-radius: 2rem;
+cursor: pointer;
+-webkit-transition: left 0.15s ease-out;
+transition: left 0.15s ease-out;
+}
+.slider__control label:before {
+content: "autoplay";
+position: absolute;
+top: 2.5rem;
+left: 0;
+color: #000000;
+font-size: .95rem;
+font-weight: bold;
+text-transform: uppercase;
+}
+.slider__control label:after {
+content: "";
+position: absolute;
+top: .25rem;
+left: .25rem;
+display: block;
+width: 1.5rem;
+height: 1.5rem;
+border-radius: 2rem;
+background: #ffffff;
+-webkit-transition: left 0.15s ease-out;
+transition: left 0.15s ease-out;
+-webkit-transform: translate3d(0, 0, 0);
+transform: translate3d(0, 0, 0);
+}
+.slider__switch:checked + .slider > .slider__list {
+-webkit-animation-name: autoplay;
+animation-name: autoplay;
+/* This will change the time it takes to move to next slide */
+-webkit-animation-duration: 18s;
+animation-duration: 18s;
+-webkit-animation-iteration-count: infinite;
+animation-iteration-count: infinite;
+}
+.slider__switch:checked + .slider + .slider__control > label { background: coral; }
+.slider__switch:checked + .slider + .slider__control > label:after { left: 2.75rem; }
+
+@-webkit-keyframes 
+autoplay {   /* position of the first slide */
+0% {
+left: 0;
+}
+/* position of the second slide */
+25% {
+left: -40.625rem;
+}
+/* position of the third slide */
+50% {
+left: -81.25rem;
+}
+}
+@keyframes 
+autoplay {   /* position of the first slide */
+0% {
+left: 0;
+}
+/* position of the second slide */
+20% {
+left: -40.625rem;
+}
+/* position of the third slide */
+50% {
+left: -81.25rem;
+}
+
+}    
