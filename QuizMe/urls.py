@@ -35,5 +35,5 @@ urlpatterns = [
     path('', include("Education.urls")),
     path('user_auth/', include("user_auth.urls")),
     path('Entertainment/', include("Entertainment.urls")),
-
+    path('General_Knowledge/', include("General_Knowledge.urls"))
 ]
