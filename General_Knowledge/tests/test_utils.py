@@ -27,8 +27,14 @@ import json
 # import Http404 to raise an error message if a model is not located in category_objects()
 from django.http import Http404
 
-#
+# import TestCase
 from unittest import TestCase
+
+# https://docs.djangoproject.com/en/5.0/topics/testing/tools/#transactiontestcase
+# import TransactionTestCase because
+# tests rely on database access such as creating or querying models, 
+# :. create test classes as subclasses of django.test.TestCase rather than unittest.TestCase
+from django.test import TransactionTestCase
 
 # AttributeError: 'HttpRequest' object has no attribute 'session'
 # import settings & import_module to address the AttributeError
@@ -184,7 +190,7 @@ Create a class that tests the CreateSubcategoryObject function instantiated in t
 The test is in a doctstring in test_utils since its run in django shell.
 
 # use TestCase from django.test to start with a fresh database each time
-class TestCreateSubcategoryObject(TestCase):
+class TestCreateSubcategoryObject(TransactionTestCase):
     # setup an instance of the RequestFactory class since get_specific_json_category uses request
     def setUp(self):    
         self.factory = RequestFactory()
@@ -333,7 +339,7 @@ class TestVariousUtils(TestCase):
 Create a class that tests the category_objects function.
 '''     
 # create tests for a valid category_name and an invalid category_name when locating a model to retrieve its category_objects
-class TestCategoryObjects(TestCase):
+class TestCategoryObjects(TransactionTestCase):
     # setup the conditions needed for functions in the class
     def setUp(self):
         # Create an instance of the HttpRequest class
