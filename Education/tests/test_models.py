@@ -129,10 +129,6 @@ class TestScienceAndNatureModel(TransactionTestCase):
         # assert that the result matches the question_ins 
         self.assertEqual(str_outcome, quiz_ins.question, msg='Question example')
 
-'''
-Create a class to test the History model.
-'''        
-# create a class to test the History model
 class TestHistoryModel(TransactionTestCase):
     '''
     Setup data for question model
@@ -143,16 +139,12 @@ class TestHistoryModel(TransactionTestCase):
         # no necessary conditions
         pass    
     
-    '''
-    A function to test if the str method returns the question_text for Science_and_Nature.
-    '''
-    def test_return_str_quiz(self):
-        # Create an instance of the History model with a specific question
         quiz_ins = History(question = 'Question example')
 
         # call __str__ method
         str_outcome = str(quiz_ins)
 
         # assert that the result matches the question_ins 
+
         self.assertEqual(str_outcome, quiz_ins.question, msg='Question example')    
     
