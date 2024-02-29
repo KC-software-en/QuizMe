@@ -12,7 +12,7 @@ from django.contrib.admin.sites import site
 # import admin.py
 from .. import admin
 
-# import the question & choice models
+# import the Mythology model
 from ..models import Mythology
 
 ######################################################################################################
