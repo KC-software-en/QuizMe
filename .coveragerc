@@ -1,19 +1,19 @@
 # `coverage run manage.py test *App*` where App is optional
 # then run `coverage report`
+# coverage run --source "Education" manage.py test && coverage report
 
 [run]
-source = Education
-
 # the files to be excluded from coverage report
-omit =     
-    Education/migrations/*
-    QuizMe/settings.py
-    Education/tests/*
-    Education/__init__.py
-    Education/urls.py
-    Education/apps.py
-    QuizMe/wsgi.py
-    manage.py
+omit = 
+    */migrations/*    
+    */settings.py  
+    */tests/*   
+    */__init__.py  
+    */urls.py
+    */apps.py
+    */wsgi.py
+    */asgi.py
+    */manage.py    
 
 # show line numbers of missing
 [report]

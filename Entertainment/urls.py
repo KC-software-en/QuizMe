@@ -16,7 +16,7 @@ app_name = 'Entertainment'
 
 # under urlpatterns, paste the code that references the functions in views.py
 urlpatterns = [
-    # set a path for the home view of education
+    # set a path for the home view of Entertainment
     path('', views.index_en, name='index_en'),   
     # set a path for the detail view
     path('<str:category_name>/<int:question_id>/detail/', views.detail, name='en_detail'),
