@@ -34,7 +34,7 @@ Create a class to test the Mythology model.
 # create a class to test the Mythology model
 class TestMythologyModel(TransactionTestCase):
     '''
-    Setup data for question model
+    Setup data for Mythology model
     '''
     # setup the required data for tests
     # https://docs.djangoproject.com/en/5.0/topics/testing/overview/#writing-tests
@@ -108,7 +108,7 @@ Create a class to test the Science_and_Nature model.
 # create a class to test the Science_and_Nature model
 class TestScienceAndNatureModel(TransactionTestCase):
     '''
-    Setup data for question model
+    Setup data for Science_and_Nature model
     '''
     # setup the required data for tests
     # https://docs.djangoproject.com/en/5.0/topics/testing/overview/#writing-tests
@@ -131,20 +131,24 @@ class TestScienceAndNatureModel(TransactionTestCase):
 
 class TestHistoryModel(TransactionTestCase):
     '''
-    Setup data for question model
+    Setup data for History model
     '''
     # setup the required data for tests
     # https://docs.djangoproject.com/en/5.0/topics/testing/overview/#writing-tests
     def setUp(self):
         # no necessary conditions
         pass    
-    
+
+    '''
+    A function to test if the str method returns the question_text for History.
+    '''
+    def test_return_str_quiz(self):
+        # Create an instance of the History model with a specific question
         quiz_ins = History(question = 'Question example')
 
         # call __str__ method
         str_outcome = str(quiz_ins)
 
         # assert that the result matches the question_ins 
-
         self.assertEqual(str_outcome, quiz_ins.question, msg='Question example')    
     
