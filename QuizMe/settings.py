@@ -37,7 +37,7 @@ ALLOWED_HOSTS = ['*']
 
 # add education app
 INSTALLED_APPS = [
-    'General_Knowledge'
+    'General_Knowledge',
     'Entertainment',
     'user_auth',
     'Education',
