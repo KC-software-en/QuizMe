@@ -197,7 +197,7 @@ A function that retrieves the desired category names from the Open Trivia DB jso
 def get_category_names(response):
     # Get the trivia categories values from the dictionary provided in the JSON response
     # Place an empty list as the default argument if the key is not found - this avoids errors in subsequent code
-    trivia_categories = response.get("trivia_categories", [])
+    trivia_categories = response.get("trivia_categories")
 
     # specify the id of the categories to include in the Education app's quizzes
     selected_category_id = [20, 17, 23]
