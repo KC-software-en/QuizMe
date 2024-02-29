@@ -188,6 +188,7 @@
         border: 3px solid rgb(147, 154, 255); /* This adds a solid black border around the paragraph */
         background-color: rgb(174, 227, 255); /* This sets the background color of the paragraph */
       }
+      ul { list-style-type: none; }
             </style>
         <title>{% block title %}QuizMe{% endblock %}</title>
             <!-- Required meta tags -->
@@ -199,7 +200,7 @@
             <!--link css -->
 	          <!--NOTE:internal CSS from parent/base template is used in child template that extends it;-->
 	          <!--NOTE: the url to stylesheet & palcement of '/'; this renders external css correctly-->
-	          <link href="{% static 'CSS/StyleSheet_edu.css' %}" rel = "stylesheet" type = "text/css"> 
+	         
     </head>
         <body style="background: #d8fdff;">            
         {% block content %}
