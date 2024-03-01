@@ -8,7 +8,7 @@ from unittest.mock import patch, MagicMock
 from .. import utils
 
 # import models
-from ..models import Mythology
+from ..models import General_Knowledge
 
 # import random to shuffle choices rendered in the form
 import random
@@ -32,8 +32,7 @@ from unittest import TestCase
 
 # https://docs.djangoproject.com/en/5.0/topics/testing/tools/#transactiontestcase
 # import TransactionTestCase because
-# tests for category objects rely on database access such as creating or querying models 
-# - this ensures test objects are not created on the admin site
+# tests rely on database access such as creating or querying models, 
 # :. create test classes as subclasses of django.test.TestCase rather than unittest.TestCase
 from django.test import TransactionTestCase
 
@@ -48,7 +47,7 @@ from mixer.backend.django import mixer
 ##################################################################################################
 ##################################################################################################
 
-# Create your tests here. Use `py manage.py test Education.tests.test_utils` to run tests in cmd
+# Create your tests here. Use `py manage.py test General_Knowledge.tests.test_utils` to run tests in cmd
 # after writing a test, run in cmd & it will say fail. 
 # next, go to utils.py and create the independent functions. Then it should pass
 # run coverage after tests
@@ -60,7 +59,7 @@ Create a class to test the functions that request an API response for categortie
 # use patch class decorator & provide the import path to the requests.get function in views.py
 # patch the external get function within the requests module, which is used in the views.get_json_categories function
 # - to intercept the HTTP request made by the code and control the response during testing
-@patch('Education.utils.requests.get')
+@patch('General_Knowledge.utils.requests.get')
 class TestJsonResponse(TestCase):
     def setUp(self):
         pass
@@ -190,8 +189,7 @@ class TestJsonResponse(TestCase):
 Create a class that tests the CreateSubcategoryObject function instantiated in the django shell to populate the database for each model.
 The test is in a doctstring in test_utils since its run in django shell.
 
-# use TransactionTestCase because tests for category objects rely on database access 
-# - this ensures test objects are not created on the admin site
+# use TestCase from django.test to start with a fresh database each time
 class TestCreateSubcategoryObject(TransactionTestCase):
     # setup an instance of the RequestFactory class since get_specific_json_category uses request
     def setUp(self):    
@@ -199,7 +197,7 @@ class TestCreateSubcategoryObject(TransactionTestCase):
 
     # test create_subcategory_object
     def test_create_subcategory_object(self):
-        with patch('Education.views.create_subcategory_object') as mock_create_subcategory_object:
+        with patch('General_Knowledge.views.create_subcategory_object') as mock_create_subcategory_object:
             # set up a successful mock response for the mock_create_subcategory_object function
             mock_object = [
                     {
@@ -215,7 +213,7 @@ class TestCreateSubcategoryObject(TransactionTestCase):
             
             # Create a GET request for the view with reverse 
             # use the name defined in urls.py with the arguments passed in the view in view.py
-            ##request = self.factory.get(reverse('Education:edu_detail', args=[50, 20]))
+            ##request = self.factory.get(reverse('General_Knowledge:gen_detail', args=[50, 20]))
             ##response = utils.get_specific_json_category(request, quantity=50, category=20)
 
             # call the create_subcategory_object function to test it with a category id
@@ -223,7 +221,7 @@ class TestCreateSubcategoryObject(TransactionTestCase):
             mock_create_subcategory_object.assert_called_once()
 
             # get the 50 objects created in the database
-            category_objects = models.Mythology.objects.all()
+            category_objects = models.General_Knowledge.objects.all()
 
             # make assertions about the object
             # assert there are 50 objects for the category 
@@ -277,7 +275,7 @@ class TestVariousUtils(TestCase):
 
     # test get_next_question_id
     # patch the selection view where get_next_question_id was called
-    @patch('Education.views.selection')
+    @patch('General_Knowledge.views.selection')
     def test_get_next_question_id(self, mock_question_selection_pks):
         # mock pks of question_selection
         mock_question_selection_pks.return_value = [12, 2, 28, 49, 35, 37, 14, 1, 9, 15]
@@ -303,12 +301,8 @@ class TestVariousUtils(TestCase):
         mock_response = {
                         "trivia_categories": [
                             {
-                                "id": 17, # 17 is a selected_category_id in utils.py
+                                "id": 9, # 9 is a selected_category_id in utils.py
                                 "name": "category1"
-                            },
-                            {
-                                "id": 20, # 20 is a selected_category_id in utils.py
-                                "name": "category2"
                             }
                             ]
                         }
@@ -321,7 +315,7 @@ class TestVariousUtils(TestCase):
         category_names = utils.get_category_names(mock_response)
         
         # assert that the names are there for the selected category ids
-        self.assertEqual(category_names, mock_category_names, msg='Should check that category1 & category2 is in the mock_response.')
+        self.assertEqual(category_names, mock_category_names, msg='Should check that category1 is in the mock_response.')
 
     # test get_category_names if the category_name is not in the json response
     def test_no_category_name(self):
@@ -345,8 +339,6 @@ class TestVariousUtils(TestCase):
 Create a class that tests the category_objects function.
 '''     
 # create tests for a valid category_name and an invalid category_name when locating a model to retrieve its category_objects
-# use TransactionTestCase because tests for category objects rely on database access 
-# - this ensures test objects are not created on the admin site
 class TestCategoryObjects(TransactionTestCase):
     # setup the conditions needed for functions in the class
     def setUp(self):
@@ -366,7 +358,7 @@ class TestCategoryObjects(TransactionTestCase):
         self.request.session = engine.SessionStore(session_key)
 
         # set up the 50 random objects retrieved
-        self.mock_questions = [Mythology.objects.create(                                       
+        self.mock_questions = [General_Knowledge.objects.create(                                       
                                       question=f"question{i}", 
                                       choices = [f'choice{i}' for i in range(1,5)], 
                                       correct_answer = f'choice1') 
@@ -378,9 +370,9 @@ class TestCategoryObjects(TransactionTestCase):
         # 10 question objects for the question_selection
         self.mock_question_selection = self.mock_questions[:10]         
 
-    # patch to mock the filter method of the Mythology.objects manager. This is done to ensure that when filter is called in your utils.category_objects function, it returns the specified self.mock_question_selection instead of actually querying the database.         
+    # patch to mock the filter method of the General_Knowledge.objects manager. This is done to ensure that when filter is called in your utils.category_objects function, it returns the specified self.mock_question_selection instead of actually querying the database.         
     # not a literal file path but rather a string representing the import path of the object you want to mock. 
-    @patch('Education.utils.Mythology.objects.filter')        
+    @patch('General_Knowledge.utils.General_Knowledge.objects.filter')        
     def test_category_objects(self, mock_filter):
         # set up the return value for the filtered selection
         mock_filter.return_value = MagicMock(filter=lambda: self.mock_question_selection)        
@@ -398,7 +390,7 @@ class TestCategoryObjects(TransactionTestCase):
         self.request.session['mock_question_selection_ids'] = self.mock_question_selection_ids
 
         # call the category_objects function
-        response = utils.category_objects(self.request, 'Mythology')
+        response = utils.category_objects(self.request, 'General Knowledge')
 
         # assertions
         # assert that the mock_question_selection exists
@@ -411,7 +403,7 @@ class TestCategoryObjects(TransactionTestCase):
 
     # test for an error raised if globals does not have a model for a category name
     # dont incl category_objects in path to avoid AttributeError: <function category_objects at 0x0489E2B8> does not have the attribute 'globals'
-    @patch('Education.utils.globals')
+    @patch('General_Knowledge.utils.globals')
     def test_category_objects_invalid_category(self, mock_globals):
         # mock the globals function to raise a LookupError for an incorrect category_name
         mock_globals.side_effect = LookupError
