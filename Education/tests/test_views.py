@@ -11,7 +11,7 @@ from django.contrib.auth.hashers import make_password
 from django.http import HttpResponse
 from django.utils.text import slugify
 from unittest.mock import patch, MagicMock, Mock
-from django.test.client import RequestFactory
+from django.test.client import RequestFactory, Client
 from django.http import HttpResponse, HttpRequest
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.sessions.middleware import SessionMiddleware
@@ -41,6 +41,7 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')    
 
+# Test for the Detail view  
 class TestDetailView(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
@@ -74,6 +75,7 @@ class TestDetailView(TestCase):
         self.assertIn('choices', response.context)
         self.assertIn('category_name', response.context) 
 
+# Test for the try new quiz view  
 @patch('django.shortcuts.reverse')  # Patch reverse function
 def test_try_new_quiz_with_result(self, mock_reverse):
   # Mock reverse function
@@ -93,6 +95,7 @@ def test_try_new_quiz_with_result(self, mock_reverse):
   # Assert "quiz_result" is deleted
   self.assertNotIn('quiz_result', request.session)
 
+# Test for the try new quiz view  
 class TestTryNewQuiz(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
@@ -123,6 +126,7 @@ class TestTryNewQuiz(TestCase):
         self.assertIsInstance(response, HttpResponseRedirect)  # Assert response is a redirect
         self.assertEqual(response.url, reverse('Education:index_edu'))  # Assert redirect URL is correct  
 
+# Test for the results view
     @patch('django.shortcuts.render')  # Patch render function
     def test_results(self, mock_render):
         # Mock request object
@@ -195,6 +199,7 @@ class TestTryNewQuiz(TestCase):
         self.assertIsNone(response.context_data['result'])  # Assert 'result' context data is None
         self.assertEqual(response.context_data['category_name'], 'some_category')  # Assert 'category_name' context data is correct    
 
+# Test for the index edu view
 class IndexEduTestCase(TestCase):
     def setUp(self):
         # Create a mock request
@@ -221,3 +226,4 @@ class IndexEduTestCase(TestCase):
         self.assertIn('question_selection', response.context_data)
         self.assertIn('first_question_id', response.context_data)
 
+# Test for the selection view.
