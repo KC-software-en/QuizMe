@@ -11,6 +11,9 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}Education Detail{% endblock %}</title>	
+    <style>
+        
+    </style>
 </head>    
 
 <body>
@@ -44,9 +47,10 @@
         <div class="container-fluid text-center">
             <div class="row my-5 align-items-center justify-content-center">			
                 <div class = "col d-flex justify-content-center">
-                    <div class="card" style="width: 40rem;">		
+                    <div class="card edu_p" style="width: 40rem;">		
                         <div class="card-body" id="no-underline">
-                            <h1 class="card-title"><i>{{ category_name }} quiz!</i></h1>		
+                            <!--add a margin below the card-title -->
+                            <h1 class="card-title mb-4"><i>{{ category_name }} quiz!</i></h1>		
                                                                                         
                                 <!--show a form for each question in the quiz -->
                                 <!--the post method was used to send data to the server-->
@@ -63,7 +67,8 @@
                                     {% if question %}
 
                                             <!--display the question text by accessing its question attribute -->
-                                            <h3> {{ question.question }} </h3> 
+                                            <!--add a margin below the question -->
+                                            <h3 class="mb-4"> {{ question.question }} </h3> 
                                             
                                             <!--display error message if user did not select a choice before submitting-->
                                             {% if error_message %}
@@ -94,8 +99,9 @@
                                                 <!--when a user selects one of the radio buttons and submits the form,
                                                      it’ll POST the data “choice=id” where id is the ID of the selected choice-->
                                                 <!--use margins to allow space above-under the button-->
-                                                <input type="Submit" value="Save"/>	                               
-                                                <br/><br/>
+                                                <!-- use btn class so that the hover styles from the id will work-->
+                                                <!--use margins to allow space under the button-->
+                                                <input type="Submit" value="Save" class="btn btn-outline-primary mb-4" id="edu_detail_btn"/>                                                                                                
                                             </fieldset>    
                                                                                      
                                     <!--display error message if there are no questions-->                                                                                        
