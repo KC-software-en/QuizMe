@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-# add education app
+# add apps
 INSTALLED_APPS = [
     'General_Knowledge',
     'Entertainment',

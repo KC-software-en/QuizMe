@@ -15,26 +15,25 @@ from django.test import TransactionTestCase
 # import mixer
 # The Mixer is a helper to generate instances of Django or SQLAlchemy models. 
 # It’s useful for testing and fixture replacement
-from mixer.backend.django import mixer
+from mixer.backend.django import mixer #
 
 # import classes from models.py 
-from ..models import Mythology, Science_and_Nature, History
-
+from ..models import General_Knowledge
 
 #####################################################################################
 
-# Create your tests here. Use `py manage.py test Education.tests.test_models` to run tests in cmd
+# Create your tests here. Use `py manage.py test General_Knowledge.tests.test_models` to run tests in cmd
 # after writing a test, run in cmd & it will say fail. 
 # next, go to models.py and create the Question model & then it should pass
 # run coverage after tests
 
 '''
-Create a class to test the Mythology model.
+Create a class to test the General_Knowledge model.
 '''        
-# create a class to test the Mythology model
-class TestMythologyModel(TransactionTestCase):
+# create a class to test the General_Knowledge model
+class TestGeneralKnowledgeModel(TransactionTestCase):
     '''
-    Setup data for Mythology model
+    Setup data for question model
     '''
     # setup the required data for tests
     # https://docs.djangoproject.com/en/5.0/topics/testing/overview/#writing-tests
@@ -43,13 +42,14 @@ class TestMythologyModel(TransactionTestCase):
         pass
     
     '''
-    A function to test if the Mythology model creates successfully before it coding it in models.py.
+    A function to test if the General_Knowledge model creates successfully before it coding it in models.py.
     '''
     # create a fail test where the functions in models.py do not exist
-    def test_mythology_model(self):        
-        # create an instance of Mythology model with mixer
+    def test_general_knowledge_model(self):          
+        # create an instance of General_Knowledge model with mixer
         # textfield stores data as a str so the list of choices will read as a str
-        quiz_ins = mixer.blend(Mythology, question = "Question example",
+        #mixer = Mixer()
+        quiz_ins = mixer.blend(General_Knowledge, question = "Question example",
                              choices = 'choice1, choice2, choice3, choice4',
                                correct_answer = 'choice1')
         
@@ -60,7 +60,7 @@ class TestMythologyModel(TransactionTestCase):
         self.assertIsNotNone(quiz_ins, msg='Should confirm question instance was created')
         # Test that obj is (or is not) an instance of cls (which can be a class or a tuple of classes, as supported by isinstance()). 
         # To check for the exact type, use assertIs(type(obj), cls). --class(cls)
-        self.assertIsInstance(quiz_ins, Mythology, msg='Should confirm that the object instantiated is from the Mythology class')
+        self.assertIsInstance(quiz_ins, General_Knowledge, msg='Should confirm that the object instantiated is from the General_Knowledge class')
         
         # check attributes of instance
         # the choices are expected to be a list from the json response
@@ -79,11 +79,11 @@ class TestMythologyModel(TransactionTestCase):
                          msg='Should check the correct answer attribute of the instantiated object')        
 
     '''
-    A function to test if the str method returns the question_text for Mythology.
+    A function to test if the str method returns the question_text for General_Knowledge.
     '''
     def test_return_str_quiz(self):
-        # Create an instance of the Mythology model with a specific question
-        quiz_ins = Mythology(question = 'Question example')
+        # Create an instance of the General_Knowledge model with a specific question
+        quiz_ins = General_Knowledge(question = 'Question example')
 
         # call __str__ method
         str_outcome = str(quiz_ins)
@@ -92,63 +92,13 @@ class TestMythologyModel(TransactionTestCase):
         self.assertEqual(str_outcome, quiz_ins.question, msg='Question example')
     
     '''
-    Create a test to check an instance of the Mythology model.
+    Create a test to check an instance of the General_Knowledge model.
     '''
-    # create a test to check an instance of the Mythology model
-    def test_mythology_instance(self):
-        # use mixer to create an instance of the Mythology model
-        quiz_instance = mixer.blend(Mythology)
+    # create a test to check an instance of the General_Knowledge model
+    def test_general_knowledge_instance(self):        
+        # use mixer to create an instance of the General_Knowledge model
+        quiz_instance = mixer.blend(General_Knowledge)
 
         # assert that the instance was successful
-        self.assertIsInstance(quiz_instance, Mythology, msg='Should confirm that the object instantiated is from the Mythology class')
-    
-'''
-Create a class to test the Science_and_Nature model.
-'''        
-# create a class to test the Science_and_Nature model
-class TestScienceAndNatureModel(TransactionTestCase):
-    '''
-    Setup data for Science_and_Nature model
-    '''
-    # setup the required data for tests
-    # https://docs.djangoproject.com/en/5.0/topics/testing/overview/#writing-tests
-    def setUp(self):
-        # no necessary conditions
-        pass    
-    
-    '''
-    A function to test if the str method returns the question_text for Science_and_Nature.
-    '''
-    def test_return_str_quiz(self):
-        # Create an instance of the Science_and_Nature model with a specific question
-        quiz_ins = Science_and_Nature(question = 'Question example')
-
-        # call __str__ method
-        str_outcome = str(quiz_ins)
-
-        # assert that the result matches the question_ins 
-        self.assertEqual(str_outcome, quiz_ins.question, msg='Question example')
-
-class TestHistoryModel(TransactionTestCase):
-    '''
-    Setup data for History model
-    '''
-    # setup the required data for tests
-    # https://docs.djangoproject.com/en/5.0/topics/testing/overview/#writing-tests
-    def setUp(self):
-        # no necessary conditions
-        pass    
-
-    '''
-    A function to test if the str method returns the question_text for History.
-    '''
-    def test_return_str_quiz(self):
-        # Create an instance of the History model with a specific question
-        quiz_ins = History(question = 'Question example')
-
-        # call __str__ method
-        str_outcome = str(quiz_ins)
-
-        # assert that the result matches the question_ins 
-        self.assertEqual(str_outcome, quiz_ins.question, msg='Question example')    
-    
+        self.assertIsInstance(quiz_instance, General_Knowledge, msg='Should confirm that the object instantiated is from the General_Knowledge class')
+ 
