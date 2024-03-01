@@ -80,12 +80,14 @@ def index_edu(request):
         # render the context to the homepage of education
         return render(request, 'edu_quiz/edu_quiz.html', context) 
 
+# add a login decorator because an Education quiz requires a registered user
 # write a view for the quiz question, incl the argument question_id
 # question_id is the specific identifier passed in the URL when accessing this view
 # it uniquely identifies and retrieves the specific question to display
 # Django automatically adds an id field as the primary key for each model (i.e. question.id)
 # display the question text 
 # render an HTTP 404 error if a question with the requested ID doesn’t exist
+@login_required(login_url='user_auth:login')
 def detail(request, category_name, question_id):  
     response = get_json_categories()
     category_names = get_category_names(response)  
@@ -134,6 +136,8 @@ def detail(request, category_name, question_id):
 Create a view that displays the quiz result.
 '''
 # create a view that displays the quiz result 
+# add a login decorator because an Education quiz requires a registered user
+@login_required(login_url='user_auth:login')
 def results(request, category_name): 
     # get the quiz result for the session
     result = request.session.get('quiz_result')
