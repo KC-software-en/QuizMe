@@ -103,6 +103,29 @@ width: 50%;
     border-radius: 5%;
 }
 
+/*style the button on edu_detail.html*/
+/*create margin*/
+/*add rounded corners with a radius*/
+/*set the color of the text in buttons*/
+/*set the background color of buttons*/
+/*set a border*/
+#edu_detail_btn{	 
+    margin-bottom: 5px;
+	margin-top: 5px;
+	border-radius: 5px;
+    color: teal;
+	background-color: lavenderblush;
+	border: 1px solid teal;    
+	}
+
+/*style the button on edu_detail.html when hovering over it*/
+/*set the color of the text in buttons*/
+/*set the background color of buttons*/
+#edu_detail_btn:hover{
+    color: lavenderblush;
+    background-color: teal;
+}    
+
 /****************************************************************************************/
 /* style General Knowledge */
 
@@ -169,8 +192,32 @@ width: 50%;
     border-radius: 5%;
 }
 
+/*style the button on gen_detail.html*/
+/*create margin*/
+/*add rounded corners with a radius*/
+/*set the background color of buttons*/
+/*set a border*/
+#gen_detail_btn{
+    color: goldenrod !important;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	border-radius: 5px;
+	background-color: lavenderblush;
+	border: 1px solid gold;
+	}
+
+/*style the button on gen_detail.html when hovering over it*/
+/*set the color of the text in buttons*/
+/*set the background color of buttons*/
+#gen_detail_btn:hover{
+    color: black !important;
+    background-color: gold;
+}    
+
 /****************************************************************************************/
 /*style the QuizMe homepage*/
+
+
 
 /* style the QuizMe description */
 /* set the font of the paragraph */
@@ -255,6 +302,11 @@ background: #00806a;
 /* Fallback for hidden attribute */
 .hidden {
 display: none;
+}
+
+/* remove bullets from unordered list in slider */
+ul{
+    list-style-type: none;
 }
 
 .slider {
