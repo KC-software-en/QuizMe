@@ -32,6 +32,7 @@
 
             <div class="row" style="padding-top: 50pt;">
                 <div class="col-md-6" style="padding-left: 80pt;">
+                    <h1>Login</h1>
                     <form action="{% url 'user_auth:authenticate_user' %}" method="post">
                         {% csrf_token %}
         
@@ -45,6 +46,7 @@
         
                         <input type="submit" value="Login" />
                     </form>
+                    <p class="text-center">Don't have an account? <a href="/user_auth/register">Register</a> instead.</p>
                 </div>        
             </div>  
         </body>
