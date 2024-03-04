@@ -4,172 +4,20 @@
         {
             "type": "multiple",
             "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "Gordon Freeman is said to have burnt and destroyed what food in the break room microwave?",
-            "correct_answer": "Casserole",
+            "category": "Mythology",
+            "question": "What mytological creatures have women&#039;s faces and vultures&#039; bodies?",
+            "correct_answer": "Harpies",
             "incorrect_answers": [
-                "Sub Sandwich",
-                "Chicken Soup",
-                "Pepperoni Pizza"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "In &quot;Fallout 4&quot;, what is the name of the dog you find at Red Rocket truck stop?",
-            "correct_answer": "Dogmeat",
-            "incorrect_answers": [
-                "Sparky",
-                "Quazar",
-                "Chop"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "In Need for Speed: Most Wanted (2005), what was the name of the main antagonist?",
-            "correct_answer": "Clarence &quot;Razor&quot; Callahan",
-            "incorrect_answers": [
-                "Hector &quot;Ming&quot; Domingo",
-                "Toru &quot;Bull&quot; Sato",
-                "Karl &quot;Baron&quot; Smit"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "hard",
-            "category": "Entertainment: Video Games",
-            "question": "How many voice channels does the Nintendo Entertainment System support natively?",
-            "correct_answer": "5",
-            "incorrect_answers": [
-                "4",
-                "6",
-                "3"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "hard",
-            "category": "Entertainment: Video Games",
-            "question": "In &quot;Pok&eacute;mon Sun and Moon&quot;, Team Skull took over which town?",
-            "correct_answer": "Po Town",
-            "incorrect_answers": [
-                "Heahea City",
-                "Tapu Village",
-                "Iki Town"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "Which of these is NOT a playable character in the 2016 video game Overwatch?",
-            "correct_answer": "Invoker",
-            "incorrect_answers": [
-                "Mercy",
-                "Winston",
-                "Zenyatta"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "What vehicle in PUBG has the highest top speed?",
-            "correct_answer": "Motorcycle",
-            "incorrect_answers": [
-                "PG-117",
-                "Dacia",
-                "Buggy"
-            ]
-        },
-        {
-            "type": "boolean",
-            "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "In the game &quot;Subnautica&quot;, a &quot;Spadefish&quot; will attack you.",
-            "correct_answer": "False",
-            "incorrect_answers": [
-                "True"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "hard",
-            "category": "Entertainment: Video Games",
-            "question": "In Counter Strike: Global Offensive, what is the code implanted onto the C4 as the Terrorists plant the bomb?",
-            "correct_answer": "7355608",
-            "incorrect_answers": [
-                "7890728",
-                "7256380",
-                "7726354"
+                "Mermaids",
+                "Nymph",
+                "Lilith"
             ]
         },
         {
             "type": "boolean",
             "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "In the game &quot;Until Dawn&quot; Emily is the only playable character who can be killed by another playable character directly.",
-            "correct_answer": "True",
-            "incorrect_answers": [
-                "False"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "What two characters from the game Undertale are never in a relationship or not related?",
-            "correct_answer": "Frisk &amp; Chara",
-            "incorrect_answers": [
-                "Sans &amp; Papyrus",
-                "Toriel &amp; Asgore",
-                "Alphys &amp; Undyne"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "In Forza Motorsport 6, which of these track-exclusive cars was NOT featured in the game, either originally with the game or added as DLC?",
-            "correct_answer": "Aston Martin Vulcan",
-            "incorrect_answers": [
-                "Ferrari FXX-K",
-                "McLaren P1 GTR",
-                "Lotus E23"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "hard",
-            "category": "Entertainment: Video Games",
-            "question": "In &quot;Magicka&quot;, which two elements are combined to cast the spell, &quot;Nullify&quot;?",
-            "correct_answer": "Arcane + Shield",
-            "incorrect_answers": [
-                "Lightning + Shield",
-                "Lightning + Life",
-                "Arcane + Life"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "What was the release date of &quot;Grand Theft Auto IV&quot;?",
-            "correct_answer": "April 29, 2008",
-            "incorrect_answers": [
-                "May 21, 2009",
-                "June 22, 2010",
-                "July 28, 2008"
-            ]
-        },
-        {
-            "type": "boolean",
-            "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "In the game Dead by Daylight, the killer Michael Myers is refered to as &quot;The Shape&quot;.",
+            "category": "Mythology",
+            "question": "According to Norse mythology, Loki is a mother.",
             "correct_answer": "True",
             "incorrect_answers": [
                 "False"
@@ -178,68 +26,148 @@
         {
             "type": "multiple",
             "difficulty": "hard",
-            "category": "Entertainment: Video Games",
-            "question": "What device allows Tracer to manipulate her own time in the game &quot;Overwatch&quot;?",
-            "correct_answer": "Chronal Accelerator",
+            "category": "Mythology",
+            "question": "In Norse mythology, what is the name of the serpent which eats the roots of the ash tree Yggdrasil?",
+            "correct_answer": "Nidhogg",
             "incorrect_answers": [
-                "B.L.I.N.K",
-                "Spacial Displacement Manipulator",
-                "TMD (Time Manipulation Device)"
+                "Bragi",
+                "Odin",
+                "Ymir"
             ]
         },
         {
             "type": "multiple",
             "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "Which Overwatch character says the line &quot;Heroes never die!&quot;?",
-            "correct_answer": "Mercy",
+            "category": "Mythology",
+            "question": "According to Japanese folklore, what is the favorite food of the Kappa.",
+            "correct_answer": "Cucumbers",
             "incorrect_answers": [
-                "Reaper",
-                "Sonic",
-                "Ana"
+                "Kabocha",
+                "Nasu",
+                "Soba"
             ]
         },
         {
             "type": "multiple",
             "difficulty": "hard",
-            "category": "Entertainment: Video Games",
-            "question": "Which of these characters from Final Fantasy VIII primarily spoke in one word sentences?",
-            "correct_answer": "Fujin",
+            "category": "Mythology",
+            "question": "Which Norse God has a horse named Sleipnir?",
+            "correct_answer": "Odin",
             "incorrect_answers": [
-                "Raijin",
-                "Seifer",
-                "Zell"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "In Kingdom Hearts which of the following people can NOT wield a keyblade?",
-            "correct_answer": "Larxene",
-            "incorrect_answers": [
-                "Xehanort",
-                "Lea",
-                "Mickey"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "Which CS:GO eSports team won the major event ESL One Cologne 2016?",
-            "correct_answer": "SK Gaming",
-            "incorrect_answers": [
-                "Team Liquid",
-                "Fnatic",
-                "Virtus.pro"
+                "Thor",
+                "Frigg",
+                "Balder"
             ]
         },
         {
             "type": "boolean",
+            "difficulty": "easy",
+            "category": "Mythology",
+            "question": "A wyvern is the same as a dragon.",
+            "correct_answer": "False",
+            "incorrect_answers": [
+                "True"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Mythology",
+            "question": "The Nike apparel and footwear brand takes it&#039;s name from the Greek goddess of what?",
+            "correct_answer": "Victory",
+            "incorrect_answers": [
+                "Courage",
+                "Strength",
+                "Honor"
+            ]
+        },
+        {
+            "type": "multiple",
             "difficulty": "hard",
-            "category": "Entertainment: Video Games",
-            "question": "In The Witcher 3, the Zoltan Chivay Gwent card can be found under the Hanged Man&#039;s Tree.",
+            "category": "Mythology",
+            "question": "Talos, the mythical giant bronze man, was the protector of which island?",
+            "correct_answer": "Crete",
+            "incorrect_answers": [
+                "Sardinia",
+                "Sicily",
+                "Cyprus"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "The Maori hold that which island nation was founded by Kupe, who discovered it under a long white cloud?",
+            "correct_answer": "New Zealand",
+            "incorrect_answers": [
+                "Vanuatu",
+                "Fiji",
+                "Hawaii"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Mythology",
+            "question": "What immense structure is referred to in Norse Mythology as the Yggdrasil.",
+            "correct_answer": "Tree",
+            "incorrect_answers": [
+                "Mountain",
+                "Temple",
+                "Castle"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "The Norse god Odin has two pet crows named &quot;Huginn&quot; and &quot;Muninn&quot;.  What do their names mean?",
+            "correct_answer": "Thought &amp; Memory",
+            "incorrect_answers": [
+                "Power &amp; Peace",
+                "War &amp; Learning",
+                "Sleeping &amp; Waking"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "Hel was the daughter of which Norse Mythological figure?",
+            "correct_answer": "Loki",
+            "incorrect_answers": [
+                "Thor",
+                "Odin",
+                "Balder"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Mythology",
+            "question": "The greek god Poseidon was the god of what?",
+            "correct_answer": "The Sea",
+            "incorrect_answers": [
+                "War",
+                "Sun",
+                "Fire"
+            ]
+        },
+        {
+            "type": "boolean",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "The Roman god &quot;Jupiter&quot; was first known as &quot;Zeus&quot; to the Greeks.",
+            "correct_answer": "True",
+            "incorrect_answers": [
+                "False"
+            ]
+        },
+        {
+            "type": "boolean",
+            "difficulty": "easy",
+            "category": "Mythology",
+            "question": "In Norse mythology, Thor once dressed as a woman.",
             "correct_answer": "True",
             "incorrect_answers": [
                 "False"
@@ -248,176 +176,68 @@
         {
             "type": "multiple",
             "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "Which of the following is NOT one of the main characters in Grand Theft Auto V&rsquo;s story mode?",
-            "correct_answer": "Tommy Vercetti",
+            "category": "Mythology",
+            "question": "What mythology did the god &quot;Apollo&quot; come from?",
+            "correct_answer": "Greek and Roman",
             "incorrect_answers": [
-                "Michael de Santa",
-                "Franklin Clinton",
-                "Trevor Phillips"
+                "Roman and Spanish",
+                "Greek and Chinese",
+                "Greek, Roman and Norse"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "What is the name of the Greek god of blacksmiths?",
+            "correct_answer": "Hephaestus",
+            "incorrect_answers": [
+                "Dyntos",
+                "Vulcan",
+                "Artagatus"
             ]
         },
         {
             "type": "multiple",
             "difficulty": "hard",
-            "category": "Entertainment: Video Games",
-            "question": "Which game in the &quot;Monster Hunter&quot; series introduced the monster &quot;Gobul&quot;?",
-            "correct_answer": "Monster Hunter Tri",
+            "category": "Mythology",
+            "question": "Nidhogg is a mythical creature from what mythology?",
+            "correct_answer": "Norse",
             "incorrect_answers": [
-                "Monster Hunter Freedom Unite",
-                "Monster Hunter Frontier",
-                "Monster Hunter Generations"
+                "Egyptian",
+                "Greek",
+                "Hindu"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "The Hippogriff, not to be confused with the Griffon, is a magical creature with the front half of an eagle, and the back half of what?",
+            "correct_answer": "A Horse",
+            "incorrect_answers": [
+                "A Dragon",
+                "A Tiger",
+                "A Lion"
             ]
         },
         {
             "type": "multiple",
             "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "Which of the following is not a character in the Street Fighter series?",
-            "correct_answer": "Mai Shiranui",
+            "category": "Mythology",
+            "question": "Who was the King of Gods in Ancient Greek mythology?",
+            "correct_answer": "Zeus",
             "incorrect_answers": [
-                "Laura Matsuda",
-                "Sakura Kasugano",
-                "Ibuki"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "What name does the little headcrab in &quot;Half Life 2&quot; have?",
-            "correct_answer": "Lamarr",
-            "incorrect_answers": [
-                "Jumperr",
-                "Drett",
-                "Jerry"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "hard",
-            "category": "Entertainment: Video Games",
-            "question": "During development of &quot;Super Mario World&quot;, Yoshi&#039;s hard saddle was originally which of these?",
-            "correct_answer": "A shell",
-            "incorrect_answers": [
-                "A slide of Gelatin",
-                "A poffin",
-                "A spike"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "Which operation in &quot;Tom Clancy&#039;s Rainbow Six Siege&quot; introduced the &quot;Skyscraper&quot; map?",
-            "correct_answer": "Red Crow",
-            "incorrect_answers": [
-                "Velvet Shell",
-                "Skull Rain",
-                "Dust Line"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "Which of these is NOT a Humongous Entertainment game franchise?",
-            "correct_answer": "Commander Keen",
-            "incorrect_answers": [
-                "Pajama Sam",
-                "Putt-Putt",
-                "Freddi Fish"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "In Terraria, which of the following items does the Martian Saucer mini-boss NOT drop?",
-            "correct_answer": "Drill Containment Unit",
-            "incorrect_answers": [
-                "Anti-Gravity Hook",
-                "Influx Waver",
-                "Cosmic Car Key"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "hard",
-            "category": "Entertainment: Video Games",
-            "question": "Which of the following games was NOT included in Valve&#039;s Orange Box?",
-            "correct_answer": "Counter-Strike",
-            "incorrect_answers": [
-                "Portal",
-                "Half-Life 2: Episode Two",
-                "Team Fortress 2"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "Which of the following is not a character in the video game Doki Doki Literature Club?",
-            "correct_answer": "Nico",
-            "incorrect_answers": [
-                "Monika",
-                "Natsuki",
-                "Sayori"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "In which Mario game did the Mega Mushroom make its debut?",
-            "correct_answer": "Mario Party 4",
-            "incorrect_answers": [
-                "New Super Mario Bros.",
-                "Mario Kart Wii",
-                "Super Mario 3D World"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "hard",
-            "category": "Entertainment: Video Games",
-            "question": "In &quot;The Witness&quot;, how many lasers must be activated to get into the mountain area?",
-            "correct_answer": "7",
-            "incorrect_answers": [
-                "8",
-                "5",
-                "12"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "hard",
-            "category": "Entertainment: Video Games",
-            "question": "In the game Nuclear Throne, what organization chases the player character throughout the game?",
-            "correct_answer": "The I.D.P.D",
-            "incorrect_answers": [
-                "The Fishmen",
-                "The Bandits",
-                "The Y.V.G.G"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "hard",
-            "category": "Entertainment: Video Games",
-            "question": "In &quot;Starbound&quot;, what is the max HP of the monster &quot;Punchy&quot;?",
-            "correct_answer": "50,000 HP",
-            "incorrect_answers": [
-                "9,000,000 HP",
-                "100 HP",
-                "150,000 HP"
+                "Apollo",
+                "Hermes",
+                "Poseidon"
             ]
         },
         {
             "type": "boolean",
             "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "In the Monster Hunter Series, it is possible to capture Elder Dragons.",
+            "category": "Mythology",
+            "question": "According to Greek Mythology, Atlas was an Olympian God.",
             "correct_answer": "False",
             "incorrect_answers": [
                 "True"
@@ -426,54 +246,186 @@
         {
             "type": "multiple",
             "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "Which of these stages is not playable in &quot;Super Smash Bros. for Wii U&quot;?",
-            "correct_answer": "Fountain of Dreams",
+            "category": "Mythology",
+            "question": "Which of the following Mesopotamian mythological figures was NOT a deity?",
+            "correct_answer": "Enkidu",
             "incorrect_answers": [
-                "Bridge of Eldin",
-                "75m",
-                "Miiverse"
+                "Enki",
+                "Enlil",
+                "Enkimdu"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Mythology",
+            "question": "What was the punishment for Sysiphus&#039;s craftiness?",
+            "correct_answer": "Cursed to roll a boulder up a hill for eternity.",
+            "incorrect_answers": [
+                "Tied to a boulder for eternity, being pecked by birds.",
+                "Standing in a lake filled with water he could not drink.",
+                "To fell a tree that regenerated after every axe swing."
             ]
         },
         {
             "type": "multiple",
             "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "In the game &quot;Subnautica&quot;, which feature was removed due to performance issues in 2016?",
-            "correct_answer": "Terraforming",
+            "category": "Mythology",
+            "question": "What is the name of the first human being in Norse mythology?",
+            "correct_answer": "Ask",
             "incorrect_answers": [
-                "Building",
-                "Crafting",
-                "Multiplayer"
+                "Asmund",
+                "Ake",
+                "Asger"
             ]
         },
         {
             "type": "multiple",
             "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "Who is credited with having created the world&#039;s first video game Easter Egg?",
-            "correct_answer": "Warren Robinett",
+            "category": "Mythology",
+            "question": "According to the Egyptian Myth of Osiris, who murdered Osiris?",
+            "correct_answer": "Set",
             "incorrect_answers": [
-                "Julius Smith",
-                "Will Crowther",
-                "Don Woods"
+                "Horus",
+                "Ra",
+                "Anhur"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "In Greek Mythology, who killed Achilles?",
+            "correct_answer": "Paris",
+            "incorrect_answers": [
+                "Hector",
+                "Helen",
+                "Pericles"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Mythology",
+            "question": "Who is a minor god that is protector and creator of various arts, such as cheese making and bee keeping.",
+            "correct_answer": "Aristaeus",
+            "incorrect_answers": [
+                "Autonoe",
+                "Carme",
+                "Cephisso"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Mythology",
+            "question": "How many heads does Cerberus have?",
+            "correct_answer": "3",
+            "incorrect_answers": [
+                "2",
+                "1",
+                "5"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "A minotaur is half human half what?",
+            "correct_answer": "Bull",
+            "incorrect_answers": [
+                "Cow",
+                "Horse",
+                "Eagle"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "Which greek god/goddess tossed a golden apple with the words &quot;for the fairest&quot; into the middle of the feast of the gods?",
+            "correct_answer": "Eris",
+            "incorrect_answers": [
+                "Hades",
+                "Ares",
+                "Artemis"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "What is the name of the Greek god of peaceful deaths?",
+            "correct_answer": "Thanatos",
+            "incorrect_answers": [
+                "Tartarus",
+                "Hades",
+                "Moros"
             ]
         },
         {
             "type": "boolean",
-            "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "The PlayStation was originally a joint project between Sega and Sony that was a Sega Genesis with a disc drive.",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "In Greek mythology, Hera is the goddess of harvest.",
             "correct_answer": "False",
             "incorrect_answers": [
                 "True"
             ]
         },
         {
-            "type": "boolean",
+            "type": "multiple",
             "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "Minecraft wasn&rsquo;t the original name to Minecraft.",
+            "category": "Mythology",
+            "question": "This Greek mythological figure is the god/goddess of battle strategy (among other things).",
+            "correct_answer": "Athena",
+            "incorrect_answers": [
+                "Ares",
+                "Artemis",
+                "Apollo"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Mythology",
+            "question": "Which Greek &amp; Roman god was known as the god of music, truth and prophecy, healing, the sun and light, plague, poetry, and more?",
+            "correct_answer": "Apollo",
+            "incorrect_answers": [
+                "Aphrodite",
+                "Artemis",
+                "Athena"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Mythology",
+            "question": "According to Algonquian folklore, how does one transform into a Wendigo?",
+            "correct_answer": "Participating in cannibalism.",
+            "incorrect_answers": [
+                "Excessive mutilation of animal corpses.",
+                "Performing a ritual involving murder.",
+                "Drinking the blood of many slain animals."
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Mythology",
+            "question": "Who is the Egyptian god of reproduction and lettuce?",
+            "correct_answer": "Min",
+            "incorrect_answers": [
+                "Menu",
+                "Mut",
+                "Meret"
+            ]
+        },
+        {
+            "type": "boolean",
+            "difficulty": "hard",
+            "category": "Mythology",
+            "question": "Rannamaari was a sea demon that haunted the people of the Maldives and had to be appeased monthly with the sacrifice of a virgin girl.",
             "correct_answer": "True",
             "incorrect_answers": [
                 "False"
@@ -482,92 +434,114 @@
         {
             "type": "multiple",
             "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "Which of the following characters from the game &quot;Overwatch&quot; was revealed to be homosexual in December of 2016?",
-            "correct_answer": "Tracer",
+            "category": "Mythology",
+            "question": "Which figure from Greek mythology traveled to the underworld to return his wife Eurydice to the land of the living?",
+            "correct_answer": "Orpheus",
             "incorrect_answers": [
-                "Widowmaker",
-                "Sombra",
-                "Symmetra"
+                "Hercules",
+                "Perseus",
+                "Daedalus"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Mythology",
+            "question": "Which of the following is NOT a god in Norse Mythology.",
+            "correct_answer": "Jens",
+            "incorrect_answers": [
+                "Loki",
+                "Tyr",
+                "Snotra"
             ]
         },
         {
             "type": "multiple",
             "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "Which of the following was NOT a playable character in the game Kingdom Hearts: Birth by Sleep?",
-            "correct_answer": "Ignis",
+            "category": "Mythology",
+            "question": "Which of these mythological creatures is said to be half-man and half-horse?",
+            "correct_answer": "Centaur",
             "incorrect_answers": [
-                "Ventus",
-                "Terra",
-                "Aqua"
+                "Minotaur",
+                "Pegasus",
+                "Gorgon"
             ]
         },
         {
             "type": "multiple",
             "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "What was the first .hack game?",
-            "correct_answer": ".hack//Infection",
+            "category": "Mythology",
+            "question": "Who was the Roman god of fire?",
+            "correct_answer": "Vulcan",
             "incorrect_answers": [
-                ".hack//Zero",
-                ".hack//Sign",
-                ".hack//Liminality"
+                "Apollo",
+                "Jupiter",
+                "Mercury"
             ]
         },
         {
             "type": "multiple",
             "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "Which survivor in Left 4 Dead sacrificed themself to save the other survivors?",
-            "correct_answer": "Bill",
+            "category": "Mythology",
+            "question": "Which of these Roman gods doesn&#039;t have a counterpart in Greek mythology?",
+            "correct_answer": "Janus",
             "incorrect_answers": [
-                "Louis",
-                "Francis",
-                "Zoey"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "In &quot;Halo 2&quot;, what is the name of the monitor of Installation 05?",
-            "correct_answer": "2401 Penitent Tangent",
-            "incorrect_answers": [
-                "343 Guilty Spark",
-                "031 Exuberant Witness",
-                "252 Biodis Expolsion"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "What is the name of the world that the MMO &quot;RuneScape&quot; takes place in?",
-            "correct_answer": "Gielinor",
-            "incorrect_answers": [
-                "Glindor",
-                "Azeroth",
-                "Zaros"
-            ]
-        },
-        {
-            "type": "multiple",
-            "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "Which of these is NOT a game under the Worms series?",
-            "correct_answer": "Major Malfunction",
-            "incorrect_answers": [
-                "Crazy Golf",
-                "Clan Wars",
-                "Ultimate Mayhem"
+                "Vulcan",
+                "Juno",
+                "Mars"
             ]
         },
         {
             "type": "boolean",
             "difficulty": "easy",
-            "category": "Entertainment: Video Games",
-            "question": "Doki Doki Literature Club was developed in Japan.",
+            "category": "Mythology",
+            "question": "According to Greek Mythology, Zeus can control lightning.",
+            "correct_answer": "True",
+            "incorrect_answers": [
+                "False"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "In African mythology, Anansi is a trickster and storyteller who takes the shape of which animal?",
+            "correct_answer": "Spider",
+            "incorrect_answers": [
+                "Wild dog",
+                "Monkey",
+                "Crocodile"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Mythology",
+            "question": "In most traditions, who was the wife of Zeus?",
+            "correct_answer": "Hera",
+            "incorrect_answers": [
+                "Aphrodite",
+                "Athena",
+                "Hestia"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "Who is the god of war in Polynesian mythology?",
+            "correct_answer": "&#039;Oro",
+            "incorrect_answers": [
+                "Hina",
+                "Kohara",
+                "M\u0101ui"
+            ]
+        },
+        {
+            "type": "boolean",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "The Japanese god Izanagi successfully returned his wife Izanami from the Underworld.",
             "correct_answer": "False",
             "incorrect_answers": [
                 "True"
@@ -576,13 +550,37 @@
         {
             "type": "multiple",
             "difficulty": "medium",
-            "category": "Entertainment: Video Games",
-            "question": "Which of these Counter-Strike maps is a bomb defuse scenario?",
-            "correct_answer": "Prodigy",
+            "category": "Mythology",
+            "question": "Neptune&#039;s greek name was...",
+            "correct_answer": "Poseidon",
             "incorrect_answers": [
-                "747",
-                "Havana",
-                "Oilrig"
+                "Ares",
+                "Zeus",
+                "Apollo"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Mythology",
+            "question": "In Greek mythology, who is the god of wine?",
+            "correct_answer": "Dionysus",
+            "incorrect_answers": [
+                "Hephaestus",
+                "Demeter",
+                "Apollo"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Mythology",
+            "question": "Which of the following is not one of the Greek Fates?",
+            "correct_answer": "Narcissus",
+            "incorrect_answers": [
+                "Clotho",
+                "Atropos",
+                "Lachesis"
             ]
         }
     ]

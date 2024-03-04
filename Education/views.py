@@ -61,7 +61,8 @@ def index_edu(request):
     for category_name in category_names:
         # call the function to retrieve the objects from the django database - viewable on admin site
         question_selection =  category_objects(request, category_name)           
-        
+        print(f"question_selection:{question_selection}")
+
         # retrieve question_selection_pks from the session (from utils.category_objects)
         # because the 1st pk needs to be indexed for the 1st question rendered
         # question_selection.first().id chose the 1st question numerically in the database, not the 1st from the randomised list
@@ -89,6 +90,7 @@ def index_edu(request):
 # render an HTTP 404 error if a question with the requested ID doesn’t exist
 @login_required(login_url='user_auth:login')
 def detail(request, category_name, question_id):  
+    from django.db import connection ##
     response = get_json_categories()
     category_names = get_category_names(response)  
 
@@ -129,7 +131,7 @@ def detail(request, category_name, question_id):
                    'category_name': category_name 
                    }
         print(f"context:{context}") ##
-
+        print(connection.queries) ##
         return render(request, 'edu_quiz/edu_detail.html', context)
 
 '''

@@ -160,7 +160,6 @@ The function & its test is called in Django shell so it is commented out.
                 # save the object to the database
 #                question_object.save()
 
-
 '''
 Create a function that finds the question id for the next question in the quiz.
 '''
