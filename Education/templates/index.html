@@ -15,60 +15,76 @@
       <!--link css in base template to make it available in child templates for all 3 apps-->
       <!--NOTE:internal CSS from parent/base template is used in child template that extends it;-->
       <!--NOTE: the url to stylesheet & palcement of '/'; this renders external css correctly-->
-      <link href="{% static 'CSS/StyleSheet_edu.css' %}" rel = "stylesheet" type = "text/css">             
+      <link href="{% static 'CSS/StyleSheet_edu.css' %}" rel = "stylesheet" type = "text/css">
+      <style>
+        /*set the font size of the text inside the navigation*/
+        /*set the border color of the navigation*/
+        /*sets the navigation background to a semi-transparent color by adding 80 to the end of hexadecimal value */
+        /*adds padding between the text and the border of the navigation element*/
+        /*adds a box shadow effect to the navigation element
+        values 0 0 30px determine the size and position of the shadow*/
+        .nav{	
+        	font-size: 20px;
+        	border:blanchedalmond;						
+        	background-color: #00000080;		        	
+        	box-shadow: 0 0 30px black;             
+        }
+      </style>             
     </head>
 
     <body style="background: floralwhite;">            
         {% block content %}
-            <!-- Nav bar template for all pages-->
+            <!-- Nav bar template for all pages-->            
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                          <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" aria-disabled="true">QuizMe </a>
-                        </li>
-                        <li class="nav-item">
-                          <!-- link to General_Knowledge quiz home page 
-                          include category_id in tag to avoid a NoReverseMatch error in template rendering-->
-                          <a class="nav-link active" href="{% url 'General_Knowledge:index_gen' %}">General Knowledge</a>
-                          
-                        </li>
-
-                            <li class="nav-item">
-                                <!-- link to Education quiz home page 
-                                include category_id in tag to avoid a NoReverseMatch error in template rendering-->
-                                <a class="nav-link active" href="{% url 'Education:index_edu' %}">Education</a>
-                                
+                    <row>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mb-2 mb-lg-0">
+                              <li class="nav-item ms-1 me-3">
+                                <a class="nav-link active" aria-current="page" aria-disabled="true" href="{% url 'Education:index' %}">QuizMe </a>
                             </li>
-                            
-                            <li class="nav-item">
-                              <!-- link to Education quiz home page 
+                            <li class="nav-item ms-1 me-3">
+                              <!-- link to General_Knowledge quiz home page 
                               include category_id in tag to avoid a NoReverseMatch error in template rendering-->
-                              <a class="nav-link active" href="{% url 'Entertainment:index_en' %}">Entertainment</a>
+                              <a class="nav-link active" href="{% url 'General_Knowledge:index_gen' %}">General Knowledge</a>
+                            
+                            </li>
 
-                          </li>
+                                <li class="nav-item ">
+                                    <!-- link to Education quiz home page 
+                                    include category_id in tag to avoid a NoReverseMatch error in template rendering-->
+                                    <a class="nav-link active" href="{% url 'Education:index_edu' %}">Education</a>
+                                    
+                                </li>
 
-                        </ul>
-                        <div class="item" style="color: coral;">
-                        {% if user.is_authenticated %}
-                            {{user.username}}
-                        {% endif %}
-                        </div>
-                        <div class="dropdown">
-                            <button class="dropbtn">Account
-                              <i class="fa fa-caret-down"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                {% if user.is_authenticated %}
-                                    <a href="{% url 'user_auth:logout' %}">Logout</a>
-                                {% else %}
-                                    <a href="{% url 'user_auth:login' %}">Login</a>
-                                    <a href="{% url 'user_auth:register' %}">Register</a>                                                                  
-                                {% endif %}
+                                <li class="nav-item ">
+                                  <!-- link to Education quiz home page 
+                                  include category_id in tag to avoid a NoReverseMatch error in template rendering-->
+                                  <a class="nav-link active" href="{% url 'Entertainment:index_en' %}">Entertainment</a>
+
+                              </li>
+
+                            </ul>
+                            <div class="text-right" style="color: coral;">
+                            {% if user.is_authenticated %}
+                                {{user.username}}
+                            {% endif %}
                             </div>
-                          </div>
-                    </div>
+                            <div class="dropdown text-right">
+                                <button class="dropbtn">Account
+                                  <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="dropdown-content">
+                                    {% if user.is_authenticated %}
+                                        <a href="{% url 'user_auth:logout' %}">Logout</a>
+                                    {% else %}
+                                        <a href="{% url 'user_auth:login' %}">Login</a>
+                                        <a href="{% url 'user_auth:register' %}">Register</a>                                                                  
+                                    {% endif %}
+                                </div>
+                              </div>
+                        </div>                
+                    </row>
                 </div>
             </nav>
             
@@ -99,7 +115,7 @@
                     </p>
                     {% if user.is_authenticated %}
                     {% else %} 
-                    <p>So what are you waiting for? <a href="/user_auth/register">Register</a> on QuizMe today and start quizzing! 🚀</p>         
+                    <p>So what are you waiting for? <a href="/user_auth/register" style="color: coral;">Register</a> on QuizMe today and start quizzing!</p>         
                     {% endif %}         
             </div>
 
@@ -158,7 +174,11 @@
                   <br>
 
                 <div class="col-md-12"  style="text-align: center;">
-                    <h4>Find all our quiz categories <a href="#Quiz">here</a></h4>
+                    <h4>Find all our quiz categories 
+                        <a href="#Quiz" style="color: coral;">
+                        here
+                        </a>
+                    </h4>
                 </div>
             </div>  
 
