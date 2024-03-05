@@ -153,7 +153,7 @@ def selection(request, category_name, question_id):
     # - since a model name was altered from its original category_name to create a valid model with 'and'
     if category_name in category_names:
         model_name = category_name.replace(" ", "_").replace("&", "and")
-        model = globals()[model_name]
+        model = globals()[model_name] # not model = apps.get_model('Education', model_name)
 
         # get the question object associated with a specific question_id in the database
         question = get_object_or_404(model, pk=question_id)
