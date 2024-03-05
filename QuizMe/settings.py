@@ -25,12 +25,22 @@ SECRET_KEY = 'django-insecure-y_c$+sv5x#*m9*+as*r&zy%q9^@2x)$x=^^-rti-5h9*mxk+r5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# when debug=false,set to '*'
+# to allow requests from any host/domain name.
+# This is useful during development
+# or when you don't know the exact host/domain name that will be used to access your application.
+# NOTE: only do this in development environments or when certain the application is not exposed to the internet
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
+# add apps
 INSTALLED_APPS = [
+    'General_Knowledge',
+    'Entertainment',
+    'user_auth',
+    'Education',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -133,6 +143,14 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Django email Backend.
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'QuizMe2024@gmail.com'
+EMAIL_HOST_PASSWORD = 'pjxp atrk kbgu aoaq'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -143,3 +161,18 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# logging for debugging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',  # Set the desired log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+    },
+}

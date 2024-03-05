@@ -1,0 +1,148 @@
+{% extends "index.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">		
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<!--NOTE: the url to stylesheet & palcement of '/'; this renders external css correctly-->
+	
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}General Knowledge Quiz{% endblock %}</title>	
+</head>    
+
+<body style="background: beige;">
+	{% block content %}
+    <!-- Navbar for all pages-->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'Education:index' %}" aria-disabled="true">QuizMe </a>
+                    </li>  
+                </ul>
+                <div class="item" style="color: #27a5ff;">
+                {% if user.is_authenticated %}
+                    {{user.username}}
+                {% endif %}
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Account
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'user_auth:logout' %}">Logout</a>
+                        {% else %}
+                            <a href="{% url 'user_auth:login' %}">Login</a>
+                            <a href="{% url 'user_auth:register' %}">Register</a>                                                                  
+                        {% endif %}
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </nav>
+	    <section style="padding-left: 10pt;">     
+            <div class = "row">
+                <!--use the text-center class because text-align: center; in .category_heading did not work-->		
+                <!-- set padding above & below the heading -->
+                <!--add a margin above the heading -->		
+                <div class = "col-md-12 text-center py-4 mt-4">
+                    <!-- show a heading for the General Knowledge Quiz category-->                    
+                    <header>
+                        <h1 id="gen_heading"><span>General Knowledge Quiz</span></h1>
+                    </header>                    
+                </div>
+            </div>     
+            
+            <!-- describe the General Knowledge category -->
+            <div class = "row">
+                <div class = "col-md-12 text-center">
+                    <p class="gen_p" style="font-size: 20px;"><i>
+                        Welcome to the General Knowledge Quiz!
+                        Challenge your mind with a diverse set of questions covering a wide range of topics. 
+                        Whether you're a trivia enthusiast or just looking to test your general knowledge, this quiz is open to everyone without an account.
+                    </i></p>
+                </div>            
+            </div>             
+        </section>
+
+        <section>
+            <!--check if there are category names -->            
+            <!-- list the categories-->
+            {% if category_names %}  
+                {% for category_name in category_names %}
+                    <!--check if there are 10 questions for the category -->
+                    {% if question_selection %}
+                        
+                        <!-- set padding above & below each subcategory -->		
+                        <div class = "row py-3">
+                            <!--an image button for the category -->  
+                            <!--Add the d-flex and justify-content-center classes to the column. 
+							This will make the column a flex container and center its contents horizontally--> 
+                            <!-- vertically center the content with align-items-center--> 
+                            <div class = "col-md-6 d-flex justify-content-center align-items-center">
+                                <!--let the image adapt to viewport width- fluid layout expands to fill the available space -->                                                    
+                                <div class="container-fluid">
+                                    
+                                    <!--General Knowledge category-->
+                                    {% if category_name == "General Knowledge" %}
+                                        <!-- call the url for the detail view of the first object in the question_selection queryset -->                    
+                                        <!--alter the url to include the app_name=General_Knowledge 
+                                        because namespaces are used to differentiate views between apps & create a url with the template tag-->
+                                        <!-- pass parameters as keyword arguments from detail view without spaces or commas 
+                                        generate links with the appropriate category_name. 
+                                        the category_name is extracted from the selected_category object in utils.get_category_names-->
+                                        <!-- display the name of the category as the button that takes you to the quiz -->
+                                        <a href = "{% url 'General_Knowledge:gen_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
+
+                                            <img src ="{% static 'assets/gen_knowledge.png' %}" 
+                                                alt = "General Knowledge" 
+                                                class = "gen_subcategory_image">
+                                                
+                                            <div class="subcategory_overlay">
+                                                <div class="gen_subcategory_text">
+                                                    {{ category_name }}
+                                                </div>
+                                            </div>
+
+                                        </a>                                                                              
+
+                                    {% endif %} 
+                                    
+                                </div>
+                            </div>
+                            
+                            <div class = "col-md-6">
+                                <!--a description for the General Knowledge category -->                    
+                                {% if category_name == "General Knowledge" %}
+                                    <p class="gen_p">                                                                                
+                                        Each quiz session for General Knowledge consists of 10 questions randomly selected from a pool of 50. 
+                                        Can you answer questions about language, history, geography, science, and more? 
+                                        Test your knowledge on topics ranging from architecture and world currencies to the origins of famous companies.
+                                        <br><br>
+                                        These questions will not only challenge your memory but also introduce you to fascinating facts and trivia. 
+                                        So, get ready to embark on a journey through a diverse array of topics and see how well you can score on the General Knowledge Quiz!
+                                    </p>                                                                
+                                
+                                {% endif %} 
+                            </div>
+                        </div>                                                         
+                        
+                    {% endif %}                
+                {% endfor %}
+
+            <!--display an error message if a quiz was not found for a category -->
+            {% else %}
+                <p>No quizzes are available.</p>
+            {% endif %}
+
+        </section>
+	{% endblock %}
+    
+</body>
+</html>

@@ -2,6 +2,10 @@
 # prevent the virtual environment from being committed and pushed to the remote repository
 quizvenv/
 
+# json files created when calling API for trivia categories and a specifc category
+chosen_quiz_category.json
+quiz_categories.json
+
 # Django #
 *.log
 *.pot
