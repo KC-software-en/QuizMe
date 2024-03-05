@@ -71,12 +71,10 @@ def index_edu(request):
     
         # the response is the dictionary for trivia categories
         # pass all the context variables into a single dictionary to render in the template correctly
-        context = {'category_names': category_names,               
-                   ##'category_name': category_name,               
+        context = {'category_names': category_names,                             
                    'question_selection': question_selection,
                    'first_question_id': question_selection_pks[0]
                    }            
-        print(f"context:{context}") ##
         
         # render the context to the homepage of education
         return render(request, 'edu_quiz/edu_quiz.html', context) 
@@ -98,7 +96,6 @@ def detail(request, category_name, question_id):
         # use the category_name selected on edu_quiz.html to determine the model to get questions from
         # replace spaces and '&' in the event category names have spaces to create a valid model name
         model_name = category_name.replace(" ", "_").replace("&", "and")
-        print(f"Model Name: {model_name}") ##
 
         # use a try-except block to find a model that matches the category name
         # use use globals() instead of apps module to access the global namespace since the the model name was modified when replacing '&' 
@@ -165,12 +162,10 @@ def selection(request, category_name, question_id):
     # - since a model name was altered from its original category_name to create a valid model with 'and'
     if category_name in category_names:
         model_name = category_name.replace(" ", "_").replace("&", "and")
-        model = globals()[model_name] # not model = apps.get_model('Education', model_name)
+        model = globals()[model_name]
 
         # get the question object associated with a specific question_id in the database
         question = get_object_or_404(model, pk=question_id)
-        #    
-        print(f"correct_answer:{question.correct_answer}") ##
     
         # use the helper function literal_eval of the ast module to convert the str representation of the choices list
         # - in the textfield of the category model into a list
@@ -178,7 +173,7 @@ def selection(request, category_name, question_id):
         # note:ast.literal_eval is safer than eval. it only evaluates literals & not arbitrary expressions, 
         # - reducing the risk of code injection
         # use in template to iterate over the list of choices dictionaries and access the values for the 'choice' key
-        convert_choices_textfield_into_list = ast.literal_eval(question.choices)             
+        convert_choices_textfield_into_list = ast.literal_eval(question.choices)           
             
         # access submitted data by key name with a dictionary-like object- request.POST
         # use the key name 'choice' (defined in edu_detail form input) which returns the ID of the selected choice
@@ -222,11 +217,9 @@ def selection(request, category_name, question_id):
                         
             # retrieve question_selection_pks from the session (from utils.category_objects)
             question_selection_pks = request.session['question_selection_ids']        
-            print(f"question_selection_ids in session:{question_selection_pks}") ##
     
             # get the next question
             next_question = get_next_question_id(category_name, question_id, question_selection_pks)
-            print(f"next_question:{next_question}") ##
     
             # if there is another question available from the question_selection redirect to the detail view again
             # - to display that question 
