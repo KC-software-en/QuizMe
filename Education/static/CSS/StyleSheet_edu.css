@@ -543,3 +543,77 @@ left: -81.25rem;
     color: lavenderblush;
     background-color: rgb(221, 46, 15);
 }       
+
+/* style the user_auth_ */
+
+/* style the user_auth_ login */
+/* set the font of the paragraph */
+/* set the font size of the paragraph */
+/* set the text color of the paragraph */
+/* align the text to the center of the paragraph */
+/* add space outside the paragraph border with margin*/
+/* add space around the paragraph text within the border*/
+/* add a solid border around the paragraph */
+/* set the background color of the paragraph */
+/* set the box-shadow of the paragraph */
+/* set the border-radius of the paragraph to round the edges*/
+.user_auth_login{
+    font-family: Arial, sans-serif; 
+    font-size: 18px; 
+    color: black; 
+    text-align: center; 
+    margin: 60px; 
+    padding: 25px; 
+    border: .5px black; 
+    background-color: lavenderblush; 
+    box-shadow: 0 0 30px black;
+    border-radius: 5%;
+}
+
+/* style the register template */
+
+/* set the font of the paragraph */
+/* set the font size of the paragraph */
+/* set the text color of the paragraph */
+/* align the text to the center of the paragraph */
+/* add space outside the paragraph border with margin*/
+/* add space around the paragraph text within the border*/
+/* add a solid border around the paragraph */
+/* set the background color of the paragraph */
+/* set the box-shadow of the paragraph */
+/* set the border-radius of the paragraph to round the edges*/
+.register_p{
+    font-family: Arial, sans-serif; 
+    font-size: 18px; 
+    color: black; 
+    text-align: center; 
+    margin: 60px; 
+    padding: 25px; 
+    border: .5px black; 
+    background-color: lavenderblush; 
+    box-shadow: 0 0 30px black;
+    border-radius: 5%;
+}
+
+/*style the button on register.html */
+/*create margin*/
+/*add rounded corners with a radius*/
+/*set the color of the text in buttons*/
+/*set the background color of buttons*/
+/*set a border*/
+.register_btn{
+    margin-bottom: 5px;
+	margin-top: 5px;
+	border-radius: 5px;
+    color: black;
+	background-color: lavenderblush;
+	border: 1px solid black;    
+	}
+
+/*style the button on register.html when hovering over it*/
+/*set the color of the text in buttons*/
+/*set the background color of buttons*/
+#register_btn:hover{
+    color: lavenderblush;
+    background-color: coral;
+}    
