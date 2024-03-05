@@ -89,8 +89,7 @@ def index_edu(request):
 # display the question text 
 # render an HTTP 404 error if a question with the requested ID doesn’t exist
 @login_required(login_url='user_auth:login')
-def detail(request, category_name, question_id):  
-    from django.db import connection ##
+def detail(request, category_name, question_id):      
     response = get_json_categories()
     category_names = get_category_names(response)  
 
@@ -115,7 +114,7 @@ def detail(request, category_name, question_id):
         # get the question object associated with a specific question_id in the database
         question = get_object_or_404(model, pk=question_id)    
         print(f"\n\nquestion:{question}")
-        print(f"correct_answer:{question.correct_answer}")
+        print(f"\n\ncorrect_answer:{question.correct_answer}")        
     
         # use the helper function literal_eval of the ast module to convert the str representation of the choices list
         # - in the textfield of the category model into a list
@@ -130,8 +129,7 @@ def detail(request, category_name, question_id):
                    'choices':convert_choices_textfield_into_list,
                    'category_name': category_name 
                    }
-        print(f"context:{context}") ##
-        print(connection.queries) ##
+        print(f"\n\ncontext:{context}\n\n") ##        
         return render(request, 'edu_quiz/edu_detail.html', context)
 
 '''
