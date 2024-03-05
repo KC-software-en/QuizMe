@@ -217,7 +217,40 @@ width: 50%;
 /****************************************************************************************/
 /*style the QuizMe homepage*/
 
+/*add a box shadow effect to the navigation element
+values determine the horizontal offset, vertical offset, blur radius, & spread radius of the shadow */
+nav{
+    box-shadow: 0 0 30px 10px black;
+}
 
+/*set the font color for the text inside the navigation */
+.nav-link{
+    color: floralwhite;
+}
+
+/*set the font color for the text inside the navigation when hovering over it */
+.nav-link:hover{
+    color: coral;
+}
+
+/*set the width of the searchbar */
+#searchbar{
+    width: 300px;
+}
+
+/*set the font color for the text inside the searchbar_button */
+/*set the border color of the searchbar_button */
+#searchbar_button{
+    color: coral;
+    border: 1px solid coral;
+}
+
+/*set the font color for the text inside the searchbar_button when hovering over it */
+/*set the background-color for the searchbar_button when hovering over it */
+#searchbar_button:hover{
+    color: black;
+    background-color: coral;
+}
 
 /* style the QuizMe description */
 /* set the font of the paragraph */
@@ -266,7 +299,7 @@ p{
     position: absolute;
     background-color: #ffffff;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px coral;
     z-index: 1;
   }
   
@@ -282,7 +315,7 @@ p{
   
   /* Add a hover effect to dropdown links */
   .dropdown-content a:hover {
-    background-color: #00c0fb;
+    background-color: coral;
   }
   
   /* Show the dropdown menu on hover */
@@ -416,3 +449,97 @@ left: -81.25rem;
 }
 
 }    
+
+/* style Entertainment */
+
+/*style font for h1 text of Entertainment heading*/
+#en_heading{	
+	color: rgb(221, 46, 15);
+    text-shadow: 2px 2px 10px lavenderblush;
+	font-weight: bold;
+	text-align: center !important;	
+}
+
+/* style the subcategory description */
+/* set the font of the paragraph */
+/* set the font size of the paragraph */
+/* set the text color of the paragraph */
+/* align the text to the center of the paragraph */
+/* add space outside the paragraph border with margin*/
+/* add space around the paragraph text within the border*/
+/* add a solid border around the paragraph */
+/* set the background color of the paragraph */
+/* set the box-shadow of the paragraph */
+/* set the border-radius of the paragraph to round the edges*/
+.en_p{
+    font-family: Arial, sans-serif; 
+    font-size: 18px; 
+    color: rgb(221, 46, 15); 
+    text-align: center; 
+    margin: 60px; 
+    padding: 25px; 
+    border: .5px solid rgb(221, 46, 15); 
+    background-color: lavenderblush; 
+    box-shadow: 0 0 30px rgb(221, 46, 15);
+    border-radius: 5%;
+}
+
+/* Define the styles for the subcategory image inside the container */
+/* let the image fill the entire width of its container. */
+/* the image's height adjusts proportionally based on its width with auto */
+/* Set the initial opacity of the subcategory_image to fully opaque */
+/* use block display to ensure consistent behaviour & that any default styles or behaviours associated with block-level elements are applied.*/
+/* set a smooth transition effect over 0.5 seconds with ease timing function */
+/* Ensure that the back face of the image is not visible during transitions */
+/* set the box-shadow of the paragraph */
+.en_subcategory_image{
+    width : 100%;
+    height : auto;
+    border-radius: 5%;
+    opacity: 1;
+    display: block;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
+    box-shadow: 0 0 40px rgb(221, 46, 15);
+}
+
+/* Define the styles for the subcategory image when hovering over the container */
+/* let the opacity of the image decrease to 0.3 to make it partially transparent */
+.container-fluid:hover .en_subcategory_image{
+    opacity: 0.3;    
+}
+
+/* Define the styles for the subcategory text within the overlay */
+/* Set the background colour */
+/* Set the text colour */
+/* Set the font size */
+/* Add padding to the text */
+.en_subcategory_text{
+    background-color: rgb(221, 46, 15);
+    color: floralwhite;
+    font-size: 16px;
+    padding: 16px 32px;
+}
+
+/*style the button on en_detail.html*/
+/*create margin*/
+/*add rounded corners with a radius*/
+/*set the color of the text in buttons*/
+/*set the background color of buttons*/
+/*set a border*/
+#en_detail_btn{	 
+    margin-bottom: 5px;
+	margin-top: 5px;
+	border-radius: 5px;
+    color: rgb(221, 46, 15);
+	background-color: lavenderblush;
+	border: 1px solid rgb(221, 46, 15);    
+	}
+
+/*style the button on en_detail.html when hovering over it*/
+/*set the color of the text in buttons*/
+/*set the background color of buttons*/
+#en_detail_btn:hover{
+    color: lavenderblush;
+    background-color: rgb(221, 46, 15);
+}       
