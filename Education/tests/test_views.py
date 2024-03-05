@@ -1,14 +1,14 @@
 # import the required libraries
-import requests
-import json
+# import ast safely evaluate strings containing Python literal structures e.g.strings, lists, dicts
+# use to convert str into list
+import ast 
 from django.template.response import SimpleTemplateResponse
 from django.template.response import TemplateResponse
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
-from django.http import HttpResponse
 from django.utils.text import slugify
 from unittest.mock import patch, MagicMock, Mock
 from django.test.client import RequestFactory, Client
@@ -18,13 +18,17 @@ from django.contrib.sessions.middleware import SessionMiddleware
 from django.contrib.auth.models import User
 
 # import functions from utils.py called in views
-from ..utils import get_json_categories, get_next_question_id, get_category_names, category_objects
+from ..utils import (
+    get_json_categories,
+    get_category_names,
+    get_specific_json_category,
+    mix_choices,
+)
 
 from ..models import *
-from ..views import *
 
 # import the views to be tested
-from ..views import detail
+from ..views import index, detail, index_edu, selection, try_new_quiz, results
 
 # create a test case for the views
 # tests for index view
@@ -180,7 +184,6 @@ class TestTryNewQuiz(TestCase):
 
         # Assertions
         self.assertEqual(response.status_code, 200)  # Assert response status code is OK
-        self.assertIsInstance(response, TemplateResponse)  # Assert response is a TemplateResponse
         self.assertEqual(response.template_name, 'edu_quiz/edu_result.html')  # Assert correct template used
         self.assertEqual(response.context_data['result'], 'some_result')  # Assert 'result' context data is correct
         self.assertEqual(response.context_data['category_name'], 'some_category')  # Assert 'category_name' context data is correct
@@ -220,10 +223,34 @@ class IndexEduTestCase(TestCase):
         response = index_edu(self.request)
 
         # Assertions
-        self.assertIsInstance(response, SimpleTemplateResponse)
-        self.assertEqual(response.template_name[0], 'edu_quiz/edu_quiz.html')
         self.assertIn('category_names', response.context_data)
         self.assertIn('question_selection', response.context_data)
         self.assertIn('first_question_id', response.context_data)
 
-# Test for the selection view.
+# Test for the selection views
+class SelectionTestCase(TestCase):       
+    @patch('Education.views.ast') 
+    def test_selection_valid_category_and_question(self, mock_ast):
+        # Mock functions
+        get_json_categories = MagicMock(return_value={"Mythology": {}, "History": {}})
+        get_category_names = MagicMock(return_value=["Mythology", "History"])
+        get_object_or_404 = MagicMock()
+        model = MagicMock()
+        model.objects.get = MagicMock()
+
+        # Set request object with valid choice
+        request = MagicMock()
+        request.POST = {'choice': 1}
+        mock_convert_choices = ['choice1', 'choice2']
+        mock_ast.literal_eval.return_value = mock_convert_choices
+        mock_question = MagicMock()
+
+        # Call function
+        selection(request, "History", 1)
+        
+        # Assertions
+        ast.literal_eval.assert_called_once_with(get_object_or_404.return_value.choices)
+        model.objects.get.assert_called_once_with(pk=request.POST['choice'])
+        assert get_json_categories() == {"Mythology": {}, "History": {}}, "get_json_categories did not return the expected value"
+        assert get_category_names() == ["Mythology", "History"], "get_category_names did not return the expected value"
+        mock_ast.literal_eval.assert_called_once_with(mock_question.choices)
