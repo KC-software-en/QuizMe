@@ -39,11 +39,18 @@ class TestViews(TestCase):
         self.user = User.objects.create_user(username='testuser', password=make_password('password'))
         self.client.login(username='testuser', password='password')
 
-    def test_index_view(self):
     # test that index view returns correct response
+    def test_index_view(self):
+        # set up a result key for the session dictionary if the user left a quiz without exiting
+        self.client.session['quiz_result'] = "possible_result"
+        self.client.session.save()
+
         response = self.client.get('/')
+
+        # assertions
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'index.html')    
+        self.assertTemplateUsed(response, 'index.html')  
+        self.assertNotIn('quiz_result', self.client.session, msg='Should check that the result was deleted from the session')  
 
 # Test for the Detail view  
 class TestDetailView(TestCase):
