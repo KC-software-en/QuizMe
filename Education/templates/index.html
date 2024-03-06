@@ -28,7 +28,9 @@
         https://getbootstrap.com/docs/5.0/components/navbar/-->        
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark my-4 py-4 px-4">
             <!-- link to QuizMe home page -->
-            <a class="navbar-brand me-4" href="{% url 'Education:index' %}">QuizMe</a>
+            <a class="navbar-brand me-4" href="{% url 'Education:index' %}" alt="QuizMe">
+                <img src="{% static 'assets/QuizMe.jpg' %}" height="80" width="80" style="border-radius: 35%;">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -83,8 +85,7 @@
             </div>
         </nav>
         
-                    
-       
+                           
             <div class="row">
                 <div class="col-md-12"  style="text-align: center;">
                     <h1><b>Welcome to QuizMe</b></h1>
