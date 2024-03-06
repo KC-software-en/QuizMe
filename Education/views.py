@@ -40,6 +40,12 @@ Create a view for the home page of QuizMe project.
 '''
 # define index view for home page of QuizMe project referenced in Education/urls.py
 def index(request):     
+    # if a user prematurely leaves a quiz & does not use the exit button,
+    # - delete the result & session data of the current quiz 
+    # - this is done for all the templates the navbar displays
+    if 'quiz_result' in request.session:
+        del request.session['quiz_result']
+        
     # Render your template and map a URL to it
     return render(request, "index.html")
 
@@ -51,6 +57,12 @@ Create a view for the home page of education quizzes.
 # get json reponse for trivia categories from open trivia db
 # index category from the dictionary id
 def index_edu(request):
+    # if a user prematurely leaves a quiz & does not use the exit button,
+    # - delete the result & session data of the current quiz 
+    # - this is done for all the templates the navbar displays
+    if 'quiz_result' in request.session:
+        del request.session['quiz_result']
+
     # call the categories function & save its response in an assigned variable - NameError if you don't assign it
     response = get_json_categories()
             
