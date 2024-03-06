@@ -12,7 +12,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 # import functions from utils.py called in views
-from .utils import get_json_categories, get_next_question_id, get_category_names, category_objects
+from .utils import get_json_categories, get_next_question_id, get_category_names, find_model, category_objects
 
 # import all models
 from .models import *
@@ -102,29 +102,16 @@ def index_edu(request):
 def detail(request, category_name, question_id):      
     response = get_json_categories()
     category_names = get_category_names(response)  
+    # call the function to find a model  
+    model = find_model(category_name, category_names) 
 
-    # check if the category_name is in the list of category_names then locate its model    
-    if category_name in category_names:
-        # use the category_name selected on edu_quiz.html to determine the model to get questions from
-        # replace spaces and '&' in the event category names have spaces to create a valid model name
-        model_name = category_name.replace(" ", "_").replace("&", "and")
-
-        # use a try-except block to find a model that matches the category name
-        # use use globals() instead of apps module to access the global namespace since the the model name was modified when replacing '&' 
-        # (apps still worked when it was only replacing " ")
-        # - dynamically:instead of explicitly specifying a fixed model in the code, generate or determine the model to use at runtime based on certain conditions/data
-        try:            
-            model = globals()[model_name] 
-            
-        # raise an error if the model is not found
-        except LookupError:
-            raise Http404("Cannot locate the model for the selected category.")     
-    
+    # check that a model was found
+    if model:            
         # get the question object associated with a specific question_id in the database
         question = get_object_or_404(model, pk=question_id)    
         print(f"\n\nquestion:{question}")
         print(f"\n\ncorrect_answer:{question.correct_answer}")        
-    
+
         # use the helper function literal_eval of the ast module to convert the str representation of the choices list
         # - in the textfield of the category model into a list
         # https://python.readthedocs.io/en/latest/library/ast.html#ast.literal_eval
@@ -132,12 +119,12 @@ def detail(request, category_name, question_id):
         # - reducing the risk of code injection
         # use in template to iterate over the list of choices dictionaries and access the values for the 'choice' key
         convert_choices_textfield_into_list = ast.literal_eval(question.choices)    
-    
+
         # render the edu_detail template & pass the 10 questions, their ids & category as context 
         context = {'question': question,
-                   'choices':convert_choices_textfield_into_list,
-                   'category_name': category_name 
-                   }
+                    'choices':convert_choices_textfield_into_list,
+                    'category_name': category_name 
+                    }
         print(f"\n\ncontext:{context}\n\n") ##        
         return render(request, 'edu_quiz/edu_detail.html', context)
 
@@ -168,14 +155,10 @@ def selection(request, category_name, question_id):
     # django automatically creates a primary key for each model
     response = get_json_categories()
     category_names = get_category_names(response)
+    model = find_model(category_name, category_names) 
 
-    # check if the category_name is in the list of category_names then locate its model
-    # use globals module instead of apps to access the global namespace for models
-    # - since a model name was altered from its original category_name to create a valid model with 'and'
-    if category_name in category_names:
-        model_name = category_name.replace(" ", "_").replace("&", "and")
-        model = globals()[model_name] # not model = apps.get_model('Education', model_name)
-
+    # check that a model was found
+    if model:    
         # get the question object associated with a specific question_id in the database
         question = get_object_or_404(model, pk=question_id)
     
