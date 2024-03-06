@@ -61,7 +61,8 @@ def index_edu(request):
     for category_name in category_names:
         # call the function to retrieve the objects from the django database - viewable on admin site
         question_selection =  category_objects(request, category_name)           
-        
+        print(f"question_selection:{question_selection}")
+
         # retrieve question_selection_pks from the session (from utils.category_objects)
         # because the 1st pk needs to be indexed for the 1st question rendered
         # question_selection.first().id chose the 1st question numerically in the database, not the 1st from the randomised list
@@ -86,7 +87,7 @@ def index_edu(request):
 # display the question text 
 # render an HTTP 404 error if a question with the requested ID doesn’t exist
 @login_required(login_url='user_auth:login')
-def detail(request, category_name, question_id):  
+def detail(request, category_name, question_id):      
     response = get_json_categories()
     category_names = get_category_names(response)  
 
@@ -99,11 +100,19 @@ def detail(request, category_name, question_id):
         # use a try-except block to find a model that matches the category name
         # use use globals() instead of apps module to access the global namespace since the the model name was modified when replacing '&' 
         # (apps still worked when it was only replacing " ")
-        # - dynamically:instead of explicitly specifying a fixed model in the code, generate or determine the model to use at runtime based on certain conditions/data          
-        model = globals()[model_name] 
-     
-        
-        question = get_object_or_404(model, pk=question_id) 
+        # - dynamically:instead of explicitly specifying a fixed model in the code, generate or determine the model to use at runtime based on certain conditions/data
+        try:            
+            model = globals()[model_name] 
+            
+        # raise an error if the model is not found
+        except LookupError:
+            raise Http404("Cannot locate the model for the selected category.")     
+    
+        # get the question object associated with a specific question_id in the database
+        question = get_object_or_404(model, pk=question_id)    
+        print(f"\n\nquestion:{question}")
+        print(f"\n\ncorrect_answer:{question.correct_answer}")        
+    
         # use the helper function literal_eval of the ast module to convert the str representation of the choices list
         # - in the textfield of the category model into a list
         # https://python.readthedocs.io/en/latest/library/ast.html#ast.literal_eval
@@ -117,7 +126,7 @@ def detail(request, category_name, question_id):
                    'choices':convert_choices_textfield_into_list,
                    'category_name': category_name 
                    }
-
+        print(f"\n\ncontext:{context}\n\n") ##        
         return render(request, 'edu_quiz/edu_detail.html', context)
 
 '''

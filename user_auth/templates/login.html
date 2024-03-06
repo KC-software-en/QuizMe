@@ -1,8 +1,9 @@
-<!-- Base template for all templates !-->
+{% extends "index.html" %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>{% block title %}QuizMe{% endblock %}</title>
+        <title>{% block title %}Login{% endblock %}</title>
             <!-- Required meta tags -->
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,27 +29,46 @@
                         </ul>
                 </div>
             </nav>
-            {% endblock %}
-
-            <div class="row" style="padding-top: 50pt;">
-                <div class="col-md-6" style="padding-left: 80pt;">
-                    <h1>Login</h1>
-                    <form action="{% url 'user_auth:authenticate_user' %}" method="post">
-                        {% csrf_token %}
-        
-                        <label>Username</label>
-                        <input type="text" name="username" placeholder="User" required>
-                        <br/><br/>
-        
-                        <label>Password</label>
-                        <input type="password" name="password" required>
-                        <br/><br/>
-        
-                        <input type="submit" value="Login" />
-                    </form>
-                    <p class="text-center">Don't have an account? <a href="/user_auth/register">Register</a> instead.</p>
+            
+            <!-- login form -->
+            <div class="row">
+                <div class="col-md">
+                    <div class="d-flex justify-content-center pt-4">
+                        <form action="{% url 'user_auth:authenticate_user' %}" method="post" class="user_auth_login">
+                            {% csrf_token %}
+                        
+                            <!-- use input-groups for each field and place icons on the left-->
+					        <!--link for bootstap icons must be in head of base template to apply in child template, else svg can work here-->								
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">								
+                                        <i class="bi bi-person-circle"></i>
+                                    </span>
+                                </div>
+                                <!--use form-control to customise input fields-->
+                                <input type="text" name="username" placeholder="Username" class="form-control" required>
+                            </div>
+                        
+                            <!-- use input-groups for each field and place icons on the left-->
+					        <div class="input-group mb-3">
+					        	<div class="input-group-append">
+					        		<span class="input-group-text">								
+					        			<i class="bi bi-key-fill"></i>
+					        		</span>
+					        	</div>
+					        		<!--use form-control to customise input fields-->
+					        		<input type="password" name="password" placeholder="Password" class="form-control" required>
+					        </div>
+                        
+                            <!--login button-->		
+					        <center>
+                            <input type="submit" value="Login" />
+                            </center>
+                        </form>
+                    </div>
                 </div>        
             </div>  
+            {% endblock %}
         </body>
 </html>
 
