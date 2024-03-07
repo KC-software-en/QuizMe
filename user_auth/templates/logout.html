@@ -23,7 +23,9 @@
             https://getbootstrap.com/docs/5.0/components/navbar/-->        
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark my-4 py-4 px-4">
                 <!-- link to QuizMe home page -->
-                <a class="navbar-brand me-4" href="{% url 'Education:index' %}">QuizMe</a>
+                <a class="navbar-brand me-4" href="{% url 'Education:index' %}" alt="QuizMe">
+                    <img src="{% static 'assets/QuizMe.jpg' %}" height="80" width="80" style="border-radius: 35%;">
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -32,7 +34,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                     <!-- list the items on the navbar -->
                   <ul class="navbar-nav mr-auto py-auto" >
-
+                    
                     <li class="nav-item active px-2">
                       <a class="nav-link" href="{% url 'General_Knowledge:index_gen' %}" style="color: floralwhite;">General Knowledge</a>
                     </li>
@@ -73,7 +75,7 @@
                             </form>
                             <button class="btn my-2 my-sm-0" type="submit" id="searchbar_button" >Search</button>
                         </div>
-
+                        
                     </div>
                 </div>
             </nav>            
