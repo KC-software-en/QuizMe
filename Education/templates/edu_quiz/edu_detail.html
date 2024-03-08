@@ -2,120 +2,110 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang = "en">
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">		
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-	<!--NOTE: the url to stylesheet & palcement of '/'; this renders external css correctly-->
-	<link href="{% static 'CSS/StyleSheet_edu.css' %}" rel = "stylesheet" type = "text/css"> 
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}Education Detail{% endblock %}</title>	
-    <style>
-        
-    </style>
-</head>    
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">		
+    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    	<!--NOTE: the url to stylesheet & palcement of '/'; this renders external css correctly-->
+    	<link href="{% static 'CSS/StyleSheet_edu.css' %}" rel = "stylesheet" type = "text/css"> 
+    	<meta charset="utf-8" />
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Education Detail{% endblock %}</title>	
+        <style>
 
-<body>
-	{% block content %}
-     <!-- Nav bar template for all pages-->
-     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-         <div class="container-fluid">
-             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                     <li class="nav-item">
-                         <a class="nav-link active" aria-disabled="true"></a>
-                     </li>                            
-                 </ul>
-                 <div class="item" style="color: coral;">
-                 {% if user.is_authenticated %}
-                     {{user.username}}
-                 {% endif %}
-                 </div>
-             </div>
-             <div class="dropdown">
-                <button class="dropbtn">Exit Quiz
-                  <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">                
-                        <a href="{% url 'Education:try_new_quiz' %}">Exit</a>
+        </style>
+    </head>    
+
+    <body>
+    	{% block content %}     
+    	    <section>
+                <div class= row>                    
+                    <div class= "col-md-4 d-flex justify-content-center pt-4 pe-4 me-4 mb-2">
+                        <!-- use tooltips to display a message when hovering over the exit button for a quiz
+                         https://getbootstrap.com/docs/5.0/components/tooltips/#examples-->
+                        <a class="btn btn-outline-light" 
+                        id="edu_detail_btn" style="font-size: larger;"
+                        href="{% url 'Education:try_new_quiz' %}"
+                        data-bs-toggle="tooltip" data-bs-placement="right" 
+                        title="Warning: Leaving the quiz will cause you to lose the data submitted.">
+                            Exit
+                        </a>
+                    </div>
                 </div>
-              </div>
-         </div>
-     </nav>
-	<section>
-        <div class="container-fluid text-center">
-            <div class="row my-5 align-items-center justify-content-center">			
-                <div class = "col d-flex justify-content-center">
-                    <div class="card edu_p" style="width: 40rem;">		
-                        <div class="card-body" id="no-underline">
-                            <!--add a margin below the card-title -->
-                            <h1 class="card-title mb-4"><i>{{ category_name }} quiz!</i></h1>		
-                                                                                        
-                                <!--show a form for each question in the quiz -->
-                                <!--the post method was used to send data to the server-->
-                                <!--the url in the action attribute was used to send data to the server-->
-                                <form action="{% url 'Education:selection' category_name=category_name question_id=question.id %}" method="POST">
-                                    <!--add the csrf_token to all post forms targeted at internal urls to protect against Cross Site Forgery-->
-                                    {% csrf_token %}
-                                                                            
-                                    <!--The template system uses dot-lookup syntax to access variable attributes.-->
-                                    <!-- Django does a dictionary lookup on the object question.-->
-                                    <!--Failing that, it tries an attribute lookup – which works, in this case. -->
-                                    <!--If attribute lookup has failed, it would’ve tried a list-index lookup.-->
-                                    <!--check if there are question objects passed as context-->                    
-                                    {% if question %}
 
-                                            <!--display the question text by accessing its question attribute -->
-                                            <!--add a margin below the question -->
-                                            <h3 class="mb-4"> {{ question.question }} </h3> 
-                                            
-                                            <!--display error message if user did not select a choice before submitting-->
-                                            {% if error_message %}
-								                <p><strong>{{error_message}}</strong></p>
-								            {% endif %}
+                <div class="container-fluid text-center">
+                    <div class="row my-5 align-items-center justify-content-center">			
+                        <div class = "col d-flex justify-content-center">
+                            <div class="card edu_p" style="width: 40rem;">		
+                                <div class="card-body" id="no-underline">
+                                    <!--add a margin below the card-title -->
+                                    <h1 class="card-title mb-4"><i>{{ category_name }} quiz!</i></h1>		
+
+                                        <!--show a form for each question in the quiz -->
+                                        <!--the post method was used to send data to the server-->
+                                        <!--the url in the action attribute was used to send data to the server-->
+                                        <form action="{% url 'Education:selection' category_name=category_name question_id=question.id %}" method="POST">
+                                            <!--add the csrf_token to all post forms targeted at internal urls to protect against Cross Site Forgery-->
+                                            {% csrf_token %}
+
+                                            <!--The template system uses dot-lookup syntax to access variable attributes.-->
+                                            <!-- Django does a dictionary lookup on the object question.-->
+                                            <!--Failing that, it tries an attribute lookup – which works, in this case. -->
+                                            <!--If attribute lookup has failed, it would’ve tried a list-index lookup.-->
+                                            <!--check if there are question objects passed as context-->                    
+                                            {% if question %}
                                         
-                                            <!--group related elements in a form with fieldset-->
-                                            <fieldset>                                                                                               
-                                                <!--iterate over the choices attribute to add a radio button for each choice
-                                                 associated with a specific question in the database-->
-                                                {% for choice in choices %}
-                                                    <!--Radio buttons. Each choice that is associated with that particular question is
-                                                    then displayed using a radio button in a form.-->
-                                                    <!--The name of each radio button is choice-->
-                                                    <!--selected value for each question will be sent to the server-->  
-                                                    <!-- uniquely identify the radio button within the form-->
-                                                    <!--the value attribute is the identifier for the user's choice associated with the question-->                                                                                              
-                                                    <input type="radio" name="choice" 
-                                                    id="choice{{forloop.counter}}" value="{{ choice.id }}" />                        
-                                                    <!-- access the value associated with the 'choice' key in the question.choices dictionary-->
-                                                    <label for="choice{{ forloop.counter }}">
-                                                        {{ choice.choice }} 
-                                                    </label>                                                                                                                                                                                                
-                                                    <br/><br/>
-                                                {% endfor %}                                                                                                                                                                            
-                                                
-                                                <!-- a button that allows the user to submit their choice-->
-                                                <!--when a user selects one of the radio buttons and submits the form,
-                                                     it’ll POST the data “choice=id” where id is the ID of the selected choice-->
-                                                <!--use margins to allow space above-under the button-->
-                                                <!-- use btn class so that the hover styles from the id will work-->                                                
-                                                <input type="Submit" value="Save" class="btn btn-outline-light" id="edu_detail_btn"/>                                                                                                
-                                            </fieldset>    
-                                                                                     
-                                    <!--display error message if there are no questions-->                                                                                        
-                                    {% else %}
-                                        <p><strong>{{ error_message }}</strong></p>
-                                    {% endif %}
-                                    
-                                </form>                                                                
+                                                    <!--display the question text by accessing its question attribute -->
+                                                    <!--add a margin below the question -->
+                                                    <h3 class="mb-4"> {{ question.question }} </h3> 
 
-                        </div>	
-                    </div>	
+                                                    <!--display error message if user did not select a choice before submitting-->
+                                                    {% if error_message %}
+    	    							                <p><strong>{{error_message}}</strong></p>
+    	    							            {% endif %}
+
+                                                    <!--group related elements in a form with fieldset-->
+                                                    <fieldset>                                                                                               
+                                                        <!--iterate over the choices attribute to add a radio button for each choice
+                                                         associated with a specific question in the database-->
+                                                        {% for choice in choices %}
+                                                            <!--Radio buttons. Each choice that is associated with that particular question is
+                                                            then displayed using a radio button in a form.-->
+                                                            <!--The name of each radio button is choice-->
+                                                            <!--selected value for each question will be sent to the server-->  
+                                                            <!-- uniquely identify the radio button within the form-->
+                                                            <!--the value attribute is the identifier for the user's choice associated with the question-->                                                                                              
+                                                            <input type="radio" name="choice" 
+                                                            id="choice{{forloop.counter}}" value="{{ choice.id }}" />                        
+                                                            <!-- access the value associated with the 'choice' key in the question.choices dictionary-->
+                                                            <label for="choice{{ forloop.counter }}">
+                                                                {{ choice.choice }} 
+                                                            </label>                                                                                                                                                                                                
+                                                            <br/><br/>
+                                                        {% endfor %}                                                                                                                                                                            
+                                                        
+                                                        <!-- a button that allows the user to submit their choice-->
+                                                        <!--when a user selects one of the radio buttons and submits the form,
+                                                             it’ll POST the data “choice=id” where id is the ID of the selected choice-->
+                                                        <!--use margins to allow space above-under the button-->
+                                                        <!-- use btn class so that the hover styles from the id will work-->                                                
+                                                        <input type="Submit" value="Save" class="btn btn-outline-light" id="edu_detail_btn"/>                                                                                                
+                                                    </fieldset>    
+
+                                            <!--display error message if there are no questions-->                                                                                        
+                                            {% else %}
+                                                <p><strong>{{ error_message }}</strong></p>
+                                            {% endif %}
+                                                
+                                        </form>                                                                
+                                    
+                                </div>	
+                            </div>	
+                        </div>
+                    </div>	                
                 </div>
-            </div>	                
-        </div>
-    </section>
-	{% endblock %}
-</body>
+            </section>
+            
+    	{% endblock %}
+    </body>
 </html>
