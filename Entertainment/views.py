@@ -143,7 +143,7 @@ def detail(request, category_name, question_id):
 
 
 # create a view that displays the quiz result 
-def results(request: HttpRequest, category_name: str) -> HttpResponse:
+def results(request, category_name: str):
     """
     This function retrieves the quiz result from the session and renders the result template.
 
