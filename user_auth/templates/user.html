@@ -1,4 +1,5 @@
-<!-- Base template for all templates !-->
+{% extends "index.html" %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,32 +11,25 @@
             <!-- Bootstrap CSS -->
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
-        <body>
-            {% block header %}
+    <body>
+        {% block header %}
 
-            {% endblock %}
+        {% endblock %}
 
-            {% block content %}
-            <!-- Nave bar template for all pages-->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/" aria-disabled="true">Home </a>
-                            </li>
+        {% block content %}                        
+            <div class="row" >
+                <div class="col-md">
+                    <div class="p-4 mt-3">
+                        <!-- Dispy User information after logging in. -->
+                        <div class="col-md-12"  style="text-align: center;">
+                            <h1 class="user_h">Welcome, {{username}}</h1>                        
+                            <p class="user_p"> Your encrypted password is {{password}}</p>
+                        </div>
                     </div>
                 </div>
-            </nav>
-            {% endblock %}
-
-            <div class="row" style="padding-top: 30pt;">
-                <div class="col-md-6" style="padding-left: 50pt;">
-                    <h1 style=color:blue style="text-align: left;" style="padding-top: 20pt;">Welcome, {{username}}</h1>
-                    <p> Your encrypted password is {{password}}</p>
-                </div>
             </div>
-        </body>
+        {% endblock %}
+    </body>
 </html>
 
 

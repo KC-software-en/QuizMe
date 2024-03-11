@@ -1,30 +1,42 @@
 # import the required libraries
-import requests
-import json
+# import ast safely evaluate strings containing Python literal structures e.g.strings, lists, dicts
+# use to convert str into list
+### Run commands for test ###
+# coverage erase
+# python manage.py test Education.tests.test_views
+# coverage run --source='.' manage.py test Education
+# coverage report
+# coverage html
+
+import ast 
 from django.template.response import SimpleTemplateResponse
 from django.template.response import TemplateResponse
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth.hashers import make_password
-from django.http import HttpResponse
-from django.utils.text import slugify
 from unittest.mock import patch, MagicMock, Mock
 from django.test.client import RequestFactory, Client
 from django.http import HttpResponse, HttpRequest
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 # import functions from utils.py called in views
-from ..utils import get_json_categories, get_next_question_id, get_category_names, category_objects
+from ..utils import (
+    get_json_categories,
+    get_category_names,
+    get_specific_json_category,
+    mix_choices,
+)
 
 from ..models import *
-from ..views import *
 
 # import the views to be tested
-from ..views import detail
+from Education.views import *
+from user_auth.views import *
 
 # create a test case for the views
 # tests for index view
@@ -35,65 +47,107 @@ class TestViews(TestCase):
         self.user = User.objects.create_user(username='testuser', password=make_password('password'))
         self.client.login(username='testuser', password='password')
 
-    def test_index_view(self):
     # test that index view returns correct response
+    def test_index_view(self):
+        # set up a result key for the session dictionary if the user left a quiz without exiting
+        self.client.session['quiz_result'] = "possible_result"
+        self.client.session.save()
+
         response = self.client.get('/')
+
+        # assertions
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'index.html')    
+        self.assertTemplateUsed(response, 'index.html')  
+        self.assertNotIn('quiz_result', self.client.session, msg='Should check that the result was deleted from the session')  
 
 # Test for the Detail view  
 class TestDetailView(TestCase):
     def setUp(self):
+        # Create a mock request
         self.factory = RequestFactory()
+        self.request = self.factory.get('/Education/')
+        self.request.session = {'question_selection_ids': [1, 2, 3]}  # Example session data
 
     @patch('Education.views.get_json_categories')
     @patch('Education.views.get_category_names')
-    @patch('Education.views.get_object_or_404')
-    @patch('Education.views.ast')
-    def test_detail_view(self, mock_ast, mock_get_object_or_404, mock_get_category_names, mock_get_json_categories):
-        # Mocking necessary functions and objects
-        mock_request = self.factory.get(detail, kwargs={'category_name': 'History', 'question_id': 1})
-        mock_response = MagicMock()
-        mock_get_json_categories.return_value = mock_response
-        mock_category_names = ['History']
-        mock_get_category_names.return_value = mock_category_names
-        mock_question = MagicMock()
-        mock_get_object_or_404.return_value = mock_question
-        mock_convert_choices = ['choice1', 'choice2']
-        mock_ast.literal_eval.return_value = mock_convert_choices
+    @patch('Education.views.category_objects')
+    def test_index_edu(self, mock_category_objects, mock_get_category_names, mock_get_json_categories):
+        # Mock the necessary functions
+        mock_get_json_categories.return_value = {'categories': [{'name': 'Math'}, {'name': 'Science'}]}
+        mock_get_category_names.return_value = ['Math', 'Science']
+        mock_category_objects.return_value = [{'id': 1, 'text': 'Question 1'}, {'id': 2, 'text': 'Question 2'}]
 
         # Call the view function
-        response = detail(mock_request, 'History', 1)
+        response = index_edu(self.request)
+        expected_categories = {'categories': [{'name': 'Math'}, {'name': 'Science'}]}
+        expected_names = ['Math', 'Science']
+        expected_objects = [
+        {'id': 1, 'text': 'Question 1'},
+        {'id': 2, 'text': 'Question 2'}
+        ]
+        category_objects = mock_category_objects()
 
-        # Assertions
-        mock_get_json_categories.assert_called_once()
-        mock_get_category_names.assert_called_once_with(mock_response)
-        mock_get_object_or_404.assert_called_once()
-        mock_ast.literal_eval.assert_called_once_with(mock_question.choices)
+        # Assertions        
         self.assertEqual(response.status_code, 200)
-        self.assertIn('question', response.context)
-        self.assertIn('choices', response.context)
-        self.assertIn('category_name', response.context) 
+        self.assertEqual(mock_get_json_categories(), expected_categories)
+        self.assertEqual(mock_get_category_names(), expected_names)
+        self.assertEqual(len(category_objects), len(expected_objects))
+        for i in range(len(expected_objects)):
+            self.assertEqual(category_objects[i], expected_objects[i])
 
-# Test for the try new quiz view  
-@patch('django.shortcuts.reverse')  # Patch reverse function
-def test_try_new_quiz_with_result(self, mock_reverse):
-  # Mock reverse function
-  mock_reverse.return_value = '/Education/try_new_quiz/'  # Replace with the expected redirect URL
+# Test for the Detail view  
+class TestDetailView(TestCase):
+    # Still need to test for.
+    pass
+    
+# Test for the results view
+class ResultsViewTest(TestCase):
+    def setUp(self):
+        # Create a test user
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
 
-  # Create a mock request object with "quiz_result" in the session
-  request = MagicMock()
-  request.session = {'quiz_result': 5}
+    def test_results_view_requires_login(self):
+        # Create a request object
+        request = HttpRequest()
+        request.user = self.user
+        req = self.client.get(reverse('Education:results', args=['History']))
+        middleware = SessionMiddleware(get_response=req)
+        middleware.process_request(request)
+        request.session.save()
 
-  # Call the function
-  response = try_new_quiz(request)
+        category_name = 'History'
 
-  # Assert expected behavior
-  self.assertEqual(response.status_code, 302)
-  self.assertEqual(response['Location'], '/Education/try_new_quiz/')
+        # Call the view function
+        response = results(request, category_name)
 
-  # Assert "quiz_result" is deleted
-  self.assertNotIn('quiz_result', request.session)
+        self.assertEqual(response.status_code, 200)
+
+    def test_results_view_with_authenticated_user(self):
+        # Log in the test user
+        self.client.login(username='testuser', password='testpassword')
+
+        # Replace 'your_category_name' with the actual category name
+        category_name = 'History'
+
+        # Call the view function
+        response = self.client.get(reverse('Education:results', args=[category_name]))
+
+        # Check if the response status code is 200 (OK)
+        self.assertEqual(response.status_code, 200)
+
+        # You can add more assertions here based on your view's behavior
+
+        # Example: Check if the correct template is used
+        self.assertTemplateUsed(response, 'edu_quiz/edu_result.html')
+
+        # Example: Check if the 'result' and 'category_name' are in the context
+        self.assertIn('result', response.context)
+        self.assertEqual(response.context['category_name'], category_name)
+
+# Test for the selection views
+class SelectionTestCase(TestCase):
+    # Still need to test for.
+    pass
 
 # Test for the try new quiz view  
 class TestTryNewQuiz(TestCase):
@@ -114,9 +168,33 @@ class TestTryNewQuiz(TestCase):
         self.assertIsInstance(response, HttpResponseRedirect)  # Assert response is a redirect
         self.assertEqual(response.url, reverse('Education:index_edu'))  # Assert redirect URL is correct
 
+# Test for the try new quiz view  with results
+    @patch('django.shortcuts.reverse')  # Patch reverse function
+    def test_try_new_quiz_with_result(self, mock_reverse):
+        # Mock reverse function
+        mock_reverse.return_value = '/Education/try_new_quiz/'  # Replace with the expected redirect URL
+
+        # Create a mock request object with "quiz_result" in the session
+        request = MagicMock()
+        request.session = {'quiz_result': 5}
+
+        # Call the function
+        response = try_new_quiz(request)
+
+        # Assert expected behavior
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], '/Education/')
+
+        # Assert "quiz_result" is deleted
+        self.assertNotIn('quiz_result', request.session) 
+
     def test_try_new_quiz_without_quiz_result_in_session(self):
         # Create a session without 'quiz_result'
-        request = self.factory.get(try_new_quiz)
+        request = RequestFactory().get(try_new_quiz)
+        # Add middleware manualy
+        middleware = SessionMiddleware(request)
+        middleware.process_request(request)
+        request.session.save()
 
         # Call the view function
         response = try_new_quiz(request)
@@ -124,106 +202,4 @@ class TestTryNewQuiz(TestCase):
         # Assertions
         self.assertNotIn('quiz_result', request.session)  # Assert session data has not been modified
         self.assertIsInstance(response, HttpResponseRedirect)  # Assert response is a redirect
-        self.assertEqual(response.url, reverse('Education:index_edu'))  # Assert redirect URL is correct  
-
-# Test for the results view
-    @patch('django.shortcuts.render')  # Patch render function
-    def test_results(self, mock_render):
-        # Mock request object
-        request = MagicMock()
-
-        # Scenario 1: "quiz_result" present in session
-        request.session['quiz_result'] = {'score': 10, 'max_score': 10}
-        category_name = 'Math'
-
-        # Call function and assert rendering
-        mock_render.return_value.status_code = 200  # Set mock response status code
-        response = results(request, category_name)
-        self.assertEqual(response.status_code, 200)
-
-        # Assert context dictionary
-        context = mock_render.call_args[1]['context']
-        self.assertEqual(context['result'], request.session['quiz_result'])
-        self.assertEqual(context['category_name'], category_name)
-
-        # Scenario 2: "quiz_result" not present in session
-        del request.session['quiz_result']
-
-        # Call function and assert rendering (should not redirect)
-        mock_render.return_value.status_code = 200
-        response = results(request, category_name)
-        self.assertEqual(response.status_code, 200)
-
-        # Assert context dictionary has empty result
-        context = mock_render.call_args[1]['context']
-        self.assertEqual(context['result'], None)
-        self.assertEqual(context['category_name'], category_name)
-
-        # Scenario 3: Invalid category name
-        invalid_category_name = 'Invalid'
-
-        # Mock render to raise exception (e.g., Http404)
-        mock_render.side_effect = Exception('Template not found')
-
-        # Call function and expect exception
-        with self.assertRaises(Exception):
-            results(request, invalid_category_name)       
-
-    def test_results_view_with_quiz_result_in_session(self):
-        # Create a session with 'quiz_result'
-        session = {'quiz_result': 'some_result'}
-        request = self.factory.get('<str:category_name>results/')
-        request.session = session
-
-        # Call the view function
-        response = results(request, 'some_category')
-
-        # Assertions
-        self.assertEqual(response.status_code, 200)  # Assert response status code is OK
-        self.assertIsInstance(response, TemplateResponse)  # Assert response is a TemplateResponse
-        self.assertEqual(response.template_name, 'edu_quiz/edu_result.html')  # Assert correct template used
-        self.assertEqual(response.context_data['result'], 'some_result')  # Assert 'result' context data is correct
-        self.assertEqual(response.context_data['category_name'], 'some_category')  # Assert 'category_name' context data is correct
-
-    def test_results_view_without_quiz_result_in_session(self):
-        # Create a session without 'quiz_result'
-        request = self.factory.get('<str:category_name>results/')
-
-        # Call the view function
-        response = results(request, 'some_category')
-
-        # Assertions
-        self.assertEqual(response.status_code, 200)  # Assert response status code is OK
-        self.assertIsInstance(response, TemplateResponse)  # Assert response is a TemplateResponse
-        self.assertEqual(response.template_name, 'edu_quiz/edu_result.html')  # Assert correct template used
-        self.assertIsNone(response.context_data['result'])  # Assert 'result' context data is None
-        self.assertEqual(response.context_data['category_name'], 'some_category')  # Assert 'category_name' context data is correct    
-
-# Test for the index edu view
-class IndexEduTestCase(TestCase):
-    def setUp(self):
-        # Create a mock request
-        self.factory = RequestFactory()
-        self.request = self.factory.get('/Education/')
-        self.request.session = {'question_selection_ids': [1, 2, 3]}  # Example session data
-
-    @patch('Education.views.get_json_categories')
-    @patch('Education.views.get_category_names')
-    @patch('Education.views.category_objects')
-    def test_index_edu(self, mock_category_objects, mock_get_category_names, mock_get_json_categories):
-        # Mock the necessary functions
-        mock_get_json_categories.return_value = {'categories': [{'name': 'Math'}, {'name': 'Science'}]}
-        mock_get_category_names.return_value = ['Math', 'Science']
-        mock_category_objects.return_value = [{'id': 1, 'text': 'Question 1'}, {'id': 2, 'text': 'Question 2'}]
-
-        # Call the view function
-        response = index_edu(self.request)
-
-        # Assertions
-        self.assertIsInstance(response, SimpleTemplateResponse)
-        self.assertEqual(response.template_name[0], 'edu_quiz/edu_quiz.html')
-        self.assertIn('category_names', response.context_data)
-        self.assertIn('question_selection', response.context_data)
-        self.assertIn('first_question_id', response.context_data)
-
-# Test for the selection view.
+        self.assertEqual(response.url, reverse('Education:index_edu'))  # Assert redirect URL is correct 

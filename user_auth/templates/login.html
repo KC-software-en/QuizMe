@@ -1,8 +1,9 @@
-<!-- Base template for all templates !-->
+{% extends "index.html" %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>{% block title %}QuizMe{% endblock %}</title>
+        <title>{% block title %}Login{% endblock %}</title>
             <!-- Required meta tags -->
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,46 +11,52 @@
             <!-- Bootstrap CSS -->
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
-        <body>
-            {% block header %}
+    <body>
+        {% block header %}
 
-            {% endblock %}
+        {% endblock %}
 
-            {% block content %}
-            <!-- Nave bar template for all pages-->
-
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/" aria-disabled="true">Home </a>
-                            </li>
-                        </ul>
-                </div>
-            </nav>
-            {% endblock %}
-
-            <div class="row" style="padding-top: 50pt;">
-                <div class="col-md-6" style="padding-left: 80pt;">
-                    <h1>Login</h1>
-                    <form action="{% url 'user_auth:authenticate_user' %}" method="post">
-                        {% csrf_token %}
-        
-                        <label>Username</label>
-                        <input type="text" name="username" placeholder="User" required>
-                        <br/><br/>
-        
-                        <label>Password</label>
-                        <input type="password" name="password" required>
-                        <br/><br/>
-        
-                        <input type="submit" value="Login" />
-                    </form>
-                    <p class="text-center">Don't have an account? <a href="/user_auth/register">Register</a> instead.</p>
+        {% block content %}                        
+            <!-- login form -->
+            <div class="row">
+                <div class="col-md">
+                    <div class="d-flex justify-content-center pt-4">
+                        <form action="{% url 'user_auth:authenticate_user' %}" method="post" class="user_auth_login">
+                            {% csrf_token %}
+                        
+                            <!-- use input-groups for each field and place icons on the left-->
+                            <!--link for bootstap icons must be in head of base template to apply in child template, else svg can work here-->								
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">								
+                                        <i class="bi bi-person-circle"></i>
+                                    </span>
+                                </div>
+                                <!--use form-control to customise input fields-->
+                                <input type="text" name="username" placeholder="Username" class="form-control" required>
+                            </div>
+                        
+                            <!-- use input-groups for each field and place icons on the left-->
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">								
+                                        <i class="bi bi-key-fill"></i>
+                                    </span>
+                                </div>
+                                    <!--use form-control to customise input fields-->
+                                    <input type="password" name="password" placeholder="Password" class="form-control" required>
+                            </div>
+                        
+                            <!--login button-->		
+                            <div style="text-align: center;">
+                                <input id="login_button" type="submit" value="Login"/>
+                            </div>
+                        </form>
+                    </div>
                 </div>        
             </div>  
-        </body>
+        {% endblock %}
+    </body>
 </html>
 
 

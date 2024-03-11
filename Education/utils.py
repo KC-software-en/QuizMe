@@ -160,7 +160,6 @@ The function & its test is called in Django shell so it is commented out.
                 # save the object to the database
 #                question_object.save()
 
-
 '''
 Create a function that finds the question id for the next question in the quiz.
 '''
@@ -194,7 +193,7 @@ A function that retrieves the desired category names from the Open Trivia DB jso
 def get_category_names(response):
     # Get the trivia categories values from the dictionary provided in the JSON response
     # Place an empty list as the default argument if the key is not found - this avoids errors in subsequent code
-    trivia_categories = response.get("trivia_categories")
+    trivia_categories = response.get("trivia_categories",[])
 
     # specify the id of the categories to include in the Education app's quizzes
     selected_category_id = [20, 17, 23]
@@ -225,6 +224,33 @@ def get_category_names(response):
 
     # return the list of category_names
     return category_names
+
+'''
+A function that finds the model associated with a category name.
+'''
+# use the selected category_name & the list of category_names it comes from as the parameters to find a model
+def find_model(category_name, category_names): 
+    # check if the category_name is in the list of category_names then locate its model       
+    if category_name in category_names:
+        # use the category_name selected on edu_quiz.html to determine the model to get questions from
+        # replace spaces and '&' in the event category names have spaces to create a valid model name
+        model_name = category_name.replace(" ", "_").replace("&", "and")
+
+        # use a try-except block to find a model that matches the category name
+        # use use globals() instead of apps module to access the global namespace since the the model name was modified when replacing '&' 
+        # (apps still worked when it was only replacing " ")
+        # - dynamically:instead of explicitly specifying a fixed model in the code, generate or determine the model to use at runtime based on certain conditions/data
+        '''# check if the category_name is in the list of category_names then locate its model
+        # use globals module instead of apps to access the global namespace for models
+        # - since a model name was altered from its original category_name to create a valid model with 'and'
+        ''' #################################
+        try:            
+            model = globals()[model_name] # not model = apps.get_model('Education', model_name)
+            return model
+
+        # raise an error if the model is not found
+        except LookupError:
+            raise Http404("Cannot locate the model for the selected category.") 
 
 '''
 A function that retrieves the category queryset from the database based on its category name.
