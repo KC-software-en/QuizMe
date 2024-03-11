@@ -6,7 +6,7 @@ from django.urls import path
 
 # import views which contain the functions or classes responsible for handling HTTP requests
 # and returning appropriate responses, rendering web pages.
-from . import views
+from Entertainment import views
 
 #############################################################################################
 #############################################################################################
