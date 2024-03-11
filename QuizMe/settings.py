@@ -100,7 +100,7 @@ elif DEBUG and (DATABASE == 2):
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Quizme',
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'Q_ME123@1',
         'HOST': 'localhost',
