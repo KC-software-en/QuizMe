@@ -15,7 +15,7 @@ from django.urls import reverse
 from .utils import get_json_categories, get_next_question_id, get_category_names, find_model, category_objects
 
 # import all models
-from .models import *
+from Education import models
 
 # import apps to dynamically fetch a model in detail() view
 from django.apps import apps
