@@ -25,6 +25,9 @@ class Music(models.Model):
     # define a __str__ method for human-readable output
     # return question
     def __str__(self):
+        """
+            Returns the question of the quiz.
+        """
         return self.question
     
 
@@ -47,6 +50,9 @@ class Film(models.Model):
     # define a __str__ method for human-readable output
     # return question
     def __str__(self):
+        """
+            Returns the question of the quiz.
+        """
         return self.question
     
 
@@ -68,4 +74,7 @@ class Video_Games(models.Model):
     # define a __str__ method for human-readable output
     # return question
     def __str__(self):
+        """
+            Returns the question of the quiz.
+        """
         return self.question    

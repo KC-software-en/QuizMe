@@ -14,11 +14,8 @@
     </head>
 
     <body>
-        {% block header %}
-
-        {% endblock %}
-
-        {% block content %}                    
+        {% block content %}  
+        <!-- Alert messages -->                  
             {% if messages %}
             <div class="messages">
                 {% for message in messages %}
@@ -29,21 +26,20 @@
             </div>
             {% endif %}
             
-            <br>
-        
             <!--Register--> 
-            <div class="container py-5">
+            <div id='form' class="container">
                 <div class="d-flex justify-content-center">
-                    <div class="card register_p" style="width: 40rem;">
+                    <div id="register_card" class="card register_p" style="width: 40rem;">
                         <div class="card-body" id="no-underline">
                             <!--add a margin below the card-title -->
-                            <h1 class="card-title mb-4">Register</h1>		
+                            <h1 id="register_h" class="card-title mb-4">Register</h1>		
                         
                             <form method="POST">
                                 {% csrf_token %}
                                 {{ register_form.as_p }}                    
-                                <button class="btn register_btn" type="submit">Register</button>
+                                <button id="register_btn" class="btn register_btn" type="submit">Register</button>
                             </form>
+                            <!-- Login link -->
                             <p class="text-center">If you already have an account, login 
                                 <a href="/user_auth/login" style="color: coral;">here
                                 </a>.

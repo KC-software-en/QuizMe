@@ -32,7 +32,7 @@
             <div class = "row">
                 <div class = "col-md-12 text-center">
                     <p class="en_p" style="font-size: 20px;"><i>
-                        Entertainment description
+                        Calling all music enthusiasts, film buffs, and video game lovers! Get ready to test your knowledge across the vast and thrilling realm of entertainment with this epic quiz extravaganza. We've got three exciting subcategories brimming with 10 random questions each, guaranteed to challenge and entertain you.
                     </i></p>
                 </div>            
             </div>             
@@ -67,7 +67,7 @@
                                         <!-- display the name of the category as the button that takes you to the quiz -->
                                         <a href = "{% url 'Entertainment:en_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
 
-                                            <img src ="{% static 'assets/mythology.png' %}" 
+                                            <img src ="{% static 'assets/film.jpg' %}" 
                                                 alt = "Film" 
                                                 class = "en_subcategory_image">
                                                 
@@ -83,7 +83,7 @@
                                     {% elif category_name == "Music" %}
                                         <a href = "{% url 'Entertainment:en_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
 
-                                            <img src ="{% static 'assets/science_and_nature.png' %}" 
+                                            <img src ="{% static 'assets/music.jpg' %}" 
                                             alt = "Music" 
                                             class = "en_subcategory_image">
 
@@ -106,7 +106,7 @@
                                         <!-- display the name of the category as the button that takes you to the quiz -->
                                         <a href = "{% url 'Entertainment:en_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
 
-                                            <img src ="{% static 'assets/history.png' %}" 
+                                            <img src ="{% static 'assets/videogames.jpg' %}" 
                                                 alt = "Video Games" 
                                                 class = "en_subcategory_image">
                                                 
@@ -126,17 +126,20 @@
                             <div class = "col-md-6">
                                 <!--a description for the Film category -->                    
                                 {% if category_name == "Film" %}
-                                    <p class="en_p">Film description
+                                    <p class="en_p">Dive into the Silver Screen: A Celebration of Film!
+                                        Film, the magic of moving pictures, has captivated audiences for over a century. This category delves into the captivating world of cinema, exploring its various elements, genres, and iconic moments.
                                     </p>
 
                                 <!--a description for the Music category -->                    
                                 {% elif category_name == "Music" %}
-                                    <p class="en_p">Music description
+                                    <p class="en_p">The Universal Language: A Journey Through Music
+                                        Music, the language that transcends borders and speaks to the soul, has been a fundamental part of human culture for millennia. This category dives into the world of music, exploring its diverse genres, foundational elements, and the profound impact it has on our lives.
                                     </p>
 
                                 <!--a description for the Video Games category -->                    
                                 {% elif category_name == "Video Games" %}
-                                    <p class="en_p">Video Games description
+                                    <p class="en_p">Power Up! Exploring the Thrilling World of Video Games
+                                        Video games, once a niche hobby, have exploded into a global phenomenon. This category delves into the captivating world of gaming, exploring its diverse genres, the technology that brings them to life, and the unique experiences they offer.
                                     </p>
                                 
                                 {% endif %} 

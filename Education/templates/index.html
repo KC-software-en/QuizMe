@@ -30,10 +30,10 @@
         
         <!-- set a black navbar 
         https://getbootstrap.com/docs/5.0/components/navbar/-->        
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark my-4 py-4 px-4">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2 px-4">
             <!-- link to QuizMe home page -->
             <a class="navbar-brand me-4" href="{% url 'Education:index' %}" alt="QuizMe">
-                <img src="{% static 'assets/QuizMe.jpg' %}" height="80" width="80" style="border-radius: 35%;">
+                <img src="{% static 'assets/QuizMe.jpg' %}" height="70" width="70" style="border-radius: 37%;">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -44,23 +44,23 @@
                 <!-- list the items on the navbar -->
               <ul class="navbar-nav mr-auto py-auto" >
                 
-                <li class="nav-item active px-2">
-                  <a class="nav-link" href="{% url 'General_Knowledge:index_gen' %}" style="color: floralwhite;">General Knowledge</a>
+                <li class="nav-item active px-2 py-2">
+                  <a class="nav-link" href="{% url 'General_Knowledge:index_gen' %}" style="color: rgb(255, 255, 255);">General Knowledge</a>
                 </li>
-                <li class="nav-item active px-2">
-                    <a class="nav-link" href="{% url 'Education:index_edu' %}" style="color: floralwhite;">Education</a>
+                <li class="nav-item active px-2 py-2">
+                    <a class="nav-link" href="{% url 'Education:index_edu' %}" style="color: rgb(255, 255, 255);">Education</a>
                 </li>
-                <li class="nav-item active px-2">
-                    <a class="nav-link pe-5" href="{% url 'Entertainment:index_en' %}" style="color: floralwhite;">Entertainment</a>
+                <li class="nav-item active px-2 py-2">
+                    <a class="nav-link pe-5" href="{% url 'Entertainment:index_en' %}" style="color: rgb(255, 255, 255);">Entertainment</a>
                 </li>
-                <div class="d-flex align-items-center justify-content-end">
+                <div class="d-flex align-items-center justify-content-end" style="padding-left: 165pt;">
                     <li class="nav-item ps-6 px-4 ms-4" style="color: coral;"> 
                         <!-- show a logged in user -->
                         {% if user.is_authenticated %}
                             {{user.username}}
                         {% endif %}
                     </li>
-                    <li class="nav-item dropdown px-4 me-4">
+                    <li class="nav-item dropdown me-4">
                         <div class="dropdown text-right">
                             <button class="dropbtn">Account
                                 <i class="fa fa-caret-down"></i>
@@ -90,14 +90,14 @@
         </nav>
         
         {% block content %}                   
-            <div class="row">
+            <div class="row" style="padding-top: 25pt;">
                 <div class="col-md-12"  style="text-align: center;">
                     <h1><b>Welcome to QuizMe</b></h1>
                 </div> 
             </div>    
 
             <div class="container"  style="text-align: center;">    
-                <p style="font-family: sans-serif">QuizMe is the ultimate quiz app for curious minds! 
+                <p id=index_p style="font-family: sans-serif">QuizMe is the ultimate quiz app for curious minds! 
 
                     QuizMe is a fun and easy way to test your knowledge 
                      
@@ -114,12 +114,13 @@
                      QuizMe has something for you. 
                     </p>
                     {% if user.is_authenticated %}
-                    {% else %} 
-                    <p>So what are you waiting for? <a href="/user_auth/register" style="color: coral;">Register</a> on QuizMe today and start quizzing!</p>         
+                    
+                        {% else %} 
+                            <p id=index_p>So what are you waiting for? <a href="/user_auth/register" style="color: coral;">Register</a> on QuizMe today and start quizzing!</p>         
                     {% endif %}         
             </div>
 
-            <br>
+        
                 <div class="col-md-12"  style="text-align: center;">
                     <h1 id="Quiz">Quiz Categories</h1>
                 </div>
@@ -149,7 +150,7 @@
 
                 <div class="container"  style="text-align: center;">    
                     <h1>About Us</h1>
-                    <p style="font-family: sans-serif">In a world where traditional media is making way for digital experiences,
+                    <p id=index_p  style="font-family: sans-serif">In a world where traditional media is making way for digital experiences,
                     
                        we recognize the need for a platform that caters to the growing demand for 
                        
@@ -161,7 +162,7 @@
                     <br>
 
                     <h1>Our Mission</h1>
-                      <p style="font-family: sans-serif">At QuizMe, we aim to provide quiz masters with a user-friendly interface to define quizzes,
+                      <p id=index_p  style="font-family: sans-serif">At QuizMe, we aim to provide quiz masters with a user-friendly interface to define quizzes,
                        
                          ensuring seamless conversion between graphical representation and human-readable data formats.
                         
