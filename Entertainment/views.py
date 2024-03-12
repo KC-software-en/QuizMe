@@ -69,7 +69,7 @@ def index_en(request):
         # because the 1st pk needs to be indexed for the 1st question rendered
         # question_selection.first().id chose the 1st question numerically in the database, not the 1st from the randomised list
         question_selection_pks = request.session['question_selection_ids']        
-        print(f"index_edu=question_selection_ids in session:{question_selection_pks}") ##     
+        print(f"index_en=question_selection_ids in session:{question_selection_pks}") ##     
 
         # the response is the dictionary for trivia categories
         # pass all the context variables into a single dictionary to render in the template correctly
@@ -102,7 +102,7 @@ def detail(request, category_name, question_id):
 
     # check if the category name is in the list of category names
     if category_name in category_names:
-        # use the category name selected on edu_quiz.html to determine the model to get questions from
+        # use the category name selected on en_quiz.html to determine the model to get questions from
         # replace spaces and '&' in the event category names have spaces to create a valid model name
         model_name = category_name.replace(" ", "_").replace("&", "and")
         print(f"Model Name: {model_name}")  # noqa: D105
@@ -131,7 +131,7 @@ def detail(request, category_name, question_id):
         # use in template to iterate over the list of choices dictionaries and access the values for the 'choice' key
         convert_choices_textfield_into_list = ast.literal_eval(question.choices)  # noqa: D105
 
-        # render the edu_detail template & pass the 10 questions, their ids & category as context
+        # render the en_detail template & pass the 10 questions, their ids & category as context
         context = {
             "question": question,
             "choices": convert_choices_textfield_into_list,
@@ -206,7 +206,7 @@ def selection(request, category_name, question_id):
         convert_choices_textfield_into_list = ast.literal_eval(question.choices)  # noqa: D105
 
         # access submitted data by key name with a dictionary-like object- request.POST
-        # use the key name 'choice' (defined in edu_detail form input) which returns the ID of the selected choice
+        # use the key name 'choice' (defined in en_detail form input) which returns the ID of the selected choice
         # retrieve the selected choice instance from the database based on the primary key
         # - obtained from the 'choice' key in the submitted form data (request.POST)
         # assumes that the 'id' attribute of the choice in the model is an integer

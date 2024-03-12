@@ -207,7 +207,7 @@ class TestCreateSubcategoryObject(TestCase):
             
             # Create a GET request for the view with reverse 
             # use the name defined in urls.py with the arguments passed in the view in view.py
-            ##request = self.factory.get(reverse('Entertainment:edu_detail', args=[50, 15]))
+            ##request = self.factory.get(reverse('Entertainment:en_detail', args=[50, 15]))
             ##response = utils.get_specific_json_category(request, quantity=50, category=15)
 
             # call the create_subcategory_object function to test it with a category id

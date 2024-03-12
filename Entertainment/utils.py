@@ -1,4 +1,4 @@
-# import requests to use the API for edu quiz
+# import requests to use the API for en quiz
 import requests
 
 # import html to handle potential HTML entities and aid rendering for create_subcategory_object
@@ -293,7 +293,7 @@ def category_objects(request, category_name):
         Http404: If the specified category cannot be found.
 
     """
-    # use the category_name selected on edu_quiz.html to determine the model to get questions from
+    # use the category_name selected on en_quiz.html to determine the model to get questions from
     # replace spaces and '&' in the event category names have spaces to create a valid model name
     model_name = category_name.replace(" ", "_").replace("&", "and") 
     print('model name : ', model_name)   
