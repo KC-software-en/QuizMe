@@ -27,5 +27,5 @@ urlpatterns = [
     # set a path for the results view
     path('<str:category_name>/results/', views.results, name='results'),
     # set a path for the start a new quiz view
-    path('Education/try_new_quiz/', views.try_new_quiz, name='try_new_quiz')    
+    path('Education/try_new_quiz/', views.try_new_quiz, name='try_new_quiz')
 ]
