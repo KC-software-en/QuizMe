@@ -45,7 +45,7 @@
                                         <!--the post method was used to send data to the server-->
                                         <!--the url in the action attribute was used to send data to the server-->
                                         <!-- avoid a selection() error by making its execution conditional upon finding a model in detail() view-->
-                                        <form {% if model_exits %} action="{% url 'Education:selection' category_name=category_name question_id=question.id %}" {% endif %} method="POST">
+                                        <form {% if model_exists %} action="{% url 'Education:selection' category_name=category_name question_id=question.id %}" {% endif %} method="POST">
                                             <!--add the csrf_token to all post forms targeted at internal urls to protect against Cross Site Forgery-->
                                             {% csrf_token %}
 
