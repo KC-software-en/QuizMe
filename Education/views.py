@@ -12,7 +12,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 # import functions from utils.py called in views
-from .utils import get_json_categories, get_next_question_id, get_category_names, find_model, category_objects
+from .utils import get_json_categories, get_next_question_id, get_category_names, category_objects
 
 # import all models
 from .models import *
@@ -101,16 +101,45 @@ def index_edu(request):
 @login_required(login_url='user_auth:login')
 def detail(request, category_name, question_id):      
     response = get_json_categories()
-    category_names = get_category_names(response)  
-    # call the function to find a model  
-    model = find_model(category_name, category_names) 
+    category_names = get_category_names(response)          
 
+    # Initialise model with a default value because the conditional checking for model gave 
+    # - UnboundLocalError: local variable 'model' referenced before assignment
+    model = None  
+
+    # check if the category_name is in the list of category_names then locate its model       
+    if category_name in category_names:            
+        # use the category_name selected on edu_quiz.html to determine the model to get questions from
+        # replace spaces and '&' in the event category names have spaces to create a valid model name
+        model_name = category_name.replace(" ", "_").replace("&", "and")
+        
+        # use a try-except block to dynamically find a model that matches the category name
+        # - dynamically:instead of explicitly specifying a fixed model in the code, 
+        # - generate or determine the model to use at runtime based on certain conditions/data        
+        # use use globals() instead of apps module to access the global namespace since the the model name was modified when
+        # - replacing '&' with 'and' to create a valid model (apps still worked when it was only replacing " ")                                     
+        try:
+            model = globals()[model_name] # not model = apps.get_model('Education', model_name)            
+            print(f"model:{model}")  
+
+        # render the detail template displaying the error when a model for a category_name cannot be located
+        except KeyError as e:
+            error_message = f"{e}: Unable to find the model for {category_name} in the global namespace."
+            context = {'question': None,
+                        'choices':None,
+                        'category_name': category_name,
+                        'error': error_message,
+                        'model_exists': False  # Flag indicating whether a model exists for the template to prevent selection() exec
+                        }
+            print(f"context:{context}")
+            return render(request, 'edu_quiz/edu_detail.html', context)
+        
     # check that a model was found
-    if model:            
+    if model != None:            
         # get the question object associated with a specific question_id in the database
         question = get_object_or_404(model, pk=question_id)    
-        print(f"\n\nquestion:{question}")
-        print(f"\n\ncorrect_answer:{question.correct_answer}")        
+        print(f"\n\nquestion:{question}")#####
+        print(f"\n\ncorrect_answer:{question.correct_answer}")  #######      
 
         # use the helper function literal_eval of the ast module to convert the str representation of the choices list
         # - in the textfield of the category model into a list
@@ -119,14 +148,17 @@ def detail(request, category_name, question_id):
         # - reducing the risk of code injection
         # use in template to iterate over the list of choices dictionaries and access the values for the 'choice' key
         convert_choices_textfield_into_list = ast.literal_eval(question.choices)    
+        print(f"choices:{convert_choices_textfield_into_list}")#######
 
         # render the edu_detail template & pass the 10 questions, their ids & category as context 
         context = {'question': question,
                     'choices':convert_choices_textfield_into_list,
-                    'category_name': category_name 
+                    'category_name': category_name,
+                    'error': None,
+                    'model_exists': True # Flag indicating a model exists so selection() can exec 
                     }
         print(f"\n\ncontext:{context}\n\n") ##        
-        return render(request, 'edu_quiz/edu_detail.html', context)
+        return render(request, 'edu_quiz/edu_detail.html', context)                
 
 '''
 Create a view that displays the quiz result.
@@ -155,10 +187,31 @@ def selection(request, category_name, question_id):
     # django automatically creates a primary key for each model
     response = get_json_categories()
     category_names = get_category_names(response)
-    model = find_model(category_name, category_names) 
+    
+    # Initialise model with a default value because the conditional checking for model gave 
+    # - UnboundLocalError: local variable 'model' referenced before assignment
+    model = None
 
+    # check if the category_name is in the list of category_names then locate its model       
+    if category_name in category_names:
+        # use the category_name selected on edu_quiz.html to determine the model to get questions from
+        # replace spaces and '&' in the event category names have spaces to create a valid model name
+        model_name = category_name.replace(" ", "_").replace("&", "and")
+
+        # dynamically find a model that matches the category name
+        # - dynamically:instead of explicitly specifying a fixed model in the code, 
+        # - generate or determine the model to use at runtime based on certain conditions/data        
+        # use use globals() instead of apps module to access the global namespace since the the model name was modified when
+        # - replacing '&' with 'and' to create a valid model (apps still worked when it was only replacing " ")                                  
+        model = globals()[model_name] # not model = apps.get_model('Education', model_name)            
+        print(f"model:{model}")                                
+                                            
+    # else print an error for a missing category_name
+    else:
+        print(f"{category_name} is not in this list: {category_names}")  
+    
     # check that a model was found
-    if model:    
+    if model != None:    
         # get the question object associated with a specific question_id in the database
         question = get_object_or_404(model, pk=question_id)
     
@@ -188,7 +241,8 @@ def selection(request, category_name, question_id):
                 'category_name': category_name,
                 'question': question,
                 'choices': convert_choices_textfield_into_list,
-                'error_message': "You didn't select a choice."
+                'error_message': "You didn't select a choice.",                
+                'model_exists': True # Flag indicating a model exists so selection() can exec 
                 })
         
         # use else instead of finally because the selection view for submitting without a choice selection won't render
@@ -236,7 +290,7 @@ def selection(request, category_name, question_id):
                 # - resolves NoReverseMatch error
                 return HttpResponseRedirect(
                     reverse('Education:results', args=(category_name,))
-                    )
+                    )    
 
 # start new quiz function
 def try_new_quiz(request):
@@ -249,4 +303,13 @@ def try_new_quiz(request):
                 reverse('Education:index_edu')
                 )  
         
-
+'''
+A view for the error page.
+'''
+# define a view for the error page
+def model_error_404(request):
+    error_message = f"Cannot locate a model for the category name in the global namespace"
+    context = {
+        'error_message': error_message
+    }
+    return render(request, 'error404_model.html', context)
