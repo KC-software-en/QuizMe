@@ -121,6 +121,7 @@ def detail(request, category_name, question_id):
         try:
             model = globals()[model_name] # not model = apps.get_model('Education', model_name)            
             print(f"model:{model}")  
+            print(f"data type of model: {type(model)}")
 
         # render the detail template displaying the error when a model for a category_name cannot be located
         except KeyError as e:
