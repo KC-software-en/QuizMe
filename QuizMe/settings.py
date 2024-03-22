@@ -83,12 +83,32 @@ WSGI_APPLICATION = 'QuizMe.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
+DATABASE = 2
+
+if DEBUG and (DATABASE == 1):
+    #Use sql database
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+
+    
 }
+elif DEBUG and (DATABASE == 2):
+    #Use postgres sql
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'Q_ME123@1',
+        'HOST': 'localhost',
+        'POST': '5432'
+    }
+
+}
+
 
 
 # Password validation
