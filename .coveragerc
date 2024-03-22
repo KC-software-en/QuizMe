@@ -9,7 +9,6 @@ omit =
     */settings.py  
     */tests/*   
     */__init__.py  
-    */urls.py
     */apps.py
     */wsgi.py
     */asgi.py
