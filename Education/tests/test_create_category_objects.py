@@ -17,23 +17,29 @@ from ..models import Mythology
 
 ##############################################################################################
 
+# Create your tests here. Use `py manage.py test Education.tests.test_create_category_objects` to run tests in cmd
+# after writing a test, run in cmd & it will say fail. 
+# next, go to create_category_objects.py and create the command. Then it should pass
+# run coverage after tests
+
 # https://docs.djangoproject.com/en/3.2/topics/testing/tools/#management-commands
 # Management commands can be tested with the call_command() function. 
 # The output can be redirected into a StringIO instance
 # create a class that tests the command create_subcategory_objects
 class TestCreateSubcategoryObjects(TransactionTestCase):
     def test_create_subcategory_objects(self):
-        out = StringIO()
+        out = StringIO()        
         
         # set the variables
         total_questions = 50
         category_id = 20
-        model_name = Mythology
+        category_name = 'Mythology'
         idx = 1
 
         # call the command (use the name of the command which is the file name, not Command/handle)
-        call_command('create_category_objects', category_id, model_name, stdout=out)
-        
+        call_command('create_category_objects', category_id, category_name, stdout=out)
+        print(f"out:{out.getvalue()}")##
+
         # set the expected output
         progress_expected_output = f"Created quiz object {idx} out of {total_questions} for category_id:{category_id}"
         final_expected_output = f"Successfully created {total_questions} quiz objects for category_id: {category_id}"
