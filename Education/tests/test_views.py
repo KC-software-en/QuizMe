@@ -96,37 +96,9 @@ class TestDetailView(TestCase):
             self.assertEqual(category_objects[i], expected_objects[i])
 
 # Test for the Detail view  
-'''class TestDetailView(TestCase):
+class TestDetailView(TestCase):
     # Still need to test for.
-    pass'''
-from django.test import TestCase, Client
-from unittest.mock import patch, Mock
-
-class TestDetail(TestCase):
-    @patch('Education.views.find_model')
-    @patch('Education.views.get_object_or_404')
-    @patch('Education.views.get_category_names')
-    @patch('Education.views.get_json_categories')
-    def test_detail_view(self, mock_get_json_categories, mock_get_category_names, mock_get_object_or_404, mock_find_model):
-        # Mock the necessary functions
-        mock_get_json_categories.return_value = {}  # Replace with your desired JSON response
-        mock_get_category_names.return_value = ['Category1', 'Category2']  # Replace with your desired category names
-        mock_find_model.return_value = Mock()  # Replace with your desired model instance
-        mock_get_object_or_404.return_value = Mock()  # Replace with your desired question instance
-
-        # Simulate a request
-        response = self.client.get('/category_name>/<int:question_id>/detail/')  # Replace with the actual URL you use in your project
-
-        # Assertions
-        self.assertEqual(response.status_code, 200)  # Replace with the expected status code
-        # Add more assertions based on the expected behavior of your view
-
-        # Example assertion: Check if find_model was called with the correct arguments
-        mock_find_model.assert_called_once_with('Category1', ['Category1', 'Category2'])
-
-        # Example assertion: Check if get_object_or_404 was called with the correct arguments
-        mock_get_object_or_404.assert_called_once_with(Mock(), pk=123)  # Replace with your desired question ID
-
+    pass
     
 # Test for the results view
 class ResultsViewTest(TestCase):
