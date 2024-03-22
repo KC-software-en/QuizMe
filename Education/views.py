@@ -73,13 +73,13 @@ def index_edu(request):
     for category_name in category_names:
         # call the function to retrieve the objects from the django database - viewable on admin site
         question_selection =  category_objects(request, category_name)           
-        print(f"question_selection:{question_selection}")
+        #print(f"question_selection:{question_selection}")
 
         # retrieve question_selection_pks from the session (from utils.category_objects)
         # because the 1st pk needs to be indexed for the 1st question rendered
         # question_selection.first().id chose the 1st question numerically in the database, not the 1st from the randomised list
         question_selection_pks = request.session['question_selection_ids']        
-        print(f"index_edu=question_selection_ids in session:{question_selection_pks}") ##     
+        #print(f"index_edu=question_selection_ids in session:{question_selection_pks}") ##     
     
         # the response is the dictionary for trivia categories
         # pass all the context variables into a single dictionary to render in the template correctly
