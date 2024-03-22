@@ -14,6 +14,8 @@ import html
 # import Http404 to raise an error message if a model is not located in category_objects()
 from django.http import Http404
 
+from django.apps import apps
+
 ####################################################################################
 
 '''
@@ -31,9 +33,9 @@ It is intended for private use by the project creator, not its users.
 
 # the custom command can be called using `python manage.py create_category_objects 20` to populate Mythology
 # be sure to place the desired model name in the handle() when calling the command with its corresponding category_id
-# `python manage.py create_category_objects 17` to populate Science & Nature
-# `python manage.py create_category_objects 23` to populate History
-# `python manage.py create_category_objects 9` to populate General Knowledge
+# `python manage.py create_category_objects 17 "Science & Nature"` to populate Science & Nature
+# `python manage.py create_category_objects 23 History` to populate History
+# `python manage.py create_category_objects 9 "General Knowledge"` to populate General Knowledge
 class Command(BaseCommand):
     # define a varible that informs one what the command does
     help = 'Populate the database with quiz objects retrieved from an API'
@@ -43,12 +45,12 @@ class Command(BaseCommand):
     def add_arguments(self, parser: CommandParser):
         # add positional arguments        
         parser.add_argument('category_id', type=int, help='The category_id for the desired quiz subcategory')
-        ##parser.add_argument('category_name', type=str, help='The category_name for the desired quiz subcategory')        
+        parser.add_argument('category_name', type=str, help='The category_name for the desired quiz subcategory')        
 
     # create an object for the sub-category (e.g.mythology) quiz data
     def handle(self, *args: Any, **options):        
         category_id = options['category_id']
-        ##category_name = options['category_name']
+        category_name = options['category_name']
 
         # call the get_specific_json_category function to get the data for the mythology category
         json_response = get_specific_json_category(quantity=50, category=category_id)
@@ -59,18 +61,17 @@ class Command(BaseCommand):
         if json_response:        
             # save json response as a variable to pass into template
             questions = json_response["results"]
-            if questions != []: ##
+            
+            if not questions: ##
                 self.stdout.write(self.style.WARNING("No questions found in the API response."))        
 
             # check if question retrieval was successful
-            ##if questions:
-            else:
+            if questions:            
                 # find the length of the list of questions 
                 total_questions = len(questions)
                 # iterate over each question in the results dictionary 
                 # enumerate each question to aid the details of the output progress message
-                for idx, question in enumerate(questions, start=1):
-                ##for question in questions:                        
+                for idx, question in enumerate(questions, start=1):                
                     # add new question text key for each question in results dictionary(AKA questions) by indexing its key                
                     # - index question text - access the value associated with the key "question" in each dictionary
                     # - use html.unescape to handle potential HTML entities and ensure accurate rendering in templates
@@ -111,20 +112,22 @@ class Command(BaseCommand):
                             correct_choice = choice
                             break
 
-                    # replace spaces and '&' in the event category names have spaces to create a valid model name
-                    # locate the model for the category_name in the 
-                    ##model_name = category_name.replace(" ", "_").replace("&", "and")    
-                    ##try:        
-                        ##model = globals()[model_name]
-                        ##return model
+                    # replace spaces and '&' in the event category names have spaces to create a valid model name                    
+                    model_name = category_name.replace(" ", "_").replace("&", "and")                        
 
+                    # use a try-except block to locate the model for the category_name 
+                    # retrieve the model dynamically using the app label 'Education' and the constructed model name
+                    # this allows model fetching by its name without needing to import it directly
+                    try:
+                        model = apps.get_model(app_label='Education', model_name=model_name)
+                    
                     # raise an error if the model is not found
-                    ##except KeyError:
-                        ##self.stderr.write(self.style.ERROR(f"Cannot locate the model for the selected category: {category_name}."))
-
+                    except KeyError:
+                        self.stderr.write(self.style.ERROR(f"Cannot locate the model for the selected category: {category_name}."))                                
+                        
                     # create a question object with the above data
                     # this will show on the admin site with the models created for questions & choices
-                    question_object = Science_and_Nature.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
+                    question_object = model.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
 
                     # save the object to the database
                     question_object.save()
