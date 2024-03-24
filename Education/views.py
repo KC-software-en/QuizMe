@@ -15,7 +15,7 @@ from django.urls import reverse
 from .utils import get_json_categories, get_next_question_id, get_category_names, category_objects
 
 # import all models
-from Education import models
+from . import models
 
 # import apps to dynamically fetch a model in detail() view
 from django.apps import apps
@@ -116,16 +116,13 @@ def detail(request, category_name, question_id):
         # use a try-except block to dynamically find a model that matches the category name
         # - dynamically:instead of explicitly specifying a fixed model in the code, 
         # - generate or determine the model to use at runtime based on certain conditions/data        
-        # use use globals() instead of apps module to access the global namespace since the the model name was modified when
-        # - replacing '&' with 'and' to create a valid model (apps still worked when it was only replacing " ")                                     
-        try:
-            model = globals()[model_name] # not model = apps.get_model('Education', model_name)            
-            print(f"model:{model}")  
-            print(f"data type of model: {type(model)}")
+        # use apps module to access the get_model function & find the model name         
+        try:            
+            model = apps.get_model('Education', model_name)                        
 
         # render the detail template displaying the error when a model for a category_name cannot be located
-        except KeyError as e:
-            error_message = f"{e}: Unable to find the model for {category_name} in the global namespace."
+        except LookupError as e:
+            error_message = f"{e}: Unable to find the model for {category_name} in the Education application."
             context = {'question': None,
                         'choices':None,
                         'category_name': category_name,
@@ -201,10 +198,9 @@ def selection(request, category_name, question_id):
 
         # dynamically find a model that matches the category name
         # - dynamically:instead of explicitly specifying a fixed model in the code, 
-        # - generate or determine the model to use at runtime based on certain conditions/data        
-        # use use globals() instead of apps module to access the global namespace since the the model name was modified when
-        # - replacing '&' with 'and' to create a valid model (apps still worked when it was only replacing " ")                                  
-        model = globals()[model_name] # not model = apps.get_model('Education', model_name)            
+        # - generate or determine the model to use at runtime based on certain conditions/data                 
+        # use apps module to access the get_model function & find the model name         
+        model = apps.get_model('Education', model_name)            
         print(f"model:{model}")                                
                                             
     # else print an error for a missing category_name
@@ -304,13 +300,3 @@ def try_new_quiz(request):
                 reverse('Education:index_edu')
                 )  
         
-'''
-A view for the error page.
-'''
-# define a view for the error page
-def model_error_404(request):
-    error_message = f"Cannot locate a model for the category name in the global namespace"
-    context = {
-        'error_message': error_message
-    }
-    return render(request, 'error404_model.html', context)
