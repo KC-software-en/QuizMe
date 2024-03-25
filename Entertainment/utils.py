@@ -120,7 +120,7 @@ def mix_choices(choices: list) -> list:
 # In project directory cmd: `python manage.py shell`, 
 # `from Entertainment.utils import get_specific_json_category, mix_choices, create_subcategory_object`
 # `create_subcategory_object(12)`, then `exit()`
-# this will populate the sub-category (e.g. mythology) table on the admin site with the quiz data
+# this will populate the sub-category (e.g. Film) table on the admin site with the quiz data
 #def create_subcategory_object(category):
     # call the get_specific_json_category function to get the data for the Music category
 #    json_response = get_specific_json_category(quantity=50, category=category)
