@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+# import os to access environment variables and retrieve sensitive information without hardcoding it into the settings file
+# i.e. secret key
+import os
+
+#########################################################################################
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,6 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = removed and stored as an environment variable
+# retrieve it
+# Create a .env file in your project's root directory and add your SECRET_KEY there.
+# You should also add this file to your .gitignore to ensure it's not committed to your repository
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 SECRET_KEY = 'django-insecure-y_c$+sv5x#*m9*+as*r&zy%q9^@2x)$x=^^-rti-5h9*mxk+r5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
