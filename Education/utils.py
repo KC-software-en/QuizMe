@@ -1,20 +1,33 @@
 # import requests to use the API for edu quiz
 import requests
 
-# import html to handle potential HTML entities and aid rendering for create_subcategory_object
-import html
-
 # import random to shuffle questions & choices rendered in the form
 import random
 
 # import json to work with the data retrieved from the open trivia db API
-import json
+import json     
+
+# import html to handle potential HTML entities and aid rendering for create_subcategory_object
+import html
 
 # import models
 from .models import Mythology, History, Science_and_Nature      
 
+
 # import Http404 to raise an error message if a model is not located in category_objects()
 from django.http import Http404
+
+#
+from django.http import HttpResponse
+
+# import render to render an HTML template with a given context and return an HttpResponse object
+from django.shortcuts import render
+
+# imported HttpResponseRedirect 
+from django.http import HttpResponseRedirect
+
+# imported reverse
+from django.urls import reverse
 
 #######################################################################################
 #######################################################################################
@@ -26,8 +39,12 @@ Create a function that returns the json response for the available categories on
 def get_json_categories():
     # get Category Lookup url
     category_lookup = 'https://opentdb.com/api_category.php'
+    
     # store url in a variable as a json response
     response = requests.get(category_lookup)
+    
+    # check if the get request was successful
+    # parse the JSON content of the response using the .json() method
     if response.status_code == 200:
         json_response = response.json()
     
@@ -36,8 +53,10 @@ def get_json_categories():
         with open("quiz_categories.json", "w") as f:
             json.dump(json_response, f, indent=4)
 
+        # return the JSON content 
         return json_response
     
+    # check if the get request was unsuccessful
     else:
         # print error if unsuccessful request
         # return None to signal that there's no valid data to work with
@@ -52,7 +71,7 @@ Create a function that returns the json response for a specific category on Open
 # create a varible to store the API url for the myth quizzes
 # use an f-str to pass in the parameter for quantity
 # -> place {} around 5 in the url then replace '5' with 'quantity'
-# then place {} around the category id (from quiz_cat.json)for myth & replace '20' with 'category'
+# then place {} around the category id (from quiz_cat.json) for myth & replace '20' with 'category'
 # return a list
 def get_specific_json_category(quantity: int, category: int):
     mythology_url = f"https://opentdb.com/api.php?amount={quantity}&category={category}"
@@ -69,8 +88,10 @@ def get_specific_json_category(quantity: int, category: int):
         with open("chosen_quiz_category.json", "w") as f:
             json.dump(json_response, f, indent=4)
 
+        # return the JSON content 
         return json_response
 
+    # check if the get request was unsuccessful
     else:
         # print error if unsuccessful request
         # return None to signal that there's no valid data to work with
@@ -87,78 +108,6 @@ Create a function that will mix the choices for each question in a quiz.
 def mix_choices(choices: list):
     random.shuffle(choices)
     return choices
-
-'''
-Create a function that will create an object for the sub-categories of the Education quiz.
-The function & its test is called in Django shell so it is commented out.
-'''
-# create an object for the sub-category (e.g.mythology) quiz data
-# in django shell import the util functions needed for the creation of the obj then call the obj
-# place the category id from the quiz_categories.json file as the argument for the function (e.g. 20)
-# In project directory cmd: `python manage.py shell`, 
-# `from Education.utils import get_specific_json_category, mix_choices, create_subcategory_object`
-# `create_subcategory_object(20)`, then `exit()`
-# this will populate the sub-category (e.g. mythology) table on the admin site with the quiz data
-
-#def create_subcategory_object(category):   
-    # call the get_specific_json_category function to get the data for the mythology category
-#    json_response = get_specific_json_category(quantity=50, category=category)
-    
-    # check if there are questions
-#    if json_response:        
-        # save json response as a variable to pass into template
-#        questions = json_response["results"]
-    
-        # check if question retrieval was successful
-#        if questions:
-            # iterate over each question in the results dictionary 
-#            for question in questions:                        
-                # add new question text key for each question in results dictionary(AKA questions) by indexing its key                
-                # - index question text - access the value associated with the key "question" in each dictionary
-                # - use html.unescape to handle potential HTML entities and ensure accurate rendering in templates
-#                question_text = html.unescape(question["question"]) 
-                            
-                # iterate over the incorrect answers with html.unescape and place them into a list with list comprehension                
-                # use html.unescape & handle potential HTML entities for accurate rendering of templates
-                # place the answers from the response in a variable 
-                # - index it from the list of key:value pairs available for each question(result)
-#                incorrect_answers = [html.unescape(answer) for answer in question["incorrect_answers"]]             
-                # use html.unescape for the correct answer
-#                correct_answer = html.unescape(question["correct_answer"])                                
-                # append the correct answer to the list of choices
-                # slice the incorrect_answers & extend it to the choices list - prevents nested lists                               
-#                choice_texts = []
-#                choice_texts.append(correct_answer)
-#                choice_texts.extend(incorrect_answers[:])                                
-    
-                # initialise an empty list to append the dictionaries containing an id for each choice
-                # - else the list will be overwritten each loop, only saving the last dictionary iterated over
-                # enumerate each choice to assign an id
-                # note: since correct_answer was appended at the start, the id will be 1
-#                choices_dict = []
-#                for i, choice in enumerate(choice_texts, start=1):
-#                    choices_dict.append({'choice': choice, 'id': i})                
-
-                # call the function to rearrange choices and make the extended choice list the argument
-#                mixed_choices = mix_choices(choices_dict)            
-    
-                # save the mixed choices to each question in the results dictionary        
-                # add a key-value pair to the question dictionary (from the category json response)
-#                question['mixed_choices'] = mixed_choices
-    
-                # find the correct answer in mixed_choices
-#                correct_choice = None
-#                for choice in mixed_choices:
-#                    if choice['id'] == 1:
-#                        correct_choice = choice
-#                        break
-                    
-                # create a question object with the above data
-                # this will show on the admin site with the models created for questions & choices
-#                question_object = Mythology.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
-    
-                # save the object to the database
-#                question_object.save()
 
 '''
 Create a function that finds the question id for the next question in the quiz.
@@ -196,7 +145,7 @@ def get_category_names(response):
     trivia_categories = response.get("trivia_categories",[])
 
     # specify the id of the categories to include in the Education app's quizzes
-    selected_category_id = [20, 17, 23]
+    selected_category_id = [20, 17, 23, 21] ##
 
     # collect the categories based on selected_category_id
     selected_categories = [category for category in trivia_categories if category.get("id") in selected_category_id]    
@@ -226,33 +175,6 @@ def get_category_names(response):
     return category_names
 
 '''
-A function that finds the model associated with a category name.
-'''
-# use the selected category_name & the list of category_names it comes from as the parameters to find a model
-def find_model(category_name, category_names): 
-    # check if the category_name is in the list of category_names then locate its model       
-    if category_name in category_names:
-        # use the category_name selected on edu_quiz.html to determine the model to get questions from
-        # replace spaces and '&' in the event category names have spaces to create a valid model name
-        model_name = category_name.replace(" ", "_").replace("&", "and")
-
-        # use a try-except block to find a model that matches the category name
-        # use use globals() instead of apps module to access the global namespace since the the model name was modified when replacing '&' 
-        # (apps still worked when it was only replacing " ")
-        # - dynamically:instead of explicitly specifying a fixed model in the code, generate or determine the model to use at runtime based on certain conditions/data
-        '''# check if the category_name is in the list of category_names then locate its model
-        # use globals module instead of apps to access the global namespace for models
-        # - since a model name was altered from its original category_name to create a valid model with 'and'
-        ''' #################################
-        try:            
-            model = globals()[model_name] # not model = apps.get_model('Education', model_name)
-            return model
-
-        # raise an error if the model is not found
-        except LookupError:
-            raise Http404("Cannot locate the model for the selected category.") 
-
-'''
 A function that retrieves the category queryset from the database based on its category name.
 '''  
 # define a function that returns the queryset for 10 random objects from the database for each category 
@@ -274,7 +196,7 @@ def category_objects(request, category_name):
         model = globals()[model_name]
         
     # raise an error if the model is not found
-    except LookupError:
+    except KeyError:
         raise Http404("Cannot locate the model for the selected category.")
 
     # get the 50 questions for the specific category
