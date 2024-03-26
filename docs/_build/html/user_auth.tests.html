@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>user_auth.tests package &mdash; QuizMe 00.00.01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="user_auth.migrations package" href="user_auth.migrations.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            QuizMe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">QuizMe</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="QuizMe.html">QuizMe package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General_Knowledge.html">General_Knowledge package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Education.html">Education package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.html">Entertainment package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="user_auth.html">user_auth package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="user_auth.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="user_auth.migrations.html">user_auth.migrations package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">user_auth.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.html#module-user_auth.admin">user_auth.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.html#module-user_auth.apps">user_auth.apps module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.html#module-user_auth.forms">user_auth.forms module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.html#module-user_auth.models">user_auth.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.html#module-user_auth.urls">user_auth.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.html#module-user_auth.views">user_auth.views module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.html#module-user_auth">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QuizMe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">QuizMe</a></li>
+          <li class="breadcrumb-item"><a href="user_auth.html">user_auth package</a></li>
+      <li class="breadcrumb-item active">user_auth.tests package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/user_auth.tests.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="user-auth-tests-package">
+<h1>user_auth.tests package<a class="headerlink" href="#user-auth-tests-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-user_auth.tests.test_forms">
+<span id="user-auth-tests-test-forms-module"></span><h2>user_auth.tests.test_forms module<a class="headerlink" href="#module-user_auth.tests.test_forms" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="user_auth.tests.test_forms.EmailTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user_auth.tests.test_forms.</span></span><span class="sig-name descname"><span class="pre">EmailTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_forms.html#EmailTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_forms.EmailTest" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>A Class that has a function to test if the automated email gets sent.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_forms.EmailTest.test_send_email">
+<span class="sig-name descname"><span class="pre">test_send_email</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_forms.html#EmailTest.test_send_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_forms.EmailTest.test_send_email" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="user_auth.tests.test_forms.NewUserFormTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user_auth.tests.test_forms.</span></span><span class="sig-name descname"><span class="pre">NewUserFormTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_forms.html#NewUserFormTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_forms.NewUserFormTestCase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>A Class that has a function to test if the users data from the form is saved so we can get the users email.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_forms.NewUserFormTestCase.test_save_method">
+<span class="sig-name descname"><span class="pre">test_save_method</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_forms.html#NewUserFormTestCase.test_save_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_forms.NewUserFormTestCase.test_save_method" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="user_auth.tests.test_forms.TestAccountCreationForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user_auth.tests.test_forms.</span></span><span class="sig-name descname"><span class="pre">TestAccountCreationForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_forms.html#TestAccountCreationForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_forms.TestAccountCreationForm" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_forms.TestAccountCreationForm.test_signup_form_invalid">
+<span class="sig-name descname"><span class="pre">test_signup_form_invalid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_forms.html#TestAccountCreationForm.test_signup_form_invalid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_forms.TestAccountCreationForm.test_signup_form_invalid" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="user_auth.tests.test_forms.test_register_form_redirect">
+<span class="sig-prename descclassname"><span class="pre">user_auth.tests.test_forms.</span></span><span class="sig-name descname"><span class="pre">test_register_form_redirect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_forms.html#test_register_form_redirect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_forms.test_register_form_redirect" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if the user gets redirected after they register.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="user_auth.tests.test_forms.test_signup_form">
+<span class="sig-prename descclassname"><span class="pre">user_auth.tests.test_forms.</span></span><span class="sig-name descname"><span class="pre">test_signup_form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_forms.html#test_signup_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_forms.test_signup_form" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-user_auth.tests.test_urls">
+<span id="user-auth-tests-test-urls-module"></span><h2>user_auth.tests.test_urls module<a class="headerlink" href="#module-user_auth.tests.test_urls" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="user_auth.tests.test_urls.TestUrls">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user_auth.tests.test_urls.</span></span><span class="sig-name descname"><span class="pre">TestUrls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_urls.html#TestUrls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_urls.TestUrls" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleTestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_urls.TestUrls.test_login_page_valid">
+<span class="sig-name descname"><span class="pre">test_login_page_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_urls.html#TestUrls.test_login_page_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_urls.TestUrls.test_login_page_valid" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if the correct template is rendered if the user enters the login url path.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_urls.TestUrls.test_logout_page_valid">
+<span class="sig-name descname"><span class="pre">test_logout_page_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_urls.html#TestUrls.test_logout_page_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_urls.TestUrls.test_logout_page_valid" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if the correct template is rendered if the user enters the logout url path.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_urls.TestUrls.test_register_page_valid">
+<span class="sig-name descname"><span class="pre">test_register_page_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_urls.html#TestUrls.test_register_page_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_urls.TestUrls.test_register_page_valid" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if the correct template is rendered if the user enters the register url path.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-user_auth.tests.test_veiws">
+<span id="user-auth-tests-test-veiws-module"></span><h2>user_auth.tests.test_veiws module<a class="headerlink" href="#module-user_auth.tests.test_veiws" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.TestAuthenticateUser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user_auth.tests.test_veiws.</span></span><span class="sig-name descname"><span class="pre">TestAuthenticateUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#TestAuthenticateUser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.TestAuthenticateUser" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.TestAuthenticateUser.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#TestAuthenticateUser.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.TestAuthenticateUser.setUp" title="Permalink to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.TestAuthenticateUser.test_failed_authentication">
+<span class="sig-name descname"><span class="pre">test_failed_authentication</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mock_authenticate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#TestAuthenticateUser.test_failed_authentication"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.TestAuthenticateUser.test_failed_authentication" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.TestAuthenticateUser.test_successful_authentication">
+<span class="sig-name descname"><span class="pre">test_successful_authentication</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mock_login</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mock_authenticate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#TestAuthenticateUser.test_successful_authentication"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.TestAuthenticateUser.test_successful_authentication" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.UserAuthViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user_auth.tests.test_veiws.</span></span><span class="sig-name descname"><span class="pre">UserAuthViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#UserAuthViewTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.UserAuthViewTest" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Create a class to test the login, logout and show user view in the user_auth views.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.UserAuthViewTest.test_login_view_valid">
+<span class="sig-name descname"><span class="pre">test_login_view_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#UserAuthViewTest.test_login_view_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.UserAuthViewTest.test_login_view_valid" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if the correct template is rendered from the login view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.UserAuthViewTest.test_logout_view_valid">
+<span class="sig-name descname"><span class="pre">test_logout_view_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#UserAuthViewTest.test_logout_view_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.UserAuthViewTest.test_logout_view_valid" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if the correct template is rendered from the logout view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.UserAuthViewTest.test_show_user">
+<span class="sig-name descname"><span class="pre">test_show_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#UserAuthViewTest.test_show_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.UserAuthViewTest.test_show_user" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if the correct template is rendered from the show_user view.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.test_authenticate_user_view">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user_auth.tests.test_veiws.</span></span><span class="sig-name descname"><span class="pre">test_authenticate_user_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#test_authenticate_user_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.test_authenticate_user_view" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>A class with functions to test the authentificate_user view.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.test_authenticate_user_view.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#test_authenticate_user_view.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.test_authenticate_user_view.setUp" title="Permalink to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.test_authenticate_user_view.test_authenticate_user">
+<span class="sig-name descname"><span class="pre">test_authenticate_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#test_authenticate_user_view.test_authenticate_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.test_authenticate_user_view.test_authenticate_user" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if a user is authentificated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.test_authenticate_user_view.test_redirect_if_not_authenticated">
+<span class="sig-name descname"><span class="pre">test_redirect_if_not_authenticated</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#test_authenticate_user_view.test_redirect_if_not_authenticated"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.test_authenticate_user_view.test_redirect_if_not_authenticated" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if a user is not authentificated and redirected to login page.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.test_authenticate_user_view.test_user_authentication_and_redirection">
+<span class="sig-name descname"><span class="pre">test_user_authentication_and_redirection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#test_authenticate_user_view.test_user_authentication_and_redirection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.test_authenticate_user_view.test_user_authentication_and_redirection" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if a user is redirected after they have been authenticated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.test_authenticate_user_view.test_user_not_authenticated_but_redirected">
+<span class="sig-name descname"><span class="pre">test_user_not_authenticated_but_redirected</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#test_authenticate_user_view.test_user_not_authenticated_but_redirected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.test_authenticate_user_view.test_user_not_authenticated_but_redirected" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if a if a user is redirected after they have been not been authenticated.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.test_user_register_view">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user_auth.tests.test_veiws.</span></span><span class="sig-name descname"><span class="pre">test_user_register_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#test_user_register_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.test_user_register_view" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>A class with functions to test the user_register_view.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.test_user_register_view.test_register_view_valid">
+<span class="sig-name descname"><span class="pre">test_register_view_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#test_user_register_view.test_register_view_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.test_user_register_view.test_register_view_valid" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if the correct template is rendered from the register view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.test_user_register_view.test_registration_successful">
+<span class="sig-name descname"><span class="pre">test_registration_successful</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#test_user_register_view.test_registration_successful"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.test_user_register_view.test_registration_successful" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if registration is succesful.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.test_user_register_view.test_registration_with_invalid_data">
+<span class="sig-name descname"><span class="pre">test_registration_with_invalid_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#test_user_register_view.test_registration_with_invalid_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.test_user_register_view.test_registration_with_invalid_data" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if user registers with invalid data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.tests.test_veiws.test_user_register_view.test_registration_with_invalid_password">
+<span class="sig-name descname"><span class="pre">test_registration_with_invalid_password</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/tests/test_veiws.html#test_user_register_view.test_registration_with_invalid_password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.tests.test_veiws.test_user_register_view.test_registration_with_invalid_password" title="Permalink to this definition"></a></dt>
+<dd><p>A function to test if a error message is displyed when a user enters invalid data in the register form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-user_auth.tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-user_auth.tests" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="user_auth.migrations.html" class="btn btn-neutral float-left" title="user_auth.migrations package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Kisha Cairncross, Deandre` Wright.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

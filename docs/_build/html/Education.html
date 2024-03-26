@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Education package &mdash; QuizMe 00.00.01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Education.management package" href="Education.management.html" />
+    <link rel="prev" title="General_Knowledge.tests package" href="General_Knowledge.tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            QuizMe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">QuizMe</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="QuizMe.html">QuizMe package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General_Knowledge.html">General_Knowledge package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Education package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.management.html">Education.management package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.migrations.html">Education.migrations package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html">Education.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Education.admin">Education.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Education.apps">Education.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Education.apps.EducationConfig"><code class="docutils literal notranslate"><span class="pre">EducationConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Education.models">Education.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Education.models.Categories"><code class="docutils literal notranslate"><span class="pre">Categories</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.models.History"><code class="docutils literal notranslate"><span class="pre">History</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.models.Mythology"><code class="docutils literal notranslate"><span class="pre">Mythology</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.models.Science_and_Nature"><code class="docutils literal notranslate"><span class="pre">Science_and_Nature</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.models.Subcategories"><code class="docutils literal notranslate"><span class="pre">Subcategories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Education.urls">Education.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Education.utils">Education.utils module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Education.utils.category_objects"><code class="docutils literal notranslate"><span class="pre">category_objects()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.utils.get_category_names"><code class="docutils literal notranslate"><span class="pre">get_category_names()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.utils.get_json_categories"><code class="docutils literal notranslate"><span class="pre">get_json_categories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.utils.get_next_question_id"><code class="docutils literal notranslate"><span class="pre">get_next_question_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.utils.get_specific_json_category"><code class="docutils literal notranslate"><span class="pre">get_specific_json_category()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.utils.mix_choices"><code class="docutils literal notranslate"><span class="pre">mix_choices()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Education.views">Education.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Education.views.detail"><code class="docutils literal notranslate"><span class="pre">detail()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.views.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.views.index_edu"><code class="docutils literal notranslate"><span class="pre">index_edu()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.views.results"><code class="docutils literal notranslate"><span class="pre">results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.views.selection"><code class="docutils literal notranslate"><span class="pre">selection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Education.views.try_new_quiz"><code class="docutils literal notranslate"><span class="pre">try_new_quiz()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Education">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.html">Entertainment package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_auth.html">user_auth package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QuizMe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">QuizMe</a></li>
+      <li class="breadcrumb-item active">Education package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Education.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="education-package">
+<h1>Education package<a class="headerlink" href="#education-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Education.management.html">Education.management package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Education.management.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Education.management.commands.html">Education.management.commands package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.management.commands.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.management.commands.html#module-Education.management.commands.create_category_objects">Education.management.commands.create_category_objects module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.management.commands.html#module-Education.management.commands">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Education.management.html#module-Education.management">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Education.migrations.html">Education.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Education.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Education.migrations.html#module-Education.migrations.0001_initial">Education.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Education.migrations.html#Education.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.migrations.html#Education.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.migrations.html#Education.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.migrations.html#Education.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Education.migrations.html#module-Education.migrations.0002_subcategories">Education.migrations.0002_subcategories module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Education.migrations.html#Education.migrations.0002_subcategories.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.migrations.html#Education.migrations.0002_subcategories.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.migrations.html#Education.migrations.0002_subcategories.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Education.migrations.html#module-Education.migrations.0003_history_mythology_science_and_nature">Education.migrations.0003_history_mythology_science_and_nature module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Education.migrations.html#Education.migrations.0003_history_mythology_science_and_nature.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.migrations.html#Education.migrations.0003_history_mythology_science_and_nature.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.migrations.html#Education.migrations.0003_history_mythology_science_and_nature.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Education.migrations.html#module-Education.migrations">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Education.tests.html">Education.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Education.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Education.tests.html#module-Education.tests.test_admin">Education.tests.test_admin module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_admin.TestModelRegistration"><code class="docutils literal notranslate"><span class="pre">TestModelRegistration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_admin.TestModelRegistration.test_quiz_registration"><code class="docutils literal notranslate"><span class="pre">TestModelRegistration.test_quiz_registration()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Education.tests.html#module-Education.tests.test_create_category_objects">Education.tests.test_create_category_objects module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects2"><code class="docutils literal notranslate"><span class="pre">TestCreateSubcategoryObjects2</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects2.test_create_subcategory_objects2"><code class="docutils literal notranslate"><span class="pre">TestCreateSubcategoryObjects2.test_create_subcategory_objects2()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Education.tests.html#module-Education.tests.test_models">Education.tests.test_models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestCategoriesModel"><code class="docutils literal notranslate"><span class="pre">TestCategoriesModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestCategoriesModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestCategoriesModel.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestCategoriesModel.test_categories_model"><code class="docutils literal notranslate"><span class="pre">TestCategoriesModel.test_categories_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestCategoriesModel.test_return_str"><code class="docutils literal notranslate"><span class="pre">TestCategoriesModel.test_return_str()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestHistoryModel"><code class="docutils literal notranslate"><span class="pre">TestHistoryModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestHistoryModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestHistoryModel.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestHistoryModel.test_return_str_quiz"><code class="docutils literal notranslate"><span class="pre">TestHistoryModel.test_return_str_quiz()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestMythologyModel"><code class="docutils literal notranslate"><span class="pre">TestMythologyModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestMythologyModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestMythologyModel.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestMythologyModel.test_mythology_instance"><code class="docutils literal notranslate"><span class="pre">TestMythologyModel.test_mythology_instance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestMythologyModel.test_mythology_model"><code class="docutils literal notranslate"><span class="pre">TestMythologyModel.test_mythology_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestMythologyModel.test_return_str_quiz"><code class="docutils literal notranslate"><span class="pre">TestMythologyModel.test_return_str_quiz()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestScienceAndNatureModel"><code class="docutils literal notranslate"><span class="pre">TestScienceAndNatureModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestScienceAndNatureModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestScienceAndNatureModel.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestScienceAndNatureModel.test_return_str_quiz"><code class="docutils literal notranslate"><span class="pre">TestScienceAndNatureModel.test_return_str_quiz()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestSubcategoriesModel"><code class="docutils literal notranslate"><span class="pre">TestSubcategoriesModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestSubcategoriesModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestSubcategoriesModel.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestSubcategoriesModel.test_return_str"><code class="docutils literal notranslate"><span class="pre">TestSubcategoriesModel.test_return_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_models.TestSubcategoriesModel.test_subcategories_model"><code class="docutils literal notranslate"><span class="pre">TestSubcategoriesModel.test_subcategories_model()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Education.tests.html#module-Education.tests.test_urls">Education.tests.test_urls module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_urls.TestUrls"><code class="docutils literal notranslate"><span class="pre">TestUrls</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_urls.TestUrls.setup"><code class="docutils literal notranslate"><span class="pre">TestUrls.setup()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_urls.TestUrls.test_home_page_valid"><code class="docutils literal notranslate"><span class="pre">TestUrls.test_home_page_valid()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Education.tests.html#module-Education.tests.test_utils">Education.tests.test_utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestCategoryObjects"><code class="docutils literal notranslate"><span class="pre">TestCategoryObjects</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestCategoryObjects.setUp"><code class="docutils literal notranslate"><span class="pre">TestCategoryObjects.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestCategoryObjects.test_category_objects"><code class="docutils literal notranslate"><span class="pre">TestCategoryObjects.test_category_objects()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestCategoryObjects.test_category_objects_invalid_category"><code class="docutils literal notranslate"><span class="pre">TestCategoryObjects.test_category_objects_invalid_category()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestGetCategoryNames"><code class="docutils literal notranslate"><span class="pre">TestGetCategoryNames</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestGetCategoryNames.setUp"><code class="docutils literal notranslate"><span class="pre">TestGetCategoryNames.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestGetCategoryNames.test_get_category_names_found"><code class="docutils literal notranslate"><span class="pre">TestGetCategoryNames.test_get_category_names_found()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestGetCategoryNames.test_no_category_name"><code class="docutils literal notranslate"><span class="pre">TestGetCategoryNames.test_no_category_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestJsonResponse"><code class="docutils literal notranslate"><span class="pre">TestJsonResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestJsonResponse.setUp"><code class="docutils literal notranslate"><span class="pre">TestJsonResponse.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestJsonResponse.test_get_json_categories_error"><code class="docutils literal notranslate"><span class="pre">TestJsonResponse.test_get_json_categories_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestJsonResponse.test_get_json_categories_ok"><code class="docutils literal notranslate"><span class="pre">TestJsonResponse.test_get_json_categories_ok()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestJsonResponse.test_get_specific_json_category_error"><code class="docutils literal notranslate"><span class="pre">TestJsonResponse.test_get_specific_json_category_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestJsonResponse.test_get_specific_json_category_success"><code class="docutils literal notranslate"><span class="pre">TestJsonResponse.test_get_specific_json_category_success()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestVariousUtils"><code class="docutils literal notranslate"><span class="pre">TestVariousUtils</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestVariousUtils.setUp"><code class="docutils literal notranslate"><span class="pre">TestVariousUtils.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestVariousUtils.test_get_next_question_id"><code class="docutils literal notranslate"><span class="pre">TestVariousUtils.test_get_next_question_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_utils.TestVariousUtils.test_mix_choices"><code class="docutils literal notranslate"><span class="pre">TestVariousUtils.test_mix_choices()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Education.tests.html#module-Education.tests.test_views">Education.tests.test_views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.ResultsViewTest"><code class="docutils literal notranslate"><span class="pre">ResultsViewTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.ResultsViewTest.setUp"><code class="docutils literal notranslate"><span class="pre">ResultsViewTest.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.ResultsViewTest.test_results_view_requires_login"><code class="docutils literal notranslate"><span class="pre">ResultsViewTest.test_results_view_requires_login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.ResultsViewTest.test_results_view_with_authenticated_user"><code class="docutils literal notranslate"><span class="pre">ResultsViewTest.test_results_view_with_authenticated_user()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.SelectionTestCase"><code class="docutils literal notranslate"><span class="pre">SelectionTestCase</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestDetailView"><code class="docutils literal notranslate"><span class="pre">TestDetailView</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestFindModel"><code class="docutils literal notranslate"><span class="pre">TestFindModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestFindModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestFindModel.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_fail"><code class="docutils literal notranslate"><span class="pre">TestFindModel.test_find_model_fail()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_success"><code class="docutils literal notranslate"><span class="pre">TestFindModel.test_find_model_success()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestTryNewQuiz"><code class="docutils literal notranslate"><span class="pre">TestTryNewQuiz</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestTryNewQuiz.setUp"><code class="docutils literal notranslate"><span class="pre">TestTryNewQuiz.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestTryNewQuiz.test_try_new_quiz_with_quiz_result_in_session"><code class="docutils literal notranslate"><span class="pre">TestTryNewQuiz.test_try_new_quiz_with_quiz_result_in_session()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestTryNewQuiz.test_try_new_quiz_with_result"><code class="docutils literal notranslate"><span class="pre">TestTryNewQuiz.test_try_new_quiz_with_result()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestTryNewQuiz.test_try_new_quiz_without_quiz_result_in_session"><code class="docutils literal notranslate"><span class="pre">TestTryNewQuiz.test_try_new_quiz_without_quiz_result_in_session()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestViews"><code class="docutils literal notranslate"><span class="pre">TestViews</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestViews.setUp"><code class="docutils literal notranslate"><span class="pre">TestViews.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestViews.test_index_view"><code class="docutils literal notranslate"><span class="pre">TestViews.test_index_view()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Education.tests.html#module-Education.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-Education.admin">
+<span id="education-admin-module"></span><h2>Education.admin module<a class="headerlink" href="#module-Education.admin" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-Education.apps">
+<span id="education-apps-module"></span><h2>Education.apps module<a class="headerlink" href="#module-Education.apps" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Education.apps.EducationConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Education.apps.</span></span><span class="sig-name descname"><span class="pre">EducationConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/apps.html#EducationConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.apps.EducationConfig" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.apps.EducationConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#Education.apps.EducationConfig.default_auto_field" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.apps.EducationConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Education'</span></em><a class="headerlink" href="#Education.apps.EducationConfig.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Education.models">
+<span id="education-models-module"></span><h2>Education.models module<a class="headerlink" href="#module-Education.models" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Education.models.Categories">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Education.models.</span></span><span class="sig-name descname"><span class="pre">Categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/models.html#Categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.models.Categories" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Education.models.Categories.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Education.models.Categories.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Education.models.Categories.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Education.models.Categories.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Categories.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#Education.models.Categories.category" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Categories.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#Education.models.Categories.description" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Categories.history_set">
+<span class="sig-name descname"><span class="pre">history_set</span></span><a class="headerlink" href="#Education.models.Categories.history_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Categories.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Education.models.Categories.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Categories.mythology_set">
+<span class="sig-name descname"><span class="pre">mythology_set</span></span><a class="headerlink" href="#Education.models.Categories.mythology_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Categories.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Education.models.Categories.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Categories.science_and_nature_set">
+<span class="sig-name descname"><span class="pre">science_and_nature_set</span></span><a class="headerlink" href="#Education.models.Categories.science_and_nature_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Categories.subcategories_set">
+<span class="sig-name descname"><span class="pre">subcategories_set</span></span><a class="headerlink" href="#Education.models.Categories.subcategories_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Education.models.History">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Education.models.</span></span><span class="sig-name descname"><span class="pre">History</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcategory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correct_answer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/models.html#History"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.models.History" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Education.models.History.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Education.models.History.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Education.models.History.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Education.models.History.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.History.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#Education.models.History.category" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.History.category_id">
+<span class="sig-name descname"><span class="pre">category_id</span></span><a class="headerlink" href="#Education.models.History.category_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.History.choices">
+<span class="sig-name descname"><span class="pre">choices</span></span><a class="headerlink" href="#Education.models.History.choices" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.History.correct_answer">
+<span class="sig-name descname"><span class="pre">correct_answer</span></span><a class="headerlink" href="#Education.models.History.correct_answer" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.History.education_category_obj">
+<span class="sig-name descname"><span class="pre">education_category_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Categories:</span> <span class="pre">Education&gt;</span></em><a class="headerlink" href="#Education.models.History.education_category_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.History.history_subcategory_obj">
+<span class="sig-name descname"><span class="pre">history_subcategory_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Subcategories:</span> <span class="pre">History&gt;</span></em><a class="headerlink" href="#Education.models.History.history_subcategory_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.History.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Education.models.History.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.History.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Education.models.History.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.History.question">
+<span class="sig-name descname"><span class="pre">question</span></span><a class="headerlink" href="#Education.models.History.question" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.History.subcategory">
+<span class="sig-name descname"><span class="pre">subcategory</span></span><a class="headerlink" href="#Education.models.History.subcategory" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.History.subcategory_id">
+<span class="sig-name descname"><span class="pre">subcategory_id</span></span><a class="headerlink" href="#Education.models.History.subcategory_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Education.models.Mythology">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Education.models.</span></span><span class="sig-name descname"><span class="pre">Mythology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcategory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correct_answer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/models.html#Mythology"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.models.Mythology" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Education.models.Mythology.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Education.models.Mythology.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Education.models.Mythology.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Education.models.Mythology.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Mythology.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#Education.models.Mythology.category" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Mythology.category_id">
+<span class="sig-name descname"><span class="pre">category_id</span></span><a class="headerlink" href="#Education.models.Mythology.category_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Mythology.choices">
+<span class="sig-name descname"><span class="pre">choices</span></span><a class="headerlink" href="#Education.models.Mythology.choices" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Mythology.correct_answer">
+<span class="sig-name descname"><span class="pre">correct_answer</span></span><a class="headerlink" href="#Education.models.Mythology.correct_answer" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Mythology.education_category_obj">
+<span class="sig-name descname"><span class="pre">education_category_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Categories:</span> <span class="pre">Education&gt;</span></em><a class="headerlink" href="#Education.models.Mythology.education_category_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Mythology.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Education.models.Mythology.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Mythology.mythology_subcategory_obj">
+<span class="sig-name descname"><span class="pre">mythology_subcategory_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Subcategories:</span> <span class="pre">Mythology&gt;</span></em><a class="headerlink" href="#Education.models.Mythology.mythology_subcategory_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Mythology.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Education.models.Mythology.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Mythology.question">
+<span class="sig-name descname"><span class="pre">question</span></span><a class="headerlink" href="#Education.models.Mythology.question" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Mythology.subcategory">
+<span class="sig-name descname"><span class="pre">subcategory</span></span><a class="headerlink" href="#Education.models.Mythology.subcategory" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Mythology.subcategory_id">
+<span class="sig-name descname"><span class="pre">subcategory_id</span></span><a class="headerlink" href="#Education.models.Mythology.subcategory_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Education.models.</span></span><span class="sig-name descname"><span class="pre">Science_and_Nature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcategory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correct_answer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/models.html#Science_and_Nature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.models.Science_and_Nature" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Education.models.Science_and_Nature.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Education.models.Science_and_Nature.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#Education.models.Science_and_Nature.category" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature.category_id">
+<span class="sig-name descname"><span class="pre">category_id</span></span><a class="headerlink" href="#Education.models.Science_and_Nature.category_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature.choices">
+<span class="sig-name descname"><span class="pre">choices</span></span><a class="headerlink" href="#Education.models.Science_and_Nature.choices" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature.correct_answer">
+<span class="sig-name descname"><span class="pre">correct_answer</span></span><a class="headerlink" href="#Education.models.Science_and_Nature.correct_answer" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature.education_category_obj">
+<span class="sig-name descname"><span class="pre">education_category_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Categories:</span> <span class="pre">Education&gt;</span></em><a class="headerlink" href="#Education.models.Science_and_Nature.education_category_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Education.models.Science_and_Nature.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Education.models.Science_and_Nature.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature.question">
+<span class="sig-name descname"><span class="pre">question</span></span><a class="headerlink" href="#Education.models.Science_and_Nature.question" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature.science_subcategory_obj">
+<span class="sig-name descname"><span class="pre">science_subcategory_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Subcategories:</span> <span class="pre">Science</span> <span class="pre">&amp;</span> <span class="pre">Nature&gt;</span></em><a class="headerlink" href="#Education.models.Science_and_Nature.science_subcategory_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature.subcategory">
+<span class="sig-name descname"><span class="pre">subcategory</span></span><a class="headerlink" href="#Education.models.Science_and_Nature.subcategory" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Science_and_Nature.subcategory_id">
+<span class="sig-name descname"><span class="pre">subcategory_id</span></span><a class="headerlink" href="#Education.models.Science_and_Nature.subcategory_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Education.models.Subcategories">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Education.models.</span></span><span class="sig-name descname"><span class="pre">Subcategories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcategory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/models.html#Subcategories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.models.Subcategories" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Education.models.Subcategories.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Education.models.Subcategories.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Education.models.Subcategories.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Education.models.Subcategories.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Subcategories.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#Education.models.Subcategories.category" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Subcategories.category_id">
+<span class="sig-name descname"><span class="pre">category_id</span></span><a class="headerlink" href="#Education.models.Subcategories.category_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Subcategories.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#Education.models.Subcategories.description" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Subcategories.education_category_obj">
+<span class="sig-name descname"><span class="pre">education_category_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Categories:</span> <span class="pre">Education&gt;</span></em><a class="headerlink" href="#Education.models.Subcategories.education_category_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Subcategories.history_set">
+<span class="sig-name descname"><span class="pre">history_set</span></span><a class="headerlink" href="#Education.models.Subcategories.history_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Subcategories.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Education.models.Subcategories.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Subcategories.mythology_set">
+<span class="sig-name descname"><span class="pre">mythology_set</span></span><a class="headerlink" href="#Education.models.Subcategories.mythology_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Subcategories.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Education.models.Subcategories.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Subcategories.science_and_nature_set">
+<span class="sig-name descname"><span class="pre">science_and_nature_set</span></span><a class="headerlink" href="#Education.models.Subcategories.science_and_nature_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Education.models.Subcategories.subcategory">
+<span class="sig-name descname"><span class="pre">subcategory</span></span><a class="headerlink" href="#Education.models.Subcategories.subcategory" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Education.urls">
+<span id="education-urls-module"></span><h2>Education.urls module<a class="headerlink" href="#module-Education.urls" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-Education.utils">
+<span id="education-utils-module"></span><h2>Education.utils module<a class="headerlink" href="#module-Education.utils" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="Education.utils.category_objects">
+<span class="sig-prename descclassname"><span class="pre">Education.utils.</span></span><span class="sig-name descname"><span class="pre">category_objects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/utils.html#category_objects"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.utils.category_objects" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the category queryset from the database based on its category name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object containing information about the client’s request.</p></li>
+<li><p><strong>category_name</strong> (<em>str</em>) – The user’s selected category</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The 10 random question objects selected from the database</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>question_selection or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Education.utils.get_category_names">
+<span class="sig-prename descclassname"><span class="pre">Education.utils.</span></span><span class="sig-name descname"><span class="pre">get_category_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/utils.html#get_category_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.utils.get_category_names" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve the desired category names from the Open Trivia DB json response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>response</strong> (<em>dict</em>) – The json response containing all categories available on Open Trivia DB.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Return the list of selected subcategories for the category according to the ids.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Education.utils.get_json_categories">
+<span class="sig-prename descclassname"><span class="pre">Education.utils.</span></span><span class="sig-name descname"><span class="pre">get_json_categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/utils.html#get_json_categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.utils.get_json_categories" title="Permalink to this definition"></a></dt>
+<dd><p>Return the json response for the available categories on Open Trivia DB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The json response</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Education.utils.get_next_question_id">
+<span class="sig-prename descclassname"><span class="pre">Education.utils.</span></span><span class="sig-name descname"><span class="pre">get_next_question_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_selection_pks</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/utils.html#get_next_question_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.utils.get_next_question_id" title="Permalink to this definition"></a></dt>
+<dd><p>Find the question id for the next question in the quiz.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>category_name</strong> (<em>str</em>) – The name of the subcategory the user selected on the category homepage.</p></li>
+<li><p><strong>question_id</strong> (<em>int</em>) – The primary key for the current question object</p></li>
+<li><p><strong>question_selection_pks</strong> (<em>list</em>) – The list of 10 random primary keys chosen for the quiz session</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Return the primary key of the next question object, should there be another in the list</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Education.utils.get_specific_json_category">
+<span class="sig-prename descclassname"><span class="pre">Education.utils.</span></span><span class="sig-name descname"><span class="pre">get_specific_json_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/utils.html#get_specific_json_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.utils.get_specific_json_category" title="Permalink to this definition"></a></dt>
+<dd><p>Return the json response for a specific Open Trivia DB quiz category</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity</strong> (<em>int</em>) – Enter the number of questions the API should return</p></li>
+<li><p><strong>category</strong> (<em>int</em>) – Enter the id for the desired quiz category</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The json response</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Education.utils.mix_choices">
+<span class="sig-prename descclassname"><span class="pre">Education.utils.</span></span><span class="sig-name descname"><span class="pre">mix_choices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/utils.html#mix_choices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.utils.mix_choices" title="Permalink to this definition"></a></dt>
+<dd><p>Mix the choices for each question in a quiz</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>choices</strong> (<em>list</em>) – The choices are a list of 4 options.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Return the shuffled choices</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-Education.views">
+<span id="education-views-module"></span><h2>Education.views module<a class="headerlink" href="#module-Education.views" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="Education.views.detail">
+<span class="sig-prename descclassname"><span class="pre">Education.views.</span></span><span class="sig-name descname"><span class="pre">detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/views.html#detail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.views.detail" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Education.views.index">
+<span class="sig-prename descclassname"><span class="pre">Education.views.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/views.html#index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.views.index" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Education.views.index_edu">
+<span class="sig-prename descclassname"><span class="pre">Education.views.</span></span><span class="sig-name descname"><span class="pre">index_edu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/views.html#index_edu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.views.index_edu" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Education.views.results">
+<span class="sig-prename descclassname"><span class="pre">Education.views.</span></span><span class="sig-name descname"><span class="pre">results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/views.html#results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.views.results" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Education.views.selection">
+<span class="sig-prename descclassname"><span class="pre">Education.views.</span></span><span class="sig-name descname"><span class="pre">selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/views.html#selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.views.selection" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Education.views.try_new_quiz">
+<span class="sig-prename descclassname"><span class="pre">Education.views.</span></span><span class="sig-name descname"><span class="pre">try_new_quiz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/views.html#try_new_quiz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.views.try_new_quiz" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-Education">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Education" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="General_Knowledge.tests.html" class="btn btn-neutral float-left" title="General_Knowledge.tests package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Education.management.html" class="btn btn-neutral float-right" title="Education.management package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Kisha Cairncross, Deandre` Wright.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
