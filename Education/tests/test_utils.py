@@ -2,7 +2,7 @@
 from django.http import HttpRequest
 
 #  import unittest to write tests that are not necessarily tied to Django and can be used in any Python project e.g. get API response from open trivia db
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, MagicMock, Mock
 
 # import functions in utils.py
 from .. import utils
@@ -44,6 +44,8 @@ from django.conf import settings
 
 # import mixer to create objects
 from mixer.backend.django import mixer
+
+import pytest 
 
 ##################################################################################################
 ##################################################################################################
@@ -378,8 +380,10 @@ class TestCategoryObjects(TransactionTestCase):
         # 10 question objects for the question_selection
         self.mock_question_selection = self.mock_questions[:10]         
 
-    # patch to mock the filter method of the Mythology.objects manager. This is done to ensure that when filter is called in your utils.category_objects function, it returns the specified self.mock_question_selection instead of actually querying the database.         
-    # not a literal file path but rather a string representing the import path of the object you want to mock. 
+    # patch to mock the filter method of the Mythology.objects manager. 
+    # - this is done to ensure that when filter is called in the utils.category_objects function, 
+    # - it returns the specified self.mock_question_selection instead of actually querying the database.         
+    # not a literal file path but rather a string representing the import path of the object to mock. 
     @patch('Education.utils.Mythology.objects.filter')        
     def test_category_objects(self, mock_filter):
         # set up the return value for the filtered selection
@@ -414,9 +418,9 @@ class TestCategoryObjects(TransactionTestCase):
     @patch('Education.utils.globals')
     def test_category_objects_invalid_category(self, mock_globals):
         # mock the globals function to raise a LookupError for an incorrect category_name
-        mock_globals.side_effect = LookupError
+        mock_globals.side_effect = KeyError
 
-        # simulate the behavior where the model is not found in the global namespace
+        # simulate the behaviour where the model is not found in the global namespace
         # raise an error when calling category_objects with an invalid category name
         with self.assertRaises(Http404, msg='Should check that an error raises for a model not located with a category_name.'):
             response = utils.category_objects(self.request, 'Invalid category')

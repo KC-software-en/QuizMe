@@ -34,6 +34,10 @@ from django.test.client import RequestFactory, Client
 from django.http import HttpResponse, HttpRequest
 # Importing the SessionMiddleware for handling sessions in Django.
 from django.contrib.sessions.middleware import SessionMiddleware
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+# import apps to dynamically fetch a model in detail() & selection() view
+from django.apps import apps
 
 # import functions from utils.py called in views
 from ..utils import (
@@ -46,7 +50,7 @@ from ..utils import (
 from ..models import *
 
 # import the views to be tested
-from Education.views import *
+from ..views import *
 from user_auth.views import *
 
 
@@ -354,8 +358,74 @@ class TestTryNewQuiz(TestCase):
 
         # Call the view function.
         response = try_new_quiz(request)
-
-        # Assertions.
+        
+         # Assertions.
         self.assertNotIn('quiz_result', request.session)  # Assert session data has not been changed.
         self.assertIsInstance(response, HttpResponseRedirect)  # Assert response is a HttpResponseRedirect.
         self.assertEqual(response.url, reverse('Education:index_edu'))  # Assert redirect URL is the correct url.
+       
+'''
+A class that tests finding a model.
+'''
+# create a class that tests finding a model.         
+@patch('Education.views.apps.get_model')
+class TestFindModel(TestCase):
+    # setup
+    def setUp(self):
+        # create a RequestFactory instance for generating mock HTTP requests during testing
+        self.factory = RequestFactory()
+
+        # Create a user object
+        self.user = User.objects.create(username='test_user')            
+            
+    # create a test that locates a model in the app    
+    def test_find_model_success(self, mock_get_model): ##, mock_get_object_or_404
+        # mock the category_name that will be used to find a model
+        mock_category_name_ok = 'Mythology'               
+
+        # create a MagicMock object to mock the behaviour of the Mythology class
+        # use spec=Mythology to ensure that mock_model behaves like an instance of the Mythology class
+        # https://docs.python.org/3.7/library/unittest.mock.html#the-mock-class
+        # set the return value of mock_get_model to be the mock_model object
+        mock_model = MagicMock(spec=Mythology)     
+        mock_get_model.return_value = mock_model
+        
+        # call the get_model function with its args app name & model name
+        result = apps.get_model('Education', mock_category_name_ok)
+        
+        # assert that the result object is an instance of the same class as mock_model
+        # https://docs.python.org/3.7/library/unittest.html?highlight=assertisinstance#unittest.TestCase.assertIsInstance
+        # assert that the result is not none, indicating successful retrieval
+        self.assertIsInstance(result, type(mock_model), msg='Should check that the response to the function get_model is a model instance.')
+        self.assertIsNotNone(result, msg='Should check that the model is not none.')        
+                
+    # test for an error raised if globals does not have a model for a category name    
+    def test_find_model_fail(self, mock_get_model):            
+        # mock the arguments for the detail() function
+        mock_category_name_absent = 'Sports'   
+        mock_question_id = 20     
+
+        # mock the get_model function to raise a LookupError for an incorrect category_name (i.e. no corresponding model)                       
+        mock_get_model.side_effect = LookupError
+                
+        # Create a GET request for the view
+        # set the user attribute for the request - required for the login decorator
+        request = self.factory.get(reverse('Education:edu_detail', args=['Sports', 20]))
+        request.user = self.user
+
+        # Call the view function with the GET request & its actual arguments        
+        response = detail(request, mock_category_name_absent, mock_question_id)        
+
+        # simulate the behaviour where the model is not found in the global namespace
+        # raise an error when calling find_model() with an invalid category name
+        # https://docs.djangoproject.com/en/3.2/topics/testing/tools/#exceptions
+        # according to documentation, an exception not visible to the test client is Http404 
+        # - :. check response.status_code in test because assertRaises(Http404) gives AssertionError: Http404 not raised
+        self.assertEqual(response.status_code, 200, msg='Should check that the status_code is 200 for the error message shown on detail template.')
+        # assert that the error message was returned in the response content
+        # - use b syntax to create a byte string literal. the content of a HTTP response is binary data - content get returned as a byte string
+        self.assertIn(b"Unable to find the model", response.content, msg='Should check that None was returned for a model not located.')
+
+        
+        
+
