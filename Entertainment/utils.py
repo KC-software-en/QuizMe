@@ -271,6 +271,34 @@ def get_category_names(response: dict) -> list:
     return category_names
 
 
+
+'''
+A function that finds the model associated with a category name.
+'''
+# use the selected category_name & the list of category_names it comes from as the parameters to find a model
+def find_model(category_name, category_names): 
+    # check if the category_name is in the list of category_names then locate its model       
+    if category_name in category_names:
+        # use the category_name selected on edu_quiz.html to determine the model to get questions from
+        # replace spaces and '&' in the event category names have spaces to create a valid model name
+        model_name = category_name.replace(" ", "_").replace("&", "and")
+
+        # use a try-except block to find a model that matches the category name
+        # use use globals() instead of apps module to access the global namespace since the the model name was modified when replacing '&' 
+        # (apps still worked when it was only replacing " ")
+        # - dynamically:instead of explicitly specifying a fixed model in the code, generate or determine the model to use at runtime based on certain conditions/data
+        '''# check if the category_name is in the list of category_names then locate its model
+        # use globals module instead of apps to access the global namespace for models
+        # - since a model name was altered from its original category_name to create a valid model with 'and'
+        ''' #################################
+        try:            
+            model = globals()[model_name] # not model = apps.get_model('Entertainment', model_name)
+            return model
+
+        # raise an error if the model is not found
+        except LookupError:
+            raise Http404("Cannot locate the model for the selected category.") 
+
 # define a function that returns the queryset for 10 random objects from the database for each category 
 # https://stackoverflow.com/questions/27270958/patch-multiple-methods-from-different-modules-using-python-mock#:~:text=The%20short%20answer%20is%20no%20you%20cannot%20use,one%20of%20the%20time%20by%20single%20patch%20calls.
 def category_objects(request, category_name):
