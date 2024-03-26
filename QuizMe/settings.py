@@ -31,10 +31,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Create a .env file in your project's root directory and add your SECRET_KEY there.
 # You should also add this file to your .gitignore to ensure it's not committed to your repository
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-SECRET_KEY = 'django-insecure-y_c$+sv5x#*m9*+as*r&zy%q9^@2x)$x=^^-rti-5h9*mxk+r5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 
 # when debug=false,set to '*'
 # to allow requests from any host/domain name.
@@ -94,7 +93,7 @@ WSGI_APPLICATION = 'QuizMe.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASE = 2
+DATABASE = os.environ.get('DATABASE')
 
 if DEBUG and (DATABASE == 1):
     #Use sql database
@@ -111,11 +110,11 @@ elif DEBUG and (DATABASE == 2):
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'Q_ME123@1',
-        'HOST': 'localhost',
-        'POST': '5432'
+        'NAME': os.environ.get('NAME'),
+        'USER': os.environ.get('USER'),
+        'PASSWORD': os.environ.get('PASSWORD'),
+        'HOST': os.environ.get('HOST'),
+        'POST': os.environ.get('POST')
     }
 
 }
@@ -155,12 +154,12 @@ USE_L10N = True
 USE_TZ = True
 
 # Django email Backend.
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'QuizMe2024@gmail.com'
-EMAIL_HOST_PASSWORD = 'pjxp atrk kbgu aoaq'
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 
 # Static files (CSS, JavaScript, Images)
