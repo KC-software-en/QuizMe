@@ -44,57 +44,59 @@
                                         <!--show a form for each question in the quiz -->
                                         <!--the post method was used to send data to the server-->
                                         <!--the url in the action attribute was used to send data to the server-->
-                                        <form action="{% url 'Education:selection' category_name=category_name question_id=question.id %}" method="POST">
+                                        <!-- avoid a selection() error by making its execution conditional upon finding a model in detail() view-->
+                                        <form {% if model_exists %} action="{% url 'Education:selection' category_name=category_name question_id=question.id %}" {% endif %} method="POST">
                                             <!--add the csrf_token to all post forms targeted at internal urls to protect against Cross Site Forgery-->
                                             {% csrf_token %}
+
+                                            <!--display error message if there are no questions - access the error key in context-->                                                                                        
+                                            {% if error %}
+                                                <p><strong>{{ error }}</strong></p>
 
                                             <!--The template system uses dot-lookup syntax to access variable attributes.-->
                                             <!-- Django does a dictionary lookup on the object question.-->
                                             <!--Failing that, it tries an attribute lookup – which works, in this case. -->
                                             <!--If attribute lookup has failed, it would’ve tried a list-index lookup.-->
                                             <!--check if there are question objects passed as context-->                    
-                                            {% if question %}
-                                        
-                                                    <!--display the question text by accessing its question attribute -->
-                                                    <!--add a margin below the question -->
-                                                    <h3 class="mb-4"> {{ question.question }} </h3> 
-
-                                                    <!--display error message if user did not select a choice before submitting-->
-                                                    {% if error_message %}
-    	    							                <p><strong>{{error_message}}</strong></p>
-    	    							            {% endif %}
-
-                                                    <!--group related elements in a form with fieldset-->
-                                                    <fieldset>                                                                                               
-                                                        <!--iterate over the choices attribute to add a radio button for each choice
-                                                         associated with a specific question in the database-->
-                                                        {% for choice in choices %}
-                                                            <!--Radio buttons. Each choice that is associated with that particular question is
-                                                            then displayed using a radio button in a form.-->
-                                                            <!--The name of each radio button is choice-->
-                                                            <!--selected value for each question will be sent to the server-->  
-                                                            <!-- uniquely identify the radio button within the form-->
-                                                            <!--the value attribute is the identifier for the user's choice associated with the question-->                                                                                              
-                                                            <input type="radio" name="choice" 
-                                                            id="choice{{forloop.counter}}" value="{{ choice.id }}" />                        
-                                                            <!-- access the value associated with the 'choice' key in the question.choices dictionary-->
-                                                            <label for="choice{{ forloop.counter }}">
-                                                                {{ choice.choice }} 
-                                                            </label>                                                                                                                                                                                                
-                                                            <br/><br/>
-                                                        {% endfor %}                                                                                                                                                                            
-                                                        
-                                                        <!-- a button that allows the user to submit their choice-->
-                                                        <!--when a user selects one of the radio buttons and submits the form,
-                                                             it’ll POST the data “choice=id” where id is the ID of the selected choice-->
-                                                        <!--use margins to allow space above-under the button-->
-                                                        <!-- use btn class so that the hover styles from the id will work-->                                                
-                                                        <input type="Submit" value="Save" class="btn btn-outline-light" id="edu_detail_btn"/>                                                                                                
-                                                    </fieldset>    
-
-                                            <!--display error message if there are no questions-->                                                                                        
                                             {% else %}
-                                                <p><strong>{{ error_message }}</strong></p>
+                                        
+                                                <!--display the question text by accessing its question attribute -->
+                                                <!--add a margin below the question -->
+                                                <h3 class="mb-4"> {{ question.question }} </h3> 
+
+                                                <!--display error message if user did not select a choice before submitting-->
+                                                {% if error_message %}
+                                                    <p><strong>{{error_message}}</strong></p>
+                                                {% endif %}
+
+                                                <!--group related elements in a form with fieldset-->
+                                                <fieldset>                                                                                               
+                                                    <!--iterate over the choices attribute to add a radio button for each choice
+                                                        associated with a specific question in the database-->
+                                                    {% for choice in choices %}
+                                                        <!--Radio buttons. Each choice that is associated with that particular question is
+                                                        then displayed using a radio button in a form.-->
+                                                        <!--The name of each radio button is choice-->
+                                                        <!--selected value for each question will be sent to the server-->  
+                                                        <!-- uniquely identify the radio button within the form-->
+                                                        <!--the value attribute is the identifier for the user's choice associated with the question-->                                                                                              
+                                                        <input type="radio" name="choice" 
+                                                        id="choice{{forloop.counter}}" value="{{ choice.id }}" />                        
+                                                        <!-- access the value associated with the 'choice' key in the question.choices dictionary-->
+                                                        <label for="choice{{ forloop.counter }}">
+                                                            {{ choice.choice }} 
+                                                        </label>                                                                                                                                                                                                
+                                                        <br/><br/>
+                                                    {% endfor %}                                                                                                                                                                            
+                                                    
+                                                    <!-- a button that allows the user to submit their choice-->
+                                                    <!--when a user selects one of the radio buttons and submits the form,
+                                                            it’ll POST the data “choice=id” where id is the ID of the selected choice-->
+                                                    <!--use margins to allow space above-under the button-->
+                                                    <!-- use btn class so that the hover styles from the id will work-->                                                
+                                                    <input type="Submit" value="Save" class="btn btn-outline-light" id="edu_detail_btn"/>                                                                                                
+                                                </fieldset>    
+
                                             {% endif %}
                                                 
                                         </form>                                                                

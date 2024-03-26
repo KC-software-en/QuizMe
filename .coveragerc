@@ -8,8 +8,7 @@ omit =
     */migrations/*    
     */settings.py  
     */tests/*   
-    */__init__.py  
-    */urls.py
+    */__init__.py      
     */apps.py
     */wsgi.py
     */asgi.py

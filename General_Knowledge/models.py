@@ -1,16 +1,73 @@
 from django.db import models
 
-############################################################################################
+###################################################################################
+###################################################################################
 
 # Create your models here.
 
 '''
-Create a General Knowledge model for the quiz.
+Create a model for the quiz categories in QuizMe.
+'''
+# define a model for categories in the QuizMe project
+class Categories(models.Model):
+    # define a field to store the category name as text
+    # define a field to store the description of the category as text
+    category = models.TextField()
+    description = models.TextField()
+
+    # define a method to represent the model instance as a string
+    # return the category name
+    def __str__(self):
+        return self.category
+        
+'''
+Create a model for the quiz subcategories in General Knowledge.
+'''
+# define a model for subcategories in the General Knowledge app
+class Subcategories(models.Model): 
+    # retrieve the category object representing 'General Knowledge' from the Categories model
+    gen_category_obj = Categories.objects.get(category='General Knowledge')
+
+    # use database foreign keys to indicate relationships between categories and subcategories
+    # - a ForeignKey field to show this many-to-one relationship
+    # set a default category to the primary key (pk) of the 'General Knowledge' category object
+    # https://docs.djangoproject.com/en/3.2/topics/db/models/#many-to-one-relationships
+    # https://dnmtechs.com/setting-default-value-for-foreign-key-attribute-in-django/
+    # ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, 
+    # - providing further control over the default value
+    # https://docs.djangoproject.com/en/3.2/ref/models/fields/#default
+    # - according to doc, for fields like ForeignKey that map to model instances, 
+    # - defaults should be the value of the field they reference (pk unless to_field is set) instead of model instances
+    category = models.ForeignKey(Categories, on_delete=models.SET_DEFAULT, default=gen_category_obj.pk)
+
+    # define a field to store the subcategory name as text
+    subcategory = models.TextField()
+
+    # define a field to store the description of the subcategory as text
+    description = models.TextField()
+
+    # define a method to represent the model instance as a string
+    # return the subcategory name 
+    def __str__(self):
+        return self.subcategory
+
+'''
+Create a General Knowledge model for the subcategory in the education quiz.
 '''
 # use Django's built-in object-relational mapping (ORM) & define the relevant classes
 # -each entry in a SQL table represents a single object, this can be converted to a class instance in Python.  
 # create a General Knowledge class that inherits from django.db.models.Model
-class General_Knowledge(models.Model):    
+class General_Knowledge(models.Model):      
+    # retrieve the category object representing 'Education' from the Categories model
+    education_category_obj = Categories.objects.get(category='Education')    
+
+    # use database foreign keys to indicate relationships between General Knowledge and categories        
+    # - a ForeignKey field to show this many-to-one relationship
+    # set a default category to the primary key (pk) of the 'education_category_obj' object    
+    # ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, 
+    # - providing further control over the default value
+    category = models.ForeignKey(Categories, on_delete=models.SET_DEFAULT, default=education_category_obj.pk)       
+
     # set variables that represent question, choices & correct_answer in the quiz
     # use TextField to store the questions
     question = models.TextField()    
@@ -25,5 +82,4 @@ class General_Knowledge(models.Model):
     # define a __str__ method for human-readable output
     # return question
     def __str__(self):
-        return self.question
-    
+        return self.question        
