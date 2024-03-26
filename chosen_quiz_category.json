@@ -3,7 +3,7 @@
         {
             "type": "type1",
             "difficulty": "level",
-            "category": "category1",
+            "category": "Entertainment : category1",
             "question": "question1",
             "correct_answer": "correct_answer1",
             "incorrect_answers": [
