@@ -33,7 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+DEBUG = True
 
 # when debug=false,set to '*'
 # to allow requests from any host/domain name.
@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'QuizMe.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASE = os.environ.get('DATABASE')
+DATABASE = 2
 
 if DEBUG and (DATABASE == 1):
     #Use sql database
@@ -110,11 +110,11 @@ elif DEBUG and (DATABASE == 2):
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('NAME'),
-        'USER': os.environ.get('USER'),
-        'PASSWORD': os.environ.get('PASSWORD'),
-        'HOST': os.environ.get('HOST'),
-        'POST': os.environ.get('POST')
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'Q_ME123@1',
+        'HOST': 'localhost',
+        'POST': '5432'
     }
 
 }
@@ -154,12 +154,12 @@ USE_L10N = True
 USE_TZ = True
 
 # Django email Backend.
-EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'QuizMe2024@gmail.com'
+EMAIL_HOST_PASSWORD = 'pjxp atrk kbgu aoaq'
 
 
 # Static files (CSS, JavaScript, Images)
