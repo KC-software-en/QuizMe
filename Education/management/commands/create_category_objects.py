@@ -11,7 +11,7 @@ from ...utils import get_specific_json_category, mix_choices
 # import html to handle potential HTML entities and aid rendering for create_subcategory_object
 import html
 
-#
+# import apps
 from django.apps import apps
 
 ####################################################################################
@@ -20,15 +20,6 @@ from django.apps import apps
 Define a class Command that extends BaseCommand. It will create an object for the sub-categories of the Education quiz.
 It is intended for private use by the project creator, not its users.
 '''
-# create an object for the sub-category (e.g.mythology) quiz data
-# in django shell import the util functions needed for the creation of the obj then call the obj
-# place the category id from the quiz_categories.json file as the argument for the function (e.g. 20)
-# In project directory cmd: `python manage.py shell`, 
-# `from Education.utils import get_specific_json_category, mix_choices, create_subcategory_object`
-# `create_subcategory_object(20)`, then `exit()`
-# this will populate the sub-category (e.g. mythology) table on the admin site with the quiz data
-# `python manage.py create_category_objects 20 Mythology`
-
 # the custom command can be called using `python manage.py create_category_objects 20 Mythology` to populate Mythology
 # be sure to place the desired app name in the handle() before calling the command with its corresponding category_id
 # `python manage.py create_category_objects 17 "Science & Nature"` to populate Science & Nature
@@ -52,7 +43,7 @@ class Command(BaseCommand):
 
         # call the get_specific_json_category function to get the data for the mythology category
         json_response = get_specific_json_category(quantity=50, category=category_id)
-        if json_response == None: ##
+        if json_response == None: 
             self.stderr.write(self.style.ERROR("Failed to retrieve data from the API."))
 
         # check if there are questions
@@ -60,7 +51,7 @@ class Command(BaseCommand):
             # save json response as a variable to pass into template
             questions = json_response["results"]
             
-            if not questions: ##
+            if not questions: 
                 self.stdout.write(self.style.WARNING("No questions found in the API response."))        
 
             # check if question retrieval was successful
