@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Education.tests.test_create_category_objects &mdash; QuizMe 00.00.01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            QuizMe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">QuizMe</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QuizMe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">Education.tests.test_create_category_objects</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Education.tests.test_create_category_objects</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">django.core.management</span> <span class="kn">import</span> <span class="n">call_command</span>
+
+<span class="c1"># https://docs.djangoproject.com/en/5.0/topics/testing/tools/#transactiontestcase</span>
+<span class="c1"># import TransactionTestCase because</span>
+<span class="c1"># tests rely on database access such as creating or querying models, </span>
+<span class="c1"># :. create test classes as subclasses of django.test.TestCase rather than unittest.TestCase</span>
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TransactionTestCase</span>
+
+<span class="c1"># import classes from models.py </span>
+<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Mythology</span>
+
+<span class="c1">#  import unittest to write tests that are not necessarily tied to Django and can be used in any Python project e.g. get API response from open trivia db</span>
+<span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">patch</span><span class="p">,</span> <span class="n">MagicMock</span><span class="p">,</span> <span class="n">Mock</span>
+
+<span class="c1"># NOTE: management commands are automatically discovered when placed within the management/commands directory of an app</span>
+<span class="c1"># - therefore, you do not need to import create_subcategory_objects explicitly in a test case </span>
+<span class="c1"># - Django will find and execute the command when you call it using call_command</span>
+
+<span class="c1">##############################################################################################</span>
+
+<span class="c1"># Create your tests here. Use `py manage.py test Education.tests.test_create_category_objects` to run tests in cmd</span>
+<span class="c1"># after writing a test, run in cmd &amp; it will say fail. </span>
+<span class="c1"># next, go to create_category_objects.py and create the command. Then it should pass</span>
+<span class="c1"># run coverage after tests</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd"># https://docs.djangoproject.com/en/3.2/topics/testing/tools/#management-commands</span>
+<span class="sd"># Management commands can be tested with the call_command() function. </span>
+<span class="sd"># The output can be redirected into a StringIO instance</span>
+<span class="sd"># create a class that tests the command create_subcategory_objects</span>
+<span class="sd">class TestCreateSubcategoryObjects(TransactionTestCase):</span>
+<span class="sd">    @patch(&#39;Education.utils.requests.get&#39;)</span>
+<span class="sd">    def test_create_subcategory_objects(self, mock_get_request):</span>
+<span class="sd">        mock_ok_response = MagicMock()</span>
+<span class="sd">        mock_ok_response.status_code = 200</span>
+<span class="sd">        mock_ok_response.json.return_value = {</span>
+<span class="sd">            &quot;results&quot;:[</span>
+<span class="sd">                {&quot;type&quot;:&quot;type1&quot;,</span>
+<span class="sd">                 &quot;difficulty&quot;:&quot;level&quot;,</span>
+<span class="sd">                 &quot;category&quot;:&quot;category1&quot;,</span>
+<span class="sd">                 &quot;question&quot;:&quot;question1&quot;,</span>
+<span class="sd">                 &quot;correct_answer&quot;:&quot;correct_answer1&quot;,</span>
+<span class="sd">                 &quot;incorrect_answers&quot;:[</span>
+<span class="sd">                     &quot;incorrect_answer&quot;,</span>
+<span class="sd">                     &quot;incorrect_answer2&quot;,</span>
+<span class="sd">                     &quot;incorrect_answer3&quot;,                     </span>
+<span class="sd">                 ]</span>
+<span class="sd">                 }</span>
+<span class="sd">            ]</span>
+<span class="sd">        }</span>
+
+<span class="sd">        # set the return value for response of mock_get as mock_response</span>
+<span class="sd">        mock_get_request.return_value = mock_ok_response</span>
+
+<span class="sd">        out = StringIO() </span>
+<span class="sd">        ##sys.stdout = out       </span>
+<span class="sd">        </span>
+<span class="sd">        # set the variables</span>
+<span class="sd">        total_questions = 50</span>
+<span class="sd">        category_id = 20</span>
+<span class="sd">        category_name = &#39;Mythology&#39;</span>
+<span class="sd">        idx = 1</span>
+
+<span class="sd">        # call the command (use the name of the command which is the file name, not Command/handle)</span>
+<span class="sd">        call_command(&#39;create_category_objects&#39;, category_id, category_name, stdout=out)</span>
+<span class="sd">        print(f&quot;out:{out.getvalue()}&quot;)##</span>
+
+<span class="sd">        # set the expected output</span>
+<span class="sd">        progress_expected_output = f&quot;Created quiz object {idx} out of {total_questions} for category_id:{category_id}&quot;</span>
+<span class="sd">        final_expected_output = f&quot;Successfully created {total_questions} quiz objects for category_id: {category_id}&quot;</span>
+<span class="sd">        </span>
+<span class="sd">        ##sys.stdout = sys.__stdout__</span>
+
+<span class="sd">        # assertions</span>
+<span class="sd">        self.assertIn(progress_expected_output, out.getvalue(), </span>
+<span class="sd">                      msg=&#39;Should check that a progess message reports the creation of a specific object.&#39;)</span>
+<span class="sd">        self.assertIn(final_expected_output, out.getvalue(), </span>
+<span class="sd">                      msg=&#39;Should check that a progess message reports the creation of 50 quiz objects.&#39;)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<div class="viewcode-block" id="TestCreateSubcategoryObjects2"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects2">[docs]</a><span class="k">class</span> <span class="nc">TestCreateSubcategoryObjects2</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCreateSubcategoryObjects2.test_create_subcategory_objects2"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects2.test_create_subcategory_objects2">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_subcategory_objects2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">StringIO</span>
+        <span class="n">call_command</span><span class="p">(</span><span class="s1">&#39;create_category_objects&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;Mythology&#39;</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;Created quiz object&#39;</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;Successfully created&#39;</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Kisha Cairncross, Deandre` Wright.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entertainment package &mdash; QuizMe 00.00.01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Entertainment.tests package" href="Entertainment.tests.html" />
+    <link rel="prev" title="Education.tests package" href="Education.tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            QuizMe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">QuizMe</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="QuizMe.html">QuizMe package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General_Knowledge.html">General_Knowledge package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Education.html">Education package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Entertainment package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html">Entertainment.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Entertainment.admin">Entertainment.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Entertainment.apps">Entertainment.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.apps.EntertainmentConfig"><code class="docutils literal notranslate"><span class="pre">EntertainmentConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Entertainment.models">Entertainment.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.models.Categories"><code class="docutils literal notranslate"><span class="pre">Categories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Entertainment.urls">Entertainment.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Entertainment.utils">Entertainment.utils module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.utils.category_objects"><code class="docutils literal notranslate"><span class="pre">category_objects()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.utils.create_subcategory_object"><code class="docutils literal notranslate"><span class="pre">create_subcategory_object()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.utils.get_category_names"><code class="docutils literal notranslate"><span class="pre">get_category_names()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.utils.get_json_categories"><code class="docutils literal notranslate"><span class="pre">get_json_categories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.utils.get_next_question_id"><code class="docutils literal notranslate"><span class="pre">get_next_question_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.utils.get_specific_json_category"><code class="docutils literal notranslate"><span class="pre">get_specific_json_category()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.utils.mix_choices"><code class="docutils literal notranslate"><span class="pre">mix_choices()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Entertainment.views">Entertainment.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.views.detail"><code class="docutils literal notranslate"><span class="pre">detail()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.views.index_en"><code class="docutils literal notranslate"><span class="pre">index_en()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.views.results"><code class="docutils literal notranslate"><span class="pre">results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.views.selection"><code class="docutils literal notranslate"><span class="pre">selection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.views.try_new_quiz"><code class="docutils literal notranslate"><span class="pre">try_new_quiz()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Entertainment">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user_auth.html">user_auth package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QuizMe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">QuizMe</a></li>
+      <li class="breadcrumb-item active">Entertainment package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Entertainment.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="entertainment-package">
+<h1>Entertainment package<a class="headerlink" href="#entertainment-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Entertainment.tests.html">Entertainment.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#entertainment-tests-test-admin-module">Entertainment.tests.test_admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#entertainment-tests-test-models-module">Entertainment.tests.test_models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#entertainment-tests-test-urls-module">Entertainment.tests.test_urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#entertainment-tests-test-utils-module">Entertainment.tests.test_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#entertainment-tests-test-views-module">Entertainment.tests.test_views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-Entertainment.admin">
+<span id="entertainment-admin-module"></span><h2>Entertainment.admin module<a class="headerlink" href="#module-Entertainment.admin" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-Entertainment.apps">
+<span id="entertainment-apps-module"></span><h2>Entertainment.apps module<a class="headerlink" href="#module-Entertainment.apps" title="Permalink to this heading"></a></h2>
+<p>Django app config for the entertainment app.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Entertainment.apps.EntertainmentConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.apps.</span></span><span class="sig-name descname"><span class="pre">EntertainmentConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/apps.html#EntertainmentConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.apps.EntertainmentConfig" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<p>Django app config for the entertainment app.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.apps.EntertainmentConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#Entertainment.apps.EntertainmentConfig.default_auto_field" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.apps.EntertainmentConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Entertainment'</span></em><a class="headerlink" href="#Entertainment.apps.EntertainmentConfig.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Entertainment.models">
+<span id="entertainment-models-module"></span><h2>Entertainment.models module<a class="headerlink" href="#module-Entertainment.models" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Entertainment.models.Categories">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Categories" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Entertainment.models.Categories.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Entertainment.models.Categories.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Entertainment.models.Categories.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Entertainment.models.Categories.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Categories.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#Entertainment.models.Categories.category" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Categories.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#Entertainment.models.Categories.description" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Categories.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Entertainment.models.Categories.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Categories.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Entertainment.models.Categories.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Entertainment.urls">
+<span id="entertainment-urls-module"></span><h2>Entertainment.urls module<a class="headerlink" href="#module-Entertainment.urls" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-Entertainment.utils">
+<span id="entertainment-utils-module"></span><h2>Entertainment.utils module<a class="headerlink" href="#module-Entertainment.utils" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="Entertainment.utils.category_objects">
+<span class="sig-prename descclassname"><span class="pre">Entertainment.utils.</span></span><span class="sig-name descname"><span class="pre">category_objects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/utils.html#category_objects"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.utils.category_objects" title="Permalink to this definition"></a></dt>
+<dd><p>A function that retrieves the category queryset from the database based on its category name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p></li>
+<li><p><strong>category_name</strong> (<em>str</em>) – The name of the category.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A queryset of objects for the specified category.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QuerySet</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Http404</strong> – If the specified category cannot be found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Entertainment.utils.create_subcategory_object">
+<span class="sig-prename descclassname"><span class="pre">Entertainment.utils.</span></span><span class="sig-name descname"><span class="pre">create_subcategory_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/utils.html#create_subcategory_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.utils.create_subcategory_object" title="Permalink to this definition"></a></dt>
+<dd><p>Create an object for the sub-category (e.g.Music) quiz data
+:param category: The id of the category to retrieve questions for
+:type category: int</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Entertainment.utils.get_category_names">
+<span class="sig-prename descclassname"><span class="pre">Entertainment.utils.</span></span><span class="sig-name descname"><span class="pre">get_category_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/Entertainment/utils.html#get_category_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.utils.get_category_names" title="Permalink to this definition"></a></dt>
+<dd><p>Create a function that finds the question id for the next question in the quiz.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>response</strong> (<em>dict</em>) – The JSON response from the Open Trivia DB API.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of category names.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Entertainment.utils.get_json_categories">
+<span class="sig-prename descclassname"><span class="pre">Entertainment.utils.</span></span><span class="sig-name descname"><span class="pre">get_json_categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/utils.html#get_json_categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.utils.get_json_categories" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the json response for the available categories on Open Trivia DB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The json response from the Open Trivia DB API.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>json</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>requests.RequestException</strong> – If the request to the Open Trivia DB API fails.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Entertainment.utils.get_next_question_id">
+<span class="sig-prename descclassname"><span class="pre">Entertainment.utils.</span></span><span class="sig-name descname"><span class="pre">get_next_question_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_selection_pks</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/utils.html#get_next_question_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.utils.get_next_question_id" title="Permalink to this definition"></a></dt>
+<dd><p>A function that retrieves the next question id based on the current question id and the list of question pks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>category_name</strong> (<em>str</em>) – The name of the category.</p></li>
+<li><p><strong>question_id</strong> (<em>int</em>) – The id of the current question.</p></li>
+<li><p><strong>question_selection_pks</strong> (<em>list</em>) – A list of question pks.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The id of the next question.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Entertainment.utils.get_specific_json_category">
+<span class="sig-prename descclassname"><span class="pre">Entertainment.utils.</span></span><span class="sig-name descname"><span class="pre">get_specific_json_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/Entertainment/utils.html#get_specific_json_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.utils.get_specific_json_category" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a specific category from the Open Trivia DB API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity</strong> (<em>int</em>) – The number of questions to retrieve.</p></li>
+<li><p><strong>category</strong> (<em>int</em>) – The category ID to retrieve questions for.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The JSON response from the Open Trivia DB API.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>requests.RequestException</strong> – If the request to the Open Trivia DB API fails.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Entertainment.utils.mix_choices">
+<span class="sig-prename descclassname"><span class="pre">Entertainment.utils.</span></span><span class="sig-name descname"><span class="pre">mix_choices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/Entertainment/utils.html#mix_choices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.utils.mix_choices" title="Permalink to this definition"></a></dt>
+<dd><p>Create a function that will mix the choices for each question in a quiz.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>choices</strong> (<em>list</em>) – A list of dictionaries containing the choices for each question.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of dictionaries containing the mixed choices for each question.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-Entertainment.views">
+<span id="entertainment-views-module"></span><h2>Entertainment.views module<a class="headerlink" href="#module-Entertainment.views" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="Entertainment.views.detail">
+<span class="sig-prename descclassname"><span class="pre">Entertainment.views.</span></span><span class="sig-name descname"><span class="pre">detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/views.html#detail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.views.detail" title="Permalink to this definition"></a></dt>
+<dd><p>This function retrieves a question object from the database based on the question_id passed in the URL.
+It also retrieves the list of choices for the question and converts the choices text field into a list of dictionaries.
+The function passes all the context variables into a single dictionary to render in the template correctly.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Entertainment.views.index_en">
+<span class="sig-prename descclassname"><span class="pre">Entertainment.views.</span></span><span class="sig-name descname"><span class="pre">index_en</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/views.html#index_en"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.views.index_en" title="Permalink to this definition"></a></dt>
+<dd><p>This function is the homepage of Entertainment quizzes.
+It displays a list of categories of quizzes and the first question of each category.
+If a user prematurely leaves a quiz and does not use the exit button,
+the result and session data of the current quiz are deleted.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Entertainment.views.results">
+<span class="sig-prename descclassname"><span class="pre">Entertainment.views.</span></span><span class="sig-name descname"><span class="pre">results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/views.html#results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.views.results" title="Permalink to this definition"></a></dt>
+<dd><p>This function retrieves the quiz result from the session and renders the result template.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p></li>
+<li><p><strong>category_name</strong> (<em>str</em>) – The name of the category of the quiz.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The HTTP response object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Entertainment.views.selection">
+<span class="sig-prename descclassname"><span class="pre">Entertainment.views.</span></span><span class="sig-name descname"><span class="pre">selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/views.html#selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.views.selection" title="Permalink to this definition"></a></dt>
+<dd><p>This function handles the submitted data for a question in a quiz.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p></li>
+<li><p><strong>category_name</strong> (<em>str</em>) – The name of the category of the quiz.</p></li>
+<li><p><strong>question_id</strong> (<em>int</em>) – The unique identifier of the question.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The HTTP response object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Entertainment.views.try_new_quiz">
+<span class="sig-prename descclassname"><span class="pre">Entertainment.views.</span></span><span class="sig-name descname"><span class="pre">try_new_quiz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/views.html#try_new_quiz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.views.try_new_quiz" title="Permalink to this definition"></a></dt>
+<dd><p>This function deletes the quiz result and session data of the current quiz before starting a new quiz.
+It then redirects the user to the home page of Entertainment quizzes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A redirect to the home page of Entertainment quizzes.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponseRedirect</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-Entertainment">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Entertainment" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Education.tests.html" class="btn btn-neutral float-left" title="Education.tests package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Entertainment.tests.html" class="btn btn-neutral float-right" title="Entertainment.tests package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Kisha Cairncross, Deandre` Wright.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

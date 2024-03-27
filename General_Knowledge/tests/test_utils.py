@@ -8,24 +8,10 @@ from unittest.mock import patch, MagicMock
 from .. import utils
 
 # import models
-from ..models import General_Knowledge
+from ..models import Categories, Subcategories, General_Knowledge
 
 # import random to shuffle choices rendered in the form
 import random
-
-# import RequestFactory to generate a HttpRequest objects & simulate HTTP requests (faster than using Client)
-# https://docs.djangoproject.com/en/5.0/topics/testing/advanced/#the-request-factory
-# import base class for all Django test cases (for writing tests, including test assertions, database setup and teardown, and other testing infrastructure)
-from django.test import RequestFactory
-
-# Import reverse is a utility function in Django that is used to generate URLs for views from their names and arguments
-from django.urls import reverse
-
-# import json to convert the JSON string into a Python object for the choices attribute in db
-import json
-
-# import Http404 to raise an error message if a model is not located in category_objects()
-from django.http import Http404
 
 # import TestCase
 from unittest import TestCase
@@ -43,6 +29,10 @@ from django.conf import settings
 
 # import mixer to create objects
 from mixer.backend.django import mixer
+
+# import sys & StringIO to test for a print statement in cmd
+from io import StringIO
+import sys
 
 ##################################################################################################
 ##################################################################################################
@@ -335,11 +325,13 @@ class TestVariousUtils(TestCase):
         # assert that the name is not there for the selected category id
         self.assertListEqual(category_names, [], msg='Should check that the list is empty if a selected category id is not there.')
 
-'''
+"""
 Create a class that tests the category_objects function.
-'''     
+"""
 # create tests for a valid category_name and an invalid category_name when locating a model to retrieve its category_objects
-class TestCategoryObjects(TransactionTestCase):
+# use TransactionTestCase because tests for category objects rely on database access 
+# - this ensures test objects are not created on the admin site
+class TestCategoryObjects(TransactionTestCase):    
     # setup the conditions needed for functions in the class
     def setUp(self):
         # Create an instance of the HttpRequest class
@@ -357,11 +349,19 @@ class TestCategoryObjects(TransactionTestCase):
         session_key = None
         self.request.session = engine.SessionStore(session_key)
 
+        # set up the category instance
+        self.category = Categories.objects.create(category="General Knowledge", description="General Knowledge description")
+
+        # set up the category instance
+        self.subcategory = Subcategories.objects.create(subcategory = "subcategory1", description="subcategory1 description", category=self.category)
+
         # set up the 50 random objects retrieved
         self.mock_questions = [General_Knowledge.objects.create(                                       
                                       question=f"question{i}", 
                                       choices = [f'choice{i}' for i in range(1,5)], 
-                                      correct_answer = f'choice1') 
+                                      correct_answer = f'choice1',
+                                      category = self.category
+                                      ) 
                         for i in range(1,51)]
         
         # mock the question_selection_ids as a list of 10 int ids(i.e. pk)
@@ -370,8 +370,10 @@ class TestCategoryObjects(TransactionTestCase):
         # 10 question objects for the question_selection
         self.mock_question_selection = self.mock_questions[:10]         
 
-    # patch to mock the filter method of the General_Knowledge.objects manager. This is done to ensure that when filter is called in your utils.category_objects function, it returns the specified self.mock_question_selection instead of actually querying the database.         
-    # not a literal file path but rather a string representing the import path of the object you want to mock. 
+    # patch to mock the filter method of the General_Knowledge.objects manager. 
+    # - this is done to ensure that when filter is called in the utils.category_objects function, 
+    # - it returns the specified self.mock_question_selection instead of actually querying the database.         
+    # not a literal file path but rather a string representing the import path of the object to mock. 
     @patch('General_Knowledge.utils.General_Knowledge.objects.filter')        
     def test_category_objects(self, mock_filter):
         # set up the return value for the filtered selection
@@ -403,13 +405,25 @@ class TestCategoryObjects(TransactionTestCase):
 
     # test for an error raised if globals does not have a model for a category name
     # dont incl category_objects in path to avoid AttributeError: <function category_objects at 0x0489E2B8> does not have the attribute 'globals'
-    @patch('General_Knowledge.utils.globals')
-    def test_category_objects_invalid_category(self, mock_globals):
+    @patch('General_Knowledge.views.apps.get_model')
+    def test_category_objects_invalid_category(self, mock_get_model):        
+        # redirect the standard output (stdout) to the StringIO object captured_output. 
+        # - this captures any output that is printed to the standard output during the execution of the category_objects function
+        captured_output = StringIO()
+        sys.stdout = captured_output
+
         # mock the globals function to raise a LookupError for an incorrect category_name
-        mock_globals.side_effect = LookupError
+        mock_get_model.side_effect = LookupError
 
-        # simulate the behavior where the model is not found in the global namespace
-        # raise an error when calling category_objects with an invalid category name
-        with self.assertRaises(Http404, msg='Should check that an error raises for a model not located with a category_name.'):
-            response = utils.category_objects(self.request, 'Invalid category')
+        # call the category_objects function
+        response = utils.category_objects(self.request, 'Invalid category')
 
+        # reset stdout to restore the standard output stream to its original state after redirecting it for testing purposes
+        # - ensures that subsequent code execution within the test/(other tests) are not affected by stdout redirection 
+        sys.stdout = sys.__stdout__
+
+        # assert that the response is None when an invalid category is provided
+        # assert that the string 'error_message' is present in the captured output.
+        self.assertIsNone(response, msg='Should return None for an invalid category.')
+        self.assertIn('error_message', captured_output.getvalue(), msg='Should check that the str is present in the stdout for LookupError.')
+        

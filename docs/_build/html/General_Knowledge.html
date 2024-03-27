@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>General_Knowledge package &mdash; QuizMe 00.00.01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="General_Knowledge.management package" href="General_Knowledge.management.html" />
+    <link rel="prev" title="QuizMe package" href="QuizMe.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            QuizMe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">QuizMe</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="QuizMe.html">QuizMe package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">General_Knowledge package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="General_Knowledge.management.html">General_Knowledge.management package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="General_Knowledge.tests.html">General_Knowledge.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-General_Knowledge.admin">General_Knowledge.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-General_Knowledge.apps">General_Knowledge.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#General_Knowledge.apps.GeneralKnowledgeConfig"><code class="docutils literal notranslate"><span class="pre">GeneralKnowledgeConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-General_Knowledge.models">General_Knowledge.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#General_Knowledge.models.Categories"><code class="docutils literal notranslate"><span class="pre">Categories</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-General_Knowledge.urls">General_Knowledge.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-General_Knowledge.utils">General_Knowledge.utils module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#General_Knowledge.utils.category_objects"><code class="docutils literal notranslate"><span class="pre">category_objects()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#General_Knowledge.utils.get_category_names"><code class="docutils literal notranslate"><span class="pre">get_category_names()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#General_Knowledge.utils.get_json_categories"><code class="docutils literal notranslate"><span class="pre">get_json_categories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#General_Knowledge.utils.get_next_question_id"><code class="docutils literal notranslate"><span class="pre">get_next_question_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#General_Knowledge.utils.get_specific_json_category"><code class="docutils literal notranslate"><span class="pre">get_specific_json_category()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#General_Knowledge.utils.mix_choices"><code class="docutils literal notranslate"><span class="pre">mix_choices()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-General_Knowledge.views">General_Knowledge.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#General_Knowledge.views.detail"><code class="docutils literal notranslate"><span class="pre">detail()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#General_Knowledge.views.index_gen"><code class="docutils literal notranslate"><span class="pre">index_gen()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#General_Knowledge.views.results"><code class="docutils literal notranslate"><span class="pre">results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#General_Knowledge.views.selection"><code class="docutils literal notranslate"><span class="pre">selection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#General_Knowledge.views.try_new_quiz"><code class="docutils literal notranslate"><span class="pre">try_new_quiz()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-General_Knowledge">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Education.html">Education package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.html">Entertainment package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_auth.html">user_auth package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QuizMe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">QuizMe</a></li>
+      <li class="breadcrumb-item active">General_Knowledge package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/General_Knowledge.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="general-knowledge-package">
+<h1>General_Knowledge package<a class="headerlink" href="#general-knowledge-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="General_Knowledge.management.html">General_Knowledge.management package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="General_Knowledge.management.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="General_Knowledge.management.commands.html">General_Knowledge.management.commands package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="General_Knowledge.management.commands.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="General_Knowledge.management.commands.html#module-General_Knowledge.management.commands.create_category_objects_gk">General_Knowledge.management.commands.create_category_objects_gk module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="General_Knowledge.management.commands.html#module-General_Knowledge.management.commands">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="General_Knowledge.management.html#module-General_Knowledge.management">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="General_Knowledge.tests.html">General_Knowledge.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="General_Knowledge.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General_Knowledge.tests.html#general-knowledge-tests-test-admin-module">General_Knowledge.tests.test_admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General_Knowledge.tests.html#general-knowledge-tests-test-models-module">General_Knowledge.tests.test_models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General_Knowledge.tests.html#general-knowledge-tests-test-urls-module">General_Knowledge.tests.test_urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General_Knowledge.tests.html#general-knowledge-tests-test-utils-module">General_Knowledge.tests.test_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General_Knowledge.tests.html#general-knowledge-tests-test-views-module">General_Knowledge.tests.test_views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General_Knowledge.tests.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-General_Knowledge.admin">
+<span id="general-knowledge-admin-module"></span><h2>General_Knowledge.admin module<a class="headerlink" href="#module-General_Knowledge.admin" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-General_Knowledge.apps">
+<span id="general-knowledge-apps-module"></span><h2>General_Knowledge.apps module<a class="headerlink" href="#module-General_Knowledge.apps" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="General_Knowledge.apps.GeneralKnowledgeConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">General_Knowledge.apps.</span></span><span class="sig-name descname"><span class="pre">GeneralKnowledgeConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/General_Knowledge/apps.html#GeneralKnowledgeConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#General_Knowledge.apps.GeneralKnowledgeConfig" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="General_Knowledge.apps.GeneralKnowledgeConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#General_Knowledge.apps.GeneralKnowledgeConfig.default_auto_field" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="General_Knowledge.apps.GeneralKnowledgeConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'General_Knowledge'</span></em><a class="headerlink" href="#General_Knowledge.apps.GeneralKnowledgeConfig.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-General_Knowledge.models">
+<span id="general-knowledge-models-module"></span><h2>General_Knowledge.models module<a class="headerlink" href="#module-General_Knowledge.models" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="General_Knowledge.models.Categories">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">General_Knowledge.models.</span></span><span class="sig-name descname"><span class="pre">Categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/General_Knowledge/models.html#Categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#General_Knowledge.models.Categories" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="General_Knowledge.models.Categories.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#General_Knowledge.models.Categories.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="General_Knowledge.models.Categories.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#General_Knowledge.models.Categories.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="General_Knowledge.models.Categories.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#General_Knowledge.models.Categories.category" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="General_Knowledge.models.Categories.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#General_Knowledge.models.Categories.description" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="General_Knowledge.models.Categories.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#General_Knowledge.models.Categories.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="General_Knowledge.models.Categories.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#General_Knowledge.models.Categories.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-General_Knowledge.urls">
+<span id="general-knowledge-urls-module"></span><h2>General_Knowledge.urls module<a class="headerlink" href="#module-General_Knowledge.urls" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-General_Knowledge.utils">
+<span id="general-knowledge-utils-module"></span><h2>General_Knowledge.utils module<a class="headerlink" href="#module-General_Knowledge.utils" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="General_Knowledge.utils.category_objects">
+<span class="sig-prename descclassname"><span class="pre">General_Knowledge.utils.</span></span><span class="sig-name descname"><span class="pre">category_objects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/General_Knowledge/utils.html#category_objects"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#General_Knowledge.utils.category_objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="General_Knowledge.utils.get_category_names">
+<span class="sig-prename descclassname"><span class="pre">General_Knowledge.utils.</span></span><span class="sig-name descname"><span class="pre">get_category_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/General_Knowledge/utils.html#get_category_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#General_Knowledge.utils.get_category_names" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="General_Knowledge.utils.get_json_categories">
+<span class="sig-prename descclassname"><span class="pre">General_Knowledge.utils.</span></span><span class="sig-name descname"><span class="pre">get_json_categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/General_Knowledge/utils.html#get_json_categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#General_Knowledge.utils.get_json_categories" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="General_Knowledge.utils.get_next_question_id">
+<span class="sig-prename descclassname"><span class="pre">General_Knowledge.utils.</span></span><span class="sig-name descname"><span class="pre">get_next_question_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_selection_pks</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/General_Knowledge/utils.html#get_next_question_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#General_Knowledge.utils.get_next_question_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="General_Knowledge.utils.get_specific_json_category">
+<span class="sig-prename descclassname"><span class="pre">General_Knowledge.utils.</span></span><span class="sig-name descname"><span class="pre">get_specific_json_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/General_Knowledge/utils.html#get_specific_json_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#General_Knowledge.utils.get_specific_json_category" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="General_Knowledge.utils.mix_choices">
+<span class="sig-prename descclassname"><span class="pre">General_Knowledge.utils.</span></span><span class="sig-name descname"><span class="pre">mix_choices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/General_Knowledge/utils.html#mix_choices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#General_Knowledge.utils.mix_choices" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-General_Knowledge.views">
+<span id="general-knowledge-views-module"></span><h2>General_Knowledge.views module<a class="headerlink" href="#module-General_Knowledge.views" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="General_Knowledge.views.detail">
+<span class="sig-prename descclassname"><span class="pre">General_Knowledge.views.</span></span><span class="sig-name descname"><span class="pre">detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/General_Knowledge/views.html#detail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#General_Knowledge.views.detail" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="General_Knowledge.views.index_gen">
+<span class="sig-prename descclassname"><span class="pre">General_Knowledge.views.</span></span><span class="sig-name descname"><span class="pre">index_gen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/General_Knowledge/views.html#index_gen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#General_Knowledge.views.index_gen" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="General_Knowledge.views.results">
+<span class="sig-prename descclassname"><span class="pre">General_Knowledge.views.</span></span><span class="sig-name descname"><span class="pre">results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/General_Knowledge/views.html#results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#General_Knowledge.views.results" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="General_Knowledge.views.selection">
+<span class="sig-prename descclassname"><span class="pre">General_Knowledge.views.</span></span><span class="sig-name descname"><span class="pre">selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/General_Knowledge/views.html#selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#General_Knowledge.views.selection" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="General_Knowledge.views.try_new_quiz">
+<span class="sig-prename descclassname"><span class="pre">General_Knowledge.views.</span></span><span class="sig-name descname"><span class="pre">try_new_quiz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/General_Knowledge/views.html#try_new_quiz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#General_Knowledge.views.try_new_quiz" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-General_Knowledge">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-General_Knowledge" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="QuizMe.html" class="btn btn-neutral float-left" title="QuizMe package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="General_Knowledge.management.html" class="btn btn-neutral float-right" title="General_Knowledge.management package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Kisha Cairncross, Deandre` Wright.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

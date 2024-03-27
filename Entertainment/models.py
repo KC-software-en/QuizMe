@@ -18,6 +18,11 @@ class Categories(models.Model):
     # define a method to represent the model instance as a string
     # return the category name
     def __str__(self):
+        """A human-readable string representation of the category object.
+
+        :return: Return the category object
+        :rtype: str
+        """
         return self.category
     
 '''
@@ -49,6 +54,11 @@ class Subcategories(models.Model):
     # define a method to represent the model instance as a string
     # return the subcategory name 
     def __str__(self):
+        """A human-readable string representation of the subcategory object.
+
+        :return: Return the subcategory object
+        :rtype: str
+        """
         return self.subcategory
     
 '''
@@ -86,9 +96,11 @@ class Music(models.Model):
 
     # define a __str__ method for human-readable output
     # return question
-    def __str__(self):
-        """
-            Returns the question of the quiz.
+    def __str__(self):        
+        """A human-readable string representation of the Music question object in a quiz.
+
+        :return: Return the question object
+        :rtype: str
         """
         return self.question
     
@@ -126,8 +138,10 @@ class Film(models.Model):
     # define a __str__ method for human-readable output
     # return question
     def __str__(self):
-        """
-            Returns the question of the quiz.
+        """A human-readable string representation of the Film question object in a quiz.
+
+        :return: Return the question object
+        :rtype: str
         """
         return self.question
     
@@ -164,7 +178,9 @@ class Video_Games(models.Model):
     # define a __str__ method for human-readable output
     # return question
     def __str__(self):
-        """
-            Returns the question of the quiz.
+        """A human-readable string representation of the Video Games question object in a quiz.
+
+        :return: Return the question object
+        :rtype: str
         """
         return self.question    
