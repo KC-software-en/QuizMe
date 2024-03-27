@@ -222,7 +222,7 @@ class TestFindModel(TestCase):
         self.user = User.objects.create(username='test_user')            
             
     # create a test that locates a model in the app    
-    def test_find_model_success(self, mock_get_model): ##, mock_get_object_or_404
+    def test_find_model_success(self, mock_get_model): 
         # mock the category_name that will be used to find a model
         mock_category_name_ok = 'Mythology'               
 
@@ -259,7 +259,7 @@ class TestFindModel(TestCase):
         # Call the view function with the GET request & its actual arguments        
         response = detail(request, mock_category_name_absent, mock_question_id)        
 
-        # simulate the behaviour where the model is not found in the global namespace
+        # simulate the behaviour where the model is not found in the apps
         # raise an error when calling find_model() with an invalid category name
         # https://docs.djangoproject.com/en/3.2/topics/testing/tools/#exceptions
         # according to documentation, an exception not visible to the test client is Http404 
