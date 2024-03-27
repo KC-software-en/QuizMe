@@ -7,26 +7,8 @@ import random
 # import json to work with the data retrieved from the open trivia db API
 import json     
 
-# import html to handle potential HTML entities and aid rendering for create_subcategory_object
-import html
-
 # import models
 from .models import Mythology, History, Science_and_Nature      
-
-# import Http404 to raise an error message if a model is not located in category_objects()
-from django.http import Http404
-
-#
-from django.http import HttpResponse
-
-# import render to render an HTML template with a given context and return an HttpResponse object
-from django.shortcuts import render
-
-# imported HttpResponseRedirect 
-from django.http import HttpResponseRedirect
-
-# imported reverse
-from django.urls import reverse
 
 # import apps to dynamically fetch a model in category_objects()
 from django.apps import apps
@@ -225,7 +207,7 @@ def category_objects(request, category_name):
     # use a try-except block to dynamically find a model that matches the category name
     # - dynamically:instead of explicitly specifying a fixed model in the code, 
     # - generate or determine the model to use at runtime based on certain conditions/data        
-    # use apps module to access the get_model function & find the model name         
+    # use apps module to access the get_model function & find the model name with its app namespace                
     try:            
         model = apps.get_model('Education', model_name)                        
 
