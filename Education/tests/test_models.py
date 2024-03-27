@@ -20,7 +20,6 @@ from mixer.backend.django import mixer
 # import classes from models.py 
 from ..models import Categories, Subcategories, Mythology, Science_and_Nature, History
 
-
 #####################################################################################
 
 # Create your tests here. Use `py manage.py test Education.tests.test_models` to run tests in cmd
