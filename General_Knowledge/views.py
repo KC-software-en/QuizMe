@@ -32,14 +32,18 @@ from django.apps import apps
 
 # Create your views here.
 
-'''
-Create a view for the home page of General Knowledge quizzes.
-'''
 # display the category of the General Knowledge quiz
 # https://www.youtube.com/watch?v=sgEhb50YSTE
 # get json reponse for trivia categories from open trivia db
 # index category from the dictionary id
 def index_gen(request):
+    """A view for the home page of the General Knowledge quiz.
+
+    :param request: The HTTP request object containing information about the client's request.
+    :type request: HttpRequest
+    :return: Return the gen_quiz template
+    :rtype: HttpResponse
+    """
     # if a user prematurely leaves a quiz & does not use the exit button,
     # - delete the result & session data of the current quiz 
     # - this is done for all the templates the navbar displays
@@ -81,6 +85,17 @@ def index_gen(request):
 # display the question text 
 # render an HTTP 404 error if a question with the requested ID doesn’t exist
 def detail(request, category_name, question_id):  
+    """A view that displays the quiz question.
+
+    :param request: The HTTP request object containing information about the client's request.
+    :type request: HttpRequest
+    :param category_name: The name of the category the user selected on the category homepage.
+    :type category_name: str
+    :param question_id: The pk of the question object
+    :type question_id: int
+    :return: Return the gen_detail template. 
+    :rtype: HttpResponse
+    """
     response = get_json_categories()
     category_names = get_category_names(response)  
 
@@ -139,11 +154,17 @@ def detail(request, category_name, question_id):
         # render the context to the detail template of General_Knowledge
         return render(request, 'gen_quiz/gen_detail.html', context)
 
-'''
-Create a view that displays the quiz result.
-'''
 # create a view that displays the quiz result 
 def results(request, category_name): 
+    """A view that displays the quiz result.
+
+    :param request: The HTTP request object containing information about the client's request.
+    :type request: HttpRequest
+    :param category_name: The name of the category the user selected on the category homepage.
+    :type category_name: str
+    :return: Return the gen_result template. 
+    :rtype: HttpResponse
+    """
     # get the quiz result for the session
     result = request.session.get('quiz_result')
            
@@ -161,7 +182,19 @@ Write a selection view that handles the submission of form data, goes to the nex
 '''
 # write a view to answer a question, incl the argument category_name & question_id
 # it handles the submitted data
-def selection(request, category_name, question_id):    
+def selection(request, category_name, question_id):   
+    """A a selection view that handles the submission of form data, goes to the next question and redirects to the results view. 
+    Otherwise the form will be redisplayed.
+
+    :param request: The HTTP request object containing information about the client's request.
+    :type request: HttpRequest
+    :param category_name: The name of the category the user selected on the category homepage.
+    :type category_name: str
+    :param question_id: The pk of the question object the user has submitted
+    :type question_id: int
+    :return: Return the gen_detail or the gen_result template. 
+    :rtype: HttpResponse
+    """  
     # pk refers to the primary key field of a database table
     # django automatically creates a primary key for each model
     response = get_json_categories()
@@ -275,6 +308,13 @@ def selection(request, category_name, question_id):
 
 # start new quiz function
 def try_new_quiz(request):
+    """A view that clears the session data and redirects to the homepage of the category.
+
+    :param request: The HTTP request object containing information about the client's request.
+    :type request: HttpRequest
+    :return: Return the gen_quiz template
+    :rtype: HttpResponse    
+    """
     # delete the result & session data of the current quiz before starting a new quiz
     if 'quiz_result' in request.session:
         del request.session['quiz_result']
