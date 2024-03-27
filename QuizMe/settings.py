@@ -31,7 +31,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Create a .env file in your project's root directory and add your SECRET_KEY there.
 # You should also add this file to your .gitignore to ensure it's not committed to your repository
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-SECRET_KEY = 'django-insecure-y_c$+sv5x#*m9*+as*r&zy%q9^@2x)$x=^^-rti-5h9*mxk+r5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
