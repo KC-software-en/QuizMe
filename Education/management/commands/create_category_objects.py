@@ -11,9 +11,7 @@ from ...utils import get_specific_json_category, mix_choices
 # import html to handle potential HTML entities and aid rendering for create_subcategory_object
 import html
 
-# import Http404 to raise an error message if a model is not located in category_objects()
-from django.http import Http404
-
+#
 from django.apps import apps
 
 ####################################################################################
@@ -31,8 +29,8 @@ It is intended for private use by the project creator, not its users.
 # this will populate the sub-category (e.g. mythology) table on the admin site with the quiz data
 # `python manage.py create_category_objects 20 Mythology`
 
-# the custom command can be called using `python manage.py create_category_objects 20` to populate Mythology
-# be sure to place the desired model name in the handle() when calling the command with its corresponding category_id
+# the custom command can be called using `python manage.py create_category_objects 20 Mythology` to populate Mythology
+# be sure to place the desired app name in the handle() before calling the command with its corresponding category_id
 # `python manage.py create_category_objects 17 "Science & Nature"` to populate Science & Nature
 # `python manage.py create_category_objects 23 History` to populate History
 # `python manage.py create_category_objects 9 "General Knowledge"` to populate General Knowledge
@@ -69,6 +67,10 @@ class Command(BaseCommand):
             if questions:            
                 # find the length of the list of questions 
                 total_questions = len(questions)
+
+                # Initialise model with a default value 
+                model = None
+
                 # iterate over each question in the results dictionary 
                 # enumerate each question to aid the details of the output progress message
                 for idx, question in enumerate(questions, start=1):                
@@ -124,18 +126,20 @@ class Command(BaseCommand):
                     # raise an error if the model is not found
                     except KeyError:
                         self.stderr.write(self.style.ERROR(f"Cannot locate the model for the selected category: {category_name}."))                                
-                        
-                    # create a question object with the above data
-                    # this will show on the admin site with the models created for questions & choices
-                    question_object = model.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
 
-                    # save the object to the database
-                    question_object.save()
+                    # check that a model was found
+                    if model != None: ##                        
+                        # create a question object with the above data
+                        # this will show on the admin site with the models created for questions & choices
+                        question_object = model.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
 
-                    # Output progress message
-                    # use standard output stream (which is where regular output is written)
-                    # - instead of directly printing to these streams, allowing for better testing and consistency
-                    self.stdout.write(f"Created quiz object {idx} out of {total_questions} for category_id:{category_id}")
+                        # save the object to the database
+                        question_object.save()
+
+                        # Output progress message
+                        # use standard output stream (which is where regular output is written)
+                        # - instead of directly printing to these streams, allowing for better testing and consistency
+                        self.stdout.write(f"Created quiz object {idx} out of {total_questions} for category_id:{category_id}")
 
                 # Output final success message
                 # When using management commands & want console output, write to self.stdout and self.stderr,
