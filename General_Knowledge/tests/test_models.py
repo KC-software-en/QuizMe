@@ -15,7 +15,7 @@ from django.test import TransactionTestCase
 # import mixer
 # The Mixer is a helper to generate instances of Django or SQLAlchemy models. 
 # It’s useful for testing and fixture replacement
-from mixer.backend.django import mixer #
+from mixer.backend.django import mixer 
 
 # import classes from models.py 
 from ..models import Categories, Subcategories, General_Knowledge

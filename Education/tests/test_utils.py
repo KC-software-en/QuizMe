@@ -219,7 +219,8 @@ class TestVariousUtils(TestCase):
         result = utils.get_next_question_id('category_name', 50, [12, 2, 28, 49, 35, 37, 14, 1, 9, 15])
         self.assertIsNone(result, msg='Should check that None is returned for a pk not in the list')
 
-"""Create a class to test get_category_names().
+"""
+Create a class to test get_category_names().
 """
 class TestGetCategoryNames(TestCase):
     # setup 
@@ -274,7 +275,8 @@ class TestGetCategoryNames(TestCase):
         # assert that the name is not there for the selected category id
         self.assertListEqual(category_names, [], msg='Should check that the list is empty if a selected category id is not there.')
 
-"""Create a class that tests the category_objects function.
+"""
+Create a class that tests the category_objects function.
 """
 # create tests for a valid category_name and an invalid category_name when locating a model to retrieve its category_objects
 # use TransactionTestCase because tests for category objects rely on database access 
@@ -351,7 +353,7 @@ class TestCategoryObjects(TransactionTestCase):
         self.assertEqual(self.request.session['mock_question_selection_ids'], self.mock_question_selection_ids, 
                          msg='Should check that there are a list of 10 ids.')  # Ensure the session is set correctly
 
-    # test for an error raised if globals does not have a model for a category name
+    # test for an error raised if apps does not have a model for a category name
     # dont incl category_objects in path to avoid AttributeError: <function category_objects at 0x0489E2B8> does not have the attribute 'globals'
     @patch('Education.views.apps.get_model')
     def test_category_objects_invalid_category(self, mock_get_model):        
