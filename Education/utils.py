@@ -173,7 +173,7 @@ def get_category_names(response):
     trivia_categories = response.get("trivia_categories",[])
 
     # specify the id of the categories to include in the Education app's quizzes
-    selected_category_id = [20, 17, 23, 21] ##
+    selected_category_id = [20, 17, 23] 
 
     # collect the categories based on selected_category_id
     selected_categories = [category for category in trivia_categories if category.get("id") in selected_category_id]    
