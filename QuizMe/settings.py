@@ -93,6 +93,19 @@ WSGI_APPLICATION = 'QuizMe.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+### Postgresql database convertion docs. ###
+# !! When populating the postgresql database, populate it as you would populate the sqlite3 db !! #
+# How to migrate the sqlite3 db data to the new postgreql db
+# https://www.youtube.com/watch?v=BGEEzjGadYI&list=WL&index=1&t=246s
+# https://hatchjs.com/migrate-sqlite-to-postgresql/
+# How to setup pg4admin to run the postgresql database server.
+# https://www.youtube.com/watch?v=pOmtWgJ7tbk&list=WL&index=1&t=146s
+# Download link for postgresql
+# https://www.postgresql.org/download/
+
+
+
+
 DATABASE = 2
 
 if DEBUG and (DATABASE == 1):

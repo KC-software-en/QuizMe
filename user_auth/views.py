@@ -2,6 +2,7 @@
 # https://docs.djangoproject.com/en/5.0/ref/contrib/messages/
 # https://docs.djangoproject.com/en/5.0/topics/auth/default/
 # https://docs.djangoproject.com/en/5.0/topics/email/
+# https://mailtrap.io/blog/django-send-email/
 # https://www.pythontutorial.net/django-tutorial/django-registration/
 
 ### import all the required imports for the views to work. ###
