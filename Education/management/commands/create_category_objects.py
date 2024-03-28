@@ -24,7 +24,6 @@ It is intended for private use by the project creator, not its users.
 # be sure to place the desired app name in the handle() before calling the command with its corresponding category_id
 # `python manage.py create_category_objects 17 "Science & Nature"` to populate Science & Nature
 # `python manage.py create_category_objects 23 History` to populate History
-# `python manage.py create_category_objects 9 "General Knowledge"` to populate General Knowledge
 class Command(BaseCommand):
     # define a varible that informs one what the command does
     help = 'Populate the database with quiz objects retrieved from an API'
@@ -52,7 +51,7 @@ class Command(BaseCommand):
             questions = json_response["results"]
             
             if not questions: 
-                self.stdout.write(self.style.WARNING("No questions found in the API response."))        
+                self.stderr.write(self.style.WARNING("No questions found in the API response."))        
 
             # check if question retrieval was successful
             if questions:            
