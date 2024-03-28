@@ -114,7 +114,7 @@ class Command(BaseCommand):
                         model = apps.get_model(app_label='Education', model_name=model_name)
                     
                     # raise an error if the model is not found
-                    except KeyError:
+                    except LookupError:
                         self.stderr.write(self.style.ERROR(f"Cannot locate the model for the selected category: {category_name}."))                                
 
                     # check that a model was found
