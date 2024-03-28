@@ -1,14 +1,3 @@
-"""
-This module contains the NewUserForm class, which is used to create a form where the user can register.
-
-The NewUserForm class inherits from the UserCreationForm class and overrides the save method to set the email field of the user instance to the value of the cleaned_data['email'] field.
-
-The NewUserForm class defines the model and fields attributes to correspond to the User model and the fields that should be included in the form.
-
-The save method of the NewUserForm class first calls the super().save() method to create the user instance, and then sets the email field of the user instance to the value of the cleaned_data['email'] field. If the commit parameter is set to True, the user instance is saved to the database.
-
-The NewUserForm class is used in the views.py module to create the form for registering a new user.
-"""
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -16,26 +5,40 @@ from django.contrib.auth.models import User
 
 class NewUserForm(UserCreationForm):
     """
-    This class defines the NewUserForm, which is used to create a form where the user can register.
+    A custom form for user registration.
+
+    Inherits from UserCreationForm and adds an email field.
+
+    Attributes:
+        email (forms.EmailField): Email field for user registration.
+    
+    Meta:
+        model (User): The User model to be used for registration.
+        fields (tuple): Fields to be displayed in the form (username, email, password1, password2).
+
+    Methods:
+        save(self, commit=True): Overrides the save method to include email field.
+            Args:
+                commit (bool, optional): Whether to save the user object to the database. Defaults to True.
+            Returns:
+                User: The saved user object.
     """
     email = forms.EmailField(required=True)
 
     class Meta:
-        """
-        This class defines the Meta class for the NewUserForm class, which specifies the model and fields attributes to correspond to the User model and the fields that should be included in the form.
-        """
+        
         model = User
         fields = ("username", "email", "password1", "password2")
 
     def save(self, commit=True):
         """
-        This method overrides the save method of the UserCreationForm class to set the email field of the user instance to the value of the cleaned_data['email'] field.
+        Overrides the save method to include email field.
 
-        Parameters:
-            commit (bool): A boolean value indicating whether to save the user instance to the database.
+        Args:
+            commit (bool, optional): Whether to save the user object to the database. Defaults to True.
 
         Returns:
-            User: The user instance.
+            User: The saved user object.
         """
         user = super(NewUserForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
