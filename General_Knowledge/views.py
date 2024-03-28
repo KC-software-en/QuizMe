@@ -14,12 +14,6 @@ from .utils import get_json_categories, get_next_question_id, get_category_names
 # import all models
 from .models import *
 
-# import Http404 to raise an error message if a model is not located in detail view
-from django.http import Http404
-
-# import logging for debugging
-import logging
-
 # import ast safely evaluate strings containing Python literal structures e.g.strings, lists, dicts
 # use to convert str into list
 import ast 
