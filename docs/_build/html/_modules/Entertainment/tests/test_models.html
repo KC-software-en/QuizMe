@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entertainment.tests.test_models &mdash; QuizMe 00.00.01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            QuizMe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">QuizMe</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QuizMe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">Entertainment.tests.test_models</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Entertainment.tests.test_models</h1><div class="highlight"><pre>
+<span></span><span class="c1"># create __init__.py then import this file to it</span>
+
+<span class="c1"># comment out TestCase import because using unittest.</span>
+<span class="c1"># TestCase avoids some testing complications, </span>
+<span class="c1"># but if tests involve the database, their behaviour may change based on the order they run. </span>
+<span class="c1"># This can make individual tests pass but fail when run together.</span>
+<span class="c1"># from django.test import TestCase</span>
+
+<span class="c1"># https://docs.djangoproject.com/en/5.0/topics/testing/tools/#transactiontestcase</span>
+<span class="c1"># import TransactionTestCase because</span>
+<span class="c1"># tests rely on database access such as creating or querying models, </span>
+<span class="c1"># :. create test classes as subclasses of django.test.TestCase rather than unittest.TestCase</span>
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TransactionTestCase</span>
+
+<span class="c1"># import mixer</span>
+<span class="c1"># The Mixer is a helper to generate instances of Django or SQLAlchemy models. </span>
+<span class="c1"># It’s useful for testing and fixture replacement</span>
+<span class="kn">from</span> <span class="nn">mixer.backend.django</span> <span class="kn">import</span> <span class="n">mixer</span>
+
+<span class="c1"># import classes from models.py </span>
+<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Music</span><span class="p">,</span> <span class="n">Film</span><span class="p">,</span> <span class="n">Video_Games</span>
+
+
+<span class="c1">#####################################################################################</span>
+
+<span class="c1"># Create your tests here. Use `py manage.py test Entertainment.tests.test_models` to run tests in cmd</span>
+<span class="c1"># after writing a test, run in cmd &amp; it will say fail. </span>
+<span class="c1"># next, go to models.py and create the Question model &amp; then it should pass</span>
+<span class="c1"># run coverage after tests</span>
+
+       
+<span class="c1"># create a class to test the Music model</span>
+<div class="viewcode-block" id="TestMusicModel"><a class="viewcode-back" href="../../../Entertainment.tests.html#Entertainment.tests.test_models.TestMusicModel">[docs]</a><span class="k">class</span> <span class="nc">TestMusicModel</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create a class to test the Music model.</span>
+<span class="sd">    &#39;&#39;&#39;</span> 
+    <span class="c1"># setup the required data for tests</span>
+    <span class="c1"># https://docs.djangoproject.com/en/5.0/topics/testing/overview/#writing-tests</span>
+<div class="viewcode-block" id="TestMusicModel.setUp"><a class="viewcode-back" href="../../../Entertainment.tests.html#Entertainment.tests.test_models.TestMusicModel.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Setup data for question model</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># no necessary conditions</span>
+        <span class="k">pass</span></div>
+    
+   
+    <span class="c1"># create a fail test where the functions in models.py do not exist</span>
+<div class="viewcode-block" id="TestMusicModel.test_music_model"><a class="viewcode-back" href="../../../Entertainment.tests.html#Entertainment.tests.test_models.TestMusicModel.test_music_model">[docs]</a>    <span class="k">def</span> <span class="nf">test_music_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            A function to test if the Music model creates successfully before it coding it in models.py.</span>
+<span class="sd">        &#39;&#39;&#39;</span>      
+        <span class="c1"># create an instance of Music model with mixer</span>
+        <span class="c1"># textfield stores data as a str so the list of choices will read as a str</span>
+        <span class="n">quiz_ins</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Music</span><span class="p">,</span> <span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;Question example&quot;</span><span class="p">,</span>
+                             <span class="n">choices</span> <span class="o">=</span> <span class="s1">&#39;choice1, choice2, choice3, choice4&#39;</span><span class="p">,</span>
+                               <span class="n">correct_answer</span> <span class="o">=</span> <span class="s1">&#39;choice1&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># assert instance was correctly created</span>
+        <span class="c1"># incl a descriptive message with assertion</span>
+        <span class="c1"># When the test fails, the message will be displayed along with the default error message, </span>
+        <span class="c1"># providing more context about what went wrong &amp; helpful for future debugging</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">quiz_ins</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should confirm question instance was created&#39;</span><span class="p">)</span>
+        <span class="c1"># Test that obj is (or is not) an instance of cls (which can be a class or a tuple of classes, as supported by isinstance()). </span>
+        <span class="c1"># To check for the exact type, use assertIs(type(obj), cls). --class(cls)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">quiz_ins</span><span class="p">,</span> <span class="n">Music</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should confirm that the object instantiated is from the Music class&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># check attributes of instance</span>
+        <span class="c1"># the choices are expected to be a list from the json response</span>
+        <span class="c1"># - so use split on the choices str to return a list of substrings</span>
+        <span class="n">expected_question</span> <span class="o">=</span> <span class="s1">&#39;Question example&#39;</span>
+        <span class="n">expected_choices</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;choice1&#39;</span><span class="p">,</span> <span class="s1">&#39;choice2&#39;</span><span class="p">,</span> <span class="s1">&#39;choice3&#39;</span><span class="p">,</span> <span class="s1">&#39;choice4&#39;</span><span class="p">]</span>
+        <span class="n">actual_choices</span> <span class="o">=</span> <span class="n">quiz_ins</span><span class="o">.</span><span class="n">choices</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+        <span class="n">expected_correct_answer</span> <span class="o">=</span> <span class="s1">&#39;choice1&#39;</span>
+
+        <span class="c1"># assertions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">quiz_ins</span><span class="o">.</span><span class="n">question</span><span class="p">,</span> <span class="n">expected_question</span><span class="p">,</span>
+                          <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check the question attribute of the instantiated object&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">actual_choices</span><span class="p">,</span> <span class="n">expected_choices</span><span class="p">,</span> 
+                             <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check the choices attribute of the instantiated object&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">quiz_ins</span><span class="o">.</span><span class="n">correct_answer</span><span class="p">,</span> <span class="n">expected_correct_answer</span><span class="p">,</span> 
+                         <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check the correct answer attribute of the instantiated object&#39;</span><span class="p">)</span>        </div>
+
+    
+<div class="viewcode-block" id="TestMusicModel.test_return_str_quiz"><a class="viewcode-back" href="../../../Entertainment.tests.html#Entertainment.tests.test_models.TestMusicModel.test_return_str_quiz">[docs]</a>    <span class="k">def</span> <span class="nf">test_return_str_quiz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            A function to test if the str method returns the question_text for Music.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Create an instance of the Music model with a specific question</span>
+        <span class="n">quiz_ins</span> <span class="o">=</span> <span class="n">Music</span><span class="p">(</span><span class="n">question</span> <span class="o">=</span> <span class="s1">&#39;Question example&#39;</span><span class="p">)</span>
+
+        <span class="c1"># call __str__ method</span>
+        <span class="n">str_outcome</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">quiz_ins</span><span class="p">)</span>
+
+        <span class="c1"># assert that the result matches the question_ins </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">str_outcome</span><span class="p">,</span> <span class="n">quiz_ins</span><span class="o">.</span><span class="n">question</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Question example&#39;</span><span class="p">)</span></div>
+    
+    
+    <span class="c1"># create a test to check an instance of the Music model</span>
+<div class="viewcode-block" id="TestMusicModel.test_Music_instance"><a class="viewcode-back" href="../../../Entertainment.tests.html#Entertainment.tests.test_models.TestMusicModel.test_Music_instance">[docs]</a>    <span class="k">def</span> <span class="nf">test_Music_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Create a test to check an instance of the Music model.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># use mixer to create an instance of the Music model</span>
+        <span class="n">quiz_instance</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Music</span><span class="p">)</span>
+
+        <span class="c1"># assert that the instance was successful</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">quiz_instance</span><span class="p">,</span> <span class="n">Music</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should confirm that the object instantiated is from the Music class&#39;</span><span class="p">)</span></div></div>
+    
+       
+<span class="c1"># create a class to test the Science_and_Nature model</span>
+<div class="viewcode-block" id="TestFilmModel"><a class="viewcode-back" href="../../../Entertainment.tests.html#Entertainment.tests.test_models.TestFilmModel">[docs]</a><span class="k">class</span> <span class="nc">TestFilmModel</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create a class to test the Film model.</span>
+<span class="sd">    &#39;&#39;&#39;</span> 
+    <span class="c1"># setup the required data for tests</span>
+    <span class="c1"># https://docs.djangoproject.com/en/5.0/topics/testing/overview/#writing-tests</span>
+<div class="viewcode-block" id="TestFilmModel.setUp"><a class="viewcode-back" href="../../../Entertainment.tests.html#Entertainment.tests.test_models.TestFilmModel.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Setup data for question model</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># no necessary conditions</span>
+        <span class="k">pass</span>    </div>
+    
+    
+<div class="viewcode-block" id="TestFilmModel.test_return_str_quiz"><a class="viewcode-back" href="../../../Entertainment.tests.html#Entertainment.tests.test_models.TestFilmModel.test_return_str_quiz">[docs]</a>    <span class="k">def</span> <span class="nf">test_return_str_quiz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            A function to test if the str method returns the question_text for Film.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Create an instance of the Film model with a specific question</span>
+        <span class="n">quiz_ins</span> <span class="o">=</span> <span class="n">Film</span><span class="p">(</span><span class="n">question</span> <span class="o">=</span> <span class="s1">&#39;Question example&#39;</span><span class="p">)</span>
+
+        <span class="c1"># call __str__ method</span>
+        <span class="n">str_outcome</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">quiz_ins</span><span class="p">)</span>
+
+        <span class="c1"># assert that the result matches the question_ins </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">str_outcome</span><span class="p">,</span> <span class="n">quiz_ins</span><span class="o">.</span><span class="n">question</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Question example&#39;</span><span class="p">)</span></div></div>
+       
+<span class="c1"># create a class to test the Video games model</span>
+<div class="viewcode-block" id="TestVideoGamesModel"><a class="viewcode-back" href="../../../Entertainment.tests.html#Entertainment.tests.test_models.TestVideoGamesModel">[docs]</a><span class="k">class</span> <span class="nc">TestVideoGamesModel</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create a class to test the Video games model.</span>
+<span class="sd">    &#39;&#39;&#39;</span> 
+    <span class="c1"># setup the required data for tests</span>
+    <span class="c1"># https://docs.djangoproject.com/en/5.0/topics/testing/overview/#writing-tests</span>
+<div class="viewcode-block" id="TestVideoGamesModel.setUp"><a class="viewcode-back" href="../../../Entertainment.tests.html#Entertainment.tests.test_models.TestVideoGamesModel.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Setup data for question model</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># no necessary conditions</span>
+        <span class="k">pass</span>    </div>
+    
+   
+<div class="viewcode-block" id="TestVideoGamesModel.test_return_str_quiz"><a class="viewcode-back" href="../../../Entertainment.tests.html#Entertainment.tests.test_models.TestVideoGamesModel.test_return_str_quiz">[docs]</a>    <span class="k">def</span> <span class="nf">test_return_str_quiz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            A function to test if the str method returns the question_text for Video games.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Create an instance of the Music model with a specific question</span>
+        <span class="n">quiz_ins</span> <span class="o">=</span> <span class="n">Video_Games</span><span class="p">(</span><span class="n">question</span> <span class="o">=</span> <span class="s1">&#39;Question example&#39;</span><span class="p">)</span>
+
+        <span class="c1"># call __str__ method</span>
+        <span class="n">str_outcome</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">quiz_ins</span><span class="p">)</span>
+
+        <span class="c1"># assert that the result matches the question_ins </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">str_outcome</span><span class="p">,</span> <span class="n">quiz_ins</span><span class="o">.</span><span class="n">question</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Question example&#39;</span><span class="p">)</span>        </div></div>
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Kisha Cairncross, Deandre` Wright.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

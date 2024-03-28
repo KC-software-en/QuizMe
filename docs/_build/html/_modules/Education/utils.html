@@ -81,26 +81,8 @@
 <span class="c1"># import json to work with the data retrieved from the open trivia db API</span>
 <span class="kn">import</span> <span class="nn">json</span>     
 
-<span class="c1"># import html to handle potential HTML entities and aid rendering for create_subcategory_object</span>
-<span class="kn">import</span> <span class="nn">html</span>
-
 <span class="c1"># import models</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Mythology</span><span class="p">,</span> <span class="n">History</span><span class="p">,</span> <span class="n">Science_and_Nature</span>      
-
-<span class="c1"># import Http404 to raise an error message if a model is not located in category_objects()</span>
-<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">Http404</span>
-
-<span class="c1">#</span>
-<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
-
-<span class="c1"># import render to render an HTML template with a given context and return an HttpResponse object</span>
-<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
-
-<span class="c1"># imported HttpResponseRedirect </span>
-<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponseRedirect</span>
-
-<span class="c1"># imported reverse</span>
-<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
 
 <span class="c1"># import apps to dynamically fetch a model in category_objects()</span>
 <span class="kn">from</span> <span class="nn">django.apps</span> <span class="kn">import</span> <span class="n">apps</span>
@@ -247,7 +229,7 @@
     <span class="n">trivia_categories</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;trivia_categories&quot;</span><span class="p">,[])</span>
 
     <span class="c1"># specify the id of the categories to include in the Education app&#39;s quizzes</span>
-    <span class="n">selected_category_id</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span> <span class="c1">##</span>
+    <span class="n">selected_category_id</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">23</span><span class="p">]</span> 
 
     <span class="c1"># collect the categories based on selected_category_id</span>
     <span class="n">selected_categories</span> <span class="o">=</span> <span class="p">[</span><span class="n">category</span> <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">trivia_categories</span> <span class="k">if</span> <span class="n">category</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">selected_category_id</span><span class="p">]</span>    
@@ -299,7 +281,7 @@
     <span class="c1"># use a try-except block to dynamically find a model that matches the category name</span>
     <span class="c1"># - dynamically:instead of explicitly specifying a fixed model in the code, </span>
     <span class="c1"># - generate or determine the model to use at runtime based on certain conditions/data        </span>
-    <span class="c1"># use apps module to access the get_model function &amp; find the model name         </span>
+    <span class="c1"># use apps module to access the get_model function &amp; find the model name with its app namespace                </span>
     <span class="k">try</span><span class="p">:</span>            
         <span class="n">model</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s1">&#39;Education&#39;</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>                        
 

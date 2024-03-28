@@ -64,12 +64,15 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-Entertainment.models">Entertainment.models module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#Entertainment.models.Categories"><code class="docutils literal notranslate"><span class="pre">Categories</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.models.Film"><code class="docutils literal notranslate"><span class="pre">Film</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.models.Music"><code class="docutils literal notranslate"><span class="pre">Music</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.models.Subcategories"><code class="docutils literal notranslate"><span class="pre">Subcategories</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Entertainment.models.Video_Games"><code class="docutils literal notranslate"><span class="pre">Video_Games</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-Entertainment.urls">Entertainment.urls module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-Entertainment.utils">Entertainment.utils module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#Entertainment.utils.category_objects"><code class="docutils literal notranslate"><span class="pre">category_objects()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Entertainment.utils.create_subcategory_object"><code class="docutils literal notranslate"><span class="pre">create_subcategory_object()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Entertainment.utils.get_category_names"><code class="docutils literal notranslate"><span class="pre">get_category_names()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Entertainment.utils.get_json_categories"><code class="docutils literal notranslate"><span class="pre">get_json_categories()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Entertainment.utils.get_next_question_id"><code class="docutils literal notranslate"><span class="pre">get_next_question_id()</span></code></a></li>
@@ -126,12 +129,55 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Entertainment.tests.html">Entertainment.tests package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#entertainment-tests-test-admin-module">Entertainment.tests.test_admin module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#entertainment-tests-test-models-module">Entertainment.tests.test_models module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#entertainment-tests-test-urls-module">Entertainment.tests.test_urls module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#entertainment-tests-test-utils-module">Entertainment.tests.test_utils module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#entertainment-tests-test-views-module">Entertainment.tests.test_views module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#module-Entertainment.tests.test_admin">Entertainment.tests.test_admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#module-Entertainment.tests.test_models">Entertainment.tests.test_models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_models.TestFilmModel"><code class="docutils literal notranslate"><span class="pre">TestFilmModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_models.TestFilmModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestFilmModel.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_models.TestFilmModel.test_return_str_quiz"><code class="docutils literal notranslate"><span class="pre">TestFilmModel.test_return_str_quiz()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_models.TestMusicModel"><code class="docutils literal notranslate"><span class="pre">TestMusicModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_models.TestMusicModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestMusicModel.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_models.TestMusicModel.test_Music_instance"><code class="docutils literal notranslate"><span class="pre">TestMusicModel.test_Music_instance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_models.TestMusicModel.test_music_model"><code class="docutils literal notranslate"><span class="pre">TestMusicModel.test_music_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_models.TestMusicModel.test_return_str_quiz"><code class="docutils literal notranslate"><span class="pre">TestMusicModel.test_return_str_quiz()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_models.TestVideoGamesModel"><code class="docutils literal notranslate"><span class="pre">TestVideoGamesModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_models.TestVideoGamesModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestVideoGamesModel.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_models.TestVideoGamesModel.test_return_str_quiz"><code class="docutils literal notranslate"><span class="pre">TestVideoGamesModel.test_return_str_quiz()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#module-Entertainment.tests.test_urls">Entertainment.tests.test_urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#module-Entertainment.tests.test_utils">Entertainment.tests.test_utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestCategoryObjects"><code class="docutils literal notranslate"><span class="pre">TestCategoryObjects</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestCategoryObjects.setUp"><code class="docutils literal notranslate"><span class="pre">TestCategoryObjects.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestCategoryObjects.test_category_objects"><code class="docutils literal notranslate"><span class="pre">TestCategoryObjects.test_category_objects()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestCategoryObjects.test_category_objects_invalid_category"><code class="docutils literal notranslate"><span class="pre">TestCategoryObjects.test_category_objects_invalid_category()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestJsonResponse"><code class="docutils literal notranslate"><span class="pre">TestJsonResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestJsonResponse.setUp"><code class="docutils literal notranslate"><span class="pre">TestJsonResponse.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestJsonResponse.test_get_json_categories_error"><code class="docutils literal notranslate"><span class="pre">TestJsonResponse.test_get_json_categories_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestJsonResponse.test_get_json_categories_ok"><code class="docutils literal notranslate"><span class="pre">TestJsonResponse.test_get_json_categories_ok()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestJsonResponse.test_get_specific_json_category_error"><code class="docutils literal notranslate"><span class="pre">TestJsonResponse.test_get_specific_json_category_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestJsonResponse.test_get_specific_json_category_success"><code class="docutils literal notranslate"><span class="pre">TestJsonResponse.test_get_specific_json_category_success()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestVariousUtils"><code class="docutils literal notranslate"><span class="pre">TestVariousUtils</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestVariousUtils.setUp"><code class="docutils literal notranslate"><span class="pre">TestVariousUtils.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestVariousUtils.test_get_category_names_found"><code class="docutils literal notranslate"><span class="pre">TestVariousUtils.test_get_category_names_found()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestVariousUtils.test_get_next_question_id"><code class="docutils literal notranslate"><span class="pre">TestVariousUtils.test_get_next_question_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestVariousUtils.test_mix_choices"><code class="docutils literal notranslate"><span class="pre">TestVariousUtils.test_mix_choices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Entertainment.tests.html#Entertainment.tests.test_utils.TestVariousUtils.test_no_category_name"><code class="docutils literal notranslate"><span class="pre">TestVariousUtils.test_no_category_name()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#module-Entertainment.tests.test_views">Entertainment.tests.test_views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.tests.html#module-Entertainment.tests">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -197,6 +243,21 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Categories.film_set">
+<span class="sig-name descname"><span class="pre">film_set</span></span><a class="headerlink" href="#Entertainment.models.Categories.film_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="Entertainment.models.Categories.id">
 <span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Entertainment.models.Categories.id" title="Permalink to this definition"></a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
@@ -204,8 +265,456 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Categories.music_set">
+<span class="sig-name descname"><span class="pre">music_set</span></span><a class="headerlink" href="#Entertainment.models.Categories.music_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="Entertainment.models.Categories.objects">
 <span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Entertainment.models.Categories.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Categories.subcategories_set">
+<span class="sig-name descname"><span class="pre">subcategories_set</span></span><a class="headerlink" href="#Entertainment.models.Categories.subcategories_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Categories.video_games_set">
+<span class="sig-name descname"><span class="pre">video_games_set</span></span><a class="headerlink" href="#Entertainment.models.Categories.video_games_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Entertainment.models.Film">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Film</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcategory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correct_answer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Film"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Film" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Entertainment.models.Film.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Entertainment.models.Film.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Entertainment.models.Film.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Entertainment.models.Film.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Film.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#Entertainment.models.Film.category" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Film.category_id">
+<span class="sig-name descname"><span class="pre">category_id</span></span><a class="headerlink" href="#Entertainment.models.Film.category_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Film.choices">
+<span class="sig-name descname"><span class="pre">choices</span></span><a class="headerlink" href="#Entertainment.models.Film.choices" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Film.correct_answer">
+<span class="sig-name descname"><span class="pre">correct_answer</span></span><a class="headerlink" href="#Entertainment.models.Film.correct_answer" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Film.en_category_obj">
+<span class="sig-name descname"><span class="pre">en_category_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Categories:</span> <span class="pre">Entertainment&gt;</span></em><a class="headerlink" href="#Entertainment.models.Film.en_category_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Film.film_subcategory_obj">
+<span class="sig-name descname"><span class="pre">film_subcategory_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Subcategories:</span> <span class="pre">Film&gt;</span></em><a class="headerlink" href="#Entertainment.models.Film.film_subcategory_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Film.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Entertainment.models.Film.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Film.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Entertainment.models.Film.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Film.question">
+<span class="sig-name descname"><span class="pre">question</span></span><a class="headerlink" href="#Entertainment.models.Film.question" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Film.subcategory">
+<span class="sig-name descname"><span class="pre">subcategory</span></span><a class="headerlink" href="#Entertainment.models.Film.subcategory" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Film.subcategory_id">
+<span class="sig-name descname"><span class="pre">subcategory_id</span></span><a class="headerlink" href="#Entertainment.models.Film.subcategory_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Entertainment.models.Music">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Music</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcategory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correct_answer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Music"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Music" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Entertainment.models.Music.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Entertainment.models.Music.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Entertainment.models.Music.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Entertainment.models.Music.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Music.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#Entertainment.models.Music.category" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Music.category_id">
+<span class="sig-name descname"><span class="pre">category_id</span></span><a class="headerlink" href="#Entertainment.models.Music.category_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Music.choices">
+<span class="sig-name descname"><span class="pre">choices</span></span><a class="headerlink" href="#Entertainment.models.Music.choices" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Music.correct_answer">
+<span class="sig-name descname"><span class="pre">correct_answer</span></span><a class="headerlink" href="#Entertainment.models.Music.correct_answer" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Music.en_category_obj">
+<span class="sig-name descname"><span class="pre">en_category_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Categories:</span> <span class="pre">Entertainment&gt;</span></em><a class="headerlink" href="#Entertainment.models.Music.en_category_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Music.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Entertainment.models.Music.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Music.music_subcategory_obj">
+<span class="sig-name descname"><span class="pre">music_subcategory_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Subcategories:</span> <span class="pre">Music&gt;</span></em><a class="headerlink" href="#Entertainment.models.Music.music_subcategory_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Music.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Entertainment.models.Music.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Music.question">
+<span class="sig-name descname"><span class="pre">question</span></span><a class="headerlink" href="#Entertainment.models.Music.question" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Music.subcategory">
+<span class="sig-name descname"><span class="pre">subcategory</span></span><a class="headerlink" href="#Entertainment.models.Music.subcategory" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Music.subcategory_id">
+<span class="sig-name descname"><span class="pre">subcategory_id</span></span><a class="headerlink" href="#Entertainment.models.Music.subcategory_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Entertainment.models.Subcategories">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Subcategories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcategory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Subcategories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Subcategories" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Entertainment.models.Subcategories.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Entertainment.models.Subcategories.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Entertainment.models.Subcategories.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Entertainment.models.Subcategories.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Subcategories.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#Entertainment.models.Subcategories.category" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Subcategories.category_id">
+<span class="sig-name descname"><span class="pre">category_id</span></span><a class="headerlink" href="#Entertainment.models.Subcategories.category_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Subcategories.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#Entertainment.models.Subcategories.description" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Subcategories.en_category_obj">
+<span class="sig-name descname"><span class="pre">en_category_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Categories:</span> <span class="pre">Entertainment&gt;</span></em><a class="headerlink" href="#Entertainment.models.Subcategories.en_category_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Subcategories.film_set">
+<span class="sig-name descname"><span class="pre">film_set</span></span><a class="headerlink" href="#Entertainment.models.Subcategories.film_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Subcategories.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Entertainment.models.Subcategories.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Subcategories.music_set">
+<span class="sig-name descname"><span class="pre">music_set</span></span><a class="headerlink" href="#Entertainment.models.Subcategories.music_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Subcategories.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Entertainment.models.Subcategories.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Subcategories.subcategory">
+<span class="sig-name descname"><span class="pre">subcategory</span></span><a class="headerlink" href="#Entertainment.models.Subcategories.subcategory" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Subcategories.video_games_set">
+<span class="sig-name descname"><span class="pre">video_games_set</span></span><a class="headerlink" href="#Entertainment.models.Subcategories.video_games_set" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Video_Games</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcategory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correct_answer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Video_Games"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Video_Games" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Entertainment.models.Video_Games.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#Entertainment.models.Video_Games.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#Entertainment.models.Video_Games.category" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games.category_id">
+<span class="sig-name descname"><span class="pre">category_id</span></span><a class="headerlink" href="#Entertainment.models.Video_Games.category_id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games.choices">
+<span class="sig-name descname"><span class="pre">choices</span></span><a class="headerlink" href="#Entertainment.models.Video_Games.choices" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games.correct_answer">
+<span class="sig-name descname"><span class="pre">correct_answer</span></span><a class="headerlink" href="#Entertainment.models.Video_Games.correct_answer" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games.en_category_obj">
+<span class="sig-name descname"><span class="pre">en_category_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Categories:</span> <span class="pre">Entertainment&gt;</span></em><a class="headerlink" href="#Entertainment.models.Video_Games.en_category_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games.games_subcategory_obj">
+<span class="sig-name descname"><span class="pre">games_subcategory_obj</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Subcategories:</span> <span class="pre">Video</span> <span class="pre">Games&gt;</span></em><a class="headerlink" href="#Entertainment.models.Video_Games.games_subcategory_obj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#Entertainment.models.Video_Games.id" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Entertainment.models.Video_Games.objects" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games.question">
+<span class="sig-name descname"><span class="pre">question</span></span><a class="headerlink" href="#Entertainment.models.Video_Games.question" title="Permalink to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games.subcategory">
+<span class="sig-name descname"><span class="pre">subcategory</span></span><a class="headerlink" href="#Entertainment.models.Video_Games.subcategory" title="Permalink to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Entertainment.models.Video_Games.subcategory_id">
+<span class="sig-name descname"><span class="pre">subcategory_id</span></span><a class="headerlink" href="#Entertainment.models.Video_Games.subcategory_id" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -237,14 +746,6 @@ object the first time, the query is executed.</p>
 <dd class="field-even"><p><strong>Http404</strong> – If the specified category cannot be found.</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="Entertainment.utils.create_subcategory_object">
-<span class="sig-prename descclassname"><span class="pre">Entertainment.utils.</span></span><span class="sig-name descname"><span class="pre">create_subcategory_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/utils.html#create_subcategory_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.utils.create_subcategory_object" title="Permalink to this definition"></a></dt>
-<dd><p>Create an object for the sub-category (e.g.Music) quiz data
-:param category: The id of the category to retrieve questions for
-:type category: int</p>
 </dd></dl>
 
 <dl class="py function">

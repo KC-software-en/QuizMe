@@ -192,10 +192,12 @@
 </section>
 <section id="module-user_auth.apps">
 <span id="user-auth-apps-module"></span><h2>user_auth.apps module<a class="headerlink" href="#module-user_auth.apps" title="Permalink to this heading"></a></h2>
+<p>Django app config for user_auth.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="user_auth.apps.UserAuthConfig">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user_auth.apps.</span></span><span class="sig-name descname"><span class="pre">UserAuthConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/apps.html#UserAuthConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.apps.UserAuthConfig" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<p>Django app config for user_auth.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="user_auth.apps.UserAuthConfig.default_auto_field">
 <span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#user_auth.apps.UserAuthConfig.default_auto_field" title="Permalink to this definition"></a></dt>
@@ -211,14 +213,21 @@
 </section>
 <section id="module-user_auth.forms">
 <span id="user-auth-forms-module"></span><h2>user_auth.forms module<a class="headerlink" href="#module-user_auth.forms" title="Permalink to this heading"></a></h2>
+<p>This module contains the NewUserForm class, which is used to create a form where the user can register.</p>
+<p>The NewUserForm class inherits from the UserCreationForm class and overrides the save method to set the email field of the user instance to the value of the cleaned_data[‘email’] field.</p>
+<p>The NewUserForm class defines the model and fields attributes to correspond to the User model and the fields that should be included in the form.</p>
+<p>The save method of the NewUserForm class first calls the super().save() method to create the user instance, and then sets the email field of the user instance to the value of the cleaned_data[‘email’] field. If the commit parameter is set to True, the user instance is saved to the database.</p>
+<p>The NewUserForm class is used in the views.py module to create the form for registering a new user.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="user_auth.forms.NewUserForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user_auth.forms.</span></span><span class="sig-name descname"><span class="pre">NewUserForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/forms.html#NewUserForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.forms.NewUserForm" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserCreationForm</span></code></p>
+<p>This class defines the NewUserForm, which is used to create a form where the user can register.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="user_auth.forms.NewUserForm.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/user_auth/forms.html#NewUserForm.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.forms.NewUserForm.Meta" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class defines the Meta class for the NewUserForm class, which specifies the model and fields attributes to correspond to the User model and the fields that should be included in the form.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="user_auth.forms.NewUserForm.Meta.fields">
 <span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('username',</span> <span class="pre">'email',</span> <span class="pre">'password1',</span> <span class="pre">'password2')</span></em><a class="headerlink" href="#user_auth.forms.NewUserForm.Meta.fields" title="Permalink to this definition"></a></dt>
@@ -251,9 +260,18 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="user_auth.forms.NewUserForm.save">
 <span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/forms.html#NewUserForm.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.forms.NewUserForm.save" title="Permalink to this definition"></a></dt>
-<dd><p>Save this form’s self.instance object if commit=True. Otherwise, add
-a save_m2m() method to the form which can be called after the instance
-is saved manually at a later time. Return the model instance.</p>
+<dd><p>This method overrides the save method of the UserCreationForm class to set the email field of the user instance to the value of the cleaned_data[‘email’] field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>commit</strong> (<em>bool</em>) – A boolean value indicating whether to save the user instance to the database.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The user instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>User</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -264,6 +282,7 @@ is saved manually at a later time. Return the model instance.</p>
 </section>
 <section id="module-user_auth.urls">
 <span id="user-auth-urls-module"></span><h2>user_auth.urls module<a class="headerlink" href="#module-user_auth.urls" title="Permalink to this heading"></a></h2>
+<p>This file contains the URL patterns for the user authentication app.</p>
 </section>
 <section id="module-user_auth.views">
 <span id="user-auth-views-module"></span><h2>user_auth.views module<a class="headerlink" href="#module-user_auth.views" title="Permalink to this heading"></a></h2>

@@ -75,9 +75,6 @@
 <span></span><span class="c1"># import requests to use the API for General_Knowledge quiz</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="c1"># import html to handle potential HTML entities and aid rendering for create_subcategory_object</span>
-<span class="kn">import</span> <span class="nn">html</span>
-
 <span class="c1"># import random to shuffle questions &amp; choices rendered in the form</span>
 <span class="kn">import</span> <span class="nn">random</span>
 
@@ -85,22 +82,21 @@
 <span class="kn">import</span> <span class="nn">json</span>
 
 <span class="c1"># import models</span>
-<span class="c1">##from .models import General_Knowledge</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">General_Knowledge</span>
 
 <span class="c1"># import apps to dynamically fetch a model in category_objects() for the detail() view</span>
 <span class="kn">from</span> <span class="nn">django.apps</span> <span class="kn">import</span> <span class="n">apps</span>      
 
-<span class="c1"># import Http404 to raise an error message if a model is not located in category_objects()</span>
-<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">Http404</span>
-
 <span class="c1">#######################################################################################</span>
 <span class="c1">#######################################################################################</span>
 
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a function that returns the json response for the available categories on Open Trivia DB.</span>
-<span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># define a function that returns the json response for Open Trivia DB</span>
 <div class="viewcode-block" id="get_json_categories"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.utils.get_json_categories">[docs]</a><span class="k">def</span> <span class="nf">get_json_categories</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the json response for the available categories on Open Trivia DB.</span>
+
+<span class="sd">    :return: The json response</span>
+<span class="sd">    :rtype: dict or None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># get Category Lookup url</span>
     <span class="n">category_lookup</span> <span class="o">=</span> <span class="s1">&#39;https://opentdb.com/api_category.php&#39;</span>
     <span class="c1"># store url in a variable as a json response</span>
@@ -121,10 +117,7 @@
         <span class="n">error_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Unable to retrieve the specific category - Status code:</span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span></div>
-<span class="w">    </span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a function that returns the json response for a specific category on Open Trivia DB.</span>
-<span class="sd">&#39;&#39;&#39;</span>
+    
 <span class="c1"># define a function that returns the json response for Open Trivia DB when requesting a specific category</span>
 <span class="c1"># create a varible to store the API url for the General_Knowledge quizzes</span>
 <span class="c1"># use an f-str to pass in the parameter for quantity</span>
@@ -132,6 +125,15 @@
 <span class="c1"># then place {} around the category id (from quiz_cat.json) for gen_know &amp; replace &#39;9&#39; with &#39;category&#39;</span>
 <span class="c1"># return a list</span>
 <div class="viewcode-block" id="get_specific_json_category"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.utils.get_specific_json_category">[docs]</a><span class="k">def</span> <span class="nf">get_specific_json_category</span><span class="p">(</span><span class="n">quantity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">category</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the json response for a specific Open Trivia DB quiz category</span>
+
+<span class="sd">    :param quantity: Enter the number of questions the API should return</span>
+<span class="sd">    :type quantity: int</span>
+<span class="sd">    :param category: Enter the id for the desired quiz category</span>
+<span class="sd">    :type category: int</span>
+<span class="sd">    :return: The json response</span>
+<span class="sd">    :rtype: dict or None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">general_knowledge_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://opentdb.com/api.php?amount=</span><span class="si">{</span><span class="n">quantity</span><span class="si">}</span><span class="s2">&amp;category=</span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">general_knowledge_url</span><span class="p">)</span>
     
@@ -155,93 +157,33 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span> </div>
 
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a function that will mix the choices for each question in a quiz.</span>
-<span class="sd">&#39;&#39;&#39;</span>    
 <span class="c1"># rearrange the options of answers</span>
 <span class="c1"># use the random module &amp; its shuffle function to rearrange</span>
 <span class="c1"># return a list of choices</span>
 <div class="viewcode-block" id="mix_choices"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.utils.mix_choices">[docs]</a><span class="k">def</span> <span class="nf">mix_choices</span><span class="p">(</span><span class="n">choices</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mix the choices for each question in a quiz</span>
+
+<span class="sd">    :param choices: The choices are a list of 4 options.</span>
+<span class="sd">    :type choices: list</span>
+<span class="sd">    :return: Return the shuffled choices</span>
+<span class="sd">    :rtype: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">choices</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">choices</span></div>
 
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a function that will create an object for the sub-categories of the General_Knowledge quiz.</span>
-<span class="sd">The function &amp; its test is called in Django shell so it is commented out.</span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="c1"># create an object for the sub-category (e.g.General Knowledge) quiz data</span>
-<span class="c1"># in django shell import the util functions needed for the creation of the obj then call the obj</span>
-<span class="c1"># place the category id from the quiz_categories.json file as the argument for the function (e.g. 20)</span>
-<span class="c1"># In project directory cmd: `python manage.py shell`, </span>
-<span class="c1"># `from General_Knowledge.utils import get_specific_json_category, mix_choices, create_subcategory_object`</span>
-<span class="c1"># `create_subcategory_object(20)`, then `exit()`</span>
-<span class="c1"># this will populate the sub-category (e.g. General_Knowledge) table on the admin site with the quiz data</span>
-
-<span class="c1">#def create_subcategory_object(category):   </span>
-    <span class="c1"># call the get_specific_json_category function to get the data for the General_Knowledge category</span>
-<span class="c1">#    json_response = get_specific_json_category(quantity=50, category=category)</span>
-    
-    <span class="c1"># check if there are questions</span>
-<span class="c1">#    if json_response:        </span>
-        <span class="c1"># save json response as a variable to pass into template</span>
-<span class="c1">#        questions = json_response[&quot;results&quot;]</span>
-    
-        <span class="c1"># check if question retrieval was successful</span>
-<span class="c1">#        if questions:</span>
-            <span class="c1"># iterate over each question in the results dictionary </span>
-<span class="c1">#            for question in questions:                        </span>
-                <span class="c1"># add new question text key for each question in results dictionary(AKA questions) by indexing its key                </span>
-                <span class="c1"># - index question text - access the value associated with the key &quot;question&quot; in each dictionary</span>
-                <span class="c1"># - use html.unescape to handle potential HTML entities and ensure accurate rendering in templates</span>
-<span class="c1">#                question_text = html.unescape(question[&quot;question&quot;]) </span>
-                            
-                <span class="c1"># iterate over the incorrect answers with html.unescape and place them into a list with list comprehension                </span>
-                <span class="c1"># use html.unescape &amp; handle potential HTML entities for accurate rendering of templates</span>
-                <span class="c1"># place the answers from the response in a variable </span>
-                <span class="c1"># - index it from the list of key:value pairs available for each question(result)</span>
-<span class="c1">#                incorrect_answers = [html.unescape(answer) for answer in question[&quot;incorrect_answers&quot;]]             </span>
-                <span class="c1"># use html.unescape for the correct answer</span>
-<span class="c1">#                correct_answer = html.unescape(question[&quot;correct_answer&quot;])                                </span>
-                <span class="c1"># append the correct answer to the list of choices</span>
-                <span class="c1"># slice the incorrect_answers &amp; extend it to the choices list - prevents nested lists                               </span>
-<span class="c1">#                choice_texts = []</span>
-<span class="c1">#                choice_texts.append(correct_answer)</span>
-<span class="c1">#                choice_texts.extend(incorrect_answers[:])                                </span>
-    
-                <span class="c1"># initialise an empty list to append the dictionaries containing an id for each choice</span>
-                <span class="c1"># - else the list will be overwritten each loop, only saving the last dictionary iterated over</span>
-                <span class="c1"># enumerate each choice to assign an id</span>
-                <span class="c1"># note: since correct_answer was appended at the start, the id will be 1</span>
-<span class="c1">#                choices_dict = []</span>
-<span class="c1">#                for i, choice in enumerate(choice_texts, start=1):</span>
-<span class="c1">#                    choices_dict.append({&#39;choice&#39;: choice, &#39;id&#39;: i})                </span>
-
-                <span class="c1"># call the function to rearrange choices and make the extended choice list the argument</span>
-<span class="c1">#                mixed_choices = mix_choices(choices_dict)            </span>
-    
-                <span class="c1"># save the mixed choices to each question in the results dictionary        </span>
-                <span class="c1"># add a key-value pair to the question dictionary (from the category json response)</span>
-<span class="c1">#                question[&#39;mixed_choices&#39;] = mixed_choices</span>
-    
-                <span class="c1"># find the correct answer in mixed_choices</span>
-<span class="c1">#                correct_choice = None</span>
-<span class="c1">#                for choice in mixed_choices:</span>
-<span class="c1">#                    if choice[&#39;id&#39;] == 1:</span>
-<span class="c1">#                        correct_choice = choice</span>
-<span class="c1">#                        break</span>
-                    
-                <span class="c1"># create a question object with the above data</span>
-                <span class="c1"># this will show on the admin site with the models created for questions &amp; choices</span>
-<span class="c1">#                question_object = General_Knowledge.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice[&#39;choice&#39;]) # index choice from the loop above</span>
-    
-                <span class="c1"># save the object to the database</span>
-<span class="c1">#                question_object.save()</span>
-
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a function that finds the question id for the next question in the quiz.</span>
-<span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># define a function that returns the django pk for the next question in the quiz</span>
 <div class="viewcode-block" id="get_next_question_id"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.utils.get_next_question_id">[docs]</a><span class="k">def</span> <span class="nf">get_next_question_id</span><span class="p">(</span><span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">,</span> <span class="n">question_selection_pks</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the question id for the next question in the quiz.</span>
+
+<span class="sd">    :param category_name: The name of the subcategory the user selected on the category homepage.</span>
+<span class="sd">    :type category_name: str</span>
+<span class="sd">    :param question_id: The primary key for the current question object</span>
+<span class="sd">    :type question_id: int</span>
+<span class="sd">    :param question_selection_pks: The list of 10 random primary keys chosen for the quiz session</span>
+<span class="sd">    :type question_selection_pks: list</span>
+<span class="sd">    :return: Return the primary key of the next question object, should there be another in the list</span>
+<span class="sd">    :rtype: int or None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># iterate over the list of question ids in question_selection_ids from utils.category_objects()</span>
     <span class="c1"># - to check if the id generated by django matches the question_id parameter in the url  </span>
     <span class="c1"># - &amp; display the specific question that matches the question_id in the URL</span>
@@ -263,11 +205,15 @@
            <span class="k">else</span><span class="p">:</span>
                <span class="k">return</span> <span class="kc">None</span></div>
 
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">A function that retrieves the desired category names from the Open Trivia DB json response.</span>
-<span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># define a function that will retrieve category names based on the category id for it in the json response</span>
 <div class="viewcode-block" id="get_category_names"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.utils.get_category_names">[docs]</a><span class="k">def</span> <span class="nf">get_category_names</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve the desired category names from the Open Trivia DB json response.</span>
+
+<span class="sd">    :param response: The json response containing all categories available on Open Trivia DB.</span>
+<span class="sd">    :type response: dict</span>
+<span class="sd">    :return: Return the list of selected subcategories for the category according to the ids.</span>
+<span class="sd">    :rtype: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Get the trivia categories values from the dictionary provided in the JSON response</span>
     <span class="c1"># Place an empty list as the default argument if the key is not found - this avoids errors in subsequent code</span>
     <span class="n">trivia_categories</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;trivia_categories&quot;</span><span class="p">,</span> <span class="p">[])</span>
@@ -302,54 +248,62 @@
     <span class="c1"># return the list of category_names</span>
     <span class="k">return</span> <span class="n">category_names</span></div>
 
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">A function that retrieves the category queryset from the database based on its category name.</span>
-<span class="sd">&#39;&#39;&#39;</span>  
 <span class="c1"># define a function that returns the queryset for 10 random objects from the database for each category </span>
 <span class="c1"># https://stackoverflow.com/questions/27270958/patch-multiple-methods-from-different-modules-using-python-mock#:~:text=The%20short%20answer%20is%20no%20you%20cannot%20use,one%20of%20the%20time%20by%20single%20patch%20calls.</span>
 <div class="viewcode-block" id="category_objects"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.utils.category_objects">[docs]</a><span class="k">def</span> <span class="nf">category_objects</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">):</span>    
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve the category queryset from the database based on its category name.</span>
+
+<span class="sd">    :param request: The HTTP request object containing information about the client&#39;s request.</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :param category_name: The user&#39;s selected category</span>
+<span class="sd">    :type category_name: str    </span>
+<span class="sd">    :return: The 10 random question objects selected from the database</span>
+<span class="sd">    :rtype: question_selection or None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Initialise model with a default value because the conditional checking for model gave </span>
+    <span class="c1"># - UnboundLocalError: local variable &#39;model&#39; referenced before assignment</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>  
+               
     <span class="c1"># use the category_name selected on gen_quiz.html to determine the model to get questions from</span>
     <span class="c1"># replace spaces and &#39;&amp;&#39; in the event category names have spaces to create a valid model name</span>
     <span class="n">model_name</span> <span class="o">=</span> <span class="n">category_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">,</span> <span class="s2">&quot;and&quot;</span><span class="p">)</span>    
 
-    <span class="c1"># use a try-except block to find a model that matches the category name</span>
-    <span class="c1"># use globals()[model_name], it directly accesses the global namespace and doesn&#39;t rely on the apps registry</span>
-    <span class="c1"># this approach was more flexible than apps.get_model module since the model name was modified when replacing &#39;&amp;&#39; </span>
-    <span class="c1"># - this is not directly compatible with how models are stored in the apps registry</span>
-    <span class="c1"># the apps module worked to dynamically retrieve a model when only &#39; &#39; was being replaced</span>
-    <span class="c1"># - dynamically:instead of explicitly specifying a fixed model in the code, generate or determine the model to use at runtime based on certain conditions/data</span>
-    <span class="c1"># use the globals() function to access the global symbol table in Python &amp; retrieve the model with the model name as a key</span>
-    <span class="c1"># - Note: it relies on the fact that the model class is in the global namespace</span>
-    <span class="k">try</span><span class="p">:</span>        
-        <span class="n">model</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()[</span><span class="n">model_name</span><span class="p">]</span>
-        
-    <span class="c1"># raise an error if the model is not found</span>
-    <span class="k">except</span> <span class="ne">LookupError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">Http404</span><span class="p">(</span><span class="s2">&quot;Cannot locate the model for the selected category.&quot;</span><span class="p">)</span>
+    <span class="c1"># use a try-except block to dynamically find a model that matches the category name</span>
+    <span class="c1"># - dynamically:instead of explicitly specifying a fixed model in the code, </span>
+    <span class="c1"># - generate or determine the model to use at runtime based on certain conditions/data        </span>
+    <span class="c1"># use apps module to access the get_model function &amp; find the model name with its app namespace        </span>
+    <span class="k">try</span><span class="p">:</span>            
+        <span class="n">model</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s1">&#39;General_Knowledge&#39;</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>                        
 
-    <span class="c1"># get the 50 questions for the specific category</span>
-    <span class="c1"># https://docs.djangoproject.com/en/3.2/topics/db/queries/#retrieving-all-objects    </span>
-    <span class="n">all_questions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>    
+    <span class="c1"># print the error when a model for a category_name cannot be located</span>
+    <span class="k">except</span> <span class="ne">LookupError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">error_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;error_message:</span><span class="si">{</span><span class="n">error_message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>        
 
-    <span class="c1"># create a list containing the pk for each obj</span>
-    <span class="n">category_question_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">question</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">question</span> <span class="ow">in</span> <span class="n">all_questions</span><span class="p">]</span>
-    
-    <span class="c1"># get the ids for the selection of 10 questions</span>
-    <span class="c1"># use random to select 10 questions</span>
-    <span class="c1"># https://docs.python.org/3.7/library/random.html?highlight=random#random.sample</span>
-    <span class="c1"># note: random.sample requires a list as its first argument</span>
-    <span class="n">question_selection_ids</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">category_question_ids</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-    
-    <span class="c1"># save the question_selection in a session then it will be accessible in selection view as well</span>
-    <span class="c1"># https://stackoverflow.com/questions/59776172/how-to-pass-querysets-or-the-context-dictronary-from-one-view-to-another-view</span>
-    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;question_selection_ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">question_selection_ids</span>
-    
-    <span class="c1"># filter the objects based on question_selection_ids</span>
-    <span class="c1"># https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut</span>
-    <span class="n">question_selection</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk__in</span><span class="o">=</span><span class="n">question_selection_ids</span><span class="p">)</span>        
+    <span class="k">if</span> <span class="n">model</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># get the 50 questions for the specific category</span>
+        <span class="c1"># https://docs.djangoproject.com/en/3.2/topics/db/queries/#retrieving-all-objects    </span>
+        <span class="n">all_questions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>    
 
-    <span class="c1"># return the selected 10 questions from the database</span>
-    <span class="k">return</span> <span class="n">question_selection</span></div>
+        <span class="c1"># create a list containing the pk for each obj</span>
+        <span class="n">category_question_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">question</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">question</span> <span class="ow">in</span> <span class="n">all_questions</span><span class="p">]</span>
+
+        <span class="c1"># get the ids for the selection of 10 questions</span>
+        <span class="c1"># use random to select 10 questions</span>
+        <span class="c1"># https://docs.python.org/3.7/library/random.html?highlight=random#random.sample</span>
+        <span class="c1"># note: random.sample requires a list as its first argument</span>
+        <span class="n">question_selection_ids</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">category_question_ids</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+        <span class="c1"># save the question_selection in a session then it will be accessible in selection view as well</span>
+        <span class="c1"># https://stackoverflow.com/questions/59776172/how-to-pass-querysets-or-the-context-dictronary-from-one-view-to-another-view</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;question_selection_ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">question_selection_ids</span>
+
+        <span class="c1"># filter the objects based on question_selection_ids</span>
+        <span class="c1"># https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut</span>
+        <span class="n">question_selection</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk__in</span><span class="o">=</span><span class="n">question_selection_ids</span><span class="p">)</span>        
+
+        <span class="c1"># return the selected 10 questions from the database</span>
+        <span class="k">return</span> <span class="n">question_selection</span></div>
 </pre></div>
 
            </div>

@@ -72,19 +72,37 @@
            <div itemprop="articleBody">
              
   <h1>Source code for user_auth.views</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">redirect</span>
+<span></span><span class="c1">### Documentation used to construct the user_auth views for user authentification. ###</span>
+<span class="c1"># https://docs.djangoproject.com/en/5.0/ref/contrib/messages/</span>
+<span class="c1"># https://docs.djangoproject.com/en/5.0/topics/auth/default/</span>
+<span class="c1"># https://docs.djangoproject.com/en/5.0/topics/email/</span>
+<span class="c1"># https://www.pythontutorial.net/django-tutorial/django-registration/</span>
+
+<span class="c1">### import all the required imports for the views to work. ###</span>
+<span class="c1"># Import render and redirect from django.shortcuts.</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">redirect</span>
+<span class="c1"># Importing the NewUserForm from .forms module.</span>
 <span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span> <span class="n">NewUserForm</span>
+<span class="c1"># Import the User model from django.contrib.auth.models.</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="c1"># Import authentication functions from Django&#39;s contrib.auth module.</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth</span> <span class="kn">import</span> <span class="n">authenticate</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">logout</span>
+<span class="c1"># Redirects the user to a specific URL using HttpResponseRedirect.</span>
 <span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponseRedirect</span>
+<span class="c1"># Reverse is used to dynamically generate URLs based on view names.</span>
 <span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+<span class="c1"># Import the messages framework from Django for displaying flash messages.</span>
 <span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">messages</span>
+<span class="c1"># Import the send_mail function from django.core.mail.</span>
 <span class="kn">from</span> <span class="nn">django.core.mail</span> <span class="kn">import</span> <span class="n">send_mail</span>
+<span class="c1"># Import the get_messages function from django.contrib.messages.</span>
 <span class="kn">from</span> <span class="nn">django.contrib.messages</span> <span class="kn">import</span> <span class="n">get_messages</span>
+<span class="c1"># Ensures that the user is logged in before accessing the view.</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.decorators</span> <span class="kn">import</span> <span class="n">login_required</span>
 
 
 <span class="c1"># Create your views here.</span>
+<span class="c1"># user_login view.</span>
 <div class="viewcode-block" id="user_login"><a class="viewcode-back" href="../../user_auth.html#user_auth.views.user_login">[docs]</a><span class="k">def</span> <span class="nf">user_login</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the login.html template for user login.</span>
@@ -93,6 +111,7 @@
 <span class="sd">        </span>
 <span class="sd">    Returns: A rendered HTML page for user login.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Renders the login template.</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;login.html&quot;</span><span class="p">)</span></div>
 
 
@@ -105,11 +124,14 @@
 
 <span class="sd">    Returns: A rendered response with the &#39;logout.html&#39; template.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Deletes the users session.</span>
     <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="c1"># Message is displayed once the user loggs out.</span>
     <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;You were successfully logged out.&quot;</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;logout.html&#39;</span><span class="p">)</span></div>
 
 
+<span class="c1"># This view renders the logged in user information.</span>
 <div class="viewcode-block" id="show_user"><a class="viewcode-back" href="../../user_auth.html#user_auth.views.show_user">[docs]</a><span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;user_auth:login&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">show_user</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -119,6 +141,7 @@
 
 <span class="sd">    Returns: HttpResponse: Rendered template with user data (username and password).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Renders the users information into the template.</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;user.html&#39;</span><span class="p">,</span> <span class="p">{</span>
         <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
@@ -127,6 +150,7 @@
 
 
 <span class="c1"># This veiw is used to register a new user.</span>
+<span class="c1"># Once the user succesfully registers on the website they are automatically sent an email.</span>
 <div class="viewcode-block" id="user_register"><a class="viewcode-back" href="../../user_auth.html#user_auth.views.user_register">[docs]</a><span class="k">def</span> <span class="nf">user_register</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handles user registration.</span>
@@ -143,7 +167,9 @@
             <span class="n">email</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">]</span>
             <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&quot;password1&quot;</span><span class="p">]</span>
 
+            <span class="c1"># Creates the user.</span>
             <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span> <span class="p">)</span>
+            <span class="c1"># Once the users are created the email gets sent to the email that has been used to register.</span>
             <span class="n">send_mail</span><span class="p">(</span>
                 <span class="n">subject</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Welcome </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2"> to QuizMe&quot;</span><span class="p">,</span>
                 <span class="n">message</span><span class="o">=</span><span class="s2">&quot;We are glad that you have registered to our quiz website fellow quizee.&quot;</span><span class="p">,</span>
@@ -151,12 +177,16 @@
                 <span class="n">recipient_list</span><span class="o">=</span><span class="p">[</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">],</span>
                 <span class="n">fail_silently</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="p">)</span>
+            <span class="c1"># Once the email has been sent the user is then saved i the database.</span>
             <span class="n">user</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="c1"># This message then gets rendered confiming the registration.</span>
             <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;Registration successful.&quot;</span><span class="p">),</span>
             <span class="n">storage</span> <span class="o">=</span> <span class="n">get_messages</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="c1"># If there is no errors the user is then redirected to the login page.</span>
             <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">storage</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s2">&quot;user_auth:login&quot;</span><span class="p">)</span>
         <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;Unsuccessful registration. Invalid information.&quot;</span><span class="p">)</span>
+    <span class="c1"># The form data gets erased and replaced with a new form.    </span>
     <span class="n">form</span> <span class="o">=</span> <span class="n">NewUserForm</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span>
         <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;register.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;register_form&quot;</span><span class="p">:</span> <span class="n">form</span><span class="p">}</span>
@@ -173,11 +203,14 @@
 <span class="sd">    Returns: If authentication is successful, redirects to the &quot;show_user&quot; page.</span>
 <span class="sd">             If authentication fails, redirects to the &quot;login&quot; page.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Compares the data login  to the data in the database to see if they are simillar.</span>
     <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span>
     <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">]</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+    <span class="c1"># If there is no user in the database that matches the data in the database they are redirected to the login page to try again.</span>
     <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s2">&quot;user_auth:login&quot;</span><span class="p">))</span>
+    <span class="c1"># If the user enters the correct data they are then logged in and redirected to the show_user view.</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">login</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s2">&quot;user_auth:show_user&quot;</span><span class="p">))</span></div>

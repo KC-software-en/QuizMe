@@ -183,8 +183,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Education.tests.html#module-Education.tests.test_create_category_objects">Education.tests.test_create_category_objects module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects2"><code class="docutils literal notranslate"><span class="pre">TestCreateSubcategoryObjects2</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects2.test_create_subcategory_objects2"><code class="docutils literal notranslate"><span class="pre">TestCreateSubcategoryObjects2.test_create_subcategory_objects2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects"><code class="docutils literal notranslate"><span class="pre">TestCreateSubcategoryObjects</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects.test_create_subcategory_objects"><code class="docutils literal notranslate"><span class="pre">TestCreateSubcategoryObjects.test_create_subcategory_objects()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects.test_create_subcategory_objects_find_model"><code class="docutils literal notranslate"><span class="pre">TestCreateSubcategoryObjects.test_create_subcategory_objects_find_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects.test_create_subcategory_objects_no_model"><code class="docutils literal notranslate"><span class="pre">TestCreateSubcategoryObjects.test_create_subcategory_objects_no_model()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -261,28 +263,45 @@
 <li class="toctree-l2"><a class="reference internal" href="Education.tests.html#module-Education.tests.test_views">Education.tests.test_views module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.ResultsViewTest"><code class="docutils literal notranslate"><span class="pre">ResultsViewTest</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.ResultsViewTest.setUp"><code class="docutils literal notranslate"><span class="pre">ResultsViewTest.setUp()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.ResultsViewTest.test_results_view_requires_login"><code class="docutils literal notranslate"><span class="pre">ResultsViewTest.test_results_view_requires_login()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.ResultsViewTest.test_results_view_with_authenticated_user"><code class="docutils literal notranslate"><span class="pre">ResultsViewTest.test_results_view_with_authenticated_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.ResultsViewTest.test_results_view_that_requires_login"><code class="docutils literal notranslate"><span class="pre">ResultsViewTest.test_results_view_that_requires_login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.ResultsViewTest.test_results_view_with_an_authenticated_user"><code class="docutils literal notranslate"><span class="pre">ResultsViewTest.test_results_view_with_an_authenticated_user()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.SelectionTestCase"><code class="docutils literal notranslate"><span class="pre">SelectionTestCase</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestDetailView"><code class="docutils literal notranslate"><span class="pre">TestDetailView</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.SelectionTestCase"><code class="docutils literal notranslate"><span class="pre">SelectionTestCase</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.SelectionTestCase.setup"><code class="docutils literal notranslate"><span class="pre">SelectionTestCase.setup()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.SelectionTestCase.test_selection_view_with_no_model"><code class="docutils literal notranslate"><span class="pre">SelectionTestCase.test_selection_view_with_no_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.SelectionTestCase.test_selection_with_a_valid_category_and_question"><code class="docutils literal notranslate"><span class="pre">SelectionTestCase.test_selection_with_a_valid_category_and_question()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestDetailView"><code class="docutils literal notranslate"><span class="pre">TestDetailView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestDetailView.setUp"><code class="docutils literal notranslate"><span class="pre">TestDetailView.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestDetailView.test_detail_view_with_invalid_question"><code class="docutils literal notranslate"><span class="pre">TestDetailView.test_detail_view_with_invalid_question()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestDetailView.test_detail_view_with_valid_question"><code class="docutils literal notranslate"><span class="pre">TestDetailView.test_detail_view_with_valid_question()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestFindModel"><code class="docutils literal notranslate"><span class="pre">TestFindModel</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestFindModel.setUp"><code class="docutils literal notranslate"><span class="pre">TestFindModel.setUp()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_fail"><code class="docutils literal notranslate"><span class="pre">TestFindModel.test_find_model_fail()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_fail_client"><code class="docutils literal notranslate"><span class="pre">TestFindModel.test_find_model_fail_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_fail_reqfac"><code class="docutils literal notranslate"><span class="pre">TestFindModel.test_find_model_fail_reqfac()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_success"><code class="docutils literal notranslate"><span class="pre">TestFindModel.test_find_model_success()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestIndexEduView"><code class="docutils literal notranslate"><span class="pre">TestIndexEduView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestIndexEduView.setUp"><code class="docutils literal notranslate"><span class="pre">TestIndexEduView.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestIndexEduView.test_index_edu"><code class="docutils literal notranslate"><span class="pre">TestIndexEduView.test_index_edu()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestIndexView"><code class="docutils literal notranslate"><span class="pre">TestIndexView</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestIndexView.setUp"><code class="docutils literal notranslate"><span class="pre">TestIndexView.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestIndexView.test_session_key_exists_in_index_view"><code class="docutils literal notranslate"><span class="pre">TestIndexView.test_session_key_exists_in_index_view()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestIndexView.test_session_key_not_exists_in_index_view"><code class="docutils literal notranslate"><span class="pre">TestIndexView.test_session_key_not_exists_in_index_view()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestTryNewQuiz"><code class="docutils literal notranslate"><span class="pre">TestTryNewQuiz</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestTryNewQuiz.setUp"><code class="docutils literal notranslate"><span class="pre">TestTryNewQuiz.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestTryNewQuiz.test_try_new_quiz_with_a_valid_result"><code class="docutils literal notranslate"><span class="pre">TestTryNewQuiz.test_try_new_quiz_with_a_valid_result()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestTryNewQuiz.test_try_new_quiz_with_quiz_result_in_session"><code class="docutils literal notranslate"><span class="pre">TestTryNewQuiz.test_try_new_quiz_with_quiz_result_in_session()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestTryNewQuiz.test_try_new_quiz_with_result"><code class="docutils literal notranslate"><span class="pre">TestTryNewQuiz.test_try_new_quiz_with_result()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestTryNewQuiz.test_try_new_quiz_without_quiz_result_in_session"><code class="docutils literal notranslate"><span class="pre">TestTryNewQuiz.test_try_new_quiz_without_quiz_result_in_session()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestViews"><code class="docutils literal notranslate"><span class="pre">TestViews</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestViews.setUp"><code class="docutils literal notranslate"><span class="pre">TestViews.setUp()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="Education.tests.html#Education.tests.test_views.TestViews.test_index_view"><code class="docutils literal notranslate"><span class="pre">TestViews.test_index_view()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -948,32 +967,116 @@ object the first time, the query is executed.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="Education.views.detail">
 <span class="sig-prename descclassname"><span class="pre">Education.views.</span></span><span class="sig-name descname"><span class="pre">detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/views.html#detail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.views.detail" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>A view that displays the quiz question.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object containing information about the client’s request.</p></li>
+<li><p><strong>category_name</strong> (<em>str</em>) – The name of the category the user selected on the category homepage.</p></li>
+<li><p><strong>question_id</strong> (<em>int</em>) – The pk of the question object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Return the edu_detail template.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Education.views.index">
 <span class="sig-prename descclassname"><span class="pre">Education.views.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/views.html#index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.views.index" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>A view for the home page of QuizMe project.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object containing information about the client’s request.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Return the index template</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Education.views.index_edu">
 <span class="sig-prename descclassname"><span class="pre">Education.views.</span></span><span class="sig-name descname"><span class="pre">index_edu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/views.html#index_edu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.views.index_edu" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>A view for the home page of education quizzes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object containing information about the client’s request.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Return the edu_quiz template</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Education.views.results">
 <span class="sig-prename descclassname"><span class="pre">Education.views.</span></span><span class="sig-name descname"><span class="pre">results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/views.html#results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.views.results" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>A view that displays the quiz result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object containing information about the client’s request.</p></li>
+<li><p><strong>category_name</strong> (<em>str</em>) – The name of the category the user selected on the category homepage.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Return the edu_result template.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Education.views.selection">
 <span class="sig-prename descclassname"><span class="pre">Education.views.</span></span><span class="sig-name descname"><span class="pre">selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/views.html#selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.views.selection" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>A a selection view that handles the submission of form data, goes to the next question and redirects to the results view.
+Otherwise the form will be redisplayed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object containing information about the client’s request.</p></li>
+<li><p><strong>category_name</strong> (<em>str</em>) – The name of the category the user selected on the category homepage.</p></li>
+<li><p><strong>question_id</strong> (<em>int</em>) – The pk of the question object the user has submitted</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Return the edu_detail or the edu_result template.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Education.views.try_new_quiz">
 <span class="sig-prename descclassname"><span class="pre">Education.views.</span></span><span class="sig-name descname"><span class="pre">try_new_quiz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Education/views.html#try_new_quiz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Education.views.try_new_quiz" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>A view that clears the session data and redirects to the homepage of the category.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object containing information about the client’s request.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Return the edu_quiz template</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-Education">
