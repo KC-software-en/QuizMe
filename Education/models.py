@@ -1,3 +1,4 @@
+# import models
 from django.db import models
 
 ###################################################################################
@@ -5,9 +6,6 @@ from django.db import models
 
 # Create your models here.
 
-'''
-Create a model for the quiz categories in QuizMe.
-'''
 # define a model for categories in the QuizMe project
 class Categories(models.Model):
     # define a field to store the category name as text
@@ -18,12 +16,14 @@ class Categories(models.Model):
     # define a method to represent the model instance as a string
     # return the category name
     def __str__(self):
+        """A human-readable string representation of the category object.
+
+        :return: Return the category object
+        :rtype: str
+        """
         return self.category
         
-'''
-Create a model for the quiz subcategories in Education.
-'''
-# define a model for subcategories in the Education app
+# define a model for the quiz subcategories in the Education app
 class Subcategories(models.Model): 
     # retrieve the category object representing 'Education' from the Categories model
     education_category_obj = Categories.objects.get(category='Education')
@@ -49,11 +49,13 @@ class Subcategories(models.Model):
     # define a method to represent the model instance as a string
     # return the subcategory name 
     def __str__(self):
+        """A human-readable string representation of the subcategory object.
+
+        :return: Return the subcategory object
+        :rtype: str
+        """
         return self.subcategory
 
-'''
-Create a Mythology model for the subcategory in the education quiz.
-'''
 # use Django's built-in object-relational mapping (ORM) & define the relevant classes
 # -each entry in a SQL table represents a single object, this can be converted to a class instance in Python.  
 # create a Mythology class that inherits from django.db.models.Model
@@ -87,11 +89,13 @@ class Mythology(models.Model):
     # define a __str__ method for human-readable output
     # return question
     def __str__(self):
+        """A human-readable string representation of the Mythology question object.
+
+        :return: Return the question object
+        :rtype: str
+        """
         return self.question
-    
-'''
-Create a Science_and_Nature model for the subcategory in the education quiz.
-'''
+
 # create a Science_and_Nature class that inherits from django.db.models.Model
 class Science_and_Nature(models.Model):    
     # retrieve the category object representing 'Education' from the Categories model
@@ -121,11 +125,13 @@ class Science_and_Nature(models.Model):
     # define a __str__ method for human-readable output
     # return question
     def __str__(self):
+        """A human-readable string representation of the Science & Nature question object.
+
+        :return: Return the question object
+        :rtype: str
+        """
         return self.question
     
-'''
-Create a History model for the subcategory in the education quiz.
-'''
 # create a History class that inherits from django.db.models.Model
 class History(models.Model):      
     # retrieve the category object representing 'Education' from the Categories model
@@ -156,5 +162,10 @@ class History(models.Model):
     # define a __str__ method for human-readable output
     # return question
     def __str__(self):
+        """A human-readable string representation of the History question object.
+
+        :return: Return the question object
+        :rtype: str
+        """
         return self.question    
     

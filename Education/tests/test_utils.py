@@ -2,30 +2,16 @@
 from django.http import HttpRequest
 
 #  import unittest to write tests that are not necessarily tied to Django and can be used in any Python project e.g. get API response from open trivia db
-from unittest.mock import patch, MagicMock, Mock
+from unittest.mock import patch, MagicMock
 
 # import functions in utils.py
 from .. import utils
 
 # import models
-from ..models import Mythology
+from ..models import Categories, Subcategories, Mythology
 
 # import random to shuffle choices rendered in the form
 import random
-
-# import RequestFactory to generate a HttpRequest objects & simulate HTTP requests (faster than using Client)
-# https://docs.djangoproject.com/en/5.0/topics/testing/advanced/#the-request-factory
-# import base class for all Django test cases (for writing tests, including test assertions, database setup and teardown, and other testing infrastructure)
-from django.test import RequestFactory
-
-# Import reverse is a utility function in Django that is used to generate URLs for views from their names and arguments
-from django.urls import reverse
-
-# import json to convert the JSON string into a Python object for the choices attribute in db
-import json
-
-# import Http404 to raise an error message if a model is not located in category_objects()
-from django.http import Http404
 
 # import TestCase
 from unittest import TestCase
@@ -42,10 +28,9 @@ from django.test import TransactionTestCase
 from importlib import import_module
 from django.conf import settings
 
-# import mixer to create objects
-from mixer.backend.django import mixer
-
-import pytest 
+# import sys & StringIO to test for a print statement in cmd
+from io import StringIO
+import sys
 
 ##################################################################################################
 ##################################################################################################
@@ -55,9 +40,9 @@ import pytest
 # next, go to utils.py and create the independent functions. Then it should pass
 # run coverage after tests
 
-'''
+"""
 Create a class to test the functions that request an API response for categorties on Open Trivia DB.
-'''
+"""
 # https://www.django-rest-framework.org/api-guide/testing/#api-test-cases ######## refer back ###
 # use patch class decorator & provide the import path to the requests.get function in views.py
 # patch the external get function within the requests module, which is used in the views.get_json_categories function
@@ -187,71 +172,9 @@ class TestJsonResponse(TestCase):
         # assert that API response was unsuccessful & returns None        
         self.assertIsNone(response_error, msg='Should check that an API response was unsuccessful & returns None.')        
 
-
-'''
-Create a class that tests the CreateSubcategoryObject function instantiated in the django shell to populate the database for each model.
-The test is in a doctstring in test_utils since its run in django shell.
-
-# use TransactionTestCase because tests for category objects rely on database access 
-# - this ensures test objects are not created on the admin site
-class TestCreateSubcategoryObject(TransactionTestCase):
-    # setup an instance of the RequestFactory class since get_specific_json_category uses request
-    def setUp(self):    
-        self.factory = RequestFactory()
-
-    # test create_subcategory_object
-    def test_create_subcategory_object(self):
-        with patch('Education.views.create_subcategory_object') as mock_create_subcategory_object:
-            # set up a successful mock response for the mock_create_subcategory_object function
-            mock_object = [
-                    {
-                    "question":"question{i}",                        
-                    "mixed_choices":[{"mixed_choice{i}":"mixed_choice{i}", 
-                                        "id{i}":"id{i}"} for i in range(1,5)],
-                    "correct_answer":"correct_answer{i}",
-                    } for i in range(1,51) # use list comprehension to create 50 mock objects (the last number is ignored)
-                ]
-                       
-            # set the return value for mock_object as mock_response_ok
-            mock_create_subcategory_object.return_value = mock_object
-            
-            # Create a GET request for the view with reverse 
-            # use the name defined in urls.py with the arguments passed in the view in view.py
-            ##request = self.factory.get(reverse('Education:edu_detail', args=[50, 20]))
-            ##response = utils.get_specific_json_category(request, quantity=50, category=20)
-
-            # call the create_subcategory_object function to test it with a category id
-            utils.create_subcategory_object(20)
-            mock_create_subcategory_object.assert_called_once()
-
-            # get the 50 objects created in the database
-            category_objects = models.Mythology.objects.all()
-
-            # make assertions about the object
-            # assert there are 50 objects for the category 
-            # - use range instead of just the int because assertCountEqual compares 2 iterables
-            self.assertEqual(category_objects.count(), 50, 
-                                  msg='Should check that there are 50 objects for the category in the database.')
-            # make assertions for each attribute in the 50 objects
-            # iterate over the queryset of category_objects & enumerate with an idx that starts at 1
-            for i, category_object in enumerate(category_objects, start=1):
-                self.assertEqual(category_object.question, 'question{i}', 
-                                 msg='Should check that question{i} is the question attribute for the object.')
-                # use "" inside dictionary not ' to avoid json.decoder.JSONDecodeError: 
-                # - Expecting property name enclosed in double quotes
-                expected_mock_mixed_choices = '[{"mixed_choice{i}":"mixed_choice{i}", "id{i}":"id{i}"}]'
-                print(f"expected_mock_mixed_choices:{expected_mock_mixed_choices}")
-                actual_choices = str(category_object.choices)
-                print(f"actual_choices:{actual_choices}")
-                self.assertEqual(actual_choices, expected_mock_mixed_choices,
-                                 msg='Should check that the list of mixed choices are in the choices attribute for the object.')
-                self.assertEqual(category_object.correct_answer, "correct_answer{i}", 
-                                 msg='Should check that correct_answer{i} is an attribute for the object.')
-'''
-
-'''
-Create a class to test miscellaneous functions in utils.py
-'''
+"""
+Create a class to test mix_choices & get_next_question_id functions in utils.py
+"""
 # create a class TestVariousUtils
 class TestVariousUtils(TestCase):
     # setup 
@@ -295,6 +218,15 @@ class TestVariousUtils(TestCase):
         # test when the pk is not in the question_selection_pks
         result = utils.get_next_question_id('category_name', 50, [12, 2, 28, 49, 35, 37, 14, 1, 9, 15])
         self.assertIsNone(result, msg='Should check that None is returned for a pk not in the list')
+
+"""
+Create a class to test get_category_names().
+"""
+class TestGetCategoryNames(TestCase):
+    # setup 
+    def setUp(self):
+        # no needed conditions
+        pass
 
     # test get_category_names that have a name for the corresponding id selection
     def test_get_category_names_found(self):
@@ -343,13 +275,13 @@ class TestVariousUtils(TestCase):
         # assert that the name is not there for the selected category id
         self.assertListEqual(category_names, [], msg='Should check that the list is empty if a selected category id is not there.')
 
-'''
+"""
 Create a class that tests the category_objects function.
-'''     
+"""
 # create tests for a valid category_name and an invalid category_name when locating a model to retrieve its category_objects
 # use TransactionTestCase because tests for category objects rely on database access 
 # - this ensures test objects are not created on the admin site
-class TestCategoryObjects(TransactionTestCase):
+class TestCategoryObjects(TransactionTestCase):    
     # setup the conditions needed for functions in the class
     def setUp(self):
         # Create an instance of the HttpRequest class
@@ -367,11 +299,19 @@ class TestCategoryObjects(TransactionTestCase):
         session_key = None
         self.request.session = engine.SessionStore(session_key)
 
+        # set up the category instance
+        self.category = Categories.objects.create(category="Education", description="Education description")
+
+        # set up the category instance
+        self.subcategory = Subcategories.objects.create(subcategory = "Mythology", description="Mythology description", category=self.category)
+
         # set up the 50 random objects retrieved
         self.mock_questions = [Mythology.objects.create(                                       
                                       question=f"question{i}", 
                                       choices = [f'choice{i}' for i in range(1,5)], 
-                                      correct_answer = f'choice1') 
+                                      correct_answer = f'choice1',
+                                      category = self.category,
+                                      subcategory = self.subcategory) 
                         for i in range(1,51)]
         
         # mock the question_selection_ids as a list of 10 int ids(i.e. pk)
@@ -413,15 +353,27 @@ class TestCategoryObjects(TransactionTestCase):
         self.assertEqual(self.request.session['mock_question_selection_ids'], self.mock_question_selection_ids, 
                          msg='Should check that there are a list of 10 ids.')  # Ensure the session is set correctly
 
-    # test for an error raised if globals does not have a model for a category name
+    # test for an error raised if apps does not have a model for a category name
     # dont incl category_objects in path to avoid AttributeError: <function category_objects at 0x0489E2B8> does not have the attribute 'globals'
-    @patch('Education.utils.globals')
-    def test_category_objects_invalid_category(self, mock_globals):
+    @patch('Education.views.apps.get_model')
+    def test_category_objects_invalid_category(self, mock_get_model):        
+        # redirect the standard output (stdout) to the StringIO object captured_output. 
+        # - this captures any output that is printed to the standard output during the execution of the category_objects function
+        captured_output = StringIO()
+        sys.stdout = captured_output
+
         # mock the globals function to raise a LookupError for an incorrect category_name
-        mock_globals.side_effect = KeyError
+        mock_get_model.side_effect = LookupError
 
-        # simulate the behaviour where the model is not found in the global namespace
-        # raise an error when calling category_objects with an invalid category name
-        with self.assertRaises(Http404, msg='Should check that an error raises for a model not located with a category_name.'):
-            response = utils.category_objects(self.request, 'Invalid category')
+        # call the category_objects function
+        response = utils.category_objects(self.request, 'Invalid category')
 
+        # reset stdout to restore the standard output stream to its original state after redirecting it for testing purposes
+        # - ensures that subsequent code execution within the test/(other tests) are not affected by stdout redirection 
+        sys.stdout = sys.__stdout__
+
+        # assert that the response is None when an invalid category is provided
+        # assert that the string 'error_message' is present in the captured output.
+        self.assertIsNone(response, msg='Should return None for an invalid category.')
+        self.assertIn('error_message', captured_output.getvalue(), msg='Should check that the str is present in the stdout for LookupError.')
+        

@@ -18,6 +18,11 @@ class Categories(models.Model):
     # define a method to represent the model instance as a string
     # return the category name
     def __str__(self):
+        """A human-readable string representation of the category object.
+
+        :return: Return the category object
+        :rtype: str
+        """
         return self.category
         
 '''
@@ -49,6 +54,11 @@ class Subcategories(models.Model):
     # define a method to represent the model instance as a string
     # return the subcategory name 
     def __str__(self):
+        """A human-readable string representation of the subcategory object.
+
+        :return: Return the subcategory object
+        :rtype: str
+        """
         return self.subcategory
 
 '''
@@ -82,4 +92,9 @@ class General_Knowledge(models.Model):
     # define a __str__ method for human-readable output
     # return question
     def __str__(self):
+        """A human-readable string representation of the General Knowledge question object in a quiz.
+
+        :return: Return the question object
+        :rtype: str
+        """
         return self.question        

@@ -17,7 +17,7 @@ from .utils import get_json_categories, get_next_question_id, get_category_names
 # import all models
 from . import models
 
-# import apps to dynamically fetch a model in detail() view
+# import apps to dynamically fetch a model in detail() & selection() view
 from django.apps import apps
 
 # import Http404 to raise an error message if a model is not located in detail view
@@ -33,21 +33,18 @@ import ast
 #######################################################################################
 #######################################################################################
 
-# Create your views here.
+# define index view for home page of QuizMe project referenced in Education/urls.py
+
+
 # define index view for home page of QuizMe project referenced in Education/urls.py
 def index(request):     
-    """
-    View function for the index page.
+    """A view for the home page of QuizMe project.
 
-    If a user prematurely leaves a quiz and does not use the exit button:
-    - Delete the result and session data of the current quiz.
-    - This action is performed for all the templates displayed in the navbar.
+    :param request: The HTTP request object containing information about the client's request.
+    :type request: HttpRequest
+    :return: Return the index template
+    :rtype: HttpResponse 
 
-    Args:
-        request (HttpRequest): The HTTP request object.
-
-    Returns:
-        HttpResponse: Renders the "index.html" template.
     """
     # if a user prematurely leaves a quiz & does not use the exit button,
     # - delete the result & session data of the current quiz 
@@ -63,14 +60,13 @@ def index(request):
 # get json reponse for trivia categories from open trivia db
 # index category from the dictionary id
 def index_edu(request):
-    """
-    View function for the Education app homepage.
 
-    Args:
-        request (HttpRequest): The HTTP request object.
+    """A view for the home page of education quizzes.
 
-    Returns:
-        HttpResponse: Rendered HTML template with context variables for the homepage.
+    :param request: The HTTP request object containing information about the client's request.
+    :type request: HttpRequest
+    :return: Return the edu_quiz template
+    :rtype: HttpResponse
     """
     # if a user prematurely leaves a quiz & does not use the exit button,
     # - delete the result & session data of the current quiz 
@@ -115,17 +111,17 @@ def index_edu(request):
 # render an HTTP 404 error if a question with the requested ID doesn’t exist
 @login_required(login_url='user_auth:login')
 def detail(request, category_name, question_id): 
+    """A view that displays the quiz question.
+
+    :param request: The HTTP request object containing information about the client's request.
+    :type request: HttpRequest
+    :param category_name: The name of the category the user selected on the category homepage.
+    :type category_name: str
+    :param question_id: The pk of the question object
+    :type question_id: int
+    :return: Return the edu_detail template. 
+    :rtype: HttpResponse
     """
-    View function for displaying the detail page of a question.
-
-    Args:
-        request (HttpRequest): The HTTP request object.
-        category_name (str): The name of the category.
-        question_id (int): The ID of the question.
-
-    Returns:
-        HttpResponse: The rendered detail template with question details or an error message.
-    """     
     response = get_json_categories()
     category_names = get_category_names(response)          
 
@@ -148,7 +144,7 @@ def detail(request, category_name, question_id):
 
         # render the detail template displaying the error when a model for a category_name cannot be located
         except LookupError as e:
-            error_message = f"{e}: Unable to find the model for {category_name} in the Education application."
+            error_message = f"{e}"
             context = {'question': None,
                         'choices':None,
                         'category_name': category_name,
@@ -184,22 +180,18 @@ def detail(request, category_name, question_id):
         print(f"\n\ncontext:{context}\n\n") ##        
         return render(request, 'edu_quiz/edu_detail.html', context)                
 
-'''
-Create a view that displays the quiz result.
-'''
 # create a view that displays the quiz result 
 # add a login decorator because an Education quiz requires a registered user
 @login_required(login_url='user_auth:login')
 def results(request, category_name): 
-    """
-    View function to display quiz results.
+    """A view that displays the quiz result.
 
-    Args:
-        request (HttpRequest): The HTTP request object.
-        category_name (str): The name of the quiz category.
-
-    Returns:
-        HttpResponse: Rendered HTML template with quiz results.
+    :param request: The HTTP request object containing information about the client's request.
+    :type request: HttpRequest
+    :param category_name: The name of the category the user selected on the category homepage.
+    :type category_name: str
+    :return: Return the edu_result template. 
+    :rtype: HttpResponse
     """
     # get the quiz result for the session
     result = request.session.get('quiz_result')
@@ -213,27 +205,20 @@ def results(request, category_name):
 
 # write a view to answer a question, incl the argument category_name & question_id
 # it handles the submitted data
-def selection(request, category_name, question_id):   
-    """
-    Handles the selection of a choice for a specific question in the quiz.
+def selection(request, category_name, question_id):  
+    """A a selection view that handles the submission of form data, goes to the next question and redirects to the results view. 
+    Otherwise the form will be redisplayed.
 
-    Args:
-        request (HttpRequest): The HTTP request object.
-        category_name (str): The name of the quiz category.
-        question_id (int): The ID of the question being answered.
+    :param request: The HTTP request object containing information about the client's request.
+    :type request: HttpRequest
+    :param category_name: The name of the category the user selected on the category homepage.
+    :type category_name: str
+    :param question_id: The pk of the question object the user has submitted
+    :type question_id: int
+    :return: Return the edu_detail or the edu_result template. 
+    :rtype: HttpResponse
+    """      
 
-    Returns:
-        HttpResponseRedirect: Redirects to the next question or the results page.
-
-    Raises:
-        Http404: If the specified question does not exist.
-
-    Notes:
-        - This function assumes that the question model exists for the given category.
-        - The selected choice is stored in the session.
-        - The quiz result is updated in the session.
-        - The next question ID is determined based on the current question and the session's question selection IDs.
-    """
     # pk refers to the primary key field of a database table
     # django automatically creates a primary key for each model
     response = get_json_categories()
@@ -344,14 +329,6 @@ def selection(request, category_name, question_id):
 
 # start new quiz function
 def try_new_quiz(request):
-    """
-    Deletes the result and session data of the current quiz before starting a new quiz.
-
-    Args:
-        request (HttpRequest): The HTTP request object.
-
-    Returns:
-        HttpResponseRedirect: Redirects to the template for the home page of education.
     """
     # delete the result & session data of the current quiz before starting a new quiz
     if 'quiz_result' in request.session:

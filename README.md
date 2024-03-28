@@ -120,8 +120,9 @@ Outline the steps necessary to build and run your application with venv and Dock
 # Credits
 *Highlights and links to the authors of your project if the project has been created by more than one person*
 
-@KC-software-en
-@Deandre1dev
+@KC-software-en https://github.com/KC-software-en
+
+@Deandre1dev https://github.com/Deandre1dev
 
 # Add a URL to your GitHub repository
 https://github.com/KC-software-en/QuizMe

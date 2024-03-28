@@ -25,8 +25,6 @@ class Categories(models.Model):
     # return the category name
     def __str__(self):
         """
-        Returns the category name as a string representation of the model instance.
-        """
         return self.category
     
 
@@ -70,8 +68,7 @@ class Subcategories(models.Model):
     # define a method to represent the model instance as a string
     # return the subcategory name 
     def __str__(self):
-        """
-        Returns the subcategory name as a string representation of the model instance.
+
         """
         return self.subcategory
     
@@ -122,9 +119,11 @@ class Music(models.Model):
 
     # define a __str__ method for human-readable output
     # return question
-    def __str__(self):
-        """
-            Returns the question of the quiz.
+    def __str__(self):        
+        """A human-readable string representation of the Music question object in a quiz.
+
+        :return: Return the question object
+        :rtype: str
         """
         return self.question
 
@@ -159,8 +158,10 @@ class Film(models.Model):
     # define a __str__ method for human-readable output
     # return question
     def __str__(self):
-        """
-            Returns the question of the quiz.
+        """A human-readable string representation of the Film question object in a quiz.
+
+        :return: Return the question object
+        :rtype: str
         """
         return self.question
     
@@ -215,7 +216,9 @@ class Video_Games(models.Model):
     # define a __str__ method for human-readable output
     # return question
     def __str__(self):
-        """
-            Returns the question of the quiz.
+        """A human-readable string representation of the Video Games question object in a quiz.
+
+        :return: Return the question object
+        :rtype: str
         """
         return self.question    

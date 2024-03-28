@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Education.tests.test_urls &mdash; QuizMe 00.00.01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            QuizMe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">QuizMe</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QuizMe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">Education.tests.test_urls</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Education.tests.test_urls</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Django documentation.</span>
+<span class="c1">#https://docs.djangoproject.com/en/5.0/topics/testing/tools/#simpletestcase</span>
+
+<span class="c1"># Import SimpleTestCase.</span>
+<span class="c1"># This helps to avoid executing write queries which will affect other tests since each SimpleTestCase test isn’t run in a transaction.</span>
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">SimpleTestCase</span>
+<span class="c1"># Import reverse is a utility function in Django that is used to generate URLs for views from their names and arguments</span>
+<span class="c1"># Import resolve which is used to resolve URL paths to a corresponding view.</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span><span class="p">,</span> <span class="n">resolve</span>
+<span class="c1"># Import views.</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span>  <span class="n">views</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Create a class to test the Urls.</span>
+<span class="sd">&#39;&#39;&#39;</span> 
+<span class="c1"># Create a failing test.</span>
+<span class="c1"># After writing the fail test, run in cmd terminal it should fail. </span>
+<span class="c1"># Next, go to views.py and create the index view and it should pass.</span>
+<span class="c1"># Create a class to test the home views.</span>
+<span class="c1"># run coverage after tests</span>
+<div class="viewcode-block" id="TestUrls"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_urls.TestUrls">[docs]</a><span class="k">class</span> <span class="nc">TestUrls</span><span class="p">(</span><span class="n">SimpleTestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestUrls.setup"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_urls.TestUrls.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># no necessary conditions</span>
+        <span class="k">pass</span>    </div>
+
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        A function to test if the correct template is rendered if the user enters the home url path.</span>
+<span class="sd">    &#39;&#39;&#39;</span>    
+    <span class="c1"># The test below will pass because the resolver match returns an index view and not the string &#39;index&#39;.</span>
+<div class="viewcode-block" id="TestUrls.test_home_page_valid"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_urls.TestUrls.test_home_page_valid">[docs]</a>    <span class="k">def</span> <span class="nf">test_home_page_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Used to generate a Url based on the view name.</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;Education:index&#39;</span><span class="p">)</span>     
+        <span class="c1"># The assert equals function is used to take the url path and return a object based on the resolver match which is a veiw.        </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">resolve</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> </div></div>
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Kisha Cairncross, Deandre` Wright.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>user_auth package &mdash; QuizMe 00.00.01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="user_auth.migrations package" href="user_auth.migrations.html" />
+    <link rel="prev" title="Entertainment.tests package" href="Entertainment.tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            QuizMe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">QuizMe</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="QuizMe.html">QuizMe package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="General_Knowledge.html">General_Knowledge package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Education.html">Education package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entertainment.html">Entertainment package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">user_auth package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.migrations.html">user_auth.migrations package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html">user_auth.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_auth.admin">user_auth.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_auth.apps">user_auth.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#user_auth.apps.UserAuthConfig"><code class="docutils literal notranslate"><span class="pre">UserAuthConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_auth.forms">user_auth.forms module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#user_auth.forms.NewUserForm"><code class="docutils literal notranslate"><span class="pre">NewUserForm</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_auth.models">user_auth.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_auth.urls">user_auth.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_auth.views">user_auth.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#user_auth.views.authenticate_user"><code class="docutils literal notranslate"><span class="pre">authenticate_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user_auth.views.show_user"><code class="docutils literal notranslate"><span class="pre">show_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user_auth.views.user_login"><code class="docutils literal notranslate"><span class="pre">user_login()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user_auth.views.user_logout"><code class="docutils literal notranslate"><span class="pre">user_logout()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user_auth.views.user_register"><code class="docutils literal notranslate"><span class="pre">user_register()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-user_auth">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QuizMe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">QuizMe</a></li>
+      <li class="breadcrumb-item active">user_auth package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/user_auth.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="user-auth-package">
+<h1>user_auth package<a class="headerlink" href="#user-auth-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user_auth.migrations.html">user_auth.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_auth.migrations.html#module-user_auth.migrations">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_auth.tests.html">user_auth.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_auth.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_auth.tests.html#module-user_auth.tests.test_forms">user_auth.tests.test_forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_forms.EmailTest"><code class="docutils literal notranslate"><span class="pre">EmailTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_forms.EmailTest.test_send_email"><code class="docutils literal notranslate"><span class="pre">EmailTest.test_send_email()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_forms.NewUserFormTestCase"><code class="docutils literal notranslate"><span class="pre">NewUserFormTestCase</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_forms.NewUserFormTestCase.test_save_method"><code class="docutils literal notranslate"><span class="pre">NewUserFormTestCase.test_save_method()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_forms.TestAccountCreationForm"><code class="docutils literal notranslate"><span class="pre">TestAccountCreationForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_forms.TestAccountCreationForm.test_signup_form_invalid"><code class="docutils literal notranslate"><span class="pre">TestAccountCreationForm.test_signup_form_invalid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_forms.test_register_form_redirect"><code class="docutils literal notranslate"><span class="pre">test_register_form_redirect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_forms.test_signup_form"><code class="docutils literal notranslate"><span class="pre">test_signup_form()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user_auth.tests.html#module-user_auth.tests.test_urls">user_auth.tests.test_urls module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_urls.TestUrls"><code class="docutils literal notranslate"><span class="pre">TestUrls</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_urls.TestUrls.test_login_page_valid"><code class="docutils literal notranslate"><span class="pre">TestUrls.test_login_page_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_urls.TestUrls.test_logout_page_valid"><code class="docutils literal notranslate"><span class="pre">TestUrls.test_logout_page_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_urls.TestUrls.test_register_page_valid"><code class="docutils literal notranslate"><span class="pre">TestUrls.test_register_page_valid()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user_auth.tests.html#module-user_auth.tests.test_veiws">user_auth.tests.test_veiws module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.TestAuthenticateUser"><code class="docutils literal notranslate"><span class="pre">TestAuthenticateUser</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.TestAuthenticateUser.setUp"><code class="docutils literal notranslate"><span class="pre">TestAuthenticateUser.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.TestAuthenticateUser.test_failed_authentication"><code class="docutils literal notranslate"><span class="pre">TestAuthenticateUser.test_failed_authentication()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.TestAuthenticateUser.test_successful_authentication"><code class="docutils literal notranslate"><span class="pre">TestAuthenticateUser.test_successful_authentication()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.UserAuthViewTest"><code class="docutils literal notranslate"><span class="pre">UserAuthViewTest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.UserAuthViewTest.test_login_view_valid"><code class="docutils literal notranslate"><span class="pre">UserAuthViewTest.test_login_view_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.UserAuthViewTest.test_logout_view_valid"><code class="docutils literal notranslate"><span class="pre">UserAuthViewTest.test_logout_view_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.UserAuthViewTest.test_show_user"><code class="docutils literal notranslate"><span class="pre">UserAuthViewTest.test_show_user()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view"><code class="docutils literal notranslate"><span class="pre">test_authenticate_user_view</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.setUp"><code class="docutils literal notranslate"><span class="pre">test_authenticate_user_view.setUp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.test_authenticate_user"><code class="docutils literal notranslate"><span class="pre">test_authenticate_user_view.test_authenticate_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.test_redirect_if_not_authenticated"><code class="docutils literal notranslate"><span class="pre">test_authenticate_user_view.test_redirect_if_not_authenticated()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.test_user_authentication_and_redirection"><code class="docutils literal notranslate"><span class="pre">test_authenticate_user_view.test_user_authentication_and_redirection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.test_user_not_authenticated_but_redirected"><code class="docutils literal notranslate"><span class="pre">test_authenticate_user_view.test_user_not_authenticated_but_redirected()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view"><code class="docutils literal notranslate"><span class="pre">test_user_register_view</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view.test_register_view_valid"><code class="docutils literal notranslate"><span class="pre">test_user_register_view.test_register_view_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view.test_registration_successful"><code class="docutils literal notranslate"><span class="pre">test_user_register_view.test_registration_successful()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view.test_registration_with_invalid_data"><code class="docutils literal notranslate"><span class="pre">test_user_register_view.test_registration_with_invalid_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view.test_registration_with_invalid_password"><code class="docutils literal notranslate"><span class="pre">test_user_register_view.test_registration_with_invalid_password()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user_auth.tests.html#module-user_auth.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-user_auth.admin">
+<span id="user-auth-admin-module"></span><h2>user_auth.admin module<a class="headerlink" href="#module-user_auth.admin" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-user_auth.apps">
+<span id="user-auth-apps-module"></span><h2>user_auth.apps module<a class="headerlink" href="#module-user_auth.apps" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="user_auth.apps.UserAuthConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user_auth.apps.</span></span><span class="sig-name descname"><span class="pre">UserAuthConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/apps.html#UserAuthConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.apps.UserAuthConfig" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="user_auth.apps.UserAuthConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#user_auth.apps.UserAuthConfig.default_auto_field" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="user_auth.apps.UserAuthConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'user_auth'</span></em><a class="headerlink" href="#user_auth.apps.UserAuthConfig.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-user_auth.forms">
+<span id="user-auth-forms-module"></span><h2>user_auth.forms module<a class="headerlink" href="#module-user_auth.forms" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="user_auth.forms.NewUserForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">user_auth.forms.</span></span><span class="sig-name descname"><span class="pre">NewUserForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/forms.html#NewUserForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.forms.NewUserForm" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserCreationForm</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="user_auth.forms.NewUserForm.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/user_auth/forms.html#NewUserForm.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.forms.NewUserForm.Meta" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="user_auth.forms.NewUserForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('username',</span> <span class="pre">'email',</span> <span class="pre">'password1',</span> <span class="pre">'password2')</span></em><a class="headerlink" href="#user_auth.forms.NewUserForm.Meta.fields" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="user_auth.forms.NewUserForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#user_auth.forms.NewUserForm.Meta.model" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="user_auth.forms.NewUserForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'email':</span> <span class="pre">&lt;django.forms.fields.EmailField</span> <span class="pre">object&gt;,</span> <span class="pre">'password1':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'password2':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'username':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#user_auth.forms.NewUserForm.base_fields" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="user_auth.forms.NewUserForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'email':</span> <span class="pre">&lt;django.forms.fields.EmailField</span> <span class="pre">object&gt;,</span> <span class="pre">'password1':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'password2':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#user_auth.forms.NewUserForm.declared_fields" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="user_auth.forms.NewUserForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#user_auth.forms.NewUserForm.media" title="Permalink to this definition"></a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="user_auth.forms.NewUserForm.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/forms.html#NewUserForm.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.forms.NewUserForm.save" title="Permalink to this definition"></a></dt>
+<dd><p>Save this form’s self.instance object if commit=True. Otherwise, add
+a save_m2m() method to the form which can be called after the instance
+is saved manually at a later time. Return the model instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-user_auth.models">
+<span id="user-auth-models-module"></span><h2>user_auth.models module<a class="headerlink" href="#module-user_auth.models" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-user_auth.urls">
+<span id="user-auth-urls-module"></span><h2>user_auth.urls module<a class="headerlink" href="#module-user_auth.urls" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-user_auth.views">
+<span id="user-auth-views-module"></span><h2>user_auth.views module<a class="headerlink" href="#module-user_auth.views" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="user_auth.views.authenticate_user">
+<span class="sig-prename descclassname"><span class="pre">user_auth.views.</span></span><span class="sig-name descname"><span class="pre">authenticate_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/views.html#authenticate_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.views.authenticate_user" title="Permalink to this definition"></a></dt>
+<dd><p>Authenticates a user based on the provided username and password.</p>
+<p>request: The HTTP request object containing POST data.</p>
+<dl class="simple">
+<dt>Returns: If authentication is successful, redirects to the “show_user” page.</dt><dd><p>If authentication fails, redirects to the “login” page.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="user_auth.views.show_user">
+<span class="sig-prename descclassname"><span class="pre">user_auth.views.</span></span><span class="sig-name descname"><span class="pre">show_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/views.html#show_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.views.show_user" title="Permalink to this definition"></a></dt>
+<dd><p>Displays user information.</p>
+<p>request: (HttpRequest): The HTTP request object.</p>
+<p>Returns: HttpResponse: Rendered template with user data (username and password).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="user_auth.views.user_login">
+<span class="sig-prename descclassname"><span class="pre">user_auth.views.</span></span><span class="sig-name descname"><span class="pre">user_login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/views.html#user_login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.views.user_login" title="Permalink to this definition"></a></dt>
+<dd><p>Renders the login.html template for user login.</p>
+<p>request: The HTTP request object.</p>
+<p>Returns: A rendered HTML page for user login.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="user_auth.views.user_logout">
+<span class="sig-prename descclassname"><span class="pre">user_auth.views.</span></span><span class="sig-name descname"><span class="pre">user_logout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/views.html#user_logout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.views.user_logout" title="Permalink to this definition"></a></dt>
+<dd><p>Logs out the user and displays a success message.</p>
+<p>request: The HTTP request object.</p>
+<p>Returns: A rendered response with the ‘logout.html’ template.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="user_auth.views.user_register">
+<span class="sig-prename descclassname"><span class="pre">user_auth.views.</span></span><span class="sig-name descname"><span class="pre">user_register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/views.html#user_register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.views.user_register" title="Permalink to this definition"></a></dt>
+<dd><p>Handles user registration.</p>
+<p>request: The HTTP request object.</p>
+<dl class="simple">
+<dt>Returns: If successful, redirects to the login page.</dt><dd><p>If unsuccessful, displays an error message and renders the registration form.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-user_auth">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-user_auth" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Entertainment.tests.html" class="btn btn-neutral float-left" title="Entertainment.tests package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="user_auth.migrations.html" class="btn btn-neutral float-right" title="user_auth.migrations package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Kisha Cairncross, Deandre` Wright.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

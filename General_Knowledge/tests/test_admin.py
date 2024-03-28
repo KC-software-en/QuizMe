@@ -17,6 +17,7 @@ from ..models import General_Knowledge
 
 ######################################################################################################
 ######################################################################################################
+# py manage.py test General_Knowledge.tests.test_admin
 
 '''
 Create a class to test the model registration on the Admin site.

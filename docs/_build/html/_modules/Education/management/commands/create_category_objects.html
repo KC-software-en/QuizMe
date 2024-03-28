@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Education.management.commands.create_category_objects &mdash; QuizMe 00.00.01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            QuizMe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules.html">QuizMe</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">QuizMe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">Education.management.commands.create_category_objects</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Education.management.commands.create_category_objects</h1><div class="highlight"><pre>
+<span></span><span class="c1"># https://docs.djangoproject.com/en/3.2/howto/custom-management-commands/#module-django.core.management</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">django.core.management.base</span> <span class="kn">import</span> <span class="n">BaseCommand</span><span class="p">,</span> <span class="n">CommandError</span><span class="p">,</span> <span class="n">CommandParser</span>
+
+<span class="c1"># import models</span>
+<span class="kn">from</span> <span class="nn">...models</span> <span class="kn">import</span> <span class="n">Mythology</span><span class="p">,</span> <span class="n">History</span><span class="p">,</span> <span class="n">Science_and_Nature</span> 
+
+<span class="c1"># import the utility functions used within the create_subcategory_object()</span>
+<span class="kn">from</span> <span class="nn">...utils</span> <span class="kn">import</span> <span class="n">get_specific_json_category</span><span class="p">,</span> <span class="n">mix_choices</span>
+
+<span class="c1"># import html to handle potential HTML entities and aid rendering for create_subcategory_object</span>
+<span class="kn">import</span> <span class="nn">html</span>
+
+<span class="c1">#</span>
+<span class="kn">from</span> <span class="nn">django.apps</span> <span class="kn">import</span> <span class="n">apps</span>
+
+<span class="c1">####################################################################################</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Define a class Command that extends BaseCommand. It will create an object for the sub-categories of the Education quiz.</span>
+<span class="sd">It is intended for private use by the project creator, not its users.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="c1"># create an object for the sub-category (e.g.mythology) quiz data</span>
+<span class="c1"># in django shell import the util functions needed for the creation of the obj then call the obj</span>
+<span class="c1"># place the category id from the quiz_categories.json file as the argument for the function (e.g. 20)</span>
+<span class="c1"># In project directory cmd: `python manage.py shell`, </span>
+<span class="c1"># `from Education.utils import get_specific_json_category, mix_choices, create_subcategory_object`</span>
+<span class="c1"># `create_subcategory_object(20)`, then `exit()`</span>
+<span class="c1"># this will populate the sub-category (e.g. mythology) table on the admin site with the quiz data</span>
+<span class="c1"># `python manage.py create_category_objects 20 Mythology`</span>
+
+<span class="c1"># the custom command can be called using `python manage.py create_category_objects 20 Mythology` to populate Mythology</span>
+<span class="c1"># be sure to place the desired app name in the handle() before calling the command with its corresponding category_id</span>
+<span class="c1"># `python manage.py create_category_objects 17 &quot;Science &amp; Nature&quot;` to populate Science &amp; Nature</span>
+<span class="c1"># `python manage.py create_category_objects 23 History` to populate History</span>
+<span class="c1"># `python manage.py create_category_objects 9 &quot;General Knowledge&quot;` to populate General Knowledge</span>
+<div class="viewcode-block" id="Command"><a class="viewcode-back" href="../../../../Education.management.commands.html#Education.management.commands.create_category_objects.Command">[docs]</a><span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="n">BaseCommand</span><span class="p">):</span>
+    <span class="c1"># define a varible that informs one what the command does</span>
+    <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;Populate the database with quiz objects retrieved from an API&#39;</span>
+
+    <span class="c1"># define the arguments for object creation</span>
+    <span class="c1"># https://docs.python.org/3/library/argparse.html#module-argparse</span>
+<div class="viewcode-block" id="Command.add_arguments"><a class="viewcode-back" href="../../../../Education.management.commands.html#Education.management.commands.create_category_objects.Command.add_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="n">CommandParser</span><span class="p">):</span>
+        <span class="c1"># add positional arguments        </span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;category_id&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;The category_id for the desired quiz subcategory&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;category_name&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;The category_name for the desired quiz subcategory&#39;</span><span class="p">)</span>        </div>
+
+    <span class="c1"># create an object for the sub-category (e.g.mythology) quiz data</span>
+<div class="viewcode-block" id="Command.handle"><a class="viewcode-back" href="../../../../Education.management.commands.html#Education.management.commands.create_category_objects.Command.handle">[docs]</a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>        
+        <span class="n">category_id</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;category_id&#39;</span><span class="p">]</span>
+        <span class="n">category_name</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;category_name&#39;</span><span class="p">]</span>
+
+        <span class="c1"># call the get_specific_json_category function to get the data for the mythology category</span>
+        <span class="n">json_response</span> <span class="o">=</span> <span class="n">get_specific_json_category</span><span class="p">(</span><span class="n">quantity</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">category_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">json_response</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span> <span class="c1">##</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">ERROR</span><span class="p">(</span><span class="s2">&quot;Failed to retrieve data from the API.&quot;</span><span class="p">))</span>
+
+        <span class="c1"># check if there are questions</span>
+        <span class="k">if</span> <span class="n">json_response</span><span class="p">:</span>        
+            <span class="c1"># save json response as a variable to pass into template</span>
+            <span class="n">questions</span> <span class="o">=</span> <span class="n">json_response</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">]</span>
+            
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">questions</span><span class="p">:</span> <span class="c1">##</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">WARNING</span><span class="p">(</span><span class="s2">&quot;No questions found in the API response.&quot;</span><span class="p">))</span>        
+
+            <span class="c1"># check if question retrieval was successful</span>
+            <span class="k">if</span> <span class="n">questions</span><span class="p">:</span>            
+                <span class="c1"># find the length of the list of questions </span>
+                <span class="n">total_questions</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span>
+
+                <span class="c1"># Initialise model with a default value </span>
+                <span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+
+                <span class="c1"># iterate over each question in the results dictionary </span>
+                <span class="c1"># enumerate each question to aid the details of the output progress message</span>
+                <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">question</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">questions</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>                
+                    <span class="c1"># add new question text key for each question in results dictionary(AKA questions) by indexing its key                </span>
+                    <span class="c1"># - index question text - access the value associated with the key &quot;question&quot; in each dictionary</span>
+                    <span class="c1"># - use html.unescape to handle potential HTML entities and ensure accurate rendering in templates</span>
+                    <span class="n">question_text</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">unescape</span><span class="p">(</span><span class="n">question</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">])</span> 
+
+                    <span class="c1"># iterate over the incorrect answers with html.unescape and place them into a list with list comprehension                </span>
+                    <span class="c1"># use html.unescape &amp; handle potential HTML entities for accurate rendering of templates</span>
+                    <span class="c1"># place the answers from the response in a variable </span>
+                    <span class="c1"># - index it from the list of key:value pairs available for each question(result)</span>
+                    <span class="n">incorrect_answers</span> <span class="o">=</span> <span class="p">[</span><span class="n">html</span><span class="o">.</span><span class="n">unescape</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span> <span class="k">for</span> <span class="n">answer</span> <span class="ow">in</span> <span class="n">question</span><span class="p">[</span><span class="s2">&quot;incorrect_answers&quot;</span><span class="p">]]</span>             
+                    <span class="c1"># use html.unescape for the correct answer</span>
+                    <span class="n">correct_answer</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">unescape</span><span class="p">(</span><span class="n">question</span><span class="p">[</span><span class="s2">&quot;correct_answer&quot;</span><span class="p">])</span>                                
+                    <span class="c1"># append the correct answer to the list of choices</span>
+                    <span class="c1"># slice the incorrect_answers &amp; extend it to the choices list - prevents nested lists                               </span>
+                    <span class="n">choice_texts</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="n">choice_texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">correct_answer</span><span class="p">)</span>
+                    <span class="n">choice_texts</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">incorrect_answers</span><span class="p">[:])</span>                                
+
+                    <span class="c1"># initialise an empty list to append the dictionaries containing an id for each choice</span>
+                    <span class="c1"># - else the list will be overwritten each loop, only saving the last dictionary iterated over</span>
+                    <span class="c1"># enumerate each choice to assign an id</span>
+                    <span class="c1"># note: since correct_answer was appended at the start, the id will be 1</span>
+                    <span class="n">choices_dict</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">choice</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">choice_texts</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+                        <span class="n">choices_dict</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;choice&#39;</span><span class="p">:</span> <span class="n">choice</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">i</span><span class="p">})</span>                
+
+                    <span class="c1"># call the function to rearrange choices and make the extended choice list the argument</span>
+                    <span class="n">mixed_choices</span> <span class="o">=</span> <span class="n">mix_choices</span><span class="p">(</span><span class="n">choices_dict</span><span class="p">)</span>            
+
+                    <span class="c1"># save the mixed choices to each question in the results dictionary        </span>
+                    <span class="c1"># add a key-value pair to the question dictionary (from the category json response)</span>
+                    <span class="n">question</span><span class="p">[</span><span class="s1">&#39;mixed_choices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mixed_choices</span>
+
+                    <span class="c1"># find the correct answer in mixed_choices</span>
+                    <span class="n">correct_choice</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="k">for</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">mixed_choices</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">choice</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                            <span class="n">correct_choice</span> <span class="o">=</span> <span class="n">choice</span>
+                            <span class="k">break</span>
+
+                    <span class="c1"># replace spaces and &#39;&amp;&#39; in the event category names have spaces to create a valid model name                    </span>
+                    <span class="n">model_name</span> <span class="o">=</span> <span class="n">category_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">,</span> <span class="s2">&quot;and&quot;</span><span class="p">)</span>                        
+
+                    <span class="c1"># use a try-except block to locate the model for the category_name </span>
+                    <span class="c1"># retrieve the model dynamically using the app label &#39;Education&#39; and the constructed model name</span>
+                    <span class="c1"># this allows model fetching by its name without needing to import it directly</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">model</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">app_label</span><span class="o">=</span><span class="s1">&#39;Education&#39;</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+                    
+                    <span class="c1"># raise an error if the model is not found</span>
+                    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">ERROR</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot locate the model for the selected category: </span><span class="si">{</span><span class="n">category_name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">))</span>                                
+
+                    <span class="c1"># check that a model was found</span>
+                    <span class="k">if</span> <span class="n">model</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span> <span class="c1">##                        </span>
+                        <span class="c1"># create a question object with the above data</span>
+                        <span class="c1"># this will show on the admin site with the models created for questions &amp; choices</span>
+                        <span class="n">question_object</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">question</span> <span class="o">=</span> <span class="n">question_text</span><span class="p">,</span> <span class="n">choices</span> <span class="o">=</span> <span class="n">mixed_choices</span><span class="p">,</span> <span class="n">correct_answer</span> <span class="o">=</span> <span class="n">correct_choice</span><span class="p">[</span><span class="s1">&#39;choice&#39;</span><span class="p">])</span> <span class="c1"># index choice from the loop above</span>
+
+                        <span class="c1"># save the object to the database</span>
+                        <span class="n">question_object</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+                        <span class="c1"># Output progress message</span>
+                        <span class="c1"># use standard output stream (which is where regular output is written)</span>
+                        <span class="c1"># - instead of directly printing to these streams, allowing for better testing and consistency</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created quiz object </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> out of </span><span class="si">{</span><span class="n">total_questions</span><span class="si">}</span><span class="s2"> for category_id:</span><span class="si">{</span><span class="n">category_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Output final success message</span>
+                <span class="c1"># When using management commands &amp; want console output, write to self.stdout and self.stderr,</span>
+                <span class="c1"># - instead of printing to stdout and stderr directly. Thus it&#39;s easier to test a custom command</span>
+                <span class="c1"># apply styling to console output for the success message (typically highlights the message in green)                   </span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully created </span><span class="si">{</span><span class="n">total_questions</span><span class="si">}</span><span class="s2"> quiz objects for category_id: </span><span class="si">{</span><span class="n">category_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Kisha Cairncross, Deandre` Wright.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

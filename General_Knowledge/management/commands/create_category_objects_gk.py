@@ -16,11 +16,11 @@ from django.apps import apps
 ####################################################################################
 
 '''
-Define a class Command that extends BaseCommand. It will create an object for the sub-categories of the Education quiz.
+Define a class Command that extends BaseCommand. It will create an object for the sub-categories of the General_Knowledge quiz.
 It is intended for private use by the project creator, not its users.
 '''
 # create an object for the category (e.g.General_Knowledge) quiz data
-# the custom command can be called with `python manage.py create_category_objects 9 "General Knowledge"` 
+# the custom command can be called with `python manage.py create_category_objects_gk 9 "General Knowledge"` 
 # - to populate General Knowledge (place category_name in "" so that it's picked up as the 2nd kwarg)
 # be sure to place the desired app name in the handle() before calling the command 
 class Command(BaseCommand):
@@ -39,7 +39,7 @@ class Command(BaseCommand):
         category_id = options['category_id']
         category_name = options['category_name']
 
-        # call the get_specific_json_category function to get the data for the mythology category
+        # call the get_specific_json_category function to get the data for the General Knowledge category
         json_response = get_specific_json_category(quantity=50, category=category_id)
         if json_response == None: ##
             self.stderr.write(self.style.ERROR("Failed to retrieve data from the API."))
@@ -103,10 +103,10 @@ class Command(BaseCommand):
                     model_name = category_name.replace(" ", "_").replace("&", "and")                        
 
                     # use a try-except block to locate the model for the category_name 
-                    # retrieve the model dynamically using the app label 'Education' and the constructed model name
+                    # retrieve the model dynamically using the app label 'General_Knowledge' and the constructed model name
                     # this allows model fetching by its name without needing to import it directly
                     try:
-                        model = apps.get_model(app_label='Education', model_name=model_name)
+                        model = apps.get_model(app_label='General_Knowledge', model_name=model_name)
                     
                     # raise an error if the model is not found
                     except KeyError:

@@ -24,6 +24,9 @@ import logging
 # use to convert str into list
 import ast 
 
+# import apps to dynamically fetch a model in detail() & selection() view
+from django.apps import apps
+
 #######################################################################################
 #######################################################################################
 
@@ -81,6 +84,10 @@ def detail(request, category_name, question_id):
     response = get_json_categories()
     category_names = get_category_names(response)  
 
+    # Initialise model with a default value because the conditional checking for model gave 
+    # - UnboundLocalError: local variable 'model' referenced before assignment
+    model = None
+
     # check if the category_name is in the list of category_names then locate its model    
     if category_name in category_names:
         # use the category_name selected on gen_quiz.html to determine the model to get questions from
@@ -88,17 +95,27 @@ def detail(request, category_name, question_id):
         model_name = category_name.replace(" ", "_").replace("&", "and")
         print(f"Model Name: {model_name}") ##
 
-        # use a try-except block to find a model that matches the category name
-        # use use globals() instead of apps module to access the global namespace since the the model name was modified when replacing '&' 
-        # (apps still worked when it was only replacing " ")
-        # - dynamically:instead of explicitly specifying a fixed model in the code, generate or determine the model to use at runtime based on certain conditions/data
+        # use a try-except block to dynamically find a model that matches the category name
+        # - dynamically:instead of explicitly specifying a fixed model in the code, 
+        # - generate or determine the model to use at runtime based on certain conditions/data        
+        # use apps module to access the get_model function & find the model name         
         try:            
-            model = globals()[model_name] 
-            
-        # raise an error if the model is not found
-        except LookupError:
-            raise Http404("Cannot locate the model for the selected category.")     
+            model = apps.get_model('General_Knowledge', model_name)                        
+
+        # render the detail template displaying the error when a model for a category_name cannot be located
+        except LookupError as e:
+            error_message = f"{e}"
+            context = {'question': None,
+                        'choices':None,
+                        'category_name': category_name,
+                        'error': error_message,
+                        'model_exists': False  # Flag indicating whether a model exists for the template to prevent selection() exec
+                        }
+            print(f"context:{context}")
+            return render(request, 'gen_quiz/gen_detail.html', context)    
     
+    # check that a model was found
+    if model != None: 
         # get the question object associated with a specific question_id in the database
         question = get_object_or_404(model, pk=question_id)    
         print(f"\n\nquestion:{question}")
@@ -150,13 +167,29 @@ def selection(request, category_name, question_id):
     response = get_json_categories()
     category_names = get_category_names(response)
 
-    # check if the category_name is in the list of category_names then locate its model
-    # use globals module instead of apps to access the global namespace for models
-    # - since a model name was altered from its original category_name to create a valid model with 'and'
-    if category_name in category_names:
-        model_name = category_name.replace(" ", "_").replace("&", "and")
-        model = globals()[model_name] # not model = apps.get_model('General_Knowledge', model_name)
+    # Initialise model with a default value because the conditional checking for model gave 
+    # - UnboundLocalError: local variable 'model' referenced before assignment
+    model = None
 
+    # check if the category_name is in the list of category_names then locate its model       
+    if category_name in category_names:
+        # use the category_name selected on edu_quiz.html to determine the model to get questions from
+        # replace spaces and '&' in the event category names have spaces to create a valid model name
+        model_name = category_name.replace(" ", "_").replace("&", "and")
+
+        # dynamically find a model that matches the category name
+        # - dynamically:instead of explicitly specifying a fixed model in the code, 
+        # - generate or determine the model to use at runtime based on certain conditions/data                 
+        # use apps module to access the get_model function & find the model name         
+        model = apps.get_model('General_Knowledge', model_name)            
+        print(f"model:{model}")                                
+                                            
+    # else print an error for a missing category_name
+    else:
+        print(f"{category_name} is not in this list: {category_names}")  
+    
+    # check that a model was found
+    if model != None:    
         # get the question object associated with a specific question_id in the database
         question = get_object_or_404(model, pk=question_id)
         #    
