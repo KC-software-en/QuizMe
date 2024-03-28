@@ -111,7 +111,7 @@ WSGI_APPLICATION = 'QuizMe.wsgi.application'
 
 
 
-DATABASE = 2
+DATABASE = 1
 
 if DEBUG and (DATABASE == 1):
     #Use sql database
