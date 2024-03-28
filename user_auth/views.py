@@ -2,7 +2,6 @@
 # https://docs.djangoproject.com/en/5.0/ref/contrib/messages/
 # https://docs.djangoproject.com/en/5.0/topics/auth/default/
 # https://docs.djangoproject.com/en/5.0/topics/email/
-# https://mailtrap.io/blog/django-send-email/
 # https://www.pythontutorial.net/django-tutorial/django-registration/
 
 ### import all the required imports for the views to work. ###
@@ -32,12 +31,11 @@ from django.contrib.auth.decorators import login_required
 # user_login view.
 def user_login(request):
     """
-    Renders the login template.
-
-    :param request: The HTTP request object.
-    :type request: HttpRequest
-    :return: The rendered login template.
-    :rtype: HttpResponse
+    Renders the login.html template for user login.
+    
+    request: The HTTP request object.
+        
+    Returns: A rendered HTML page for user login.
     """
     # Renders the login template.
     return render(request, "login.html")
@@ -46,13 +44,11 @@ def user_login(request):
 # This veiw logs the user out.
 def user_logout(request):
     """
-    Logs out the user by deleting the session.
+    Logs out the user and displays a success message.
 
-    Args:
-        request (HttpRequest): The HTTP request object.
+    request: The HTTP request object.
 
-    Returns:
-        HttpResponse: A response with a success message and the "logout.html" template.
+    Returns: A rendered response with the 'logout.html' template.
     """
     # Deletes the users session.
     logout(request)
@@ -65,13 +61,11 @@ def user_logout(request):
 @login_required(login_url='user_auth:login')
 def show_user(request):
     """
-    Renders the user's information into the template.
+    Displays user information.
 
-    Args:
-        request (HttpRequest): The HTTP request object.
+    request: (HttpRequest): The HTTP request object.
 
-    Returns:
-        HttpResponse: A response containing the rendered user information in the 'user.html' template.
+    Returns: HttpResponse: Rendered template with user data (username and password).
     """
     # Renders the users information into the template.
     print(request.user.username)
@@ -85,21 +79,12 @@ def show_user(request):
 # Once the user succesfully registers on the website they are automatically sent an email.
 def user_register(request):
     """
-    View function to handle user registration.
+    Handles user registration.
 
-    Args:
-        request (HttpRequest): The HTTP request object.
+    request: The HTTP request object.
 
-    Returns:
-        HttpResponse: The response containing the registration form or redirecting to the login page.
-
-    Raises:
-        None
-
-    Example:
-        To register a new user, make a POST request with valid form data.
-        If successful, the user will receive a welcome email and be redirected to the login page.
-        If unsuccessful, an error message will be displayed.
+    Returns: If successful, redirects to the login page.
+             If unsuccessful, displays an error message and renders the registration form.
     """
     if request.method == "POST":
         form = NewUserForm(request.POST)        
@@ -137,14 +122,12 @@ def user_register(request):
 #  This veiw is used to authenticate and check if the user already exists.
 def authenticate_user(request):
     """
-    Authenticates a user based on the provided login data.
+    Authenticates a user based on the provided username and password.
 
-    Args:
-        request (HttpRequest): The HTTP request object containing POST data.
+    request: The HTTP request object containing POST data.
 
-    Returns:
-        HttpResponseRedirect: Redirects the user to the login page if authentication fails,
-        or to the show_user view if authentication succeeds.
+    Returns: If authentication is successful, redirects to the "show_user" page.
+             If authentication fails, redirects to the "login" page.
     """
     # Compares the data login  to the data in the database to see if they are simillar.
     username = request.POST["username"]

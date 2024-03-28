@@ -33,8 +33,7 @@ import ast
 #######################################################################################
 #######################################################################################
 
-# define index view for home page of QuizMe project referenced in Education/urls.py
-
+# Create your views here.
 
 # define index view for home page of QuizMe project referenced in Education/urls.py
 def index(request):     
@@ -44,7 +43,6 @@ def index(request):
     :type request: HttpRequest
     :return: Return the index template
     :rtype: HttpResponse 
-
     """
     # if a user prematurely leaves a quiz & does not use the exit button,
     # - delete the result & session data of the current quiz 
@@ -60,7 +58,6 @@ def index(request):
 # get json reponse for trivia categories from open trivia db
 # index category from the dictionary id
 def index_edu(request):
-
     """A view for the home page of education quizzes.
 
     :param request: The HTTP request object containing information about the client's request.
@@ -218,7 +215,6 @@ def selection(request, category_name, question_id):
     :return: Return the edu_detail or the edu_result template. 
     :rtype: HttpResponse
     """      
-
     # pk refers to the primary key field of a database table
     # django automatically creates a primary key for each model
     response = get_json_categories()
@@ -329,6 +325,12 @@ def selection(request, category_name, question_id):
 
 # start new quiz function
 def try_new_quiz(request):
+    """A view that clears the session data and redirects to the homepage of the category.
+
+    :param request: The HTTP request object containing information about the client's request.
+    :type request: HttpRequest
+    :return: Return the edu_quiz template
+    :rtype: HttpResponse    
     """
     # delete the result & session data of the current quiz before starting a new quiz
     if 'quiz_result' in request.session:

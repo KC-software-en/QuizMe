@@ -11,11 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-# Call the enviroment variables.
-from dotenv import load_dotenv
-
-# Load all the enviroment variables.
-load_dotenv()
 
 # import os to access environment variables and retrieve sensitive information without hardcoding it into the settings file
 # i.e. secret key
@@ -98,19 +93,6 @@ WSGI_APPLICATION = 'QuizMe.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-### Postgresql database convertion docs. ###
-# !! When populating the postgresql database, populate it as you would populate the sqlite3 db !! #
-# How to migrate the sqlite3 db data to the new postgreql db
-# https://www.youtube.com/watch?v=BGEEzjGadYI&list=WL&index=1&t=246s
-# https://hatchjs.com/migrate-sqlite-to-postgresql/
-# How to setup pg4admin to run the postgresql database server.
-# https://www.youtube.com/watch?v=pOmtWgJ7tbk&list=WL&index=1&t=146s
-# Download link for postgresql
-# https://www.postgresql.org/download/
-
-
-
-
 DATABASE = 2
 
 if DEBUG and (DATABASE == 1):
@@ -128,11 +110,11 @@ elif DEBUG and (DATABASE == 2):
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DATABASE_NAME'),
-        'USER': os.environ.get('DATABASE_USER'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': os.environ.get('DATABASE_HOST'),
-        'POST': os.environ.get('DATABASE_POST')
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'Q_ME123@1',
+        'HOST': 'localhost',
+        'POST': '5432'
     }
 
 }
@@ -171,14 +153,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Django email Backend with documentation.
-# https://docs.djangoproject.com/en/5.0/topics/email/
-EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+# Django email Backend.
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'QuizMe2024@gmail.com'
+EMAIL_HOST_PASSWORD = 'pjxp atrk kbgu aoaq'
 
 
 # Static files (CSS, JavaScript, Images)
