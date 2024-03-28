@@ -171,7 +171,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Django email Backend.
+# Django email Backend with documentation.
+# https://docs.djangoproject.com/en/5.0/topics/email/
 EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
