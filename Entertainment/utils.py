@@ -26,14 +26,11 @@ from django.http import Http404
 # define a function that returns the json response for Open Trivia DB
 def get_json_categories():
     """
-    Returns the json response for the available categories on Open Trivia DB.
+    Retrieves the Open Trivia Database (OTDB) category lookup data and saves it to a JSON file.
 
     Returns:
-        json: The json response from the Open Trivia DB API.
-
-    Raises:
-        requests.RequestException: If the request to the Open Trivia DB API fails.
-
+        dict or None: A dictionary containing the category data retrieved from the OTDB API,
+        or None if the request was unsuccessful.
     """
     # get Category Lookup url
     category_lookup = 'https://opentdb.com/api_category.php'
@@ -60,18 +57,15 @@ def get_json_categories():
 # define a function that returns the json response for Open Trivia DB when requesting a specific category
 def get_specific_json_category(quantity: int, category: int) -> dict:
     """
-    Retrieve a specific category from the Open Trivia DB API.
+    Retrieves a specific category of quiz questions from the Open Trivia Database (opentdb.com).
 
     Args:
-        quantity (int): The number of questions to retrieve.
-        category (int): The category ID to retrieve questions for.
+        quantity (int): The number of quiz questions to retrieve.
+        category (int): The category ID of the desired quiz questions.
 
     Returns:
-        dict: The JSON response from the Open Trivia DB API.
-
-    Raises:
-        requests.RequestException: If the request to the Open Trivia DB API fails.
-
+        dict: A dictionary containing the quiz questions in JSON format.
+            If the request is unsuccessful, returns None.
     """
     api_url = f"https://opentdb.com/api.php?amount={quantity}&category={category}"
     response = requests.get(api_url)
@@ -102,100 +96,38 @@ def get_specific_json_category(quantity: int, category: int) -> dict:
 # return a list of choices
 def mix_choices(choices: list) -> list:
     """
-    Create a function that will mix the choices for each question in a quiz.
+    Randomly shuffles the elements in the input list of choices.
 
     Args:
-        choices (list): A list of dictionaries containing the choices for each question.
+        choices (list): A list of elements to be shuffled.
 
     Returns:
-        list: A list of dictionaries containing the mixed choices for each question.
-
+        list: A new list with the elements randomly shuffled.
     """
     random.shuffle(choices)
     return choices
-
-# create an object for the sub-category (e.g.Music) quiz data
-# in django shell import the util functions needed for the creation of the obj then call the obj
-# place the category id from the quiz_categories.json file as the argument for the function (e.g. 20)
-# In project directory cmd: `python manage.py shell`, 
-# `from Entertainment.utils import get_specific_json_category, mix_choices, create_subcategory_object`
-# `create_subcategory_object(12)`, then `exit()`
-# this will populate the sub-category (e.g. Film) table on the admin site with the quiz data
-#def create_subcategory_object(category):
-    # call the get_specific_json_category function to get the data for the Music category
-#    json_response = get_specific_json_category(quantity=50, category=category)
-
-    # check if there are questions
-#    if json_response:
-        # save json response as a variable to pass into template
- #       questions = json_response["results"]
-
-        # check if question retrieval was successful
-#        if questions:
-            # iterate over each question in the results dictionary
-#            for question in questions:
-                # add new question text key for each question in results dictionary(AKA questions) by indexing its key
-                # - index question text - access the value associated with the key "question" in each dictionary
-                # - use html.unescape to handle potential HTML entities and ensure accurate rendering in templates
-#                question_text = html.unescape(question["question"])
-
-                # iterate over the incorrect answers with html.unescape and place them into a list with list comprehension
-                # use html.unescape & handle potential HTML entities for accurate rendering of templates
-                # place the answers from the response in a variable
-                # - index it from the list of key:value pairs available for each question(result)
-#                incorrect_answers = [html.unescape(answer) for answer in question["incorrect_answers"]]
-                # use html.unescape for the correct answer
-#                correct_answer = html.unescape(question["correct_answer"])
-
-                # append the correct answer to the list of choices
-                # slice the incorrect_answers & extend it to the choices list - prevents nested lists
-#                choices_list = [correct_answer] + incorrect_answers
-
-                # initialise an empty list to append the dictionaries containing an id for each choice
-                # - else the list will be overwritten each loop, only saving the last dictionary iterated over
-                # enumerate each choice to assign an id
-                # note: since correct_answer was appended at the start, the id will be 1
-#                choices_dict = []
- #               for i, choice in enumerate(choices_list, start=1):
-  #                  choices_dict.append({"choice": choice, "id": i})
-
-                # call the function to rearrange choices and make the extended choice list the argument
-#                mixed_choices = mix_choices(choices_dict)
-
-                # save the mixed choices to each question in the results dictionary
-                # add a key-value pair to the question dictionary (from the category json response)
- #               question["mixed_choices"] = mixed_choices
-
-                # find the correct answer in mixed_choices
-  #              correct_choice = None
-   #             for choice in mixed_choices:
-    #                if choice["id"] == 1:
-     #                   correct_choice = choice
-      #                  break
-
-                # create a question object with the above data
-                # this will show on the admin site with the models created for questions & choices
-       #         question_object = Music.objects.create(
-        #            question=question_text, choices=mixed_choices, correct_answer=correct_choice["choice"]
-         #       )  # index choice from the loop above
-
-                # save the object to the database
-          #      question_object.save()
 
 
 # define a function that returns the django pk for the next question in the quiz
 def get_next_question_id(category_name, question_id, question_selection_pks):
     """
-    A function that retrieves the next question id based on the current question id and the list of question pks.
+    Given a category name, a current question ID, and a list of question primary keys (question_selection_pks),
+    this function returns the next question ID based on the order of the questions in the list.
 
     Args:
         category_name (str): The name of the category.
-        question_id (int): The id of the current question.
-        question_selection_pks (list): A list of question pks.
+        question_id (int): The current question ID (primary key).
+        question_selection_pks (list): A list of question primary keys (integers).
 
     Returns:
-        int: The id of the next question.
+        int or None: The next question ID (primary key) if available, or None if there is no next question.
 
+    Example:
+        category_name = "Science"
+        question_id = 5
+        question_selection_pks = [1, 3, 5, 7, 9]
+        next_question_id = get_next_question_id(category_name, question_id, question_selection_pks)
+        # If question_id is 5, next_question_id will be 7.
     """
     # iterate over the list of question ids in question_selection_ids from utils.category_objects()
     # - to check if the id generated by django matches the question_id parameter in the url
@@ -222,14 +154,25 @@ def get_next_question_id(category_name, question_id, question_selection_pks):
 # define a function that will retrieve category names based on the category id for it in the json response
 def get_category_names(response: dict) -> list:
     """
-    Create a function that finds the question id for the next question in the quiz.
+    Extracts and returns a list of trivia category names from the provided JSON response dictionary.
 
     Args:
-        response (dict): The JSON response from the Open Trivia DB API.
+        response (dict): A dictionary containing trivia category information.
 
     Returns:
         list: A list of category names.
 
+    Example:
+        response = {
+            "trivia_categories": [
+                {"id": 12, "name": "Entertainment: Music"},
+                {"id": 11, "name": "Entertainment: Film"},
+                {"id": 15, "name": "Entertainment: Video Games"},
+                # ... other category entries ...
+            ]
+        }
+        get_category_names(response)
+        # Output: ["Music", "Film", "Video Games"]
     """
     # Get the trivia categories values from the dictionary provided in the JSON response
     # Place an empty list as the default argument if the key is not found - this avoids errors in subsequent code
@@ -272,11 +215,22 @@ def get_category_names(response: dict) -> list:
 
 
 
-'''
-A function that finds the model associated with a category name.
-'''
+
 # use the selected category_name & the list of category_names it comes from as the parameters to find a model
 def find_model(category_name, category_names): 
+    """
+    Finds the model corresponding to the given category name.
+
+    Args:
+        category_name (str): The name of the category.
+        category_names (list): List of available category names.
+
+    Returns:
+        Model: The model corresponding to the category name.
+
+    Raises:
+        Http404: If the model for the selected category is not found.
+    """
     # check if the category_name is in the list of category_names then locate its model       
     if category_name in category_names:
         # use the category_name selected on edu_quiz.html to determine the model to get questions from
@@ -303,18 +257,14 @@ def find_model(category_name, category_names):
 # https://stackoverflow.com/questions/27270958/patch-multiple-methods-from-different-modules-using-python-mock#:~:text=The%20short%20answer%20is%20no%20you%20cannot%20use,one%20of%20the%20time%20by%20single%20patch%20calls.
 def category_objects(request, category_name):
     """
-    A function that retrieves the category queryset from the database based on its category name.
+    Retrieves a list of questions from a specified category model and selects 10 random questions.
 
     Args:
         request (HttpRequest): The HTTP request object.
-        category_name (str): The name of the category.
+        category_name (str): The name of the category (used to determine the model).
 
     Returns:
-        QuerySet: A queryset of objects for the specified category.
-
-    Raises:
-        Http404: If the specified category cannot be found.
-
+        QuerySet: A queryset containing the selected 10 questions from the specified category model.
     """
     # use the category_name selected on edu_quiz.html to determine the model to get questions from
     # replace spaces and '&' in the event category names have spaces to create a valid model name

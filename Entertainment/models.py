@@ -4,12 +4,18 @@ from django.db import models
 ###################################################################################
 
 # Create your models here.
-
-'''
-Create a model for the quiz categories in QuizMe.
-'''
 # define a model for categories in the QuizMe project
 class Categories(models.Model):
+    """
+    Represents a category in the system.
+
+    Attributes:
+        category (TextField): The name of the category.
+        description (TextField): A description of the category.
+    """
+
+    category = models.TextField()
+    description = models.TextField()
     # define a field to store the category name as text
     # define a field to store the description of the category as text
     category = models.TextField()
@@ -18,13 +24,28 @@ class Categories(models.Model):
     # define a method to represent the model instance as a string
     # return the category name
     def __str__(self):
+        """
+        Returns the category name as a string representation of the model instance.
+        """
         return self.category
     
-'''
-Create a model for the quiz subcategories in Entertainment.
-'''
+
 # define a model for subcategories in the Entertainment app
 class Subcategories(models.Model):
+    """
+    Represents subcategories within the Categories model.
+
+    Attributes:
+        category (ForeignKey): A foreign key to the Categories model representing the parent category.
+            Default value is the primary key (pk) of the 'Entertainment' category object.
+            Behavior on deletion of the referenced object is set to SET_DEFAULT.
+            For fields like ForeignKey, defaults should be the value of the field they reference (pk).
+        subcategory (TextField): The name of the subcategory as text.
+        description (TextField): A description of the subcategory as text.
+
+    Methods:
+        __str__(): Returns the subcategory name as a string representation of the model instance.
+    """
     # retrieve the category object representing 'Entertainment' from the Categories model
     en_category_obj = Categories.objects.get(category='Entertainment')
 
@@ -49,15 +70,30 @@ class Subcategories(models.Model):
     # define a method to represent the model instance as a string
     # return the subcategory name 
     def __str__(self):
+        """
+        Returns the subcategory name as a string representation of the model instance.
+        """
         return self.subcategory
     
-'''
-Create a Music model for the subcategory in the entertainment quiz.
-''' 
+
 # use Django's built-in object-relational mapping (ORM) & define the relevant classes
 # -each entry in a SQL table represents a single object, this can be converted to a class instance in Python.  
 # create a Music class that inherits from django.db.models.Model
-class Music(models.Model):       
+class Music(models.Model):   
+    """
+    Represents a music-related entity in the database.
+
+    Attributes:
+        category (ForeignKey): A reference to the associated category.
+            Default value is the primary key of the 'en_category_obj' object.
+            The 'on_delete' parameter defines behavior when the referenced object is deleted.
+        subcategory (ForeignKey): A reference to the associated subcategory.
+            Default value is the primary key of the 'music_subcategory_obj' object.
+            'on_delete' is set to CASCADE for automatic deletion of related objects.
+        question (TextField): Stores the quiz question.
+        choices (TextField): Stores the list of answer choices (default is an empty list).
+        correct_answer (TextField): Stores the correct answer.
+    """    
     # retrieve the category object representing 'Education' from the Categories model
     en_category_obj = Categories.objects.get(category='Entertainment')
     # retrieve the subcategory object representing 'Music' from the Subcategories model
@@ -91,10 +127,7 @@ class Music(models.Model):
             Returns the question of the quiz.
         """
         return self.question
-    
-'''
-Create a Film model for the subcategory in the entertainment quiz.
-'''
+
 # create a Film class that inherits from django.db.models.Model
 class Film(models.Model):        
     # retrieve the category object representing 'Entertainment' from the Categories model
@@ -131,10 +164,28 @@ class Film(models.Model):
         """
         return self.question
     
-'''
-Create a model for the Science and nature questions in the entertainment quiz.
-'''
 class Video_Games(models.Model):
+    """
+    Represents a film in the database.
+
+    Attributes:
+        category (ForeignKey): A foreign key relationship to the Categories model,
+            representing the category of the film.
+        subcategory (ForeignKey): A foreign key relationship to the Subcategories model,
+            representing the subcategory of the film.
+        question (TextField): Stores the film-related quiz question.
+        choices (TextField): Stores the list of answer choices for the quiz.
+        correct_answer (TextField): Stores the correct answer for the quiz.
+
+    Methods:
+        __str__(self):
+            Returns the question of the quiz.
+
+    Note:
+        - The `on_delete` parameter specifies the behavior when the referenced object is deleted.
+          In this case, we use `models.SET_DEFAULT` to set the default value.
+        - The default category and subcategory are set to the primary keys (pks) of the respective objects.
+    """
     # retrieve the category object representing 'Entertainment' from the Categories model
     en_category_obj = Categories.objects.get(category='Entertainment')
     # retrieve the subcategory object representing 'Video Games' from the Subcategories model

@@ -34,14 +34,29 @@ import ast
 #######################################################################################
 
 # Create your views here.
-'''
-Create a view for the home page of Entertainment quizzes.
-'''
 # display the category of the Entertainment quiz
 # https://www.youtube.com/watch?v=sgEhb50YSTE
 # get json reponse for trivia categories from open trivia db
 # index category from the dictionary id
 def index_en(request):
+    """
+    View function for rendering the homepage of the quiz application.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered HTML template for the homepage.
+
+    Notes:
+        - If a user prematurely leaves a quiz without using the exit button:
+            - Delete the result and session data of the current quiz.
+            - This behavior applies to all templates displayed in the navbar.
+        - Calls the `get_json_categories()` function to return chosen categories for quiz presentation on the homepage.
+        - Retrieves category names using `get_category_names(response)`.
+        - Retrieves question objects from the Django database for each category using `category_objects(request, category_name)`.
+        - Renders the context variables (category names, question selection, and first question ID) in the template.
+    """
     # if a user prematurely leaves a quiz & does not use the exit button,
     # - delete the result & session data of the current quiz 
     # - this is done for all the templates the navbar displays
@@ -84,7 +99,18 @@ def index_en(request):
 # display the question text 
 # render an HTTP 404 error if a question with the requested ID doesn’t exist
 @login_required(login_url='user_auth:login')
-def detail(request, category_name, question_id):      
+def detail(request, category_name, question_id): 
+    """
+    View function for displaying the details of a specific question.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        category_name (str): The name of the category.
+        question_id (int): The ID of the question.
+
+    Returns:
+        HttpResponse: The rendered HTML template with the question details.
+    """     
     response = get_json_categories()
     category_names = get_category_names(response)  
     # call the function to find a model  
@@ -113,13 +139,21 @@ def detail(request, category_name, question_id):
         print(f"\n\ncontext:{context}\n\n") ##        
         return render(request, 'entertainment/en_detail', context)
 
-'''
-Create a view that displays the quiz result.
-'''
+
 # create a view that displays the quiz result 
 # add a login decorator because an Entertainment quiz requires a registered user
 @login_required(login_url='user_auth:login')
 def results(request, category_name): 
+    """
+    View function to display quiz results.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        category_name (str): The name of the quiz category.
+
+    Returns:
+        HttpResponse: Rendered HTML template with quiz results.
+    """
     # get the quiz result for the session
     result = request.session.get('quiz_result')
            
@@ -130,12 +164,21 @@ def results(request, category_name):
                }   
     return render(request, 'edu_quiz/edu_result.html', context)
 
-'''
-Write a selection view that handles the submission of form data, goes to the next question and redirects to the results view."
-'''
+
 # write a view to answer a question, incl the argument category_name & question_id
 # it handles the submitted data
-def selection(request, category_name, question_id):    
+def selection(request, category_name, question_id): 
+    """
+    Handles the selection of a choice for a quiz question.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        category_name (str): The name of the quiz category.
+        question_id (int): The ID of the quiz question.
+
+    Returns:
+        HttpResponse: A response indicating the result of the choice selection.
+    """   
     # pk refers to the primary key field of a database table
     # django automatically creates a primary key for each model
     response = get_json_categories()
@@ -225,6 +268,15 @@ def selection(request, category_name, question_id):
 
 # start new quiz function
 def try_new_quiz(request):
+    """
+    Deletes the result and session data of the current quiz before starting a new quiz.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the home page of Entertainment.
+    """
     # delete the result & session data of the current quiz before starting a new quiz
     if 'quiz_result' in request.session:
         del request.session['quiz_result']
