@@ -20,12 +20,6 @@ from . import models
 # import apps to dynamically fetch a model in detail() & selection() view
 from django.apps import apps
 
-# import Http404 to raise an error message if a model is not located in detail view
-from django.http import Http404
-
-# import logging for debugging
-import logging
-
 # import ast safely evaluate strings containing Python literal structures e.g.strings, lists, dicts
 # use to convert str into list
 import ast 
