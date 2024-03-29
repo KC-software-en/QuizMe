@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Education.views &mdash; QuizMe 00.00.01 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d7bb8d4d"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -109,11 +106,17 @@
 
 <span class="c1"># Create your views here.</span>
 
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a view for the home page of QuizMe project.</span>
-<span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># define index view for home page of QuizMe project referenced in Education/urls.py</span>
-<div class="viewcode-block" id="index"><a class="viewcode-back" href="../../Education.html#Education.views.index">[docs]</a><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>     
+<div class="viewcode-block" id="index">
+<a class="viewcode-back" href="../../Education.html#Education.views.index">[docs]</a>
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>     
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A view for the home page of QuizMe project.</span>
+
+<span class="sd">    :param request: The HTTP request object containing information about the client&#39;s request.</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :return: Return the index template</span>
+<span class="sd">    :rtype: HttpResponse </span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># if a user prematurely leaves a quiz &amp; does not use the exit button,</span>
     <span class="c1"># - delete the result &amp; session data of the current quiz </span>
     <span class="c1"># - this is done for all the templates the navbar displays</span>
@@ -123,14 +126,21 @@
     <span class="c1"># Render your template and map a URL to it</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;index.html&quot;</span><span class="p">)</span></div>
 
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a view for the home page of education quizzes.</span>
-<span class="sd">&#39;&#39;&#39;</span>
+
 <span class="c1"># display the category of the education quiz</span>
 <span class="c1"># https://www.youtube.com/watch?v=sgEhb50YSTE</span>
 <span class="c1"># get json reponse for trivia categories from open trivia db</span>
 <span class="c1"># index category from the dictionary id</span>
-<div class="viewcode-block" id="index_edu"><a class="viewcode-back" href="../../Education.html#Education.views.index_edu">[docs]</a><span class="k">def</span> <span class="nf">index_edu</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="index_edu">
+<a class="viewcode-back" href="../../Education.html#Education.views.index_edu">[docs]</a>
+<span class="k">def</span> <span class="nf">index_edu</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A view for the home page of education quizzes.</span>
+
+<span class="sd">    :param request: The HTTP request object containing information about the client&#39;s request.</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :return: Return the edu_quiz template</span>
+<span class="sd">    :rtype: HttpResponse</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># if a user prematurely leaves a quiz &amp; does not use the exit button,</span>
     <span class="c1"># - delete the result &amp; session data of the current quiz </span>
     <span class="c1"># - this is done for all the templates the navbar displays</span>
@@ -165,6 +175,7 @@
         <span class="c1"># render the context to the homepage of education</span>
         <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;edu_quiz/edu_quiz.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> </div>
 
+
 <span class="c1"># add a login decorator because an Education quiz requires a registered user</span>
 <span class="c1"># write a view for the quiz question, incl the argument question_id</span>
 <span class="c1"># question_id is the specific identifier passed in the URL when accessing this view</span>
@@ -172,8 +183,21 @@
 <span class="c1"># Django automatically adds an id field as the primary key for each model (i.e. question.id)</span>
 <span class="c1"># display the question text </span>
 <span class="c1"># render an HTTP 404 error if a question with the requested ID doesn’t exist</span>
-<div class="viewcode-block" id="detail"><a class="viewcode-back" href="../../Education.html#Education.views.detail">[docs]</a><span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;user_auth:login&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>      
+<div class="viewcode-block" id="detail">
+<a class="viewcode-back" href="../../Education.html#Education.views.detail">[docs]</a>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;user_auth:login&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span> 
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A view that displays the quiz question.</span>
+
+<span class="sd">    :param request: The HTTP request object containing information about the client&#39;s request.</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :param category_name: The name of the category the user selected on the category homepage.</span>
+<span class="sd">    :type category_name: str</span>
+<span class="sd">    :param question_id: The pk of the question object</span>
+<span class="sd">    :type question_id: int</span>
+<span class="sd">    :return: Return the edu_detail template. </span>
+<span class="sd">    :rtype: HttpResponse</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">get_json_categories</span><span class="p">()</span>
     <span class="n">category_names</span> <span class="o">=</span> <span class="n">get_category_names</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>          
 
@@ -232,13 +256,22 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">context:</span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1">##        </span>
         <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;edu_quiz/edu_detail.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>                </div>
 
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a view that displays the quiz result.</span>
-<span class="sd">&#39;&#39;&#39;</span>
+
 <span class="c1"># create a view that displays the quiz result </span>
 <span class="c1"># add a login decorator because an Education quiz requires a registered user</span>
-<div class="viewcode-block" id="results"><a class="viewcode-back" href="../../Education.html#Education.views.results">[docs]</a><span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;user_auth:login&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="results">
+<a class="viewcode-back" href="../../Education.html#Education.views.results">[docs]</a>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;user_auth:login&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">results</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">):</span> 
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A view that displays the quiz result.</span>
+
+<span class="sd">    :param request: The HTTP request object containing information about the client&#39;s request.</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :param category_name: The name of the category the user selected on the category homepage.</span>
+<span class="sd">    :type category_name: str</span>
+<span class="sd">    :return: Return the edu_result template. </span>
+<span class="sd">    :rtype: HttpResponse</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># get the quiz result for the session</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;quiz_result&#39;</span><span class="p">)</span>
            
@@ -249,12 +282,24 @@
                <span class="p">}</span>   
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;edu_quiz/edu_result.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Write a selection view that handles the submission of form data, goes to the next question and redirects to the results view.&quot;</span>
-<span class="sd">&#39;&#39;&#39;</span>
+
 <span class="c1"># write a view to answer a question, incl the argument category_name &amp; question_id</span>
 <span class="c1"># it handles the submitted data</span>
-<div class="viewcode-block" id="selection"><a class="viewcode-back" href="../../Education.html#Education.views.selection">[docs]</a><span class="k">def</span> <span class="nf">selection</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>    
+<div class="viewcode-block" id="selection">
+<a class="viewcode-back" href="../../Education.html#Education.views.selection">[docs]</a>
+<span class="k">def</span> <span class="nf">selection</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>  
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A a selection view that handles the submission of form data, goes to the next question and redirects to the results view. </span>
+<span class="sd">    Otherwise the form will be redisplayed.</span>
+
+<span class="sd">    :param request: The HTTP request object containing information about the client&#39;s request.</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :param category_name: The name of the category the user selected on the category homepage.</span>
+<span class="sd">    :type category_name: str</span>
+<span class="sd">    :param question_id: The pk of the question object the user has submitted</span>
+<span class="sd">    :type question_id: int</span>
+<span class="sd">    :return: Return the edu_detail or the edu_result template. </span>
+<span class="sd">    :rtype: HttpResponse</span>
+<span class="sd">    &quot;&quot;&quot;</span>      
     <span class="c1"># pk refers to the primary key field of a database table</span>
     <span class="c1"># django automatically creates a primary key for each model</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">get_json_categories</span><span class="p">()</span>
@@ -363,8 +408,18 @@
                     <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;Education:results&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">category_name</span><span class="p">,))</span>
                     <span class="p">)</span>    </div>
 
+
 <span class="c1"># start new quiz function</span>
-<div class="viewcode-block" id="try_new_quiz"><a class="viewcode-back" href="../../Education.html#Education.views.try_new_quiz">[docs]</a><span class="k">def</span> <span class="nf">try_new_quiz</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="try_new_quiz">
+<a class="viewcode-back" href="../../Education.html#Education.views.try_new_quiz">[docs]</a>
+<span class="k">def</span> <span class="nf">try_new_quiz</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A view that clears the session data and redirects to the homepage of the category.</span>
+
+<span class="sd">    :param request: The HTTP request object containing information about the client&#39;s request.</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :return: Return the edu_quiz template</span>
+<span class="sd">    :rtype: HttpResponse    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># delete the result &amp; session data of the current quiz before starting a new quiz</span>
     <span class="k">if</span> <span class="s1">&#39;quiz_result&#39;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">:</span>
         <span class="k">del</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;quiz_result&#39;</span><span class="p">]</span>
@@ -373,6 +428,7 @@
     <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span>
                 <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;Education:index_edu&#39;</span><span class="p">)</span>
                 <span class="p">)</span>  </div>
+
         
 </pre></div>
 

@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>user_auth.tests.test_urls &mdash; QuizMe 00.00.01 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
-
-  
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=d7bb8d4d"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -92,9 +89,13 @@
 <span class="c1"># Next, go to urls.py and create the urls and it should pass.</span>
 <span class="c1"># Create a class to test the home views.</span>
 <span class="c1"># run coverage after tests</span>
-<div class="viewcode-block" id="TestUrls"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_urls.TestUrls">[docs]</a><span class="k">class</span> <span class="nc">TestUrls</span><span class="p">(</span><span class="n">SimpleTestCase</span><span class="p">):</span>       
+<div class="viewcode-block" id="TestUrls">
+<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_urls.TestUrls">[docs]</a>
+<span class="k">class</span> <span class="nc">TestUrls</span><span class="p">(</span><span class="n">SimpleTestCase</span><span class="p">):</span>       
     <span class="c1"># The test will Pass because the resolver match should return the user_login view.</span>
-<div class="viewcode-block" id="TestUrls.test_login_page_valid"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_urls.TestUrls.test_login_page_valid">[docs]</a>    <span class="k">def</span> <span class="nf">test_login_page_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestUrls.test_login_page_valid">
+<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_urls.TestUrls.test_login_page_valid">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_login_page_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            A function to test if the correct template is rendered if the user enters the login url path.</span>
 <span class="sd">        &#39;&#39;&#39;</span> 
@@ -102,9 +103,12 @@
         <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s2">&quot;user_auth:login&quot;</span><span class="p">)</span>
         <span class="c1"># The assert equals function is used to take the url path and return a object based on the resolver match which is a veiw.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">resolve</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">user_login</span><span class="p">)</span> </div>
+
     
     <span class="c1"># The test will Pass because the resolver match should return the user_logout view.</span>
-<div class="viewcode-block" id="TestUrls.test_logout_page_valid"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_urls.TestUrls.test_logout_page_valid">[docs]</a>    <span class="k">def</span> <span class="nf">test_logout_page_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestUrls.test_logout_page_valid">
+<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_urls.TestUrls.test_logout_page_valid">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_logout_page_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            A function to test if the correct template is rendered if the user enters the logout url path.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -112,16 +116,21 @@
         <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s2">&quot;user_auth:logout&quot;</span><span class="p">)</span> 
         <span class="c1"># The assert equals function is used to take the url path and return a object based on the resolver match which is a view.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">resolve</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">user_logout</span><span class="p">)</span> </div>
+
     
     <span class="c1"># The test will Pass because the resolver match should return the user_register view.</span>
-<div class="viewcode-block" id="TestUrls.test_register_page_valid"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_urls.TestUrls.test_register_page_valid">[docs]</a>    <span class="k">def</span> <span class="nf">test_register_page_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestUrls.test_register_page_valid">
+<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_urls.TestUrls.test_register_page_valid">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_register_page_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            A function to test if the correct template is rendered if the user enters the register url path.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># used to generate a URL based on view name.</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s2">&quot;user_auth:register&quot;</span><span class="p">)</span> 
         <span class="c1"># The assert equals function is used to take the url path and return a object based on the resolver match which is a veiw.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">resolve</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">user_register</span><span class="p">)</span> </div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">resolve</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">user_register</span><span class="p">)</span> </div>
+</div>
+
         
         
 </pre></div>

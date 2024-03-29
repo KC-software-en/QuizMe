@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Education.tests.test_admin &mdash; QuizMe 00.00.01 documentation</title>
+  <title>General_Knowledge.tests.test_admin &mdash; QuizMe 00.00.01 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -59,7 +59,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">Education.tests.test_admin</li>
+      <li class="breadcrumb-item active">General_Knowledge.tests.test_admin</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -68,7 +68,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for Education.tests.test_admin</h1><div class="highlight"><pre>
+  <h1>Source code for General_Knowledge.tests.test_admin</h1><div class="highlight"><pre>
 <span></span><span class="c1"># https://docs.djangoproject.com/en/5.0/topics/testing/tools/#transactiontestcase</span>
 <span class="c1"># import TransactionTestCase because</span>
 <span class="c1"># tests rely on database access such as creating or querying models, </span>
@@ -83,29 +83,30 @@
 <span class="c1"># import admin.py</span>
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">admin</span>
 
-<span class="c1"># import the Mythology model</span>
-<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Mythology</span>
+<span class="c1"># import the General_Knowledge model</span>
+<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">General_Knowledge</span>
 
 <span class="c1">######################################################################################################</span>
 <span class="c1">######################################################################################################</span>
+<span class="c1"># py manage.py test General_Knowledge.tests.test_admin</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Create a class to test the model registration on the Admin site.</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># test that the models were registered on admin site</span>
 <div class="viewcode-block" id="TestModelRegistration">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_admin.TestModelRegistration">[docs]</a>
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_admin.TestModelRegistration">[docs]</a>
 <span class="k">class</span> <span class="nc">TestModelRegistration</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Create a method to test the Mythology model registration.</span>
+<span class="sd">    Create a method to test the General_Knowledge model registration.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="c1"># assert that Mythology model was registered with the admin site</span>
+    <span class="c1"># assert that General_Knowledge model was registered with the admin site</span>
     <span class="c1"># - by examining the internal attribute of the AdminSite class in Django - the _registry attribute of the site object.</span>
     <span class="c1"># _registry is a dictionary where {model classes:admin classes associated with those models}</span>
 <div class="viewcode-block" id="TestModelRegistration.test_quiz_registration">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_admin.TestModelRegistration.test_quiz_registration">[docs]</a>
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_admin.TestModelRegistration.test_quiz_registration">[docs]</a>
     <span class="k">def</span> <span class="nf">test_quiz_registration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">Mythology</span><span class="p">,</span> <span class="n">site</span><span class="o">.</span><span class="n">_registry</span><span class="p">,</span> <span class="s1">&#39;Should check Mythology is on the admin site&#39;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">General_Knowledge</span><span class="p">,</span> <span class="n">site</span><span class="o">.</span><span class="n">_registry</span><span class="p">,</span> <span class="s1">&#39;Should check that General_Knowledge is on the admin site&#39;</span><span class="p">)</span></div>
 </div>
 
     

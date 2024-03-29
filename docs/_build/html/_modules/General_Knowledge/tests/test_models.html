@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Education.tests.test_models &mdash; QuizMe 00.00.01 documentation</title>
+  <title>General_Knowledge.tests.test_models &mdash; QuizMe 00.00.01 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -59,7 +59,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">Education.tests.test_models</li>
+      <li class="breadcrumb-item active">General_Knowledge.tests.test_models</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -68,7 +68,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for Education.tests.test_models</h1><div class="highlight"><pre>
+  <h1>Source code for General_Knowledge.tests.test_models</h1><div class="highlight"><pre>
 <span></span><span class="c1"># create __init__.py then import this file to it</span>
 
 <span class="c1"># comment out TestCase import because using unittest.</span>
@@ -86,17 +86,18 @@
 <span class="c1"># import mixer</span>
 <span class="c1"># The Mixer is a helper to generate instances of Django or SQLAlchemy models. </span>
 <span class="c1"># It’s useful for testing and fixture replacement</span>
-<span class="kn">from</span> <span class="nn">mixer.backend.django</span> <span class="kn">import</span> <span class="n">mixer</span>
+<span class="kn">from</span> <span class="nn">mixer.backend.django</span> <span class="kn">import</span> <span class="n">mixer</span> 
 
 <span class="c1"># import classes from models.py </span>
-<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Categories</span><span class="p">,</span> <span class="n">Subcategories</span><span class="p">,</span> <span class="n">Mythology</span><span class="p">,</span> <span class="n">Science_and_Nature</span><span class="p">,</span> <span class="n">History</span>
+<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Categories</span><span class="p">,</span> <span class="n">Subcategories</span><span class="p">,</span> <span class="n">General_Knowledge</span>
 
 <span class="c1">#####################################################################################</span>
 
-<span class="c1"># Create your tests here. Use `py manage.py test Education.tests.test_models` to run tests in cmd</span>
+<span class="c1"># Create your tests here. Use `py manage.py test General_Knowledge.tests.test_models` to run tests in cmd</span>
 <span class="c1"># after writing a test, run in cmd &amp; it will say fail. </span>
 <span class="c1"># next, go to models.py and create the Question model &amp; then it should pass</span>
 <span class="c1"># run coverage after tests</span>
+<span class="c1"># import classes from models.py </span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Create a class to test the Categories model.</span>
@@ -104,10 +105,10 @@
 <span class="c1"># create a class to test the Categories model</span>
 <span class="c1"># https://docs.djangoproject.com/en/3.2/topics/testing/overview/#writing-tests</span>
 <div class="viewcode-block" id="TestCategoriesModel">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestCategoriesModel">[docs]</a>
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_models.TestCategoriesModel">[docs]</a>
 <span class="k">class</span> <span class="nc">TestCategoriesModel</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
 <div class="viewcode-block" id="TestCategoriesModel.setUp">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestCategoriesModel.setUp">[docs]</a>
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_models.TestCategoriesModel.setUp">[docs]</a>
     <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># no necessary conditions</span>
         <span class="k">pass</span></div>
@@ -117,7 +118,7 @@
 <span class="sd">    A function to test if the Categories model creates successfully before it coding it in models.py.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="TestCategoriesModel.test_categories_model">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestCategoriesModel.test_categories_model">[docs]</a>
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_models.TestCategoriesModel.test_categories_model">[docs]</a>
     <span class="k">def</span> <span class="nf">test_categories_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>        
         <span class="c1"># create an instance of Categories model with mixer</span>
         <span class="c1"># textfield stores data as a str </span>
@@ -148,7 +149,7 @@
 <span class="sd">    A function to test if the str method returns the category attribute for Categories.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="TestCategoriesModel.test_return_str">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestCategoriesModel.test_return_str">[docs]</a>
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_models.TestCategoriesModel.test_return_str">[docs]</a>
     <span class="k">def</span> <span class="nf">test_return_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create an instance of the Categories model with a specific question</span>
         <span class="n">category_ins</span> <span class="o">=</span> <span class="n">Categories</span><span class="p">(</span><span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;Category1&quot;</span><span class="p">)</span>
@@ -166,11 +167,11 @@
 <span class="sd">&#39;&#39;&#39;</span>        
 <span class="c1"># create a class to test the Subcategories model</span>
 <div class="viewcode-block" id="TestSubcategoriesModel">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestSubcategoriesModel">[docs]</a>
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_models.TestSubcategoriesModel">[docs]</a>
 <span class="k">class</span> <span class="nc">TestSubcategoriesModel</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
     <span class="c1"># setup an instance for the model used as a foreign key</span>
 <div class="viewcode-block" id="TestSubcategoriesModel.setUp">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestSubcategoriesModel.setUp">[docs]</a>
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_models.TestSubcategoriesModel.setUp">[docs]</a>
     <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># create an instance of Categories model with mixer</span>
         <span class="c1"># textfield stores data as a str </span>
@@ -187,7 +188,7 @@
 <span class="sd">    A function to test if the Subcategories model creates successfully before it coding it in models.py.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="TestSubcategoriesModel.test_subcategories_model">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestSubcategoriesModel.test_subcategories_model">[docs]</a>
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_models.TestSubcategoriesModel.test_subcategories_model">[docs]</a>
     <span class="k">def</span> <span class="nf">test_subcategories_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
         <span class="c1"># access the foreign key attribute of the subcategory_in</span>
         <span class="n">subcategory_ins_fk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subcategory_ins</span><span class="o">.</span><span class="n">category</span>
@@ -219,7 +220,7 @@
 <span class="sd">    A function to test if the str method returns the subcategory attribute for Subcategories.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="TestSubcategoriesModel.test_return_str">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestSubcategoriesModel.test_return_str">[docs]</a>
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_models.TestSubcategoriesModel.test_return_str">[docs]</a>
     <span class="k">def</span> <span class="nf">test_return_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># call __str__ method on instance of the Subcategories model</span>
         <span class="n">str_outcome</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subcategory_ins</span><span class="p">)</span>
@@ -230,19 +231,19 @@
 
 
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a class to test the Mythology model.</span>
+<span class="sd">Create a class to test the General_Knowledge model.</span>
 <span class="sd">&#39;&#39;&#39;</span>        
-<span class="c1"># create a class to test the Mythology model</span>
-<div class="viewcode-block" id="TestMythologyModel">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestMythologyModel">[docs]</a>
-<span class="k">class</span> <span class="nc">TestMythologyModel</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
+<span class="c1"># create a class to test the General_Knowledge model</span>
+<div class="viewcode-block" id="TestGeneralKnowledgeModel">
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_models.TestGeneralKnowledgeModel">[docs]</a>
+<span class="k">class</span> <span class="nc">TestGeneralKnowledgeModel</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Setup data for Mythology model</span>
+<span class="sd">    Setup data for question model</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="c1"># setup the required data for tests</span>
     <span class="c1"># https://docs.djangoproject.com/en/5.0/topics/testing/overview/#writing-tests</span>
-<div class="viewcode-block" id="TestMythologyModel.setUp">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestMythologyModel.setUp">[docs]</a>
+<div class="viewcode-block" id="TestGeneralKnowledgeModel.setUp">
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_models.TestGeneralKnowledgeModel.setUp">[docs]</a>
     <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># no necessary conditions</span>
         <span class="c1"># create an instance of Categories model with mixer</span>
@@ -257,16 +258,16 @@
 
 <span class="w">    </span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    A function to test if the Mythology model creates successfully before it coding it in models.py.</span>
+<span class="sd">    A function to test if the General_Knowledge model creates successfully before it coding it in models.py.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="c1"># create a fail test where the functions in models.py do not exist</span>
-<div class="viewcode-block" id="TestMythologyModel.test_mythology_model">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestMythologyModel.test_mythology_model">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_mythology_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>        
-        <span class="c1"># create an instance of Mythology model with mixer</span>
-        <span class="c1"># textfield stores data as a str so the list of choices will read as a str</span>
-        <span class="n">quiz_ins</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Mythology</span><span class="p">,</span> <span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;Question example&quot;</span><span class="p">,</span>
-                             <span class="n">choices</span> <span class="o">=</span> <span class="s1">&#39;choice1, choice2, choice3, choice4&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="TestGeneralKnowledgeModel.test_general_knowledge_model">
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_models.TestGeneralKnowledgeModel.test_general_knowledge_model">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_general_knowledge_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>          
+        <span class="c1"># create an instance of General_Knowledge model with mixer</span>
+        <span class="c1"># textfield stores data as a str so the list of choices will read as a str        </span>
+        <span class="n">quiz_ins</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">General_Knowledge</span><span class="p">,</span> <span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;Question example&quot;</span><span class="p">,</span>
+                               <span class="n">choices</span> <span class="o">=</span> <span class="s1">&#39;choice1, choice2, choice3, choice4&#39;</span><span class="p">,</span>
                                <span class="n">correct_answer</span> <span class="o">=</span> <span class="s1">&#39;choice1&#39;</span><span class="p">,</span>
                                <span class="n">category</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">category_ins</span><span class="p">,</span>
                                <span class="n">subcategory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subcategory_ins</span><span class="p">)</span>
@@ -278,7 +279,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">quiz_ins</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should confirm question instance was created&#39;</span><span class="p">)</span>
         <span class="c1"># Test that obj is (or is not) an instance of cls (which can be a class or a tuple of classes, as supported by isinstance()). </span>
         <span class="c1"># To check for the exact type, use assertIs(type(obj), cls). --class(cls)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">quiz_ins</span><span class="p">,</span> <span class="n">Mythology</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should confirm that the object instantiated is from the Mythology class&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">quiz_ins</span><span class="p">,</span> <span class="n">General_Knowledge</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should confirm that the object instantiated is from the General_Knowledge class&#39;</span><span class="p">)</span>
         
         <span class="c1"># check attributes of instance</span>
         <span class="c1"># the choices are expected to be a list from the json response</span>
@@ -298,106 +299,39 @@
 
 
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    A function to test if the str method returns the question_text for Mythology.</span>
+<span class="sd">    A function to test if the str method returns the question_text for General_Knowledge.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestMythologyModel.test_return_str_quiz">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestMythologyModel.test_return_str_quiz">[docs]</a>
+<div class="viewcode-block" id="TestGeneralKnowledgeModel.test_return_str_quiz">
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_models.TestGeneralKnowledgeModel.test_return_str_quiz">[docs]</a>
     <span class="k">def</span> <span class="nf">test_return_str_quiz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Create an instance of the Mythology model with a specific question</span>
-        <span class="n">quiz_ins</span> <span class="o">=</span> <span class="n">Mythology</span><span class="p">(</span><span class="n">question</span> <span class="o">=</span> <span class="s1">&#39;Question example&#39;</span><span class="p">)</span>
-
-        <span class="c1"># call __str__ method</span>
-        <span class="n">str_outcome</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">quiz_ins</span><span class="p">)</span>
-
-        <span class="c1"># assert that the result matches the question_ins </span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">str_outcome</span><span class="p">,</span> <span class="n">quiz_ins</span><span class="o">.</span><span class="n">question</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that Question example is in the str.&#39;</span><span class="p">)</span></div>
-
-<span class="w">    </span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Create a test to check an instance of the Mythology model.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="c1"># create a test to check an instance of the Mythology model</span>
-<div class="viewcode-block" id="TestMythologyModel.test_mythology_instance">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestMythologyModel.test_mythology_instance">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_mythology_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># use mixer to create an instance of the Mythology model</span>
-        <span class="n">quiz_instance</span> <span class="o">=</span> <span class="n">mixer</span><span class="o">.</span><span class="n">blend</span><span class="p">(</span><span class="n">Mythology</span><span class="p">,</span>
-                                    <span class="n">category</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">category_ins</span><span class="p">,</span>
-                                    <span class="n">subcategory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subcategory_ins</span><span class="p">)</span>
-
-        <span class="c1"># assert that the instance was successful</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">quiz_instance</span><span class="p">,</span> <span class="n">Mythology</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should confirm that the object instantiated is from the Mythology class&#39;</span><span class="p">)</span></div>
-</div>
-
-<span class="w">    </span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a class to test the Science_and_Nature model.</span>
-<span class="sd">&#39;&#39;&#39;</span>        
-<span class="c1"># create a class to test the Science_and_Nature model</span>
-<div class="viewcode-block" id="TestScienceAndNatureModel">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestScienceAndNatureModel">[docs]</a>
-<span class="k">class</span> <span class="nc">TestScienceAndNatureModel</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Setup data for Science_and_Nature model</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="c1"># setup the required data for tests</span>
-    <span class="c1"># https://docs.djangoproject.com/en/5.0/topics/testing/overview/#writing-tests</span>
-<div class="viewcode-block" id="TestScienceAndNatureModel.setUp">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestScienceAndNatureModel.setUp">[docs]</a>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># no necessary conditions</span>
-        <span class="k">pass</span>    </div>
-
-<span class="w">    </span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    A function to test if the str method returns the question_text for Science_and_Nature.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestScienceAndNatureModel.test_return_str_quiz">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestScienceAndNatureModel.test_return_str_quiz">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_return_str_quiz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Create an instance of the Science_and_Nature model with a specific question</span>
-        <span class="n">quiz_ins</span> <span class="o">=</span> <span class="n">Science_and_Nature</span><span class="p">(</span><span class="n">question</span> <span class="o">=</span> <span class="s1">&#39;Question example&#39;</span><span class="p">)</span>
+        <span class="c1"># Create an instance of the General_Knowledge model with a specific question</span>
+        <span class="n">quiz_ins</span> <span class="o">=</span> <span class="n">General_Knowledge</span><span class="p">(</span><span class="n">question</span> <span class="o">=</span> <span class="s1">&#39;Question example&#39;</span><span class="p">)</span>
 
         <span class="c1"># call __str__ method</span>
         <span class="n">str_outcome</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">quiz_ins</span><span class="p">)</span>
 
         <span class="c1"># assert that the result matches the question_ins </span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">str_outcome</span><span class="p">,</span> <span class="n">quiz_ins</span><span class="o">.</span><span class="n">question</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Question example&#39;</span><span class="p">)</span></div>
-</div>
 
-
-<div class="viewcode-block" id="TestHistoryModel">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestHistoryModel">[docs]</a>
-<span class="k">class</span> <span class="nc">TestHistoryModel</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
+<span class="w">    </span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Setup data for History model</span>
+<span class="sd">    Create a test to check an instance of the General_Knowledge model.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="c1"># setup the required data for tests</span>
-    <span class="c1"># https://docs.djangoproject.com/en/5.0/topics/testing/overview/#writing-tests</span>
-<div class="viewcode-block" id="TestHistoryModel.setUp">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestHistoryModel.setUp">[docs]</a>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># no necessary conditions</span>
-        <span class="k">pass</span>    </div>
-
-
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    A function to test if the str method returns the question_text for History.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestHistoryModel.test_return_str_quiz">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_models.TestHistoryModel.test_return_str_quiz">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_return_str_quiz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Create an instance of the History model with a specific question</span>
-        <span class="n">quiz_ins</span> <span class="o">=</span> <span class="n">History</span><span class="p">(</span><span class="n">question</span> <span class="o">=</span> <span class="s1">&#39;Question example&#39;</span><span class="p">)</span>
+    <span class="c1"># create a test to check an instance of the General_Knowledge model</span>
+<div class="viewcode-block" id="TestGeneralKnowledgeModel.test_general_knowledge_instance">
+<a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_models.TestGeneralKnowledgeModel.test_general_knowledge_instance">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_general_knowledge_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>        
+        <span class="c1"># Create an instance of the General_Knowledge model with a specific question</span>
+        <span class="n">quiz_ins</span> <span class="o">=</span> <span class="n">General_Knowledge</span><span class="p">(</span><span class="n">question</span> <span class="o">=</span> <span class="s1">&#39;Question example&#39;</span><span class="p">)</span>
 
         <span class="c1"># call __str__ method</span>
         <span class="n">str_outcome</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">quiz_ins</span><span class="p">)</span>
 
         <span class="c1"># assert that the result matches the question_ins </span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">str_outcome</span><span class="p">,</span> <span class="n">quiz_ins</span><span class="o">.</span><span class="n">question</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Question example&#39;</span><span class="p">)</span>    </div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">str_outcome</span><span class="p">,</span> <span class="n">quiz_ins</span><span class="o">.</span><span class="n">question</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Question example&#39;</span><span class="p">)</span>   </div>
 </div>
 
-    
+ 
 </pre></div>
 
            </div>

@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Education.management.commands.create_category_objects &mdash; QuizMe 00.00.01 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
-
-  
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/underscore.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=d7bb8d4d"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
@@ -85,48 +82,48 @@
 <span class="c1"># import html to handle potential HTML entities and aid rendering for create_subcategory_object</span>
 <span class="kn">import</span> <span class="nn">html</span>
 
-<span class="c1">#</span>
+<span class="c1"># import apps</span>
 <span class="kn">from</span> <span class="nn">django.apps</span> <span class="kn">import</span> <span class="n">apps</span>
 
+<span class="c1"># When populating the postgresql database don&#39;t forget to run this command.</span>
+<span class="c1"># &#39;python manage.py migrate --run-sync&#39; to sync the migration into postgresql database.</span>
 <span class="c1">####################################################################################</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Define a class Command that extends BaseCommand. It will create an object for the sub-categories of the Education quiz.</span>
 <span class="sd">It is intended for private use by the project creator, not its users.</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="c1"># create an object for the sub-category (e.g.mythology) quiz data</span>
-<span class="c1"># in django shell import the util functions needed for the creation of the obj then call the obj</span>
-<span class="c1"># place the category id from the quiz_categories.json file as the argument for the function (e.g. 20)</span>
-<span class="c1"># In project directory cmd: `python manage.py shell`, </span>
-<span class="c1"># `from Education.utils import get_specific_json_category, mix_choices, create_subcategory_object`</span>
-<span class="c1"># `create_subcategory_object(20)`, then `exit()`</span>
-<span class="c1"># this will populate the sub-category (e.g. mythology) table on the admin site with the quiz data</span>
-<span class="c1"># `python manage.py create_category_objects 20 Mythology`</span>
-
 <span class="c1"># the custom command can be called using `python manage.py create_category_objects 20 Mythology` to populate Mythology</span>
 <span class="c1"># be sure to place the desired app name in the handle() before calling the command with its corresponding category_id</span>
 <span class="c1"># `python manage.py create_category_objects 17 &quot;Science &amp; Nature&quot;` to populate Science &amp; Nature</span>
 <span class="c1"># `python manage.py create_category_objects 23 History` to populate History</span>
 <span class="c1"># `python manage.py create_category_objects 9 &quot;General Knowledge&quot;` to populate General Knowledge</span>
-<div class="viewcode-block" id="Command"><a class="viewcode-back" href="../../../../Education.management.commands.html#Education.management.commands.create_category_objects.Command">[docs]</a><span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="n">BaseCommand</span><span class="p">):</span>
+<div class="viewcode-block" id="Command">
+<a class="viewcode-back" href="../../../../Education.management.commands.html#Education.management.commands.create_category_objects.Command">[docs]</a>
+<span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="n">BaseCommand</span><span class="p">):</span>
     <span class="c1"># define a varible that informs one what the command does</span>
     <span class="n">help</span> <span class="o">=</span> <span class="s1">&#39;Populate the database with quiz objects retrieved from an API&#39;</span>
 
     <span class="c1"># define the arguments for object creation</span>
     <span class="c1"># https://docs.python.org/3/library/argparse.html#module-argparse</span>
-<div class="viewcode-block" id="Command.add_arguments"><a class="viewcode-back" href="../../../../Education.management.commands.html#Education.management.commands.create_category_objects.Command.add_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="n">CommandParser</span><span class="p">):</span>
+<div class="viewcode-block" id="Command.add_arguments">
+<a class="viewcode-back" href="../../../../Education.management.commands.html#Education.management.commands.create_category_objects.Command.add_arguments">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="n">CommandParser</span><span class="p">):</span>
         <span class="c1"># add positional arguments        </span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;category_id&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;The category_id for the desired quiz subcategory&#39;</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;category_name&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;The category_name for the desired quiz subcategory&#39;</span><span class="p">)</span>        </div>
 
+
     <span class="c1"># create an object for the sub-category (e.g.mythology) quiz data</span>
-<div class="viewcode-block" id="Command.handle"><a class="viewcode-back" href="../../../../Education.management.commands.html#Education.management.commands.create_category_objects.Command.handle">[docs]</a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>        
+<div class="viewcode-block" id="Command.handle">
+<a class="viewcode-back" href="../../../../Education.management.commands.html#Education.management.commands.create_category_objects.Command.handle">[docs]</a>
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>        
         <span class="n">category_id</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;category_id&#39;</span><span class="p">]</span>
         <span class="n">category_name</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;category_name&#39;</span><span class="p">]</span>
 
         <span class="c1"># call the get_specific_json_category function to get the data for the mythology category</span>
         <span class="n">json_response</span> <span class="o">=</span> <span class="n">get_specific_json_category</span><span class="p">(</span><span class="n">quantity</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">category_id</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">json_response</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span> <span class="c1">##</span>
+        <span class="k">if</span> <span class="n">json_response</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span> 
             <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">ERROR</span><span class="p">(</span><span class="s2">&quot;Failed to retrieve data from the API.&quot;</span><span class="p">))</span>
 
         <span class="c1"># check if there are questions</span>
@@ -134,7 +131,7 @@
             <span class="c1"># save json response as a variable to pass into template</span>
             <span class="n">questions</span> <span class="o">=</span> <span class="n">json_response</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">]</span>
             
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">questions</span><span class="p">:</span> <span class="c1">##</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">questions</span><span class="p">:</span> 
                 <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">WARNING</span><span class="p">(</span><span class="s2">&quot;No questions found in the API response.&quot;</span><span class="p">))</span>        
 
             <span class="c1"># check if question retrieval was successful</span>
@@ -219,7 +216,9 @@
                 <span class="c1"># When using management commands &amp; want console output, write to self.stdout and self.stderr,</span>
                 <span class="c1"># - instead of printing to stdout and stderr directly. Thus it&#39;s easier to test a custom command</span>
                 <span class="c1"># apply styling to console output for the success message (typically highlights the message in green)                   </span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully created </span><span class="si">{</span><span class="n">total_questions</span><span class="si">}</span><span class="s2"> quiz objects for category_id: </span><span class="si">{</span><span class="n">category_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span></div></div>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">SUCCESS</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully created </span><span class="si">{</span><span class="n">total_questions</span><span class="si">}</span><span class="s2"> quiz objects for category_id: </span><span class="si">{</span><span class="n">category_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span></div>
+</div>
+
 </pre></div>
 
            </div>
