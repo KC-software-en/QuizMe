@@ -43,10 +43,15 @@ Create a view for the home page of Entertainment quizzes.
 # index category from the dictionary id
 def index_en(request):
     """
-    This function is the homepage of Entertainment quizzes.
+    This function represents the homepage of Entertainment quizzes.
     It displays a list of categories of quizzes and the first question of each category.
     If a user prematurely leaves a quiz and does not use the exit button,
     the result and session data of the current quiz are deleted.
+
+    :param request: The HTTP request object (optional, if needed).
+    :type request: HttpRequest
+    :return: The en_quiz template.
+    :rtype: template
     """
     # if a user prematurely leaves a quiz & does not use the exit button,
     # - delete the result & session data of the current quiz 
@@ -93,6 +98,15 @@ def detail(request, category_name, question_id):
     This function retrieves a question object from the database based on the question_id passed in the URL.
     It also retrieves the list of choices for the question and converts the choices text field into a list of dictionaries.
     The function passes all the context variables into a single dictionary to render in the template correctly.
+
+    :param request: The HTTP request object (optional, if needed).
+    :type request: HttpRequest
+    :param category_name: The name of the category.
+    :type category_name: str
+    :param question_id: The ID of the question.
+    :type question_id: int
+    :return: The detail template.
+    :rtype: template
     """
     # retrieve the list of categories from the open trivia database
     response = get_json_categories()
@@ -147,13 +161,12 @@ def results(request, category_name: str):
     """
     This function retrieves the quiz result from the session and renders the result template.
 
-    Args:
-        request (HttpRequest): The HTTP request object.
-        category_name (str): The name of the category of the quiz.
-
-    Returns:
-        HttpResponse: The HTTP response object.
-
+    :param request: The HTTP request object (optional, if needed).
+    :type request: HttpRequest
+    :param category_name: The name of the category.
+    :type category_name: str
+    :return: The result template.
+    :rtype: template
     """
     # get the quiz result for the session
     result = request.session.get('quiz_result')
@@ -170,16 +183,16 @@ def results(request, category_name: str):
 # it handles the submitted data
 def selection(request, category_name, question_id):
     """
-    This function handles the submitted data for a question in a quiz.
+    Handles the submitted data for a question in a quiz.
 
-    Args:
-        request (HttpRequest): The HTTP request object.
-        category_name (str): The name of the category of the quiz.
-        question_id (int): The unique identifier of the question.
-
-    Returns:
-        HttpResponse: The HTTP response object.
-
+    :param request: The HTTP request object (optional, if needed).
+    :type request: HttpRequest
+    :param category_name: The name of the category.
+    :type category_name: str
+    :param question_id: The ID of the question.
+    :type question_id: int
+    :return: The detail template.
+    :rtype: template
     """
     # retrieve the list of categories from the open trivia database
     response = get_json_categories()
@@ -279,12 +292,10 @@ def try_new_quiz(request):
     This function deletes the quiz result and session data of the current quiz before starting a new quiz.
     It then redirects the user to the home page of Entertainment quizzes.
 
-    Args:
-        request (HttpRequest): The HTTP request object.
-
-    Returns:
-        HttpResponseRedirect: A redirect to the home page of Entertainment quizzes.
-
+    :param request: The HTTP request object (optional, if needed).
+    :type request: HttpRequest
+    :return: The index_en template.
+    :rtype: template
     """
     # delete the result & session data of the current quiz before starting a new quiz
     if 'quiz_result' in request.session:
