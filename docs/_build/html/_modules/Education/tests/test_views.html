@@ -447,13 +447,10 @@
     <span class="c1"># setup</span>
 <div class="viewcode-block" id="TestFindModel.setUp"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># create a RequestFactory instance for generating mock HTTP requests during testing</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">()</span> 
-        
-        <span class="c1">#</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">()</span>
 
         <span class="c1"># Create a user object</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;test_user&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>            </div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;test_user&#39;</span><span class="p">)</span>            </div>
             
     <span class="c1"># create a test that locates a model in the app    </span>
 <div class="viewcode-block" id="TestFindModel.test_find_model_success"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_success">[docs]</a>    <span class="k">def</span> <span class="nf">test_find_model_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_model</span><span class="p">):</span> 
@@ -477,58 +474,35 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the model is not none.&#39;</span><span class="p">)</span>        </div>
                 
     <span class="c1"># test for an error raised if globals does not have a model for a category name    </span>
-<div class="viewcode-block" id="TestFindModel.test_find_model_fail_reqfac"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_fail_reqfac">[docs]</a>    <span class="k">def</span> <span class="nf">test_find_model_fail_reqfac</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_model</span><span class="p">):</span>            
-        <span class="c1"># mock the arguments for the detail() function</span>
-        <span class="n">mock_category_name_absent</span> <span class="o">=</span> <span class="s1">&#39;Sports&#39;</span>   
-        <span class="n">mock_question_id</span> <span class="o">=</span> <span class="mi">20</span>     
-
-        <span class="c1"># mock the get_model function to raise a LookupError for an incorrect category_name (i.e. no corresponding model)                       </span>
-        <span class="n">mock_get_model</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s2">&quot;Model not found&quot;</span><span class="p">)</span>
-                
-        <span class="c1"># Create a GET request for the view</span>
-        <span class="c1"># set the user attribute for the request - required for the login decorator</span>
-        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;Education:edu_detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sports&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">]))</span>
-        <span class="n">request</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span>
-
-        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">LookupError</span><span class="p">):</span>
-            <span class="n">detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">mock_category_name_absent</span><span class="p">,</span> <span class="n">mock_question_id</span><span class="p">)</span>
-
-        
-        <span class="c1"># Call the view function with the GET request &amp; its actual arguments        </span>
-        <span class="c1">##response = detail(request, mock_category_name_absent, mock_question_id)   </span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">exception</span><span class="p">),</span> <span class="s2">&quot;Model not found&quot;</span><span class="p">)</span>     
-
-        <span class="c1"># simulate the behaviour where the model is not found in the apps</span>
-        <span class="c1"># raise an error when calling find_model() with an invalid category name</span>
-        <span class="c1"># https://docs.djangoproject.com/en/3.2/topics/testing/tools/#exceptions</span>
-        <span class="c1"># according to documentation, an exception not visible to the test client is Http404 </span>
-        <span class="c1"># - :. check response.status_code in test because assertRaises(Http404) gives AssertionError: Http404 not raised</span>
-        <span class="c1">##self.assertEqual(response.status_code, 200, msg=&#39;Should check that the status_code is 200 for the error message shown on detail template.&#39;)</span>
-        <span class="c1"># assert that the error message was returned in the response content</span>
-        <span class="c1"># - use b syntax to create a byte string literal. the content of a HTTP response is binary data - content get returned as a byte string</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Unable to find the model&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that None was returned for a model not located.&#39;</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="TestFindModel.test_find_model_fail_client"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_fail_client">[docs]</a>    <span class="k">def</span> <span class="nf">test_find_model_fail_client</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_model</span><span class="p">):</span>            
+<div class="viewcode-block" id="TestFindModel.test_find_model_fail"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_fail">[docs]</a>    <span class="k">def</span> <span class="nf">test_find_model_fail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_model</span><span class="p">):</span>            
         <span class="c1"># mock the arguments for the detail() function</span>
         <span class="n">mock_category_name_absent</span> <span class="o">=</span> <span class="s1">&#39;Sports&#39;</span>   
         <span class="n">mock_question_id</span> <span class="o">=</span> <span class="mi">20</span>     
 
         <span class="c1"># mock the get_model function to raise a LookupError for an incorrect category_name (i.e. no corresponding model)                       </span>
         <span class="n">mock_get_model</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">LookupError</span>
-
-        <span class="c1"># Log in the user</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;test_user&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
-
+                
         <span class="c1"># Create a GET request for the view</span>
         <span class="c1"># set the user attribute for the request - required for the login decorator</span>
-        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;Education:edu_detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sports&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">]))</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;Education:edu_detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sports&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">]))</span>
         <span class="n">request</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span>
 
         <span class="c1"># Call the view function with the GET request &amp; its actual arguments        </span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">mock_category_name_absent</span><span class="p">,</span> <span class="n">mock_question_id</span><span class="p">)</span>        
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;edu_quiz/edu_detail.html&#39;</span><span class="p">)</span></div></div>
+        <span class="c1"># simulate the behaviour where the model is not found in the apps</span>
+        <span class="c1"># raise an error when calling find_model() with an invalid category name</span>
+        <span class="c1"># https://docs.djangoproject.com/en/3.2/topics/testing/tools/#exceptions</span>
+        <span class="c1"># according to documentation, an exception not visible to the test client is Http404 </span>
+        <span class="c1"># - :. check response.status_code in test because assertRaises(Http404) gives AssertionError: Http404 not raised</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the status_code is 200 for the error message shown on detail template.&#39;</span><span class="p">)</span>
+        <span class="c1"># assert that the error message was returned in the response content</span>
+        <span class="c1"># - use b syntax to create a byte string literal. the content of a HTTP response is binary data - content get returned as a byte string</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Unable to find the model&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that None was returned for a model not located.&#39;</span><span class="p">)</span></div></div>
+
+        
+        
+
 </pre></div>
 
            </div>
