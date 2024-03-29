@@ -36,7 +36,7 @@ def user_login(request):
     :param request: The HTTP request object.
     :type request: HttpRequest
     :return: A rendered HTML page for user login.
-    :rtype: template
+    :rtype: HTTPResponse
     """
     # Renders the login template.
     return render(request, "login.html")
@@ -50,7 +50,7 @@ def user_logout(request):
     :param request: The HTTP request object.
     :type request: HttpRequest
     :return: A rendered HTML page for user logout.
-    :rtype: template
+    :rtype: HTTPResponse
     """
     # Deletes the users session.
     logout(request)
@@ -68,7 +68,7 @@ def show_user(request):
     :param request: The HTTP request object.
     :type request: HttpRequest
     :return: Rendered template with user data (username and password)
-    :rtype: template
+    :rtype: HTTPResponse
     """
     # Renders the users information into the template.
     print(request.user.username)
@@ -88,7 +88,7 @@ def user_register(request):
     :type request: HttpRequest
     :return: If successful, redirects to the login page.
              If unsuccessful, displays an error message and renders the registration form.
-    :rtype: template
+    :rtype: HTTPResponse
     """
     if request.method == "POST":
         form = NewUserForm(request.POST)        
@@ -132,7 +132,7 @@ def authenticate_user(request):
     :type request: HttpRequest
     :return: If authentication is successful, redirects to the "show_user" page.
              If authentication fails, redirects to the "login" page..
-    :rtype: template
+    :rtype: HTTPResponse
     """
     # Compares the data login  to the data in the database to see if they are simillar.
     username = request.POST["username"]
