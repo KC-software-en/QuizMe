@@ -4,12 +4,10 @@ from django.db import models
 ###################################################################################
 
 # Create your models here.
-
-'''
-Create a model for the quiz categories in QuizMe.
-'''
 # define a model for categories in the QuizMe project
 class Categories(models.Model):
+    """Create a model for the quiz categories in QuizMe.
+    """
     # define a field to store the category name as text
     # define a field to store the description of the category as text
     category = models.TextField()
@@ -25,11 +23,11 @@ class Categories(models.Model):
         """
         return self.category
     
-'''
-Create a model for the quiz subcategories in Entertainment.
-'''
+
 # define a model for subcategories in the Entertainment app
 class Subcategories(models.Model):
+    """Create a model for the quiz subcategories in Entertainment.
+    """
     # retrieve the category object representing 'Entertainment' from the Categories model
     en_category_obj = Categories.objects.get(category='Entertainment')
 
@@ -61,13 +59,13 @@ class Subcategories(models.Model):
         """
         return self.subcategory
     
-'''
-Create a Music model for the subcategory in the entertainment quiz.
-''' 
+ 
 # use Django's built-in object-relational mapping (ORM) & define the relevant classes
 # -each entry in a SQL table represents a single object, this can be converted to a class instance in Python.  
 # create a Music class that inherits from django.db.models.Model
-class Music(models.Model):       
+class Music(models.Model): 
+    """Create a Music model for the subcategory in the entertainment quiz.
+    """ 
     # retrieve the category object representing 'Education' from the Categories model
     en_category_obj = Categories.objects.get(category='Entertainment')
     # retrieve the subcategory object representing 'Music' from the Subcategories model
@@ -103,12 +101,11 @@ class Music(models.Model):
         :rtype: str
         """
         return self.question
-    
-'''
-Create a Film model for the subcategory in the entertainment quiz.
-'''
+
 # create a Film class that inherits from django.db.models.Model
-class Film(models.Model):        
+class Film(models.Model):   
+    """Create a Film model for the subcategory in the entertainment quiz.
+    """ 
     # retrieve the category object representing 'Entertainment' from the Categories model
     en_category_obj = Categories.objects.get(category='Entertainment')
     # retrieve the subcategory object representing 'Film' from the Subcategories model
@@ -144,11 +141,10 @@ class Film(models.Model):
         :rtype: str
         """
         return self.question
-    
-'''
-Create a model for the Science and nature questions in the entertainment quiz.
-'''
+
 class Video_Games(models.Model):
+    """Create a model for the Science and nature questions in the entertainment quiz.
+    """ 
     # retrieve the category object representing 'Entertainment' from the Categories model
     en_category_obj = Categories.objects.get(category='Entertainment')
     # retrieve the subcategory object representing 'Video Games' from the Subcategories model

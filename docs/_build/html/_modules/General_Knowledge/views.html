@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>General_Knowledge.views &mdash; QuizMe 00.00.01 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d7bb8d4d"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -98,6 +95,9 @@
 <span class="c1"># use to convert str into list</span>
 <span class="kn">import</span> <span class="nn">ast</span> 
 
+<span class="c1"># import apps to dynamically fetch a model in detail() &amp; selection() view</span>
+<span class="kn">from</span> <span class="nn">django.apps</span> <span class="kn">import</span> <span class="n">apps</span>
+
 <span class="c1">#######################################################################################</span>
 <span class="c1">#######################################################################################</span>
 
@@ -110,7 +110,9 @@
 <span class="c1"># https://www.youtube.com/watch?v=sgEhb50YSTE</span>
 <span class="c1"># get json reponse for trivia categories from open trivia db</span>
 <span class="c1"># index category from the dictionary id</span>
-<div class="viewcode-block" id="index_gen"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.views.index_gen">[docs]</a><span class="k">def</span> <span class="nf">index_gen</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="index_gen">
+<a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.views.index_gen">[docs]</a>
+<span class="k">def</span> <span class="nf">index_gen</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="c1"># if a user prematurely leaves a quiz &amp; does not use the exit button,</span>
     <span class="c1"># - delete the result &amp; session data of the current quiz </span>
     <span class="c1"># - this is done for all the templates the navbar displays</span>
@@ -145,15 +147,22 @@
         <span class="c1"># render the context to the homepage of General_Knowledge</span>
         <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;gen_quiz/gen_quiz.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> </div>
 
+
 <span class="c1"># write a view for the quiz question, incl the argument question_id</span>
 <span class="c1"># question_id is the specific identifier passed in the URL when accessing this view</span>
 <span class="c1"># it uniquely identifies and retrieves the specific question to display</span>
 <span class="c1"># Django automatically adds an id field as the primary key for each model (i.e. question.id)</span>
 <span class="c1"># display the question text </span>
 <span class="c1"># render an HTTP 404 error if a question with the requested ID doesn’t exist</span>
-<div class="viewcode-block" id="detail"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.views.detail">[docs]</a><span class="k">def</span> <span class="nf">detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>  
+<div class="viewcode-block" id="detail">
+<a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.views.detail">[docs]</a>
+<span class="k">def</span> <span class="nf">detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>  
     <span class="n">response</span> <span class="o">=</span> <span class="n">get_json_categories</span><span class="p">()</span>
     <span class="n">category_names</span> <span class="o">=</span> <span class="n">get_category_names</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>  
+
+    <span class="c1"># Initialise model with a default value because the conditional checking for model gave </span>
+    <span class="c1"># - UnboundLocalError: local variable &#39;model&#39; referenced before assignment</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1"># check if the category_name is in the list of category_names then locate its model    </span>
     <span class="k">if</span> <span class="n">category_name</span> <span class="ow">in</span> <span class="n">category_names</span><span class="p">:</span>
@@ -162,17 +171,27 @@
         <span class="n">model_name</span> <span class="o">=</span> <span class="n">category_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">,</span> <span class="s2">&quot;and&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model Name: </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1">##</span>
 
-        <span class="c1"># use a try-except block to find a model that matches the category name</span>
-        <span class="c1"># use use globals() instead of apps module to access the global namespace since the the model name was modified when replacing &#39;&amp;&#39; </span>
-        <span class="c1"># (apps still worked when it was only replacing &quot; &quot;)</span>
-        <span class="c1"># - dynamically:instead of explicitly specifying a fixed model in the code, generate or determine the model to use at runtime based on certain conditions/data</span>
+        <span class="c1"># use a try-except block to dynamically find a model that matches the category name</span>
+        <span class="c1"># - dynamically:instead of explicitly specifying a fixed model in the code, </span>
+        <span class="c1"># - generate or determine the model to use at runtime based on certain conditions/data        </span>
+        <span class="c1"># use apps module to access the get_model function &amp; find the model name         </span>
         <span class="k">try</span><span class="p">:</span>            
-            <span class="n">model</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()[</span><span class="n">model_name</span><span class="p">]</span> 
-            
-        <span class="c1"># raise an error if the model is not found</span>
-        <span class="k">except</span> <span class="ne">LookupError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">Http404</span><span class="p">(</span><span class="s2">&quot;Cannot locate the model for the selected category.&quot;</span><span class="p">)</span>     
+            <span class="n">model</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s1">&#39;General_Knowledge&#39;</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>                        
+
+        <span class="c1"># render the detail template displaying the error when a model for a category_name cannot be located</span>
+        <span class="k">except</span> <span class="ne">LookupError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">error_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;question&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="s1">&#39;choices&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="s1">&#39;category_name&#39;</span><span class="p">:</span> <span class="n">category_name</span><span class="p">,</span>
+                        <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">error_message</span><span class="p">,</span>
+                        <span class="s1">&#39;model_exists&#39;</span><span class="p">:</span> <span class="kc">False</span>  <span class="c1"># Flag indicating whether a model exists for the template to prevent selection() exec</span>
+                        <span class="p">}</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;context:</span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;gen_quiz/gen_detail.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>    
     
+    <span class="c1"># check that a model was found</span>
+    <span class="k">if</span> <span class="n">model</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span> 
         <span class="c1"># get the question object associated with a specific question_id in the database</span>
         <span class="n">question</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">question_id</span><span class="p">)</span>    
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">question:</span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -196,11 +215,14 @@
         <span class="c1"># render the context to the detail template of General_Knowledge</span>
         <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;gen_quiz/gen_detail.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
+
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Create a view that displays the quiz result.</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># create a view that displays the quiz result </span>
-<div class="viewcode-block" id="results"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.views.results">[docs]</a><span class="k">def</span> <span class="nf">results</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">):</span> 
+<div class="viewcode-block" id="results">
+<a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.views.results">[docs]</a>
+<span class="k">def</span> <span class="nf">results</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">):</span> 
     <span class="c1"># get the quiz result for the session</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;quiz_result&#39;</span><span class="p">)</span>
            
@@ -213,24 +235,43 @@
     <span class="c1"># render the context to the result template of General_Knowledge</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;gen_quiz/gen_result.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
+
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Write a selection view that handles the submission of form data, goes to the next question and redirects to the results view.&quot;</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># write a view to answer a question, incl the argument category_name &amp; question_id</span>
 <span class="c1"># it handles the submitted data</span>
-<div class="viewcode-block" id="selection"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.views.selection">[docs]</a><span class="k">def</span> <span class="nf">selection</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>    
+<div class="viewcode-block" id="selection">
+<a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.views.selection">[docs]</a>
+<span class="k">def</span> <span class="nf">selection</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>    
     <span class="c1"># pk refers to the primary key field of a database table</span>
     <span class="c1"># django automatically creates a primary key for each model</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">get_json_categories</span><span class="p">()</span>
     <span class="n">category_names</span> <span class="o">=</span> <span class="n">get_category_names</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 
-    <span class="c1"># check if the category_name is in the list of category_names then locate its model</span>
-    <span class="c1"># use globals module instead of apps to access the global namespace for models</span>
-    <span class="c1"># - since a model name was altered from its original category_name to create a valid model with &#39;and&#39;</span>
-    <span class="k">if</span> <span class="n">category_name</span> <span class="ow">in</span> <span class="n">category_names</span><span class="p">:</span>
-        <span class="n">model_name</span> <span class="o">=</span> <span class="n">category_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">,</span> <span class="s2">&quot;and&quot;</span><span class="p">)</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()[</span><span class="n">model_name</span><span class="p">]</span> <span class="c1"># not model = apps.get_model(&#39;General_Knowledge&#39;, model_name)</span>
+    <span class="c1"># Initialise model with a default value because the conditional checking for model gave </span>
+    <span class="c1"># - UnboundLocalError: local variable &#39;model&#39; referenced before assignment</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
 
+    <span class="c1"># check if the category_name is in the list of category_names then locate its model       </span>
+    <span class="k">if</span> <span class="n">category_name</span> <span class="ow">in</span> <span class="n">category_names</span><span class="p">:</span>
+        <span class="c1"># use the category_name selected on edu_quiz.html to determine the model to get questions from</span>
+        <span class="c1"># replace spaces and &#39;&amp;&#39; in the event category names have spaces to create a valid model name</span>
+        <span class="n">model_name</span> <span class="o">=</span> <span class="n">category_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">,</span> <span class="s2">&quot;and&quot;</span><span class="p">)</span>
+
+        <span class="c1"># dynamically find a model that matches the category name</span>
+        <span class="c1"># - dynamically:instead of explicitly specifying a fixed model in the code, </span>
+        <span class="c1"># - generate or determine the model to use at runtime based on certain conditions/data                 </span>
+        <span class="c1"># use apps module to access the get_model function &amp; find the model name         </span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">apps</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s1">&#39;General_Knowledge&#39;</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>            
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;model:</span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>                                
+                                            
+    <span class="c1"># else print an error for a missing category_name</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">category_name</span><span class="si">}</span><span class="s2"> is not in this list: </span><span class="si">{</span><span class="n">category_names</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  
+    
+    <span class="c1"># check that a model was found</span>
+    <span class="k">if</span> <span class="n">model</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>    
         <span class="c1"># get the question object associated with a specific question_id in the database</span>
         <span class="n">question</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">question_id</span><span class="p">)</span>
         <span class="c1">#    </span>
@@ -314,8 +355,11 @@
                     <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;General_Knowledge:results&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">category_name</span><span class="p">,))</span>
                     <span class="p">)</span></div>
 
+
 <span class="c1"># start new quiz function</span>
-<div class="viewcode-block" id="try_new_quiz"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.views.try_new_quiz">[docs]</a><span class="k">def</span> <span class="nf">try_new_quiz</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="try_new_quiz">
+<a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.views.try_new_quiz">[docs]</a>
+<span class="k">def</span> <span class="nf">try_new_quiz</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="c1"># delete the result &amp; session data of the current quiz before starting a new quiz</span>
     <span class="k">if</span> <span class="s1">&#39;quiz_result&#39;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">:</span>
         <span class="k">del</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;quiz_result&#39;</span><span class="p">]</span>
@@ -324,6 +368,7 @@
     <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span>
                 <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;General_Knowledge:index_gen&#39;</span><span class="p">)</span>
                 <span class="p">)</span>  </div>
+
         
 
 </pre></div>

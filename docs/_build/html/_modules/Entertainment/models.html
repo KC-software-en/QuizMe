@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Entertainment.models &mdash; QuizMe 00.00.01 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d7bb8d4d"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -78,12 +75,12 @@
 <span class="c1">###################################################################################</span>
 
 <span class="c1"># Create your models here.</span>
-
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a model for the quiz categories in QuizMe.</span>
-<span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># define a model for categories in the QuizMe project</span>
-<div class="viewcode-block" id="Categories"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.models.Categories">[docs]</a><span class="k">class</span> <span class="nc">Categories</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="Categories">
+<a class="viewcode-back" href="../../Entertainment.html#Entertainment.models.Categories">[docs]</a>
+<span class="k">class</span> <span class="nc">Categories</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a model for the quiz categories in QuizMe.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># define a field to store the category name as text</span>
     <span class="c1"># define a field to store the description of the category as text</span>
     <span class="n">category</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
@@ -92,8 +89,183 @@
     <span class="c1"># define a method to represent the model instance as a string</span>
     <span class="c1"># return the category name</span>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A human-readable string representation of the category object.</span>
+
+<span class="sd">        :return: Return the category object</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span></div>
+
     
+
+<span class="c1"># define a model for subcategories in the Entertainment app</span>
+<div class="viewcode-block" id="Subcategories">
+<a class="viewcode-back" href="../../Entertainment.html#Entertainment.models.Subcategories">[docs]</a>
+<span class="k">class</span> <span class="nc">Subcategories</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a model for the quiz subcategories in Entertainment.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># retrieve the category object representing &#39;Entertainment&#39; from the Categories model</span>
+    <span class="n">en_category_obj</span> <span class="o">=</span> <span class="n">Categories</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;Entertainment&#39;</span><span class="p">)</span>
+
+    <span class="c1"># use database foreign keys to indicate relationships between categories and subcategories</span>
+    <span class="c1"># - a ForeignKey field to show this many-to-one relationship</span>
+    <span class="c1"># set a default category to the primary key (pk) of the &#39;Entertainment&#39; category object</span>
+    <span class="c1"># https://docs.djangoproject.com/en/3.2/topics/db/models/#many-to-one-relationships</span>
+    <span class="c1"># https://dnmtechs.com/setting-default-value-for-foreign-key-attribute-in-django/</span>
+    <span class="c1"># ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, </span>
+    <span class="c1"># - providing further control over the default value</span>
+    <span class="c1"># https://docs.djangoproject.com/en/3.2/ref/models/fields/#default</span>
+    <span class="c1"># - according to doc, for fields like ForeignKey that map to model instances, </span>
+    <span class="c1"># - defaults should be the value of the field they reference (pk unless to_field is set) instead of model instances</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Categories</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_DEFAULT</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">en_category_obj</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>    
+
+    <span class="c1"># define a field to store the subcategory name as text</span>
+    <span class="n">subcategory</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="c1"># define a field to store the description of the subcategory as text</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="c1"># define a method to represent the model instance as a string</span>
+    <span class="c1"># return the subcategory name </span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A human-readable string representation of the subcategory object.</span>
+
+<span class="sd">        :return: Return the subcategory object</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subcategory</span></div>
+
+    
+ 
+<span class="c1"># use Django&#39;s built-in object-relational mapping (ORM) &amp; define the relevant classes</span>
+<span class="c1"># -each entry in a SQL table represents a single object, this can be converted to a class instance in Python.  </span>
+<span class="c1"># create a Music class that inherits from django.db.models.Model</span>
+<div class="viewcode-block" id="Music">
+<a class="viewcode-back" href="../../Entertainment.html#Entertainment.models.Music">[docs]</a>
+<span class="k">class</span> <span class="nc">Music</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span> 
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Music model for the subcategory in the entertainment quiz.</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+    <span class="c1"># retrieve the category object representing &#39;Education&#39; from the Categories model</span>
+    <span class="n">en_category_obj</span> <span class="o">=</span> <span class="n">Categories</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;Entertainment&#39;</span><span class="p">)</span>
+    <span class="c1"># retrieve the subcategory object representing &#39;Music&#39; from the Subcategories model</span>
+    <span class="n">music_subcategory_obj</span> <span class="o">=</span> <span class="n">Subcategories</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">subcategory</span><span class="o">=</span><span class="s1">&#39;Music&#39;</span><span class="p">)</span>
+
+    <span class="c1"># use database foreign keys to indicate relationships between Music and categories    </span>
+    <span class="c1"># use database foreign keys to indicate relationships between Music and subcategories</span>
+    <span class="c1"># - a ForeignKey field to show this many-to-one relationship</span>
+    <span class="c1"># set a default category to the primary key (pk) of the &#39;en_category_obj&#39; object</span>
+    <span class="c1"># set the desired default subcategory to the primary key (pk) of the &#39;music_subcategory_obj&#39;</span>
+    <span class="c1"># ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, </span>
+    <span class="c1"># - providing further control over the default value</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Categories</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_DEFAULT</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">en_category_obj</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>   
+    <span class="n">subcategory</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Subcategories</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">music_subcategory_obj</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>       
+
+    <span class="c1"># set variables that represent question, choices &amp; correct_answer in the quiz</span>
+    <span class="c1"># use TextField to store the questions</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>    
+    
+    <span class="c1"># use TextField to store the list of choices </span>
+    <span class="c1"># set default as an empty list and allow it to be blank.</span>
+    <span class="n">choices</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">default</span> <span class="o">=</span> <span class="nb">list</span><span class="p">,</span> <span class="n">blank</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># use TextField to store the correct answer</span>
+    <span class="n">correct_answer</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="c1"># define a __str__ method for human-readable output</span>
+    <span class="c1"># return question</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>        
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A human-readable string representation of the Music question object in a quiz.</span>
+
+<span class="sd">        :return: Return the question object</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">question</span></div>
+
+
+<span class="c1"># create a Film class that inherits from django.db.models.Model</span>
+<div class="viewcode-block" id="Film">
+<a class="viewcode-back" href="../../Entertainment.html#Entertainment.models.Film">[docs]</a>
+<span class="k">class</span> <span class="nc">Film</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>   
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Film model for the subcategory in the entertainment quiz.</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+    <span class="c1"># retrieve the category object representing &#39;Entertainment&#39; from the Categories model</span>
+    <span class="n">en_category_obj</span> <span class="o">=</span> <span class="n">Categories</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;Entertainment&#39;</span><span class="p">)</span>
+    <span class="c1"># retrieve the subcategory object representing &#39;Film&#39; from the Subcategories model</span>
+    <span class="n">film_subcategory_obj</span> <span class="o">=</span> <span class="n">Subcategories</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">subcategory</span><span class="o">=</span><span class="s1">&#39;Film&#39;</span><span class="p">)</span>
+
+    <span class="c1"># use database foreign keys to indicate relationships between Film and categories    </span>
+    <span class="c1"># use database foreign keys to indicate relationships between Film and subcategories</span>
+    <span class="c1"># - a ForeignKey field to show this many-to-one relationship</span>
+    <span class="c1"># set a default category to the primary key (pk) of the &#39;en_category_obj&#39; object</span>
+    <span class="c1"># set the desired default subcategory to the primary key (pk) of the &#39;film_subcategory_obj&#39;</span>
+    <span class="c1"># ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, </span>
+    <span class="c1"># - providing further control over the default value</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Categories</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_DEFAULT</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">en_category_obj</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>   
+    <span class="n">subcategory</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Subcategories</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">film_subcategory_obj</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>       
+
+    <span class="c1"># set variables that represent question, choices &amp; correct_answer in the quiz</span>
+    <span class="c1"># use TextField to store the questions</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>    
+    
+    <span class="c1"># use TextField to store the list of choices </span>
+    <span class="c1"># set default as an empty list and allow it to be blank.</span>
+    <span class="n">choices</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">default</span> <span class="o">=</span> <span class="nb">list</span><span class="p">,</span> <span class="n">blank</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># use TextField to store the correct answer</span>
+    <span class="n">correct_answer</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="c1"># define a __str__ method for human-readable output</span>
+    <span class="c1"># return question</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A human-readable string representation of the Film question object in a quiz.</span>
+
+<span class="sd">        :return: Return the question object</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">question</span></div>
+
+
+<div class="viewcode-block" id="Video_Games">
+<a class="viewcode-back" href="../../Entertainment.html#Entertainment.models.Video_Games">[docs]</a>
+<span class="k">class</span> <span class="nc">Video_Games</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a model for the Science and nature questions in the entertainment quiz.</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+    <span class="c1"># retrieve the category object representing &#39;Entertainment&#39; from the Categories model</span>
+    <span class="n">en_category_obj</span> <span class="o">=</span> <span class="n">Categories</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;Entertainment&#39;</span><span class="p">)</span>
+    <span class="c1"># retrieve the subcategory object representing &#39;Video Games&#39; from the Subcategories model</span>
+    <span class="n">games_subcategory_obj</span> <span class="o">=</span> <span class="n">Subcategories</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">subcategory</span><span class="o">=</span><span class="s1">&#39;Video Games&#39;</span><span class="p">)</span>
+
+    <span class="c1"># use database foreign keys to indicate relationships between Video Games and categories    </span>
+    <span class="c1"># use database foreign keys to indicate relationships between Video Games and subcategories</span>
+    <span class="c1"># - a ForeignKey field to show this many-to-one relationship</span>
+    <span class="c1"># set a default category to the primary key (pk) of the &#39;en_category_obj&#39; object</span>
+    <span class="c1"># set the desired default subcategory to the primary key (pk) of the &#39;games_subcategory_obj&#39;</span>
+    <span class="c1"># ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, </span>
+    <span class="c1"># - providing further control over the default value</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Categories</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_DEFAULT</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">en_category_obj</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>   
+    <span class="n">subcategory</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Subcategories</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">games_subcategory_obj</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>       
+    
+    <span class="c1"># set variables that represent question, choices &amp; correct_answer in the quiz</span>
+    <span class="c1"># use TextField to store the questions</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>    
+    
+    <span class="c1"># use TextField to store the list of choices </span>
+    <span class="c1"># set default as an empty list and allow it to be blank.</span>
+    <span class="n">choices</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">default</span> <span class="o">=</span> <span class="nb">list</span><span class="p">,</span> <span class="n">blank</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># use TextField to store the correct answer</span>
+    <span class="n">correct_answer</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+
+    <span class="c1"># define a __str__ method for human-readable output</span>
+    <span class="c1"># return question</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A human-readable string representation of the Video Games question object in a quiz.</span>
+
+<span class="sd">        :return: Return the question object</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">question</span>    </div>
+
 </pre></div>
 
            </div>

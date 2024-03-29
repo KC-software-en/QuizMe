@@ -131,7 +131,7 @@ class TestDetailView(TestCase):
         # Mock the necessary functions.
         get_json_categories = Mock(return_value={'categories': [{'name': 'category1'}, {'name': 'category2'}]})
         get_category_names = Mock(return_value=['category1', 'category2'])
-        find_model = Mock(return_value=Mock())
+        get_model = Mock(return_value=Mock())
         get_object_or_404 = Mock(return_value=Mock(
             pk=1,
             correct_answer='Answer',
@@ -141,7 +141,7 @@ class TestDetailView(TestCase):
         # Patch the necessary functions in views.
         with patch('Education.views.get_json_categories', get_json_categories), \
              patch('Education.views.get_category_names', get_category_names), \
-             patch('Education.views.find_model', find_model), \
+             patch('Education.views.apps.get_model', get_model), \
              patch('Education.views.get_object_or_404', get_object_or_404):
             response = detail(request, 'category1', 1)
         
@@ -162,13 +162,12 @@ class TestDetailView(TestCase):
         # Mock the necessary functions.
         get_json_categories = Mock(return_value={'trivia_categories"': [{'name': 'category1'}, {'name': 'category2'}]})
         get_category_names = Mock(return_value=['category1', 'category2'])
-        find_model = Mock(return_value=Mock())
-        get_object_or_404 = Mock(side_effect=Http404)
+        get_model = Mock(return_value=Mock())
 
         # Patch the necessary functions in views.
         with patch('Education.views.get_json_categories', get_json_categories), \
              patch('Education.views.get_category_names', get_category_names), \
-             patch('Education.views.find_model', find_model):
+             patch('Education.views.apps.get_model', get_model):
                 response = detail(request, 'category1', 2)             
 
         # Assert that the correct template is rendered.
@@ -178,6 +177,24 @@ class TestDetailView(TestCase):
         self.assertIsNone(response.context_data['question'])
         self.assertEqual(response.context_data['choices'], [])
         self.assertEqual(response.context_data['category_name'], 'category1')
+
+    @patch('Education.view.detail')  # Mock the 'detail' function
+    def test_detail_should_return_result(self, detail_mock):
+        detail_mock.return_value = True
+        result = detail()
+        self.assertTrue(result)
+
+    @patch('Education.view.detail')
+    def test_deatil_should_return_none_when_raiseing_http_error_404(self, detail_mock):
+        detail_mock.side_effect = LookupError('not found')
+        result = detail()
+        self.assertIsNone(result)
+
+    @patch('Education.view.detail')
+    def test_raise_lookup_error(self, detail_mock):
+        detail_mock.side_effect = LookupError('some other error')
+        with self.assertRaises(LookupError):
+            detail()
 
     
 
@@ -306,7 +323,8 @@ class SelectionTestCase(TestCase):
         self.assertEqual(response.context_data['question'].correct_answer, 'Choice 1')
         self.assertEqual(response.context_data['choices'], ['Choice 1', 'Choice 2', 'Choice 3'])
         self.assertEqual(response.context_data['category_name'], 'category1')      
-      
+
+  
 ### Test for the try new quiz view. ###
 class TestTryNewQuiz(TestCase):
     def setUp(self):
@@ -365,7 +383,7 @@ class TestTryNewQuiz(TestCase):
         self.assertEqual(response.url, reverse('Education:index_edu'))  # Assert redirect URL is the correct url.
        
 '''
-A class that tests finding a model.
+A class that tests finding a model. to test for the lookup error.
 '''
 # create a class that tests finding a model.         
 @patch('Education.views.apps.get_model')

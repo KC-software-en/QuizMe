@@ -1,0 +1,28 @@
+1 . Use the sqlite 3 database to create the categories 
+    # So remove the unwanted imports and models leave the categories only.
+    # Run migrations on the sqlite 3 database as usual.
+    # Then switch to the postgresql database.
+    # Then run this command 'python manage.py migrate --run-syncdb' to sync postgresql database tables.
+    # Once all the categories are added check the pgadmin4 app and refresh to check the changes if the tables have been added.
+    # After the tables have been added populate them manually.
+
+2 . Use the postgresql database to create the subcategories 
+    # So remove the unwanted imports and models leave the categories and subcategories only.
+    # Run migrations on the postgresql database as you would for sqlite3.
+    # Then run this command 'python manage.py migrate --run-syncdb' to sync postgresql database tables.
+    # Once all the subcategories are added check the pgadmin4 app and refresh to check the changes if the tables have been added. 
+    # After the tables have been added populate them manually.
+
+3 . Use the postgresql database to create the models for each app.
+    # So add all the imports and models.
+    # Run migrations on the postgresql database as you would for sqlite3.
+    # Then run this command 'python manage.py migrate --run-syncdb' to sync postgresql database tables.
+    # Once all the models are added check the pgadmin4 app and refresh to check the changes if the tables have been added.   
+
+4 . Use the postgresql database populate each app model.
+    # So make sure all the imports and models are added.
+    # Run the python commands used to populate the database models.
+    # Then run this command 'python manage.py migrate --run-syncdb' to sync postgresql database tables.
+    # Once all the models are added check the pgadmin4 app and refresh to check the changes if the tables have been added.   
+
+5. Run the server on postgresql db and check if everything works and runs successfully.          

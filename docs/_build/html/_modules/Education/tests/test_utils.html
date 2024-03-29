@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Education.tests.test_utils &mdash; QuizMe 00.00.01 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
-
-  
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=d7bb8d4d"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -121,16 +118,23 @@
 <span class="c1"># use patch class decorator &amp; provide the import path to the requests.get function in views.py</span>
 <span class="c1"># patch the external get function within the requests module, which is used in the views.get_json_categories function</span>
 <span class="c1"># - to intercept the HTTP request made by the code and control the response during testing</span>
-<div class="viewcode-block" id="TestJsonResponse"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestJsonResponse">[docs]</a><span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.utils.requests.get&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestJsonResponse">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestJsonResponse">[docs]</a>
+<span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.utils.requests.get&#39;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">TestJsonResponse</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
-<div class="viewcode-block" id="TestJsonResponse.setUp"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestJsonResponse.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestJsonResponse.setUp">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestJsonResponse.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span></div>
+
     
     <span class="c1"># test successful response for json categories by calling its function from views </span>
     <span class="c1"># https://docs.python.org/3.7/library/unittest.mock.html#the-mock-class</span>
     <span class="c1"># mock_get_request is a parameter representing the function that replaces a mock during the test</span>
     <span class="c1"># - represents the requests.get function in the patch decorator, which is called inside the get_json_categories function</span>
-<div class="viewcode-block" id="TestJsonResponse.test_get_json_categories_ok"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestJsonResponse.test_get_json_categories_ok">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_json_categories_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_request</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestJsonResponse.test_get_json_categories_ok">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestJsonResponse.test_get_json_categories_ok">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_get_json_categories_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_request</span><span class="p">):</span>  
         <span class="c1"># create an instance of MagicMock &amp; assign it to the response object</span>
         <span class="c1"># simulate a successful HTTP response with a status_code attribute</span>
         <span class="c1"># reflect that the get_json_categories function calls response.json() by</span>
@@ -159,12 +163,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that an API response was successfully received.&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that json_response is a dictionary.&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;trivia_categories&#39;</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the trivia_categories key is present in the dictionary json_response.&#39;</span><span class="p">)</span>        </div>
+
     
     <span class="c1"># test unsuccessful response for json categories by calling its function from views  </span>
     <span class="c1"># https://docs.python.org/3.7/library/unittest.mock.html#the-mock-class</span>
     <span class="c1"># mock_get_request is a parameter representing the function that replaces a mock during the test</span>
     <span class="c1"># - represents the requests.get function in the patch decorator, which is called inside the get_json_categories function</span>
-<div class="viewcode-block" id="TestJsonResponse.test_get_json_categories_error"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestJsonResponse.test_get_json_categories_error">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_json_categories_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_request</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestJsonResponse.test_get_json_categories_error">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestJsonResponse.test_get_json_categories_error">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_get_json_categories_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_request</span><span class="p">):</span>  
         <span class="c1"># create an instance of MagicMock &amp; assign it to the response object</span>
         <span class="c1"># simulate an unsuccessful HTTP response with a status_code attribute        </span>
         <span class="n">mock_response_error</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
@@ -180,10 +187,13 @@
         <span class="c1"># assert that API response was unsuccessful &amp; None        </span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">response_error</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the categories API response was unsuccessful &amp; returns None.&#39;</span><span class="p">)</span>        </div>
 
+
     <span class="c1"># test successful response for specific json categories by calling its function from views  </span>
     <span class="c1"># mock_get_request is an argument representing the mocked version of the requests.get function specified in the @patch decorator, </span>
     <span class="c1"># - used within the get_specific_json_category function.</span>
-<div class="viewcode-block" id="TestJsonResponse.test_get_specific_json_category_success"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestJsonResponse.test_get_specific_json_category_success">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_specific_json_category_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_request</span><span class="p">):</span>
+<div class="viewcode-block" id="TestJsonResponse.test_get_specific_json_category_success">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestJsonResponse.test_get_specific_json_category_success">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_get_specific_json_category_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_request</span><span class="p">):</span>
         <span class="c1"># set up mock for a successful response</span>
         <span class="c1"># create a mock object by instantiating a MagicMock class &amp; assigning it to the response object</span>
         <span class="c1"># - it will simulate an HTTP response object</span>
@@ -223,10 +233,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">response_ok</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that json_response is a dictionary.&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="n">response_ok</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the trivia_categories key is present in the dictionary json_response.&#39;</span><span class="p">)</span>        </div>
 
+
     <span class="c1"># test error response for specific json categories by calling its function from views  </span>
     <span class="c1"># mock_get_request is an argument representing the mocked version of the requests.get function specified in the @patch decorator, </span>
     <span class="c1"># - used within the get_specific_json_category function.</span>
-<div class="viewcode-block" id="TestJsonResponse.test_get_specific_json_category_error"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestJsonResponse.test_get_specific_json_category_error">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_specific_json_category_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_request</span><span class="p">):</span>
+<div class="viewcode-block" id="TestJsonResponse.test_get_specific_json_category_error">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestJsonResponse.test_get_specific_json_category_error">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_get_specific_json_category_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_request</span><span class="p">):</span>
         <span class="c1"># set up mock for an unsuccessful response</span>
         <span class="c1"># create a mock object by instantiating a MagicMock class &amp; assigning it to the response object</span>
         <span class="c1"># - it will simulate an HTTP response object</span>
@@ -244,19 +257,28 @@
         <span class="n">response_error</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_specific_json_category</span><span class="p">(</span><span class="n">quantity</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
         
         <span class="c1"># assert that API response was unsuccessful &amp; returns None        </span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">response_error</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that an API response was unsuccessful &amp; returns None.&#39;</span><span class="p">)</span>        </div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">response_error</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that an API response was unsuccessful &amp; returns None.&#39;</span><span class="p">)</span>        </div>
+</div>
+
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Create a class to test mix_choices &amp; get_next_question_id functions in utils.py</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="c1"># create a class TestVariousUtils</span>
-<div class="viewcode-block" id="TestVariousUtils"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestVariousUtils">[docs]</a><span class="k">class</span> <span class="nc">TestVariousUtils</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestVariousUtils">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestVariousUtils">[docs]</a>
+<span class="k">class</span> <span class="nc">TestVariousUtils</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="c1"># setup </span>
-<div class="viewcode-block" id="TestVariousUtils.setUp"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestVariousUtils.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestVariousUtils.setUp">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestVariousUtils.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span></div>
 
+
     <span class="c1"># test the mix_choices function</span>
-<div class="viewcode-block" id="TestVariousUtils.test_mix_choices"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestVariousUtils.test_mix_choices">[docs]</a>    <span class="k">def</span> <span class="nf">test_mix_choices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestVariousUtils.test_mix_choices">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestVariousUtils.test_mix_choices">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_mix_choices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># create a list of choices to test</span>
         <span class="c1"># use random to check that it will rearrange the list</span>
         <span class="n">choices</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Choice1&#39;</span><span class="p">,</span> <span class="s1">&#39;Choice2&#39;</span><span class="p">,</span> <span class="s1">&#39;Choice3&#39;</span><span class="p">]</span>
@@ -274,9 +296,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertCountEqual</span><span class="p">(</span><span class="n">mixed_choices</span><span class="p">,</span> <span class="n">choices</span><span class="p">,</span>
                                 <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the two lists contain the same items, regardless of their order&#39;</span><span class="p">)</span></div>
 
+
     <span class="c1"># test get_next_question_id</span>
     <span class="c1"># patch the selection view where get_next_question_id was called</span>
-<div class="viewcode-block" id="TestVariousUtils.test_get_next_question_id"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestVariousUtils.test_get_next_question_id">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.selection&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestVariousUtils.test_get_next_question_id">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestVariousUtils.test_get_next_question_id">[docs]</a>
+    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.selection&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">test_get_next_question_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_question_selection_pks</span><span class="p">):</span>
         <span class="c1"># mock pks of question_selection</span>
         <span class="n">mock_question_selection_pks</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
@@ -291,18 +316,28 @@
 
         <span class="c1"># test when the pk is not in the question_selection_pks</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_next_question_id</span><span class="p">(</span><span class="s1">&#39;category_name&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that None is returned for a pk not in the list&#39;</span><span class="p">)</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that None is returned for a pk not in the list&#39;</span><span class="p">)</span></div>
+</div>
 
-<span class="sd">&quot;&quot;&quot;Create a class to test get_category_names().</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
-<div class="viewcode-block" id="TestGetCategoryNames"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestGetCategoryNames">[docs]</a><span class="k">class</span> <span class="nc">TestGetCategoryNames</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="sd">Create a class to test get_category_names().</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="TestGetCategoryNames">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestGetCategoryNames">[docs]</a>
+<span class="k">class</span> <span class="nc">TestGetCategoryNames</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="c1"># setup </span>
-<div class="viewcode-block" id="TestGetCategoryNames.setUp"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestGetCategoryNames.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestGetCategoryNames.setUp">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestGetCategoryNames.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># no needed conditions</span>
         <span class="k">pass</span></div>
 
+
     <span class="c1"># test get_category_names that have a name for the corresponding id selection</span>
-<div class="viewcode-block" id="TestGetCategoryNames.test_get_category_names_found"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestGetCategoryNames.test_get_category_names_found">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_category_names_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestGetCategoryNames.test_get_category_names_found">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestGetCategoryNames.test_get_category_names_found">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_get_category_names_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># create a MagicMock object to mock the response from the external get_category_names function</span>
         <span class="n">mock_response</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
         
@@ -330,8 +365,11 @@
         <span class="c1"># assert that the names are there for the selected category ids</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">category_names</span><span class="p">,</span> <span class="n">mock_category_names</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that category1 &amp; category2 is in the mock_response.&#39;</span><span class="p">)</span></div>
 
+
     <span class="c1"># test get_category_names if the category_name is not in the json response</span>
-<div class="viewcode-block" id="TestGetCategoryNames.test_no_category_name"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestGetCategoryNames.test_no_category_name">[docs]</a>    <span class="k">def</span> <span class="nf">test_no_category_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestGetCategoryNames.test_no_category_name">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestGetCategoryNames.test_no_category_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_no_category_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># set up a mock_response containing a dictionary of trivia category lists</span>
         <span class="c1"># alter the id so that a category_name cannot be found by its id</span>
         <span class="n">mock_response</span> <span class="o">=</span> <span class="p">{</span>
@@ -346,16 +384,23 @@
         <span class="n">category_names</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">get_category_names</span><span class="p">(</span><span class="n">mock_response</span><span class="p">)</span>
 
         <span class="c1"># assert that the name is not there for the selected category id</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertListEqual</span><span class="p">(</span><span class="n">category_names</span><span class="p">,</span> <span class="p">[],</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the list is empty if a selected category id is not there.&#39;</span><span class="p">)</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertListEqual</span><span class="p">(</span><span class="n">category_names</span><span class="p">,</span> <span class="p">[],</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the list is empty if a selected category id is not there.&#39;</span><span class="p">)</span></div>
+</div>
 
-<span class="sd">&quot;&quot;&quot;Create a class that tests the category_objects function.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Create a class that tests the category_objects function.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="c1"># create tests for a valid category_name and an invalid category_name when locating a model to retrieve its category_objects</span>
 <span class="c1"># use TransactionTestCase because tests for category objects rely on database access </span>
 <span class="c1"># - this ensures test objects are not created on the admin site</span>
-<div class="viewcode-block" id="TestCategoryObjects"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestCategoryObjects">[docs]</a><span class="k">class</span> <span class="nc">TestCategoryObjects</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>    
+<div class="viewcode-block" id="TestCategoryObjects">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestCategoryObjects">[docs]</a>
+<span class="k">class</span> <span class="nc">TestCategoryObjects</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>    
     <span class="c1"># setup the conditions needed for functions in the class</span>
-<div class="viewcode-block" id="TestCategoryObjects.setUp"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestCategoryObjects.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCategoryObjects.setUp">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestCategoryObjects.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create an instance of the HttpRequest class</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">HttpRequest</span><span class="p">()</span>
 
@@ -392,11 +437,14 @@
         <span class="c1"># 10 question objects for the question_selection</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mock_question_selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mock_questions</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>         </div>
 
+
     <span class="c1"># patch to mock the filter method of the Mythology.objects manager. </span>
     <span class="c1"># - this is done to ensure that when filter is called in the utils.category_objects function, </span>
     <span class="c1"># - it returns the specified self.mock_question_selection instead of actually querying the database.         </span>
     <span class="c1"># not a literal file path but rather a string representing the import path of the object to mock. </span>
-<div class="viewcode-block" id="TestCategoryObjects.test_category_objects"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestCategoryObjects.test_category_objects">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.utils.Mythology.objects.filter&#39;</span><span class="p">)</span>        
+<div class="viewcode-block" id="TestCategoryObjects.test_category_objects">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestCategoryObjects.test_category_objects">[docs]</a>
+    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.utils.Mythology.objects.filter&#39;</span><span class="p">)</span>        
     <span class="k">def</span> <span class="nf">test_category_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_filter</span><span class="p">):</span>
         <span class="c1"># set up the return value for the filtered selection</span>
         <span class="n">mock_filter</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="nb">filter</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mock_question_selection</span><span class="p">)</span>        
@@ -425,9 +473,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;mock_question_selection_ids&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">mock_question_selection_ids</span><span class="p">,</span> 
                          <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that there are a list of 10 ids.&#39;</span><span class="p">)</span>  <span class="c1"># Ensure the session is set correctly</span></div>
 
-    <span class="c1"># test for an error raised if globals does not have a model for a category name</span>
+
+    <span class="c1"># test for an error raised if apps does not have a model for a category name</span>
     <span class="c1"># dont incl category_objects in path to avoid AttributeError: &lt;function category_objects at 0x0489E2B8&gt; does not have the attribute &#39;globals&#39;</span>
-<div class="viewcode-block" id="TestCategoryObjects.test_category_objects_invalid_category"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestCategoryObjects.test_category_objects_invalid_category">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.apps.get_model&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestCategoryObjects.test_category_objects_invalid_category">
+<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_utils.TestCategoryObjects.test_category_objects_invalid_category">[docs]</a>
+    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.apps.get_model&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">test_category_objects_invalid_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_model</span><span class="p">):</span>        
         <span class="c1"># redirect the standard output (stdout) to the StringIO object captured_output. </span>
         <span class="c1"># - this captures any output that is printed to the standard output during the execution of the category_objects function</span>
@@ -447,7 +498,9 @@
         <span class="c1"># assert that the response is None when an invalid category is provided</span>
         <span class="c1"># assert that the string &#39;error_message&#39; is present in the captured output.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should return None for an invalid category.&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;error_message&#39;</span><span class="p">,</span> <span class="n">captured_output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the str is present in the stdout for LookupError.&#39;</span><span class="p">)</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;error_message&#39;</span><span class="p">,</span> <span class="n">captured_output</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the str is present in the stdout for LookupError.&#39;</span><span class="p">)</span></div>
+</div>
+
         
 </pre></div>
 
