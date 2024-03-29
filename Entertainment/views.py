@@ -51,7 +51,7 @@ def index_en(request):
     :param request: The HTTP request object (optional, if needed).
     :type request: HttpRequest
     :return: The en_quiz template.
-    :rtype: template
+    :rtype: HTTPResponse
     """
     # if a user prematurely leaves a quiz & does not use the exit button,
     # - delete the result & session data of the current quiz 
@@ -106,7 +106,7 @@ def detail(request, category_name, question_id):
     :param question_id: The ID of the question.
     :type question_id: int
     :return: The detail template.
-    :rtype: template
+    :rtype: HTTPResponse
     """
     # retrieve the list of categories from the open trivia database
     response = get_json_categories()
@@ -166,7 +166,7 @@ def results(request, category_name: str):
     :param category_name: The name of the category.
     :type category_name: str
     :return: The result template.
-    :rtype: template
+    :rtype: HTTPResponse
     """
     # get the quiz result for the session
     result = request.session.get('quiz_result')
@@ -192,7 +192,7 @@ def selection(request, category_name, question_id):
     :param question_id: The ID of the question.
     :type question_id: int
     :return: The detail template.
-    :rtype: template
+    :rtype: HTTPResponse
     """
     # retrieve the list of categories from the open trivia database
     response = get_json_categories()
@@ -295,7 +295,7 @@ def try_new_quiz(request):
     :param request: The HTTP request object (optional, if needed).
     :type request: HttpRequest
     :return: The index_en template.
-    :rtype: template
+    :rtype: HTTPResponse
     """
     # delete the result & session data of the current quiz before starting a new quiz
     if 'quiz_result' in request.session:

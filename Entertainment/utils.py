@@ -25,15 +25,11 @@ from django.http import Http404
 
 # define a function that returns the json response for Open Trivia DB
 def get_json_categories():
-    """
-    Retrieve a specific category from the Open Trivia DB API.
+    """Retrieve a specific category from the Open Trivia DB API.
 
-    :param name: None.
-    :type name: str
-    :return: The JSON response from the Open Trivia DB API.
-    :rtype: dict
+    :return: The JSON response from the Open Trivia DB API
+    :rtype:  dict
     """
-
     # get Category Lookup url
     category_lookup = 'https://opentdb.com/api_category.php'
     # store url in a variable as a json response
