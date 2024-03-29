@@ -29,13 +29,13 @@ class NewUserForm(UserCreationForm):
 
     def save(self, commit=True):
         """
-        This method overrides the save method of the UserCreationForm class to set the email field of the user instance to the value of the cleaned_data['email'] field.
+        Overrides the save method of the UserCreationForm class to set the email field of the user instance
+        to the value of the cleaned_data['email'] field.
 
-        Parameters:
-            commit (bool): A boolean value indicating whether to save the user instance to the database.
-
-        Returns:
-            User: The user instance.
+        :param commit: A boolean value indicating whether to save the user instance to the database.
+        :type commit: bool
+        :return: A user instance.
+        :rtype: form
         """
         user = super(NewUserForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
