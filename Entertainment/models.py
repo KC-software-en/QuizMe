@@ -4,18 +4,9 @@ from django.db import models
 ###################################################################################
 
 # Create your models here.
-
-'''
-
-'''
 # define a model for categories in the QuizMe project
 class Categories(models.Model):
     """Create a model for the quiz categories in QuizMe.
-
-    :param models: models.Model
-    :type models: models.TextField()
-    :return: Category name and category description
-    :rtype: str
     """
     # define a field to store the category name as text
     # define a field to store the description of the category as text
@@ -36,11 +27,6 @@ class Categories(models.Model):
 # define a model for subcategories in the Entertainment app
 class Subcategories(models.Model):
     """Create a model for the quiz subcategories in Entertainment.
-
-    :param models: models.Model.
-    :type models: models.ForeignKey, models.TextField .
-    :return: category foriegn key , subcategory and description as textfields.
-    :rtype: str
     """
     # retrieve the category object representing 'Entertainment' from the Categories model
     en_category_obj = Categories.objects.get(category='Entertainment')
@@ -79,11 +65,6 @@ class Subcategories(models.Model):
 # create a Music class that inherits from django.db.models.Model
 class Music(models.Model): 
     """Create a Music model for the subcategory in the entertainment quiz.
-
-    :param models: models.Model.
-    :type models: models.ForeignKey, models.TextField .
-    :return: category foriegn key , subcategory foriegn key , question, choices and correct answer as textfields.
-    :rtype: str
     """ 
     # retrieve the category object representing 'Education' from the Categories model
     en_category_obj = Categories.objects.get(category='Entertainment')
@@ -124,11 +105,6 @@ class Music(models.Model):
 # create a Film class that inherits from django.db.models.Model
 class Film(models.Model):   
     """Create a Film model for the subcategory in the entertainment quiz.
-
-    :param models: models.Model.
-    :type models: models.ForeignKey, models.TextField .
-    :return: category foriegn key , subcategory foriegn key , question, choices and correct answer as textfields.
-    :rtype: str
     """ 
     # retrieve the category object representing 'Entertainment' from the Categories model
     en_category_obj = Categories.objects.get(category='Entertainment')
@@ -168,11 +144,6 @@ class Film(models.Model):
 
 class Video_Games(models.Model):
     """Create a model for the Science and nature questions in the entertainment quiz.
-
-    :param models: models.Model.
-    :type models: models.ForeignKey, models.TextField .
-    :return: category foriegn key , subcategory foriegn key , question, choices and correct answer as textfields.
-    :rtype: str
     """ 
     # retrieve the category object representing 'Entertainment' from the Categories model
     en_category_obj = Categories.objects.get(category='Entertainment')
