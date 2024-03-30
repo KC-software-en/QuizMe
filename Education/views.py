@@ -74,14 +74,12 @@ def index_edu(request):
     # iterate over the list of category_names to return the context for each subcategory in Education app
     for category_name in category_names:
         # call the function to retrieve the objects from the django database - viewable on admin site
-        question_selection =  category_objects(request, category_name)           
-        print(f"question_selection:{question_selection}")
+        question_selection =  category_objects(request, category_name)                   
 
         # retrieve question_selection_pks from the session (from utils.category_objects)
         # because the 1st pk needs to be indexed for the 1st question rendered
         # question_selection.first().id chose the 1st question numerically in the database, not the 1st from the randomised list
-        question_selection_pks = request.session['question_selection_ids']        
-        print(f"index_edu=question_selection_ids in session:{question_selection_pks}") ##     
+        question_selection_pks = request.session['question_selection_ids']                
     
         # the response is the dictionary for trivia categories
         # pass all the context variables into a single dictionary to render in the template correctly
@@ -149,17 +147,14 @@ def detail(request, category_name, question_id):
     if model != None:            
         # get the question object associated with a specific question_id in the database
         question = get_object_or_404(model, pk=question_id)    
-        print(f"\n\nquestion:{question}")#####
-        print(f"\n\ncorrect_answer:{question.correct_answer}")  #######      
-
+        
         # use the helper function literal_eval of the ast module to convert the str representation of the choices list
         # - in the textfield of the category model into a list
         # https://python.readthedocs.io/en/latest/library/ast.html#ast.literal_eval
         # note:ast.literal_eval is safer than eval. it only evaluates literals & not arbitrary expressions, 
         # - reducing the risk of code injection
         # use in template to iterate over the list of choices dictionaries and access the values for the 'choice' key
-        convert_choices_textfield_into_list = ast.literal_eval(question.choices)    
-        print(f"choices:{convert_choices_textfield_into_list}")#######
+        convert_choices_textfield_into_list = ast.literal_eval(question.choices)            
 
         # render the edu_detail template & pass the 10 questions, their ids & category as context 
         context = {'question': question,
@@ -168,7 +163,7 @@ def detail(request, category_name, question_id):
                     'error': None,
                     'model_exists': True # Flag indicating a model exists so selection() can exec 
                     }
-        print(f"\n\ncontext:{context}\n\n") ##        
+        
         return render(request, 'edu_quiz/edu_detail.html', context)                
 
 # create a view that displays the quiz result 
@@ -228,8 +223,7 @@ def selection(request, category_name, question_id):
         # - dynamically:instead of explicitly specifying a fixed model in the code, 
         # - generate or determine the model to use at runtime based on certain conditions/data                 
         # use apps module to access the get_model function & find the model name         
-        model = apps.get_model('Education', model_name)            
-        print(f"model:{model}")                                
+        model = apps.get_model('Education', model_name)                    
                                             
     # else print an error for a missing category_name
     else:
