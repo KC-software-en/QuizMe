@@ -1,5 +1,7 @@
 # Django documentation.
-#https://docs.djangoproject.com/en/4.2/topics/testing/advanced/
+# https://docs.djangoproject.com/en/4.2/topics/testing/advanced/
+# https://stackoverflow.com/questions/3728528/testing-email-sending-in-django
+# https://mailtrap.io/blog/django-send-email/
 
 # Import The request factory. 
 # RequestFactory provides a way to generate a request instance that can be used as the first argument to any view.
