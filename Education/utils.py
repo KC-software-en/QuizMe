@@ -158,8 +158,7 @@ def get_category_names(response):
     selected_category_id = [20, 17, 23] 
 
     # collect the categories based on selected_category_id
-    selected_categories = [category for category in trivia_categories if category.get("id") in selected_category_id]    
-    print(f"selected_categories:{selected_categories}")
+    selected_categories = [category for category in trivia_categories if category.get("id") in selected_category_id]        
 
     # initialise a variable for the chosen category from the json response
     selected_category = None
@@ -172,8 +171,7 @@ def get_category_names(response):
         # check if the id in selected_category_id is in the trivia_categories
         if category.get("id") in selected_category_id:
             # assign the current category to the selected_category variable
-            selected_category = category      
-            print(f"selected_category:{selected_category}")      
+            selected_category = category                  
             
             # get the name of the category if the id exists for the selected category
             # append each category name to a list
