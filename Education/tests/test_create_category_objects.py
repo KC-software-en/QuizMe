@@ -6,7 +6,7 @@ from django.core.management import call_command
 # https://docs.djangoproject.com/en/5.0/topics/testing/tools/#transactiontestcase
 # import TransactionTestCase because
 # tests rely on database access such as creating or querying models, 
-# :. create test classes as subclasses of django.test.TestCase rather than unittest.TestCase
+# :. create test classes as subclasses of django.test.TestCase rather than unittest.TestCase¹
 from django.test import TransactionTestCase
 
 # import classes from models.py 
@@ -35,7 +35,6 @@ from django.apps import apps
 # next, go to create_category_objects.py and create the command. Then it should pass
 # run coverage after tests
 
-# https://www.django-rest-framework.org/api-guide/testing/#api-test-cases ######## refer back ###
 # use patch class decorator & provide the import path to the requests.get function in views.py
 # patch the external get function within the requests module, which is used in the views.get_json_categories function
 # - to intercept the HTTP request made by the code and control the response during testing
@@ -110,7 +109,7 @@ class TestFindModel(TestCase):
     def test_find_model_success(self, mock_get_model): 
         # create a MagicMock object to mock the behaviour of the Mythology class
         # use spec=Mythology to ensure that mock_model behaves like an instance of the Mythology class
-        # https://docs.python.org/3.7/library/unittest.mock.html#the-mock-class
+        # https://docs.python.org/3.7/library/unittest.mock.html#the-mock-class² 
         # set the return value of mock_get_model to be the mock_model object
         mock_model = MagicMock(spec=Mythology)     
         mock_get_model.return_value = mock_model
@@ -126,8 +125,8 @@ class TestFindModel(TestCase):
         # cast category_id to str because call_command() expects string arguments
         call_command('create_category_objects', str(category_id), category_name, stdout=out)
    
-        # assert that the result object is an instance of the same class as mock_model
-        # https://docs.python.org/3.7/library/unittest.html?highlight=assertisinstance#unittest.TestCase.assertIsInstance
+        # assert that the result object is an instance of the same class as mock_model³
+        # https://docs.python.org/3.7/library/unittest.html?highlight=assertisinstance#unittest.TestCase.assertIsInstance 
         # assert that the result is not none, indicating successful retrieval
         self.assertIsInstance(mock_get_model.return_value, type(mock_model),
                                msg='Should check that the response to the function get_model is a model instance.')
@@ -157,7 +156,7 @@ class TestFindModel(TestCase):
                 
 
 # https://docs.djangoproject.com/en/3.2/topics/testing/tools/#management-commands
-# Management commands can be tested with the call_command() function. 
+# Management commands can be tested with the call_command() function⁴. 
 # The output can be redirected into a StringIO instance
 # create a class that tests the command create_subcategory_objects
 class TestCreateSubcategoryObjects(TransactionTestCase):
