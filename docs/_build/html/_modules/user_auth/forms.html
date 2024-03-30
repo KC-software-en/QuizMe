@@ -103,13 +103,13 @@
 
 <div class="viewcode-block" id="NewUserForm.save"><a class="viewcode-back" href="../../user_auth.html#user_auth.forms.NewUserForm.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commit</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This method overrides the save method of the UserCreationForm class to set the email field of the user instance to the value of the cleaned_data[&#39;email&#39;] field.</span>
+<span class="sd">        Overrides the save method of the UserCreationForm class to set the email field of the user instance</span>
+<span class="sd">        to the value of the cleaned_data[&#39;email&#39;] field.</span>
 
-<span class="sd">        Parameters:</span>
-<span class="sd">            commit (bool): A boolean value indicating whether to save the user instance to the database.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            User: The user instance.</span>
+<span class="sd">        :param commit: A boolean value indicating whether to save the user instance to the database.</span>
+<span class="sd">        :type commit: bool</span>
+<span class="sd">        :return: A user instance.</span>
+<span class="sd">        :rtype: form</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">user</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">NewUserForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span>

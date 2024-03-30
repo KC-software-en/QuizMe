@@ -260,16 +260,17 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="user_auth.forms.NewUserForm.save">
 <span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/forms.html#NewUserForm.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.forms.NewUserForm.save" title="Permalink to this definition"></a></dt>
-<dd><p>This method overrides the save method of the UserCreationForm class to set the email field of the user instance to the value of the cleaned_data[‘email’] field.</p>
+<dd><p>Overrides the save method of the UserCreationForm class to set the email field of the user instance
+to the value of the cleaned_data[‘email’] field.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>commit</strong> (<em>bool</em>) – A boolean value indicating whether to save the user instance to the database.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The user instance.</p>
+<dd class="field-even"><p>A user instance.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>User</p>
+<dd class="field-odd"><p>form</p>
 </dd>
 </dl>
 </dd></dl>
@@ -290,9 +291,16 @@
 <dt class="sig sig-object py" id="user_auth.views.authenticate_user">
 <span class="sig-prename descclassname"><span class="pre">user_auth.views.</span></span><span class="sig-name descname"><span class="pre">authenticate_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/views.html#authenticate_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.views.authenticate_user" title="Permalink to this definition"></a></dt>
 <dd><p>Authenticates a user based on the provided username and password.</p>
-<p>request: The HTTP request object containing POST data.</p>
-<dl class="simple">
-<dt>Returns: If authentication is successful, redirects to the “show_user” page.</dt><dd><p>If authentication fails, redirects to the “login” page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If authentication is successful, redirects to the “show_user” page.
+If authentication fails, redirects to the “login” page..</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>template</p>
 </dd>
 </dl>
 </dd></dl>
@@ -301,33 +309,67 @@
 <dt class="sig sig-object py" id="user_auth.views.show_user">
 <span class="sig-prename descclassname"><span class="pre">user_auth.views.</span></span><span class="sig-name descname"><span class="pre">show_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/views.html#show_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.views.show_user" title="Permalink to this definition"></a></dt>
 <dd><p>Displays user information.</p>
-<p>request: (HttpRequest): The HTTP request object.</p>
-<p>Returns: HttpResponse: Rendered template with user data (username and password).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered template with user data (username and password)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>template</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="user_auth.views.user_login">
 <span class="sig-prename descclassname"><span class="pre">user_auth.views.</span></span><span class="sig-name descname"><span class="pre">user_login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/views.html#user_login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.views.user_login" title="Permalink to this definition"></a></dt>
 <dd><p>Renders the login.html template for user login.</p>
-<p>request: The HTTP request object.</p>
-<p>Returns: A rendered HTML page for user login.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A rendered HTML page for user login.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>template</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="user_auth.views.user_logout">
 <span class="sig-prename descclassname"><span class="pre">user_auth.views.</span></span><span class="sig-name descname"><span class="pre">user_logout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/views.html#user_logout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.views.user_logout" title="Permalink to this definition"></a></dt>
 <dd><p>Logs out the user and displays a success message.</p>
-<p>request: The HTTP request object.</p>
-<p>Returns: A rendered response with the ‘logout.html’ template.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A rendered HTML page for user logout.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>template</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="user_auth.views.user_register">
 <span class="sig-prename descclassname"><span class="pre">user_auth.views.</span></span><span class="sig-name descname"><span class="pre">user_register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/user_auth/views.html#user_register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#user_auth.views.user_register" title="Permalink to this definition"></a></dt>
 <dd><p>Handles user registration.</p>
-<p>request: The HTTP request object.</p>
-<dl class="simple">
-<dt>Returns: If successful, redirects to the login page.</dt><dd><p>If unsuccessful, displays an error message and renders the registration form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If successful, redirects to the login page.
+If unsuccessful, displays an error message and renders the registration form.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>template</p>
 </dd>
 </dl>
 </dd></dl>

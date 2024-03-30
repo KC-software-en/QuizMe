@@ -106,10 +106,11 @@
 <div class="viewcode-block" id="user_login"><a class="viewcode-back" href="../../user_auth.html#user_auth.views.user_login">[docs]</a><span class="k">def</span> <span class="nf">user_login</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the login.html template for user login.</span>
-<span class="sd">    </span>
-<span class="sd">    request: The HTTP request object.</span>
-<span class="sd">        </span>
-<span class="sd">    Returns: A rendered HTML page for user login.</span>
+
+<span class="sd">    :param request: The HTTP request object.</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :return: A rendered HTML page for user login.</span>
+<span class="sd">    :rtype: template</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Renders the login template.</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;login.html&quot;</span><span class="p">)</span></div>
@@ -120,9 +121,10 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Logs out the user and displays a success message.</span>
 
-<span class="sd">    request: The HTTP request object.</span>
-
-<span class="sd">    Returns: A rendered response with the &#39;logout.html&#39; template.</span>
+<span class="sd">    :param request: The HTTP request object.</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :return: A rendered HTML page for user logout.</span>
+<span class="sd">    :rtype: template</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Deletes the users session.</span>
     <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
@@ -137,9 +139,10 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Displays user information.</span>
 
-<span class="sd">    request: (HttpRequest): The HTTP request object.</span>
-
-<span class="sd">    Returns: HttpResponse: Rendered template with user data (username and password).</span>
+<span class="sd">    :param request: The HTTP request object.</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :return: Rendered template with user data (username and password)</span>
+<span class="sd">    :rtype: template</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Renders the users information into the template.</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
@@ -155,10 +158,11 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handles user registration.</span>
 
-<span class="sd">    request: The HTTP request object.</span>
-
-<span class="sd">    Returns: If successful, redirects to the login page.</span>
+<span class="sd">    :param request: The HTTP request object.</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :return: If successful, redirects to the login page.</span>
 <span class="sd">             If unsuccessful, displays an error message and renders the registration form.</span>
+<span class="sd">    :rtype: template</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
         <span class="n">form</span> <span class="o">=</span> <span class="n">NewUserForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>        
@@ -198,10 +202,11 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Authenticates a user based on the provided username and password.</span>
 
-<span class="sd">    request: The HTTP request object containing POST data.</span>
-
-<span class="sd">    Returns: If authentication is successful, redirects to the &quot;show_user&quot; page.</span>
-<span class="sd">             If authentication fails, redirects to the &quot;login&quot; page.</span>
+<span class="sd">    :param request: The HTTP request object.</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :return: If authentication is successful, redirects to the &quot;show_user&quot; page.</span>
+<span class="sd">             If authentication fails, redirects to the &quot;login&quot; page..</span>
+<span class="sd">    :rtype: template</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Compares the data login  to the data in the database to see if they are simillar.</span>
     <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span>

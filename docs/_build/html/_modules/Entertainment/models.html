@@ -78,12 +78,10 @@
 <span class="c1">###################################################################################</span>
 
 <span class="c1"># Create your models here.</span>
-
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a model for the quiz categories in QuizMe.</span>
-<span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># define a model for categories in the QuizMe project</span>
 <div class="viewcode-block" id="Categories"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.models.Categories">[docs]</a><span class="k">class</span> <span class="nc">Categories</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a model for the quiz categories in QuizMe.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># define a field to store the category name as text</span>
     <span class="c1"># define a field to store the description of the category as text</span>
     <span class="n">category</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
@@ -98,12 +96,12 @@
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span></div>
-<span class="w">    </span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a model for the quiz subcategories in Entertainment.</span>
-<span class="sd">&#39;&#39;&#39;</span>
+    
+
 <span class="c1"># define a model for subcategories in the Entertainment app</span>
 <div class="viewcode-block" id="Subcategories"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.models.Subcategories">[docs]</a><span class="k">class</span> <span class="nc">Subcategories</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a model for the quiz subcategories in Entertainment.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># retrieve the category object representing &#39;Entertainment&#39; from the Categories model</span>
     <span class="n">en_category_obj</span> <span class="o">=</span> <span class="n">Categories</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;Entertainment&#39;</span><span class="p">)</span>
 
@@ -134,14 +132,14 @@
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subcategory</span></div>
-<span class="w">    </span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a Music model for the subcategory in the entertainment quiz.</span>
-<span class="sd">&#39;&#39;&#39;</span> 
+    
+ 
 <span class="c1"># use Django&#39;s built-in object-relational mapping (ORM) &amp; define the relevant classes</span>
 <span class="c1"># -each entry in a SQL table represents a single object, this can be converted to a class instance in Python.  </span>
 <span class="c1"># create a Music class that inherits from django.db.models.Model</span>
-<div class="viewcode-block" id="Music"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.models.Music">[docs]</a><span class="k">class</span> <span class="nc">Music</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>       
+<div class="viewcode-block" id="Music"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.models.Music">[docs]</a><span class="k">class</span> <span class="nc">Music</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span> 
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Music model for the subcategory in the entertainment quiz.</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
     <span class="c1"># retrieve the category object representing &#39;Education&#39; from the Categories model</span>
     <span class="n">en_category_obj</span> <span class="o">=</span> <span class="n">Categories</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;Entertainment&#39;</span><span class="p">)</span>
     <span class="c1"># retrieve the subcategory object representing &#39;Music&#39; from the Subcategories model</span>
@@ -177,12 +175,11 @@
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">question</span></div>
-<span class="w">    </span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a Film model for the subcategory in the entertainment quiz.</span>
-<span class="sd">&#39;&#39;&#39;</span>
+
 <span class="c1"># create a Film class that inherits from django.db.models.Model</span>
-<div class="viewcode-block" id="Film"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.models.Film">[docs]</a><span class="k">class</span> <span class="nc">Film</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>        
+<div class="viewcode-block" id="Film"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.models.Film">[docs]</a><span class="k">class</span> <span class="nc">Film</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>   
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Film model for the subcategory in the entertainment quiz.</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
     <span class="c1"># retrieve the category object representing &#39;Entertainment&#39; from the Categories model</span>
     <span class="n">en_category_obj</span> <span class="o">=</span> <span class="n">Categories</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;Entertainment&#39;</span><span class="p">)</span>
     <span class="c1"># retrieve the subcategory object representing &#39;Film&#39; from the Subcategories model</span>
@@ -218,11 +215,10 @@
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">question</span></div>
-<span class="w">    </span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Create a model for the Science and nature questions in the entertainment quiz.</span>
-<span class="sd">&#39;&#39;&#39;</span>
+
 <div class="viewcode-block" id="Video_Games"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.models.Video_Games">[docs]</a><span class="k">class</span> <span class="nc">Video_Games</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a model for the Science and nature questions in the entertainment quiz.</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
     <span class="c1"># retrieve the category object representing &#39;Entertainment&#39; from the Categories model</span>
     <span class="n">en_category_obj</span> <span class="o">=</span> <span class="n">Categories</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;Entertainment&#39;</span><span class="p">)</span>
     <span class="c1"># retrieve the subcategory object representing &#39;Video Games&#39; from the Subcategories model</span>

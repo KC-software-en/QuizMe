@@ -117,10 +117,15 @@
 <span class="c1"># index category from the dictionary id</span>
 <div class="viewcode-block" id="index_en"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.views.index_en">[docs]</a><span class="k">def</span> <span class="nf">index_en</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function is the homepage of Entertainment quizzes.</span>
+<span class="sd">    This function represents the homepage of Entertainment quizzes.</span>
 <span class="sd">    It displays a list of categories of quizzes and the first question of each category.</span>
 <span class="sd">    If a user prematurely leaves a quiz and does not use the exit button,</span>
 <span class="sd">    the result and session data of the current quiz are deleted.</span>
+
+<span class="sd">    :param request: The HTTP request object (optional, if needed).</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :return: The en_quiz template.</span>
+<span class="sd">    :rtype: HTTPResponse</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># if a user prematurely leaves a quiz &amp; does not use the exit button,</span>
     <span class="c1"># - delete the result &amp; session data of the current quiz </span>
@@ -167,6 +172,15 @@
 <span class="sd">    This function retrieves a question object from the database based on the question_id passed in the URL.</span>
 <span class="sd">    It also retrieves the list of choices for the question and converts the choices text field into a list of dictionaries.</span>
 <span class="sd">    The function passes all the context variables into a single dictionary to render in the template correctly.</span>
+
+<span class="sd">    :param request: The HTTP request object (optional, if needed).</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :param category_name: The name of the category.</span>
+<span class="sd">    :type category_name: str</span>
+<span class="sd">    :param question_id: The ID of the question.</span>
+<span class="sd">    :type question_id: int</span>
+<span class="sd">    :return: The detail template.</span>
+<span class="sd">    :rtype: HTTPResponse</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># retrieve the list of categories from the open trivia database</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">get_json_categories</span><span class="p">()</span>
@@ -221,13 +235,12 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function retrieves the quiz result from the session and renders the result template.</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        request (HttpRequest): The HTTP request object.</span>
-<span class="sd">        category_name (str): The name of the category of the quiz.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        HttpResponse: The HTTP response object.</span>
-
+<span class="sd">    :param request: The HTTP request object (optional, if needed).</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :param category_name: The name of the category.</span>
+<span class="sd">    :type category_name: str</span>
+<span class="sd">    :return: The result template.</span>
+<span class="sd">    :rtype: HTTPResponse</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># get the quiz result for the session</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;quiz_result&#39;</span><span class="p">)</span>
@@ -244,16 +257,16 @@
 <span class="c1"># it handles the submitted data</span>
 <div class="viewcode-block" id="selection"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.views.selection">[docs]</a><span class="k">def</span> <span class="nf">selection</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This function handles the submitted data for a question in a quiz.</span>
+<span class="sd">    Handles the submitted data for a question in a quiz.</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        request (HttpRequest): The HTTP request object.</span>
-<span class="sd">        category_name (str): The name of the category of the quiz.</span>
-<span class="sd">        question_id (int): The unique identifier of the question.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        HttpResponse: The HTTP response object.</span>
-
+<span class="sd">    :param request: The HTTP request object (optional, if needed).</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :param category_name: The name of the category.</span>
+<span class="sd">    :type category_name: str</span>
+<span class="sd">    :param question_id: The ID of the question.</span>
+<span class="sd">    :type question_id: int</span>
+<span class="sd">    :return: The detail template.</span>
+<span class="sd">    :rtype: HTTPResponse</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># retrieve the list of categories from the open trivia database</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">get_json_categories</span><span class="p">()</span>
@@ -353,12 +366,10 @@
 <span class="sd">    This function deletes the quiz result and session data of the current quiz before starting a new quiz.</span>
 <span class="sd">    It then redirects the user to the home page of Entertainment quizzes.</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        request (HttpRequest): The HTTP request object.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        HttpResponseRedirect: A redirect to the home page of Entertainment quizzes.</span>
-
+<span class="sd">    :param request: The HTTP request object (optional, if needed).</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :return: The index_en template.</span>
+<span class="sd">    :rtype: HTTPResponse</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># delete the result &amp; session data of the current quiz before starting a new quiz</span>
     <span class="k">if</span> <span class="s1">&#39;quiz_result&#39;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">:</span>

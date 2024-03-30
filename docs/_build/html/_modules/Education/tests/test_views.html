@@ -205,7 +205,7 @@
         <span class="c1"># Mock the necessary functions.</span>
         <span class="n">get_json_categories</span> <span class="o">=</span> <span class="n">Mock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;categories&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;category1&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;category2&#39;</span><span class="p">}]})</span>
         <span class="n">get_category_names</span> <span class="o">=</span> <span class="n">Mock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;category1&#39;</span><span class="p">,</span> <span class="s1">&#39;category2&#39;</span><span class="p">])</span>
-        <span class="n">find_model</span> <span class="o">=</span> <span class="n">Mock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">Mock</span><span class="p">())</span>
+        <span class="n">get_model</span> <span class="o">=</span> <span class="n">Mock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">Mock</span><span class="p">())</span>
         <span class="n">get_object_or_404</span> <span class="o">=</span> <span class="n">Mock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">Mock</span><span class="p">(</span>
             <span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
             <span class="n">correct_answer</span><span class="o">=</span><span class="s1">&#39;Answer&#39;</span><span class="p">,</span>
@@ -215,7 +215,7 @@
         <span class="c1"># Patch the necessary functions in views.</span>
         <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;Education.views.get_json_categories&#39;</span><span class="p">,</span> <span class="n">get_json_categories</span><span class="p">),</span> \
              <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;Education.views.get_category_names&#39;</span><span class="p">,</span> <span class="n">get_category_names</span><span class="p">),</span> \
-             <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;Education.views.find_model&#39;</span><span class="p">,</span> <span class="n">find_model</span><span class="p">),</span> \
+             <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;Education.views.apps.get_model&#39;</span><span class="p">,</span> <span class="n">get_model</span><span class="p">),</span> \
              <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;Education.views.get_object_or_404&#39;</span><span class="p">,</span> <span class="n">get_object_or_404</span><span class="p">):</span>
             <span class="n">response</span> <span class="o">=</span> <span class="n">detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;category1&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         
@@ -236,13 +236,12 @@
         <span class="c1"># Mock the necessary functions.</span>
         <span class="n">get_json_categories</span> <span class="o">=</span> <span class="n">Mock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;trivia_categories&quot;&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;category1&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;category2&#39;</span><span class="p">}]})</span>
         <span class="n">get_category_names</span> <span class="o">=</span> <span class="n">Mock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;category1&#39;</span><span class="p">,</span> <span class="s1">&#39;category2&#39;</span><span class="p">])</span>
-        <span class="n">find_model</span> <span class="o">=</span> <span class="n">Mock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">Mock</span><span class="p">())</span>
-        <span class="n">get_object_or_404</span> <span class="o">=</span> <span class="n">Mock</span><span class="p">(</span><span class="n">side_effect</span><span class="o">=</span><span class="n">Http404</span><span class="p">)</span>
+        <span class="n">get_model</span> <span class="o">=</span> <span class="n">Mock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">Mock</span><span class="p">())</span>
 
         <span class="c1"># Patch the necessary functions in views.</span>
         <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;Education.views.get_json_categories&#39;</span><span class="p">,</span> <span class="n">get_json_categories</span><span class="p">),</span> \
              <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;Education.views.get_category_names&#39;</span><span class="p">,</span> <span class="n">get_category_names</span><span class="p">),</span> \
-             <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;Education.views.find_model&#39;</span><span class="p">,</span> <span class="n">find_model</span><span class="p">):</span>
+             <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;Education.views.apps.get_model&#39;</span><span class="p">,</span> <span class="n">get_model</span><span class="p">):</span>
                 <span class="n">response</span> <span class="o">=</span> <span class="n">detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;category1&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>             
 
         <span class="c1"># Assert that the correct template is rendered.</span>
@@ -251,7 +250,25 @@
         <span class="c1"># Assert that the context contains the expected values.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;question&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;choices&#39;</span><span class="p">],</span> <span class="p">[])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;category_name&#39;</span><span class="p">],</span> <span class="s1">&#39;category1&#39;</span><span class="p">)</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;category_name&#39;</span><span class="p">],</span> <span class="s1">&#39;category1&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestDetailView.test_detail_should_return_result"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.test_detail_should_return_result">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.view.detail&#39;</span><span class="p">)</span>  <span class="c1"># Mock the &#39;detail&#39; function</span>
+    <span class="k">def</span> <span class="nf">test_detail_should_return_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detail_mock</span><span class="p">):</span>
+        <span class="n">detail_mock</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">detail</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestDetailView.test_deatil_should_return_none_when_raiseing_http_error_404"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.test_deatil_should_return_none_when_raiseing_http_error_404">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.view.detail&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_deatil_should_return_none_when_raiseing_http_error_404</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detail_mock</span><span class="p">):</span>
+        <span class="n">detail_mock</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s1">&#39;not found&#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">detail</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestDetailView.test_raise_lookup_error"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.test_raise_lookup_error">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.view.detail&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_raise_lookup_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detail_mock</span><span class="p">):</span>
+        <span class="n">detail_mock</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s1">&#39;some other error&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">LookupError</span><span class="p">):</span>
+            <span class="n">detail</span><span class="p">()</span></div></div>
 
     
 
@@ -380,7 +397,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;question&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">correct_answer</span><span class="p">,</span> <span class="s1">&#39;Choice 1&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;choices&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Choice 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Choice 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Choice 3&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;category_name&#39;</span><span class="p">],</span> <span class="s1">&#39;category1&#39;</span><span class="p">)</span>      </div></div>
-      
+
+  
 <span class="c1">### Test for the try new quiz view. ###</span>
 <div class="viewcode-block" id="TestTryNewQuiz"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestTryNewQuiz">[docs]</a><span class="k">class</span> <span class="nc">TestTryNewQuiz</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
 <div class="viewcode-block" id="TestTryNewQuiz.setUp"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestTryNewQuiz.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -439,7 +457,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;Education:index_edu&#39;</span><span class="p">))</span>  <span class="c1"># Assert redirect URL is the correct url.</span></div></div>
 <span class="w">       </span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">A class that tests finding a model.</span>
+<span class="sd">A class that tests finding a model. to test for the lookup error.</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># create a class that tests finding a model.         </span>
 <div class="viewcode-block" id="TestFindModel"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel">[docs]</a><span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.apps.get_model&#39;</span><span class="p">)</span>

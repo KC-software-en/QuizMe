@@ -214,8 +214,9 @@
 <span id="entertainment-models-module"></span><h2>Entertainment.models module<a class="headerlink" href="#module-Entertainment.models" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="Entertainment.models.Categories">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Categories" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Categories" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Create a model for the quiz categories in QuizMe.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="Entertainment.models.Categories.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Entertainment.models.Categories.DoesNotExist" title="Permalink to this definition"></a></dt>
@@ -318,8 +319,9 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 
 <dl class="py class">
 <dt class="sig sig-object py" id="Entertainment.models.Film">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Film</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcategory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correct_answer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Film"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Film" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Film</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Film"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Film" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Create a Film model for the subcategory in the entertainment quiz.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="Entertainment.models.Film.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Entertainment.models.Film.DoesNotExist" title="Permalink to this definition"></a></dt>
@@ -415,8 +417,9 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="Entertainment.models.Music">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Music</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcategory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correct_answer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Music"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Music" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Music</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Music"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Music" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Create a Music model for the subcategory in the entertainment quiz.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="Entertainment.models.Music.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Entertainment.models.Music.DoesNotExist" title="Permalink to this definition"></a></dt>
@@ -512,8 +515,9 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="Entertainment.models.Subcategories">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Subcategories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcategory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Subcategories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Subcategories" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Subcategories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Subcategories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Subcategories" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Create a model for the quiz subcategories in Entertainment.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="Entertainment.models.Subcategories.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Entertainment.models.Subcategories.DoesNotExist" title="Permalink to this definition"></a></dt>
@@ -624,8 +628,9 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 
 <dl class="py class">
 <dt class="sig sig-object py" id="Entertainment.models.Video_Games">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Video_Games</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subcategory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correct_answer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Video_Games"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Video_Games" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Entertainment.models.</span></span><span class="sig-name descname"><span class="pre">Video_Games</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/models.html#Video_Games"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.models.Video_Games" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Create a model for the Science and nature questions in the entertainment quiz.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="Entertainment.models.Video_Games.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#Entertainment.models.Video_Games.DoesNotExist" title="Permalink to this definition"></a></dt>
@@ -728,11 +733,11 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="Entertainment.utils.category_objects">
 <span class="sig-prename descclassname"><span class="pre">Entertainment.utils.</span></span><span class="sig-name descname"><span class="pre">category_objects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/utils.html#category_objects"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.utils.category_objects" title="Permalink to this definition"></a></dt>
-<dd><p>A function that retrieves the category queryset from the database based on its category name.</p>
+<dd><p>Retrieves the category queryset from the database based on its category name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p></li>
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object (optional, if needed).</p></li>
 <li><p><strong>category_name</strong> (<em>str</em>) – The name of the category.</p></li>
 </ul>
 </dd>
@@ -742,25 +747,22 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>QuerySet</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>Http404</strong> – If the specified category cannot be found.</p>
-</dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Entertainment.utils.get_category_names">
 <span class="sig-prename descclassname"><span class="pre">Entertainment.utils.</span></span><span class="sig-name descname"><span class="pre">get_category_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/Entertainment/utils.html#get_category_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.utils.get_category_names" title="Permalink to this definition"></a></dt>
-<dd><p>Create a function that finds the question id for the next question in the quiz.</p>
+<dd><p>Finds the question ID for the next question in the quiz.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>response</strong> (<em>dict</em>) – The JSON response from the Open Trivia DB API.</p>
+<dd class="field-odd"><p><strong>response</strong> (<em>list</em>) – A list containing relevant information about the quiz.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of category names.</p>
+<dd class="field-even"><p>A dictionary with details about the next question (e.g., question ID, category).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -768,16 +770,13 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="Entertainment.utils.get_json_categories">
 <span class="sig-prename descclassname"><span class="pre">Entertainment.utils.</span></span><span class="sig-name descname"><span class="pre">get_json_categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/utils.html#get_json_categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.utils.get_json_categories" title="Permalink to this definition"></a></dt>
-<dd><p>Returns the json response for the available categories on Open Trivia DB.</p>
+<dd><p>Retrieve a specific category from the Open Trivia DB API.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The json response from the Open Trivia DB API.</p>
+<dd class="field-odd"><p>The JSON response from the Open Trivia DB API</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>json</p>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>requests.RequestException</strong> – If the request to the Open Trivia DB API fails.</p>
+<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -785,17 +784,16 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="Entertainment.utils.get_next_question_id">
 <span class="sig-prename descclassname"><span class="pre">Entertainment.utils.</span></span><span class="sig-name descname"><span class="pre">get_next_question_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_selection_pks</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/utils.html#get_next_question_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.utils.get_next_question_id" title="Permalink to this definition"></a></dt>
-<dd><p>A function that retrieves the next question id based on the current question id and the list of question pks.</p>
+<dd><p>Retrieves the next question ID based on the current question ID and the list of question primary keys.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>category_name</strong> (<em>str</em>) – The name of the category.</p></li>
-<li><p><strong>question_id</strong> (<em>int</em>) – The id of the current question.</p></li>
-<li><p><strong>question_selection_pks</strong> (<em>list</em>) – A list of question pks.</p></li>
+<li><p><strong>question_id</strong> (<em>int</em>) – The ID of the current question.</p></li>
+<li><p><strong>question_selection_pks</strong> (<em>list</em>) – A list of primary keys representing available questions.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The id of the next question.</p>
+<dd class="field-even"><p>The ID of the next question.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
@@ -809,10 +807,7 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dd><p>Retrieve a specific category from the Open Trivia DB API.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>quantity</strong> (<em>int</em>) – The number of questions to retrieve.</p></li>
-<li><p><strong>category</strong> (<em>int</em>) – The category ID to retrieve questions for.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – A description of the quantity and category.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The JSON response from the Open Trivia DB API.</p>
@@ -820,22 +815,19 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>requests.RequestException</strong> – If the request to the Open Trivia DB API fails.</p>
-</dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Entertainment.utils.mix_choices">
 <span class="sig-prename descclassname"><span class="pre">Entertainment.utils.</span></span><span class="sig-name descname"><span class="pre">mix_choices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/Entertainment/utils.html#mix_choices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.utils.mix_choices" title="Permalink to this definition"></a></dt>
-<dd><p>Create a function that will mix the choices for each question in a quiz.</p>
+<dd><p>Mixes the choices for each question in a quiz.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>choices</strong> (<em>list</em>) – A list of dictionaries containing the choices for each question.</p>
+<dd class="field-odd"><p><strong>choices</strong> (<em>list</em>) – A list of answer choices for a question.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of dictionaries containing the mixed choices for each question.</p>
+<dd class="field-even"><p>A shuffled list of choices.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list</p>
@@ -852,15 +844,41 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dd><p>This function retrieves a question object from the database based on the question_id passed in the URL.
 It also retrieves the list of choices for the question and converts the choices text field into a list of dictionaries.
 The function passes all the context variables into a single dictionary to render in the template correctly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object (optional, if needed).</p></li>
+<li><p><strong>category_name</strong> (<em>str</em>) – The name of the category.</p></li>
+<li><p><strong>question_id</strong> (<em>int</em>) – The ID of the question.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The detail template.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HTTPResponse</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Entertainment.views.index_en">
 <span class="sig-prename descclassname"><span class="pre">Entertainment.views.</span></span><span class="sig-name descname"><span class="pre">index_en</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/views.html#index_en"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.views.index_en" title="Permalink to this definition"></a></dt>
-<dd><p>This function is the homepage of Entertainment quizzes.
+<dd><p>This function represents the homepage of Entertainment quizzes.
 It displays a list of categories of quizzes and the first question of each category.
 If a user prematurely leaves a quiz and does not use the exit button,
 the result and session data of the current quiz are deleted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object (optional, if needed).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The en_quiz template.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HTTPResponse</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -870,15 +888,15 @@ the result and session data of the current quiz are deleted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p></li>
-<li><p><strong>category_name</strong> (<em>str</em>) – The name of the category of the quiz.</p></li>
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object (optional, if needed).</p></li>
+<li><p><strong>category_name</strong> (<em>str</em>) – The name of the category.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The HTTP response object.</p>
+<dd class="field-even"><p>The result template.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>HttpResponse</p>
+<dd class="field-odd"><p>HTTPResponse</p>
 </dd>
 </dl>
 </dd></dl>
@@ -886,20 +904,20 @@ the result and session data of the current quiz are deleted.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="Entertainment.views.selection">
 <span class="sig-prename descclassname"><span class="pre">Entertainment.views.</span></span><span class="sig-name descname"><span class="pre">selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Entertainment/views.html#selection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Entertainment.views.selection" title="Permalink to this definition"></a></dt>
-<dd><p>This function handles the submitted data for a question in a quiz.</p>
+<dd><p>Handles the submitted data for a question in a quiz.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p></li>
-<li><p><strong>category_name</strong> (<em>str</em>) – The name of the category of the quiz.</p></li>
-<li><p><strong>question_id</strong> (<em>int</em>) – The unique identifier of the question.</p></li>
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object (optional, if needed).</p></li>
+<li><p><strong>category_name</strong> (<em>str</em>) – The name of the category.</p></li>
+<li><p><strong>question_id</strong> (<em>int</em>) – The ID of the question.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The HTTP response object.</p>
+<dd class="field-even"><p>The detail template.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>HttpResponse</p>
+<dd class="field-odd"><p>HTTPResponse</p>
 </dd>
 </dl>
 </dd></dl>
@@ -911,13 +929,13 @@ the result and session data of the current quiz are deleted.</p>
 It then redirects the user to the home page of Entertainment quizzes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object (optional, if needed).</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A redirect to the home page of Entertainment quizzes.</p>
+<dd class="field-even"><p>The index_en template.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>HttpResponseRedirect</p>
+<dd class="field-odd"><p>HTTPResponse</p>
 </dd>
 </dl>
 </dd></dl>

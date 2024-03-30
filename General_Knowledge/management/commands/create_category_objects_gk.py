@@ -13,6 +13,8 @@ import html
 
 from django.apps import apps
 
+# When populating the postgresql database don't forget to run this command.
+# 'python manage.py migrate --run-sync' to sync the migration into postgresql database.
 ####################################################################################
 
 '''
