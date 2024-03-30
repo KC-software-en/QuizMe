@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>user_auth.views &mdash; QuizMe 00.00.01 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=d7bb8d4d"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -100,33 +103,28 @@
 
 <span class="c1"># Create your views here.</span>
 <span class="c1"># user_login view.</span>
-<div class="viewcode-block" id="user_login">
-<a class="viewcode-back" href="../../user_auth.html#user_auth.views.user_login">[docs]</a>
-<span class="k">def</span> <span class="nf">user_login</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="user_login"><a class="viewcode-back" href="../../user_auth.html#user_auth.views.user_login">[docs]</a><span class="k">def</span> <span class="nf">user_login</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the login.html template for user login.</span>
 
 <span class="sd">    :param request: The HTTP request object.</span>
 <span class="sd">    :type request: HttpRequest</span>
 <span class="sd">    :return: A rendered HTML page for user login.</span>
-<span class="sd">    :rtype: HTTPResponse</span>
+<span class="sd">    :rtype: template</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Renders the login template.</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;login.html&quot;</span><span class="p">)</span></div>
 
 
-
 <span class="c1"># This veiw logs the user out.</span>
-<div class="viewcode-block" id="user_logout">
-<a class="viewcode-back" href="../../user_auth.html#user_auth.views.user_logout">[docs]</a>
-<span class="k">def</span> <span class="nf">user_logout</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="user_logout"><a class="viewcode-back" href="../../user_auth.html#user_auth.views.user_logout">[docs]</a><span class="k">def</span> <span class="nf">user_logout</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Logs out the user and displays a success message.</span>
 
 <span class="sd">    :param request: The HTTP request object.</span>
 <span class="sd">    :type request: HttpRequest</span>
 <span class="sd">    :return: A rendered HTML page for user logout.</span>
-<span class="sd">    :rtype: HTTPResponse</span>
+<span class="sd">    :rtype: template</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Deletes the users session.</span>
     <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
@@ -135,11 +133,8 @@
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;logout.html&#39;</span><span class="p">)</span></div>
 
 
-
 <span class="c1"># This view renders the logged in user information.</span>
-<div class="viewcode-block" id="show_user">
-<a class="viewcode-back" href="../../user_auth.html#user_auth.views.show_user">[docs]</a>
-<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;user_auth:login&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="show_user"><a class="viewcode-back" href="../../user_auth.html#user_auth.views.show_user">[docs]</a><span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;user_auth:login&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">show_user</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Displays user information.</span>
@@ -147,7 +142,7 @@
 <span class="sd">    :param request: The HTTP request object.</span>
 <span class="sd">    :type request: HttpRequest</span>
 <span class="sd">    :return: Rendered template with user data (username and password)</span>
-<span class="sd">    :rtype: HTTPResponse</span>
+<span class="sd">    :rtype: template</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Renders the users information into the template.</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
@@ -157,12 +152,9 @@
 <span class="p">})</span></div>
 
 
-
 <span class="c1"># This veiw is used to register a new user.</span>
 <span class="c1"># Once the user succesfully registers on the website they are automatically sent an email.</span>
-<div class="viewcode-block" id="user_register">
-<a class="viewcode-back" href="../../user_auth.html#user_auth.views.user_register">[docs]</a>
-<span class="k">def</span> <span class="nf">user_register</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="user_register"><a class="viewcode-back" href="../../user_auth.html#user_auth.views.user_register">[docs]</a><span class="k">def</span> <span class="nf">user_register</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handles user registration.</span>
 
@@ -170,7 +162,7 @@
 <span class="sd">    :type request: HttpRequest</span>
 <span class="sd">    :return: If successful, redirects to the login page.</span>
 <span class="sd">             If unsuccessful, displays an error message and renders the registration form.</span>
-<span class="sd">    :rtype: HTTPResponse</span>
+<span class="sd">    :rtype: template</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
         <span class="n">form</span> <span class="o">=</span> <span class="n">NewUserForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>        
@@ -205,11 +197,8 @@
     <span class="p">)</span></div>
 
 
-
 <span class="c1">#  This veiw is used to authenticate and check if the user already exists.</span>
-<div class="viewcode-block" id="authenticate_user">
-<a class="viewcode-back" href="../../user_auth.html#user_auth.views.authenticate_user">[docs]</a>
-<span class="k">def</span> <span class="nf">authenticate_user</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="authenticate_user"><a class="viewcode-back" href="../../user_auth.html#user_auth.views.authenticate_user">[docs]</a><span class="k">def</span> <span class="nf">authenticate_user</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Authenticates a user based on the provided username and password.</span>
 
@@ -217,7 +206,7 @@
 <span class="sd">    :type request: HttpRequest</span>
 <span class="sd">    :return: If authentication is successful, redirects to the &quot;show_user&quot; page.</span>
 <span class="sd">             If authentication fails, redirects to the &quot;login&quot; page..</span>
-<span class="sd">    :rtype: HTTPResponse</span>
+<span class="sd">    :rtype: template</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Compares the data login  to the data in the database to see if they are simillar.</span>
     <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]</span>
@@ -230,7 +219,6 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">login</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s2">&quot;user_auth:show_user&quot;</span><span class="p">))</span></div>
-
 
 </pre></div>
 

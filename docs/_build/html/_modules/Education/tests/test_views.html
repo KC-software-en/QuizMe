@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Education.tests.test_views &mdash; QuizMe 00.00.01 documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=d7bb8d4d"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -127,20 +130,13 @@
 
 <span class="c1">### Create a testcases for the views. ###</span>
 <span class="c1"># Test for the index view.</span>
-<div class="viewcode-block" id="TestIndexView">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexView">[docs]</a>
-<span class="k">class</span> <span class="nc">TestIndexView</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestIndexView"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexView">[docs]</a><span class="k">class</span> <span class="nc">TestIndexView</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="c1"># Create a setUp method to create a user which is logged in before each test.</span>
-<div class="viewcode-block" id="TestIndexView.setUp">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexView.setUp">[docs]</a>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestIndexView.setUp"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexView.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a RequestFactory instance.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">()</span></div>
 
-
-<div class="viewcode-block" id="TestIndexView.test_session_key_exists_in_index_view">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexView.test_session_key_exists_in_index_view">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_session_key_exists_in_index_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestIndexView.test_session_key_exists_in_index_view"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexView.test_session_key_exists_in_index_view">[docs]</a>    <span class="k">def</span> <span class="nf">test_session_key_exists_in_index_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a request with &#39;quiz_result&#39; in session in the index page.</span>
         <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
         <span class="n">request</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;quiz_result&#39;</span><span class="p">:</span> <span class="s1">&#39;some_value&#39;</span><span class="p">}</span>
@@ -152,10 +148,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertNotIn</span><span class="p">(</span><span class="s1">&#39;quiz_result&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">HttpResponse</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="TestIndexView.test_session_key_not_exists_in_index_view">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexView.test_session_key_not_exists_in_index_view">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_session_key_not_exists_in_index_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestIndexView.test_session_key_not_exists_in_index_view"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexView.test_session_key_not_exists_in_index_view">[docs]</a>    <span class="k">def</span> <span class="nf">test_session_key_not_exists_in_index_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a request without &#39;quiz_result&#39; in index session.</span>
         <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
         <span class="n">request</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="p">{}</span>
@@ -165,25 +158,16 @@
 
         <span class="c1"># Check if &#39;quiz_result&#39; is not removed from the index session.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertNotIn</span><span class="p">(</span><span class="s1">&#39;quiz_result&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">HttpResponse</span><span class="p">)</span></div>
-</div>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">HttpResponse</span><span class="p">)</span></div></div>
 
 <span class="c1">### Test for Index_edu view ###</span>
-<div class="viewcode-block" id="TestIndexEduView">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexEduView">[docs]</a>
-<span class="k">class</span> <span class="nc">TestIndexEduView</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
-<div class="viewcode-block" id="TestIndexEduView.setUp">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexEduView.setUp">[docs]</a>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestIndexEduView"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexEduView">[docs]</a><span class="k">class</span> <span class="nc">TestIndexEduView</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestIndexEduView.setUp"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexEduView.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a RequestFactory instance.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">()</span></div>
 
-
     <span class="c1"># patch the functions in the Education views.</span>
-<div class="viewcode-block" id="TestIndexEduView.test_index_edu">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexEduView.test_index_edu">[docs]</a>
-    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.get_json_categories&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestIndexEduView.test_index_edu"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestIndexEduView.test_index_edu">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.get_json_categories&#39;</span><span class="p">)</span>
     <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.get_category_names&#39;</span><span class="p">)</span>
     <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.category_objects&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">test_index_edu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_category_objects</span><span class="p">,</span> <span class="n">mock_get_category_names</span><span class="p">,</span> <span class="n">mock_get_json_categories</span><span class="p">):</span>
@@ -203,24 +187,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
         <span class="n">mock_get_json_categories</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
         <span class="n">mock_get_category_names</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;mocked_categories&#39;</span><span class="p">)</span>
-        <span class="n">mock_category_objects</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;mocked_category_name&#39;</span><span class="p">)</span></div>
-</div>
-
+        <span class="n">mock_category_objects</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;mocked_category_name&#39;</span><span class="p">)</span></div></div>
 
 <span class="c1">### Test for the Detail view ###</span>
-<div class="viewcode-block" id="TestDetailView">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView">[docs]</a>
-<span class="k">class</span> <span class="nc">TestDetailView</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>    
-<div class="viewcode-block" id="TestDetailView.setUp">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.setUp">[docs]</a>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestDetailView"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView">[docs]</a><span class="k">class</span> <span class="nc">TestDetailView</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>    
+<div class="viewcode-block" id="TestDetailView.setUp"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a client instance.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span></div>
 
-
-<div class="viewcode-block" id="TestDetailView.test_detail_view_with_valid_question">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.test_detail_view_with_valid_question">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_detail_view_with_valid_question</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestDetailView.test_detail_view_with_valid_question"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.test_detail_view_with_valid_question">[docs]</a>    <span class="k">def</span> <span class="nf">test_detail_view_with_valid_question</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a mock request with category_name and question_id.</span>
         <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/Education/category/1&#39;</span><span class="p">)</span>
         <span class="c1"># Mocking the user object for testing purposes.</span>
@@ -253,10 +228,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;choices&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Choice 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Choice 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Choice 3&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;category_name&#39;</span><span class="p">],</span> <span class="s1">&#39;category1&#39;</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="TestDetailView.test_detail_view_with_invalid_question">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.test_detail_view_with_invalid_question">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_detail_view_with_invalid_question</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestDetailView.test_detail_view_with_invalid_question"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.test_detail_view_with_invalid_question">[docs]</a>    <span class="k">def</span> <span class="nf">test_detail_view_with_invalid_question</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a mock request with category_name and question_id.</span>
         <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;&lt;str:category_name&gt;/&lt;int:question_id&gt;/detail/&#39;</span><span class="p">)</span>
         <span class="n">request</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">Mock</span><span class="p">()</span>
@@ -280,51 +252,33 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;choices&#39;</span><span class="p">],</span> <span class="p">[])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;category_name&#39;</span><span class="p">],</span> <span class="s1">&#39;category1&#39;</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="TestDetailView.test_detail_should_return_result">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.test_detail_should_return_result">[docs]</a>
-    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.view.detail&#39;</span><span class="p">)</span>  <span class="c1"># Mock the &#39;detail&#39; function</span>
+<div class="viewcode-block" id="TestDetailView.test_detail_should_return_result"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.test_detail_should_return_result">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.view.detail&#39;</span><span class="p">)</span>  <span class="c1"># Mock the &#39;detail&#39; function</span>
     <span class="k">def</span> <span class="nf">test_detail_should_return_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detail_mock</span><span class="p">):</span>
         <span class="n">detail_mock</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">detail</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="TestDetailView.test_deatil_should_return_none_when_raiseing_http_error_404">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.test_deatil_should_return_none_when_raiseing_http_error_404">[docs]</a>
-    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.view.detail&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestDetailView.test_deatil_should_return_none_when_raiseing_http_error_404"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.test_deatil_should_return_none_when_raiseing_http_error_404">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.view.detail&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">test_deatil_should_return_none_when_raiseing_http_error_404</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detail_mock</span><span class="p">):</span>
         <span class="n">detail_mock</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s1">&#39;not found&#39;</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">detail</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="TestDetailView.test_raise_lookup_error">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.test_raise_lookup_error">[docs]</a>
-    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.view.detail&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestDetailView.test_raise_lookup_error"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestDetailView.test_raise_lookup_error">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.view.detail&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">test_raise_lookup_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detail_mock</span><span class="p">):</span>
         <span class="n">detail_mock</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s1">&#39;some other error&#39;</span><span class="p">)</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">LookupError</span><span class="p">):</span>
-            <span class="n">detail</span><span class="p">()</span></div>
-</div>
-
+            <span class="n">detail</span><span class="p">()</span></div></div>
 
     
 
 <span class="c1">### Test for the results view. ###</span>
-<div class="viewcode-block" id="ResultsViewTest">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.ResultsViewTest">[docs]</a>
-<span class="k">class</span> <span class="nc">ResultsViewTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
-<div class="viewcode-block" id="ResultsViewTest.setUp">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.ResultsViewTest.setUp">[docs]</a>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ResultsViewTest"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.ResultsViewTest">[docs]</a><span class="k">class</span> <span class="nc">ResultsViewTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="ResultsViewTest.setUp"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.ResultsViewTest.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a test user instance.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;testpassword&#39;</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="ResultsViewTest.test_results_view_that_requires_login">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.ResultsViewTest.test_results_view_that_requires_login">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_results_view_that_requires_login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ResultsViewTest.test_results_view_that_requires_login"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.ResultsViewTest.test_results_view_that_requires_login">[docs]</a>    <span class="k">def</span> <span class="nf">test_results_view_that_requires_login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a request object.</span>
         <span class="n">request</span> <span class="o">=</span> <span class="n">HttpRequest</span><span class="p">()</span>
         <span class="n">request</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span>
@@ -345,10 +299,7 @@
         <span class="c1"># Assertions.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="ResultsViewTest.test_results_view_with_an_authenticated_user">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.ResultsViewTest.test_results_view_with_an_authenticated_user">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_results_view_with_an_authenticated_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ResultsViewTest.test_results_view_with_an_authenticated_user"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.ResultsViewTest.test_results_view_with_an_authenticated_user">[docs]</a>    <span class="k">def</span> <span class="nf">test_results_view_with_an_authenticated_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Log in the test user.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;testpassword&#39;</span><span class="p">)</span>
 
@@ -365,23 +316,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;edu_quiz/edu_result.html&#39;</span><span class="p">)</span>
         <span class="c1"># Check if the &#39;result&#39; and &#39;category_name&#39; are in the context.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;category_name&#39;</span><span class="p">],</span> <span class="n">category_name</span><span class="p">)</span></div>
-</div>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;category_name&#39;</span><span class="p">],</span> <span class="n">category_name</span><span class="p">)</span></div></div>
         
 <span class="c1">### Test for the selection views. ###</span>
-<div class="viewcode-block" id="SelectionTestCase">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.SelectionTestCase">[docs]</a>
-<span class="k">class</span> <span class="nc">SelectionTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span> 
-<div class="viewcode-block" id="SelectionTestCase.setup">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.SelectionTestCase.setup">[docs]</a>
-    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SelectionTestCase"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.SelectionTestCase">[docs]</a><span class="k">class</span> <span class="nc">SelectionTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span> 
+<div class="viewcode-block" id="SelectionTestCase.setup"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.SelectionTestCase.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a RequestFactory instance.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">()</span>      </div>
-
-<div class="viewcode-block" id="SelectionTestCase.test_selection_with_a_valid_category_and_question">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.SelectionTestCase.test_selection_with_a_valid_category_and_question">[docs]</a>
-    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.ast&#39;</span><span class="p">)</span> 
+<div class="viewcode-block" id="SelectionTestCase.test_selection_with_a_valid_category_and_question"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.SelectionTestCase.test_selection_with_a_valid_category_and_question">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.ast&#39;</span><span class="p">)</span> 
     <span class="k">def</span> <span class="nf">test_selection_with_a_valid_category_and_question</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_ast</span><span class="p">):</span>
         <span class="c1"># Mock functions.</span>
         <span class="n">get_json_categories</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Mythology&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;History&quot;</span><span class="p">:</span> <span class="p">{}})</span>
@@ -415,10 +357,7 @@
         <span class="c1"># Assert that the &#39;mock_ast.literal_eval&#39; function was called exactly once with the &#39;mock_question.choices&#39; argument.</span>
         <span class="n">mock_ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="n">mock_question</span><span class="o">.</span><span class="n">choices</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="SelectionTestCase.test_selection_view_with_no_model">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.SelectionTestCase.test_selection_view_with_no_model">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_selection_view_with_no_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SelectionTestCase.test_selection_view_with_no_model"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.SelectionTestCase.test_selection_view_with_no_model">[docs]</a>    <span class="k">def</span> <span class="nf">test_selection_view_with_no_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a client instance.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
         <span class="c1"># Create a Mock request.</span>
@@ -457,25 +396,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;question&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pk</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;question&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">correct_answer</span><span class="p">,</span> <span class="s1">&#39;Choice 1&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;choices&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Choice 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Choice 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Choice 3&#39;</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;category_name&#39;</span><span class="p">],</span> <span class="s1">&#39;category1&#39;</span><span class="p">)</span>      </div>
-</div>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context_data</span><span class="p">[</span><span class="s1">&#39;category_name&#39;</span><span class="p">],</span> <span class="s1">&#39;category1&#39;</span><span class="p">)</span>      </div></div>
 
   
 <span class="c1">### Test for the try new quiz view. ###</span>
-<div class="viewcode-block" id="TestTryNewQuiz">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestTryNewQuiz">[docs]</a>
-<span class="k">class</span> <span class="nc">TestTryNewQuiz</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
-<div class="viewcode-block" id="TestTryNewQuiz.setUp">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestTryNewQuiz.setUp">[docs]</a>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestTryNewQuiz"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestTryNewQuiz">[docs]</a><span class="k">class</span> <span class="nc">TestTryNewQuiz</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestTryNewQuiz.setUp"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestTryNewQuiz.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a RequestFactory instance.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">()</span></div>
 
-
-<div class="viewcode-block" id="TestTryNewQuiz.test_try_new_quiz_with_quiz_result_in_session">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestTryNewQuiz.test_try_new_quiz_with_quiz_result_in_session">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_try_new_quiz_with_quiz_result_in_session</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestTryNewQuiz.test_try_new_quiz_with_quiz_result_in_session"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestTryNewQuiz.test_try_new_quiz_with_quiz_result_in_session">[docs]</a>    <span class="k">def</span> <span class="nf">test_try_new_quiz_with_quiz_result_in_session</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a session with &#39;quiz_result&#39;.</span>
         <span class="n">session</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;quiz_result&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
         <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">try_new_quiz</span><span class="p">)</span>
@@ -489,12 +419,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">HttpResponseRedirect</span><span class="p">)</span>  <span class="c1"># Assert response is a redirect reponse.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;Education:index_edu&#39;</span><span class="p">))</span>  <span class="c1"># Assert redirect URL is the correct url.</span></div>
 
-
     <span class="c1"># Test for the try new quiz view  with results.</span>
     <span class="c1"># Patch reverse function.</span>
-<div class="viewcode-block" id="TestTryNewQuiz.test_try_new_quiz_with_a_valid_result">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestTryNewQuiz.test_try_new_quiz_with_a_valid_result">[docs]</a>
-    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;django.shortcuts.reverse&#39;</span><span class="p">)</span>  
+<div class="viewcode-block" id="TestTryNewQuiz.test_try_new_quiz_with_a_valid_result"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestTryNewQuiz.test_try_new_quiz_with_a_valid_result">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;django.shortcuts.reverse&#39;</span><span class="p">)</span>  
     <span class="k">def</span> <span class="nf">test_try_new_quiz_with_a_valid_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_reverse</span><span class="p">):</span>
         <span class="c1"># Mock reverse function.</span>
         <span class="n">mock_reverse</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="s1">&#39;/Education/try_new_quiz/&#39;</span>  
@@ -513,10 +440,7 @@
         <span class="c1"># Assert &quot;quiz_result&quot; is deleted from the sessions.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertNotIn</span><span class="p">(</span><span class="s1">&#39;quiz_result&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">)</span> </div>
 
-
-<div class="viewcode-block" id="TestTryNewQuiz.test_try_new_quiz_without_quiz_result_in_session">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestTryNewQuiz.test_try_new_quiz_without_quiz_result_in_session">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_try_new_quiz_without_quiz_result_in_session</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestTryNewQuiz.test_try_new_quiz_without_quiz_result_in_session"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestTryNewQuiz.test_try_new_quiz_without_quiz_result_in_session">[docs]</a>    <span class="k">def</span> <span class="nf">test_try_new_quiz_without_quiz_result_in_session</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a session without &#39;quiz_result&#39; in the session.</span>
         <span class="n">request</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">try_new_quiz</span><span class="p">)</span>
         <span class="c1"># Add middleware manualy.</span>
@@ -530,33 +454,24 @@
          <span class="c1"># Assertions.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertNotIn</span><span class="p">(</span><span class="s1">&#39;quiz_result&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">)</span>  <span class="c1"># Assert session data has not been changed.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">HttpResponseRedirect</span><span class="p">)</span>  <span class="c1"># Assert response is a HttpResponseRedirect.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;Education:index_edu&#39;</span><span class="p">))</span>  <span class="c1"># Assert redirect URL is the correct url.</span></div>
-</div>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;Education:index_edu&#39;</span><span class="p">))</span>  <span class="c1"># Assert redirect URL is the correct url.</span></div></div>
 <span class="w">       </span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">A class that tests finding a model. to test for the lookup error.</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># create a class that tests finding a model.         </span>
-<div class="viewcode-block" id="TestFindModel">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel">[docs]</a>
-<span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.apps.get_model&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestFindModel"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel">[docs]</a><span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.apps.get_model&#39;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">TestFindModel</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
     <span class="c1"># setup</span>
-<div class="viewcode-block" id="TestFindModel.setUp">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel.setUp">[docs]</a>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestFindModel.setUp"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># create a RequestFactory instance for generating mock HTTP requests during testing</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">()</span>
 
         <span class="c1"># Create a user object</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;test_user&#39;</span><span class="p">)</span>            </div>
-
             
     <span class="c1"># create a test that locates a model in the app    </span>
-<div class="viewcode-block" id="TestFindModel.test_find_model_success">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_success">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_find_model_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_model</span><span class="p">):</span> 
+<div class="viewcode-block" id="TestFindModel.test_find_model_success"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_success">[docs]</a>    <span class="k">def</span> <span class="nf">test_find_model_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_model</span><span class="p">):</span> 
         <span class="c1"># mock the category_name that will be used to find a model</span>
         <span class="n">mock_category_name_ok</span> <span class="o">=</span> <span class="s1">&#39;Mythology&#39;</span>               
 
@@ -575,12 +490,9 @@
         <span class="c1"># assert that the result is not none, indicating successful retrieval</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">mock_model</span><span class="p">),</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the response to the function get_model is a model instance.&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the model is not none.&#39;</span><span class="p">)</span>        </div>
-
                 
     <span class="c1"># test for an error raised if globals does not have a model for a category name    </span>
-<div class="viewcode-block" id="TestFindModel.test_find_model_fail">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_fail">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_find_model_fail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_model</span><span class="p">):</span>            
+<div class="viewcode-block" id="TestFindModel.test_find_model_fail"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_views.TestFindModel.test_find_model_fail">[docs]</a>    <span class="k">def</span> <span class="nf">test_find_model_fail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_model</span><span class="p">):</span>            
         <span class="c1"># mock the arguments for the detail() function</span>
         <span class="n">mock_category_name_absent</span> <span class="o">=</span> <span class="s1">&#39;Sports&#39;</span>   
         <span class="n">mock_question_id</span> <span class="o">=</span> <span class="mi">20</span>     
@@ -604,9 +516,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the status_code is 200 for the error message shown on detail template.&#39;</span><span class="p">)</span>
         <span class="c1"># assert that the error message was returned in the response content</span>
         <span class="c1"># - use b syntax to create a byte string literal. the content of a HTTP response is binary data - content get returned as a byte string</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Unable to find the model&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that None was returned for a model not located.&#39;</span><span class="p">)</span></div>
-</div>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Unable to find the model&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that None was returned for a model not located.&#39;</span><span class="p">)</span></div></div>
 
         
         

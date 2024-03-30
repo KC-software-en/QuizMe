@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>General_Knowledge.tests.test_views &mdash; QuizMe 00.00.01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            QuizMe
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">QuizMe</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">QuizMe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">General_Knowledge.tests.test_views</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for General_Knowledge.tests.test_views</h1><div class="highlight"><pre>
+<span></span><span class="c1"># import requests to use the API for General_Knowledge quiz</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># import from urllib to work with URL requests &amp; the response handling process when making HTTP requests</span>
+<span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span>
+
+<span class="c1"># https://docs.djangoproject.com/en/5.0/intro/tutorial05/#id7</span>
+<span class="c1"># reverse function is used in Django to generate URLs for views based on their names or patterns</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+
+<span class="c1"># import all views</span>
+<span class="c1"># (had to use this structure so that response object would recognise views)</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="c1"># import json to work with the data retrieved from the open trivia db API</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="c1"># https://docs.djangoproject.com/en/5.0/topics/testing/tools/#transactiontestcase</span>
+<span class="c1"># import TransactionTestCase because</span>
+<span class="c1"># tests rely on database access such as creating or querying models, </span>
+<span class="c1"># :. create test classes as subclasses of django.test.TestCase rather than unittest.TestCase</span>
+<span class="c1"># import RequestFactory to generate a HttpRequest objects &amp; simulate HTTP requests (faster than using Client)</span>
+<span class="c1"># https://docs.djangoproject.com/en/5.0/topics/testing/tools/#the-test-client</span>
+<span class="c1"># https://docs.djangoproject.com/en/5.0/topics/testing/advanced/#the-request-factory</span>
+<span class="c1"># import base class for all Django test cases (for writing tests, including test assertions, database setup and teardown, and other testing infrastructure)</span>
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span><span class="p">,</span> <span class="n">RequestFactory</span><span class="p">,</span> <span class="n">Client</span>
+
+<span class="c1"># import unittest on its own to include in class argument</span>
+<span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="c1">#  import unittest to write tests that are not necessarily tied to Django and can be used in any Python project e.g. get API response from open trivia db</span>
+<span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">patch</span><span class="p">,</span> <span class="n">MagicMock</span>
+
+<span class="c1"># import AnonymousUser model - a special type of user object representing an unauthenticated user or a user who is not logged in</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">AnonymousUser</span>
+
+<span class="c1"># import logging then comment out after debugging view response to pass assertions</span>
+<span class="c1">#import logging######</span>
+
+<span class="c1"># import TemplateResponse because it is a specialised HttpResponse subclass that is specifically designed for representing responses generated from rendering templates</span>
+<span class="c1"># use the render function in Django views &amp; it typically returns a TemplateResponse instance</span>
+<span class="kn">from</span> <span class="nn">django.template.response</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>  
+
+<span class="c1"># import random to shuffle choices rendered in the form</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># import APIRequestFactory for the question &amp; choices view which requests a response from an API</span>
+<span class="kn">from</span> <span class="nn">rest_framework.test</span> <span class="kn">import</span> <span class="n">APIRequestFactory</span>
+
+<span class="c1">#############################################################################################</span>
+<span class="c1">#############################################################################################</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Create a class to test the views rendered in General_Knowledge.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="c1">#</span>
+<div class="viewcode-block" id="TestGeneralKnowledgeViews"><a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_views.TestGeneralKnowledgeViews">[docs]</a><span class="k">class</span> <span class="nc">TestGeneralKnowledgeViews</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestGeneralKnowledgeViews.setUp"><a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_views.TestGeneralKnowledgeViews.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># create fake requests with a RequestFactory instance - sets up the test environment</span>
+        <span class="c1"># set up a Django test client for making HTTP requests in the tests</span>
+        <span class="c1"># setup a user who is not logged in with AnonymousUser</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">()</span>   
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>     <span class="c1">#######</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">anonymous_user</span> <span class="o">=</span> <span class="n">AnonymousUser</span><span class="p">()</span>        </div>
+    
+    <span class="c1"># test the &#39;index_gen&#39; view with RequestFactory to create a fake GET request</span>
+<div class="viewcode-block" id="TestGeneralKnowledgeViews.test_index_gen_view_with_reqfac"><a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_views.TestGeneralKnowledgeViews.test_index_gen_view_with_reqfac">[docs]</a>    <span class="k">def</span> <span class="nf">test_index_gen_view_with_reqfac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># create a fake GET request to the &#39;index_gen&#39; view with a specified category_id </span>
+        <span class="c1"># simulate a request to index_gen view and capture the resulting HTTP response</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;General_Knowledge:index_gen&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;category_id&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}))</span>
+        
+        <span class="c1"># Simulate an anonymous user because General_Knowledge is accessible to unauthenticated users</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">AnonymousUser</span><span class="p">()</span>
+
+        <span class="c1"># simulate a request to index_gen view and capture the resulting HTTP response </span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">views</span><span class="o">.</span><span class="n">index_gen</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+
+        <span class="c1"># assert that the HTTP response status code is 200 (OK), indicating a successful request.        </span>
+        <span class="c1"># (need request to use status_code)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check for a successful GET request of index_gen view for anyone&#39;</span><span class="p">)</span></div>
+
+    <span class="c1"># test the &#39;index_gen&#39; view using the Django test client</span>
+<div class="viewcode-block" id="TestGeneralKnowledgeViews.test_index_gen_view_with_client"><a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_views.TestGeneralKnowledgeViews.test_index_gen_view_with_client">[docs]</a>    <span class="k">def</span> <span class="nf">test_index_gen_view_with_client</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>    
+        <span class="c1"># make a GET request to the &#39;index_gen&#39; view using the Django test client</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;General_Knowledge:index_gen&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;category_id&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}))</span>
+
+        <span class="c1"># assert that the view renders the gen_quiz template - use path from template directory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;gen_quiz/gen_quiz.html&#39;</span><span class="p">,</span> <span class="n">msg_prefix</span><span class="o">=</span><span class="s1">&#39;Should check that the gen_quiz template was used&#39;</span><span class="p">)</span>    </div>
+
+    <span class="c1"># test the successful retrieval of questions and choices with RequestFactory</span>
+    <span class="c1"># add a patch decorator with the import path to the get_specific_json_category as the argument</span>
+    <span class="c1"># - because the get_specific_json_category object should be temporarily replaced</span>
+    <span class="c1"># mock_get_specific_json_category represents the mocked version of the get_specific_json_category function </span>
+    <span class="c1"># - specified in the @patch decorator &amp; used within the get_questions_and_choices function</span>
+    <span class="c1">#@patch(&#39;General_Knowledge.views.get_specific_json_category&#39;)</span>
+<div class="viewcode-block" id="TestGeneralKnowledgeViews.test_get_questions_and_choices_success"><a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_views.TestGeneralKnowledgeViews.test_get_questions_and_choices_success">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_questions_and_choices_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>        
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;General_Knowledge.views.get_specific_json_category&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock_get_specific_json_category</span><span class="p">:</span>
+            <span class="c1"># set up a successful mock response for the mock_get_specific_json_category function</span>
+            <span class="n">mock_response_ok</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;results&quot;</span><span class="p">:[</span>
+                    <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;type1&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;difficulty&quot;</span><span class="p">:</span><span class="s2">&quot;level&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;category1&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;question&quot;</span><span class="p">:</span><span class="s2">&quot;question1&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;correct_answer&quot;</span><span class="p">:</span><span class="s2">&quot;correct_answer1&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;incorrect_answers&quot;</span><span class="p">:[</span>
+                         <span class="s2">&quot;incorrect_answer&quot;</span><span class="p">,</span>
+                         <span class="s2">&quot;incorrect_answer2&quot;</span><span class="p">,</span>
+                         <span class="s2">&quot;incorrect_answer3&quot;</span><span class="p">,</span>                     
+                     <span class="p">]</span>
+                     <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+
+            <span class="c1"># add a new key value pair to the response dictionary after calling the mix choices function</span>
+            <span class="n">mock_response_ok</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;mixed_choices&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mixed choice1&#39;</span><span class="p">,</span> <span class="s1">&#39;mixed choice2&#39;</span><span class="p">,</span> <span class="s1">&#39;mixed choice3&#39;</span><span class="p">,</span> <span class="s1">&#39;mixed choice4&#39;</span><span class="p">]</span>
+
+            <span class="c1"># set the return value for response of mock_get_specific_json_category as mock_response_ok</span>
+            <span class="n">mock_get_specific_json_category</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_response_ok</span>
+
+            <span class="c1"># Create a GET request for the view with reverse </span>
+            <span class="c1"># use the name defined in urls.py with the arguments passed in the view in view.py</span>
+            <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;General_Knowledge:detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">]))</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">views</span><span class="o">.</span><span class="n">get_questions_and_choices</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="c1">#?do i have to call the jsoncat func?                                    </span>
+
+            <span class="c1"># assert that the response is successful with a status code of 200</span>
+            <span class="c1"># the view will set up a context variable called questions (the name representing &#39;results&#39;) </span>
+            <span class="c1"># - response.context is passed to the template</span>
+            <span class="c1"># - assert that questions is in the response context</span>
+            <span class="c1"># assert that the value for questions (i.e. results) is a list</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>               </div>
+             
+
+    <span class="c1"># test the unsuccessful retrieval of questions and choices with RequestFactory    </span>
+<div class="viewcode-block" id="TestGeneralKnowledgeViews.test_get_questions_and_choices_no_questions"><a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_views.TestGeneralKnowledgeViews.test_get_questions_and_choices_no_questions">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_questions_and_choices_no_questions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># use context manager to mock the get_specific_json_category function &amp; return a response without questions</span>
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;General_Knowledge.views.get_specific_json_category&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock_get_specific_json_category</span><span class="p">:</span>
+            <span class="c1"># set up an empty dictionary for a 200-OK mock response from the mock_get_specific_json_category function</span>
+            <span class="n">mock_response_empty</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;results&quot;</span><span class="p">:[]</span>
+            <span class="p">}</span>
+
+            <span class="c1"># set the return value for response of mock_get_specific_json_category as mock_response_empty</span>
+            <span class="n">mock_get_specific_json_category</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_response_empty</span>
+            
+            <span class="c1"># Create a GET request for the view</span>
+            <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;General_Knowledge:detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">]))</span>
+        
+            <span class="c1"># Call the view function with the GET request</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">views</span><span class="o">.</span><span class="n">get_questions_and_choices</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>                
+                                
+            <span class="c1"># assert that the response has a status code of 200</span>
+            <span class="c1"># assert that the response returns an empty list where questions should be</span>
+            <span class="c1"># assert that the context variable for the error_message is present when passed to the template</span>
+            <span class="c1"># - check if the string is present in the HTML content of the response after it has been decoded from bytes to a Unicode string </span>
+            <span class="c1"># - easier to work with text-based content in your tests</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the status code for the questions &amp; choices response is OK.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mock_response_empty</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that there is an empty list where questions should be.&#39;</span><span class="p">)</span>            
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;Unable to retrieve the questions from the json response&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span></div>
+
+    <span class="c1">#  test that the gen_detail template is used for the    </span>
+<div class="viewcode-block" id="TestGeneralKnowledgeViews.test_detail_view_with_client"><a class="viewcode-back" href="../../../General_Knowledge.tests.html#General_Knowledge.tests.test_views.TestGeneralKnowledgeViews.test_detail_view_with_client">[docs]</a>    <span class="k">def</span> <span class="nf">test_detail_view_with_client</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># make a GET request to the &#39;detail&#39; view using the Django test client</span>
+        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s1">&#39;General_Knowledge.views.get_specific_json_category&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock_get_specific_json</span><span class="p">:</span>
+            <span class="n">mock_response</span> <span class="o">=</span> <span class="p">{</span>
+                            <span class="s2">&quot;results&quot;</span><span class="p">:[</span>
+                                        <span class="p">{</span>
+                                        <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;type1&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;difficulty&quot;</span><span class="p">:</span><span class="s2">&quot;level&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;category1&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;question&quot;</span><span class="p">:</span><span class="s2">&quot;question1&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;correct_answer&quot;</span><span class="p">:</span><span class="s2">&quot;correct_answer1&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;incorrect_answers&quot;</span><span class="p">:[</span>
+                                            <span class="s2">&quot;incorrect_answer&quot;</span><span class="p">,</span>
+                                            <span class="s2">&quot;incorrect_answer2&quot;</span><span class="p">,</span>
+                                            <span class="s2">&quot;incorrect_answer3&quot;</span><span class="p">,</span>
+                                            <span class="p">]</span>
+                                        <span class="p">}</span>
+                                    <span class="p">]</span>
+                            <span class="p">}</span>
+            
+            <span class="c1"># </span>
+            <span class="n">mock_get_specific_json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_response</span>
+
+            <span class="c1"># make a GET request to the detail view</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;General_Knowledge:detail&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">]))</span>            
+
+            <span class="c1"># assert that the view renders the gen_quiz template - use path from template directory</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;gen_quiz/gen_detail.html&#39;</span><span class="p">)</span> <span class="c1"># can only be used with Client() not ReqFac()</span></div></div>
+
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Kisha Cairncross, Deandre` Wright.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

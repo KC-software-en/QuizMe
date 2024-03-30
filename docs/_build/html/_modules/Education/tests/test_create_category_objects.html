@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Education.tests.test_create_category_objects &mdash; QuizMe 00.00.01 documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=d7bb8d4d"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -83,8 +86,17 @@
 <span class="c1"># import classes from models.py </span>
 <span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Mythology</span>
 
+<span class="c1"># import utils used in command</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">get_specific_json_category</span>
+
 <span class="c1">#  import unittest to write tests that are not necessarily tied to Django and can be used in any Python project e.g. get API response from open trivia db</span>
 <span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">patch</span><span class="p">,</span> <span class="n">MagicMock</span><span class="p">,</span> <span class="n">Mock</span>
+
+<span class="c1"># import TestCase</span>
+<span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">TestCase</span>
+
+<span class="c1"># import apps to dynamically fetch a model </span>
+<span class="kn">from</span> <span class="nn">django.apps</span> <span class="kn">import</span> <span class="n">apps</span>
 
 <span class="c1"># NOTE: management commands are automatically discovered when placed within the management/commands directory of an app</span>
 <span class="c1"># - therefore, you do not need to import create_subcategory_objects explicitly in a test case </span>
@@ -96,72 +108,187 @@
 <span class="c1"># after writing a test, run in cmd &amp; it will say fail. </span>
 <span class="c1"># next, go to create_category_objects.py and create the command. Then it should pass</span>
 <span class="c1"># run coverage after tests</span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd"># https://docs.djangoproject.com/en/3.2/topics/testing/tools/#management-commands</span>
-<span class="sd"># Management commands can be tested with the call_command() function. </span>
-<span class="sd"># The output can be redirected into a StringIO instance</span>
-<span class="sd"># create a class that tests the command create_subcategory_objects</span>
-<span class="sd">class TestCreateSubcategoryObjects(TransactionTestCase):</span>
-<span class="sd">    @patch(&#39;Education.utils.requests.get&#39;)</span>
-<span class="sd">    def test_create_subcategory_objects(self, mock_get_request):</span>
-<span class="sd">        mock_ok_response = MagicMock()</span>
-<span class="sd">        mock_ok_response.status_code = 200</span>
-<span class="sd">        mock_ok_response.json.return_value = {</span>
-<span class="sd">            &quot;results&quot;:[</span>
-<span class="sd">                {&quot;type&quot;:&quot;type1&quot;,</span>
-<span class="sd">                 &quot;difficulty&quot;:&quot;level&quot;,</span>
-<span class="sd">                 &quot;category&quot;:&quot;category1&quot;,</span>
-<span class="sd">                 &quot;question&quot;:&quot;question1&quot;,</span>
-<span class="sd">                 &quot;correct_answer&quot;:&quot;correct_answer1&quot;,</span>
-<span class="sd">                 &quot;incorrect_answers&quot;:[</span>
-<span class="sd">                     &quot;incorrect_answer&quot;,</span>
-<span class="sd">                     &quot;incorrect_answer2&quot;,</span>
-<span class="sd">                     &quot;incorrect_answer3&quot;,                     </span>
-<span class="sd">                 ]</span>
-<span class="sd">                 }</span>
-<span class="sd">            ]</span>
-<span class="sd">        }</span>
 
-<span class="sd">        # set the return value for response of mock_get as mock_response</span>
-<span class="sd">        mock_get_request.return_value = mock_ok_response</span>
+<span class="c1"># https://www.django-rest-framework.org/api-guide/testing/#api-test-cases ######## refer back ###</span>
+<span class="c1"># use patch class decorator &amp; provide the import path to the requests.get function in views.py</span>
+<span class="c1"># patch the external get function within the requests module, which is used in the views.get_json_categories function</span>
+<span class="c1"># - to intercept the HTTP request made by the code and control the response during testing</span>
+<div class="viewcode-block" id="TestGetSpecificJsonCategoryError"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestGetSpecificJsonCategoryError">[docs]</a><span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.utils.requests.get&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">TestGetSpecificJsonCategoryError</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="c1"># test error response for specific json categories by calling its function from utils  </span>
+    <span class="c1"># mock_get_request is an argument representing the mocked version of the requests.get function specified in the @patch decorator, </span>
+    <span class="c1"># - used within the get_specific_json_category function.    </span>
+<div class="viewcode-block" id="TestGetSpecificJsonCategoryError.test_get_specific_json_category_error"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestGetSpecificJsonCategoryError.test_get_specific_json_category_error">[docs]</a>    <span class="k">def</span> <span class="nf">test_get_specific_json_category_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_request</span><span class="p">):</span>
+        <span class="c1"># set up mock for an unsuccessful response</span>
+        <span class="c1"># create a mock object by instantiating a MagicMock class &amp; assigning it to the response object</span>
+        <span class="c1"># - it will simulate an HTTP response object</span>
+        <span class="c1"># - MagicMock allows you to access and set attributes, call methods, etc, without explicitly defining them</span>
+        <span class="c1"># simulate an unsuccessful HTTP response with a status_code attribute e.g. 429 for rate limit exceeded        </span>
+        <span class="c1"># simulate an error message for the mock test</span>
+        <span class="n">mock_error_response</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>        
+        <span class="n">mock_error_response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">429</span>
+        <span class="n">mock_error_response</span><span class="o">.</span><span class="n">error_message</span> <span class="o">=</span> <span class="s2">&quot;Too many requests to the API in a given amount of time (&#39;rate limiting&#39;).&quot;</span>
 
-<span class="sd">        out = StringIO() </span>
-<span class="sd">        ##sys.stdout = out       </span>
-<span class="sd">        </span>
-<span class="sd">        # set the variables</span>
-<span class="sd">        total_questions = 50</span>
-<span class="sd">        category_id = 20</span>
-<span class="sd">        category_name = &#39;Mythology&#39;</span>
-<span class="sd">        idx = 1</span>
+        <span class="c1"># set the return value for response of mock_get_request as mock_error_response</span>
+        <span class="n">mock_get_request</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_error_response</span>
 
-<span class="sd">        # call the command (use the name of the command which is the file name, not Command/handle)</span>
-<span class="sd">        call_command(&#39;create_category_objects&#39;, category_id, category_name, stdout=out)</span>
-<span class="sd">        print(f&quot;out:{out.getvalue()}&quot;)##</span>
+        <span class="c1"># redirect stderr into a str</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span> 
 
-<span class="sd">        # set the expected output</span>
-<span class="sd">        progress_expected_output = f&quot;Created quiz object {idx} out of {total_questions} for category_id:{category_id}&quot;</span>
-<span class="sd">        final_expected_output = f&quot;Successfully created {total_questions} quiz objects for category_id: {category_id}&quot;</span>
-<span class="sd">        </span>
-<span class="sd">        ##sys.stdout = sys.__stdout__</span>
+        <span class="c1"># set the variables        </span>
+        <span class="n">category_id</span> <span class="o">=</span> <span class="mi">20</span>
+        <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Mythology&#39;</span>        
 
-<span class="sd">        # assertions</span>
-<span class="sd">        self.assertIn(progress_expected_output, out.getvalue(), </span>
-<span class="sd">                      msg=&#39;Should check that a progess message reports the creation of a specific object.&#39;)</span>
-<span class="sd">        self.assertIn(final_expected_output, out.getvalue(), </span>
-<span class="sd">                      msg=&#39;Should check that a progess message reports the creation of 50 quiz objects.&#39;)</span>
-<span class="sd">&#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestCreateSubcategoryObjects2">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects2">[docs]</a>
-<span class="k">class</span> <span class="nc">TestCreateSubcategoryObjects2</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
-<div class="viewcode-block" id="TestCreateSubcategoryObjects2.test_create_subcategory_objects2">
-<a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects2.test_create_subcategory_objects2">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_create_subcategory_objects2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># call the command (use the name of the command which is the file name, not Command/handle)</span>
+        <span class="c1"># cast category_id to str because call_command() expects string arguments</span>
+        <span class="n">call_command</span><span class="p">(</span><span class="s1">&#39;create_category_objects&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">category_id</span><span class="p">),</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+
+        <span class="c1"># assertions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;Failed to retrieve data from the API&#39;</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> 
+                      <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that a str is in the error message for failing to retrieve API response&#39;</span><span class="p">)</span>        </div>
+
+    <span class="c1"># test for an empty json response        </span>
+<div class="viewcode-block" id="TestGetSpecificJsonCategoryError.test_no_questions_in_json"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestGetSpecificJsonCategoryError.test_no_questions_in_json">[docs]</a>    <span class="k">def</span> <span class="nf">test_no_questions_in_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_request</span><span class="p">):</span>
+        <span class="c1"># set up mock for an successful API retrieval but an empty json response</span>
+        <span class="c1"># create a mock object by instantiating a MagicMock class &amp; assigning it to the response object</span>
+        <span class="c1"># - it will simulate an HTTP response object</span>
+        <span class="c1"># - MagicMock allows you to access and set attributes, call methods, etc, without explicitly defining them</span>
+        <span class="c1"># simulate an successful HTTP response with a status_code attribute </span>
+        <span class="c1"># simulate an error message for the mock test</span>
+        <span class="n">mock_response</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>        
+        <span class="n">mock_response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">200</span>
+        <span class="n">mock_response</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;results&quot;</span><span class="p">:[]}</span>
+
+        <span class="c1"># set the return value for response of mock_get_request as mock_response</span>
+        <span class="n">mock_get_request</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_response</span>
+
+        <span class="c1"># redirect stderr into a str</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span> 
+
+        <span class="c1"># set the variables        </span>
+        <span class="n">category_id</span> <span class="o">=</span> <span class="mi">20</span>
+        <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Mythology&#39;</span>        
+
+        <span class="c1"># call the command (use the name of the command which is the file name, not Command/handle)</span>
+        <span class="c1"># cast category_id to str because call_command() expects string arguments</span>
+        <span class="n">call_command</span><span class="p">(</span><span class="s1">&#39;create_category_objects&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">category_id</span><span class="p">),</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+
+        <span class="c1"># assertions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;No questions found in the API response&#39;</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> 
+                      <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that a str is in the error message for an empty json response&#39;</span><span class="p">)</span>        </div></div>
+
+<span class="c1"># create a class that tests finding a model.         </span>
+<div class="viewcode-block" id="TestFindModel"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestFindModel">[docs]</a><span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.views.apps.get_model&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">TestFindModel</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="c1"># create a test that locates a model in the app    </span>
+<div class="viewcode-block" id="TestFindModel.test_find_model_success"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestFindModel.test_find_model_success">[docs]</a>    <span class="k">def</span> <span class="nf">test_find_model_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_model</span><span class="p">):</span> 
+        <span class="c1"># create a MagicMock object to mock the behaviour of the Mythology class</span>
+        <span class="c1"># use spec=Mythology to ensure that mock_model behaves like an instance of the Mythology class</span>
+        <span class="c1"># https://docs.python.org/3.7/library/unittest.mock.html#the-mock-class</span>
+        <span class="c1"># set the return value of mock_get_model to be the mock_model object</span>
+        <span class="n">mock_model</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">Mythology</span><span class="p">)</span>     
+        <span class="n">mock_get_model</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_model</span>
+        
+        <span class="c1"># redirect stderr into a str</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span> 
+
+        <span class="c1"># set the variables        </span>
+        <span class="n">category_id</span> <span class="o">=</span> <span class="mi">20</span>
+        <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Mythology&#39;</span>        
+
+        <span class="c1"># call the command (use the name of the command which is the file name, not Command/handle)</span>
+        <span class="c1"># cast category_id to str because call_command() expects string arguments</span>
+        <span class="n">call_command</span><span class="p">(</span><span class="s1">&#39;create_category_objects&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">category_id</span><span class="p">),</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+   
+        <span class="c1"># assert that the result object is an instance of the same class as mock_model</span>
+        <span class="c1"># https://docs.python.org/3.7/library/unittest.html?highlight=assertisinstance#unittest.TestCase.assertIsInstance</span>
+        <span class="c1"># assert that the result is not none, indicating successful retrieval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">mock_get_model</span><span class="o">.</span><span class="n">return_value</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">mock_model</span><span class="p">),</span>
+                               <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the response to the function get_model is a model instance.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that the model is not none.&#39;</span><span class="p">)</span>   </div>
+
+    <span class="c1"># test for an error raised if globals does not have a model for a category name    </span>
+<div class="viewcode-block" id="TestFindModel.test_find_model_fail"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestFindModel.test_find_model_fail">[docs]</a>    <span class="k">def</span> <span class="nf">test_find_model_fail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_model</span><span class="p">):</span>            
+        <span class="c1"># mock the arguments for the detail() function</span>
+        <span class="n">mock_category_name_absent</span> <span class="o">=</span> <span class="s1">&#39;Sports&#39;</span>   
+        <span class="n">mock_category_id</span> <span class="o">=</span> <span class="mi">21</span>     
+
+        <span class="c1"># mock the get_model function to raise a LookupError for an incorrect category_name (i.e. no corresponding model)                       </span>
+        <span class="n">mock_get_model</span><span class="o">.</span><span class="n">side_effect</span> <span class="o">=</span> <span class="ne">LookupError</span>
+
+        <span class="c1"># redirect stderr into a str</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span> 
+
+        <span class="c1"># call the command (use the name of the command which is the file name, not Command/handle)</span>
+        <span class="c1"># cast category_id to str because call_command() expects string arguments</span>
+        <span class="n">call_command</span><span class="p">(</span><span class="s1">&#39;create_category_objects&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">mock_category_id</span><span class="p">),</span> <span class="n">mock_category_name_absent</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+
+        <span class="c1"># assertions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;Cannot locate the model for the selected category&#39;</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> 
+                      <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that a str is in the error message for a model not found&#39;</span><span class="p">)</span>        </div></div>
+
+        
+                
+
+<span class="c1"># https://docs.djangoproject.com/en/3.2/topics/testing/tools/#management-commands</span>
+<span class="c1"># Management commands can be tested with the call_command() function. </span>
+<span class="c1"># The output can be redirected into a StringIO instance</span>
+<span class="c1"># create a class that tests the command create_subcategory_objects</span>
+<div class="viewcode-block" id="TestCreateSubcategoryObjects"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects">[docs]</a><span class="k">class</span> <span class="nc">TestCreateSubcategoryObjects</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCreateSubcategoryObjects.test_create_subcategory_objects"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects.test_create_subcategory_objects">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;Education.utils.requests.get&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_create_subcategory_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_get_request</span><span class="p">):</span>
+        <span class="n">mock_ok_response</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="n">mock_ok_response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">200</span>
+        <span class="n">mock_ok_response</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;results&quot;</span><span class="p">:[</span>
+                <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;type1&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;difficulty&quot;</span><span class="p">:</span><span class="s2">&quot;level&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;category&quot;</span><span class="p">:</span><span class="s2">&quot;category1&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;question&quot;</span><span class="p">:</span><span class="s2">&quot;question1&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;correct_answer&quot;</span><span class="p">:</span><span class="s2">&quot;correct_answer1&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;incorrect_answers&quot;</span><span class="p">:[</span>
+                     <span class="s2">&quot;incorrect_answer&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;incorrect_answer2&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;incorrect_answer3&quot;</span><span class="p">,</span>                     
+                 <span class="p">]</span>
+                 <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+
+        <span class="c1"># set the return value for response of mock_get as mock_response</span>
+        <span class="n">mock_get_request</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_ok_response</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span> 
+        <span class="c1">##sys.stdout = out       </span>
+        
+        <span class="c1"># set the variables</span>
+        <span class="n">total_questions</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="n">category_id</span> <span class="o">=</span> <span class="mi">20</span>
+        <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Mythology&#39;</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="c1"># call the command (use the name of the command which is the file name, not Command/handle)</span>
+        <span class="n">call_command</span><span class="p">(</span><span class="s1">&#39;create_category_objects&#39;</span><span class="p">,</span> <span class="n">category_id</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;out:</span><span class="si">{</span><span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="c1">##</span>
+
+        <span class="c1"># set the expected output</span>
+        <span class="n">progress_expected_output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Created quiz object </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> out of </span><span class="si">{</span><span class="n">total_questions</span><span class="si">}</span><span class="s2"> for category_id:</span><span class="si">{</span><span class="n">category_id</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">final_expected_output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Successfully created </span><span class="si">{</span><span class="n">total_questions</span><span class="si">}</span><span class="s2"> quiz objects for category_id: </span><span class="si">{</span><span class="n">category_id</span><span class="si">}</span><span class="s2">&quot;</span>
+        
+        <span class="c1">##sys.stdout = sys.__stdout__</span>
+
+        <span class="c1"># assertions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">progress_expected_output</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> 
+                      <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that a progess message reports the creation of a specific object.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">final_expected_output</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">(),</span> 
+                      <span class="n">msg</span><span class="o">=</span><span class="s1">&#39;Should check that a progess message reports the creation of 50 quiz objects.&#39;</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="TestCreateSubcategoryObjects2"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects2">[docs]</a><span class="k">class</span> <span class="nc">TestCreateSubcategoryObjects2</span><span class="p">(</span><span class="n">TransactionTestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCreateSubcategoryObjects2.test_create_subcategory_objects2"><a class="viewcode-back" href="../../../Education.tests.html#Education.tests.test_create_category_objects.TestCreateSubcategoryObjects2.test_create_subcategory_objects2">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_subcategory_objects2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">StringIO</span>
         <span class="n">call_command</span><span class="p">(</span><span class="s1">&#39;create_category_objects&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;Mythology&#39;</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;Created quiz object&#39;</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;Successfully created&#39;</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span></div>
-</div>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;Successfully created&#39;</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span></div></div>
 </pre></div>
 
            </div>

@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Entertainment.views &mdash; QuizMe 00.00.01 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=d7bb8d4d"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -112,9 +115,7 @@
 <span class="c1"># https://www.youtube.com/watch?v=sgEhb50YSTE</span>
 <span class="c1"># get json reponse for trivia categories from open trivia db</span>
 <span class="c1"># index category from the dictionary id</span>
-<div class="viewcode-block" id="index_en">
-<a class="viewcode-back" href="../../Entertainment.html#Entertainment.views.index_en">[docs]</a>
-<span class="k">def</span> <span class="nf">index_en</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="index_en"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.views.index_en">[docs]</a><span class="k">def</span> <span class="nf">index_en</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function represents the homepage of Entertainment quizzes.</span>
 <span class="sd">    It displays a list of categories of quizzes and the first question of each category.</span>
@@ -160,16 +161,13 @@
         <span class="c1"># render the context to the homepage of Entertainment</span>
         <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;entertainment/en_quiz.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span> </div>
 
-
 <span class="c1"># write a view for the quiz question, incl the argument question_id</span>
 <span class="c1"># question_id is the specific identifier passed in the URL when accessing this view</span>
 <span class="c1"># it uniquely identifies and retrieves the specific question to display</span>
 <span class="c1"># Django automatically adds an id field as the primary key for each model (i.e. question.id)</span>
 <span class="c1"># display the question text </span>
 <span class="c1"># render an HTTP 404 error if a question with the requested ID doesn’t exist</span>
-<div class="viewcode-block" id="detail">
-<a class="viewcode-back" href="../../Entertainment.html#Entertainment.views.detail">[docs]</a>
-<span class="k">def</span> <span class="nf">detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>
+<div class="viewcode-block" id="detail"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.views.detail">[docs]</a><span class="k">def</span> <span class="nf">detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function retrieves a question object from the database based on the question_id passed in the URL.</span>
 <span class="sd">    It also retrieves the list of choices for the question and converts the choices text field into a list of dictionaries.</span>
@@ -232,11 +230,8 @@
         <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;entertainment/en_detail.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
 
-
 <span class="c1"># create a view that displays the quiz result </span>
-<div class="viewcode-block" id="results">
-<a class="viewcode-back" href="../../Entertainment.html#Entertainment.views.results">[docs]</a>
-<span class="k">def</span> <span class="nf">results</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="viewcode-block" id="results"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.views.results">[docs]</a><span class="k">def</span> <span class="nf">results</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function retrieves the quiz result from the session and renders the result template.</span>
 
@@ -258,12 +253,9 @@
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;entertainment/en_result.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
 
-
 <span class="c1"># write a view to answer a question, incl the argument category_name &amp; question_id</span>
 <span class="c1"># it handles the submitted data</span>
-<div class="viewcode-block" id="selection">
-<a class="viewcode-back" href="../../Entertainment.html#Entertainment.views.selection">[docs]</a>
-<span class="k">def</span> <span class="nf">selection</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>
+<div class="viewcode-block" id="selection"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.views.selection">[docs]</a><span class="k">def</span> <span class="nf">selection</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handles the submitted data for a question in a quiz.</span>
 
@@ -368,11 +360,8 @@
                     <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;Entertainment:results&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">category_name</span><span class="p">,))</span>
                 <span class="p">)</span></div>
 
-
 <span class="c1"># start new quiz function</span>
-<div class="viewcode-block" id="try_new_quiz">
-<a class="viewcode-back" href="../../Entertainment.html#Entertainment.views.try_new_quiz">[docs]</a>
-<span class="k">def</span> <span class="nf">try_new_quiz</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<div class="viewcode-block" id="try_new_quiz"><a class="viewcode-back" href="../../Entertainment.html#Entertainment.views.try_new_quiz">[docs]</a><span class="k">def</span> <span class="nf">try_new_quiz</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function deletes the quiz result and session data of the current quiz before starting a new quiz.</span>
 <span class="sd">    It then redirects the user to the home page of Entertainment quizzes.</span>
@@ -390,7 +379,6 @@
     <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span>
         <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;Entertainment:index_en&#39;</span><span class="p">)</span>
     <span class="p">)</span>  </div>
-
         
 
 </pre></div>

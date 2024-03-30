@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>General_Knowledge.models &mdash; QuizMe 00.00.01 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=d7bb8d4d"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -80,9 +83,7 @@
 <span class="sd">Create a model for the quiz categories in QuizMe.</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># define a model for categories in the QuizMe project</span>
-<div class="viewcode-block" id="Categories">
-<a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.models.Categories">[docs]</a>
-<span class="k">class</span> <span class="nc">Categories</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="Categories"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.models.Categories">[docs]</a><span class="k">class</span> <span class="nc">Categories</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="c1"># define a field to store the category name as text</span>
     <span class="c1"># define a field to store the description of the category as text</span>
     <span class="n">category</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
@@ -97,15 +98,12 @@
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span></div>
-
 <span class="w">        </span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Create a model for the quiz subcategories in General Knowledge.</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># define a model for subcategories in the General Knowledge app</span>
-<div class="viewcode-block" id="Subcategories">
-<a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.models.Subcategories">[docs]</a>
-<span class="k">class</span> <span class="nc">Subcategories</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span> 
+<div class="viewcode-block" id="Subcategories"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.models.Subcategories">[docs]</a><span class="k">class</span> <span class="nc">Subcategories</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span> 
     <span class="c1"># retrieve the category object representing &#39;General Knowledge&#39; from the Categories model</span>
     <span class="n">gen_category_obj</span> <span class="o">=</span> <span class="n">Categories</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;General Knowledge&#39;</span><span class="p">)</span>
 
@@ -137,16 +135,13 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subcategory</span></div>
 
-
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">Create a General Knowledge model for the subcategory in the education quiz.</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># use Django&#39;s built-in object-relational mapping (ORM) &amp; define the relevant classes</span>
 <span class="c1"># -each entry in a SQL table represents a single object, this can be converted to a class instance in Python.  </span>
 <span class="c1"># create a General Knowledge class that inherits from django.db.models.Model</span>
-<div class="viewcode-block" id="General_Knowledge">
-<a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.models.General_Knowledge">[docs]</a>
-<span class="k">class</span> <span class="nc">General_Knowledge</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>      
+<div class="viewcode-block" id="General_Knowledge"><a class="viewcode-back" href="../../General_Knowledge.html#General_Knowledge.models.General_Knowledge">[docs]</a><span class="k">class</span> <span class="nc">General_Knowledge</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>      
     <span class="c1"># retrieve the category object representing &#39;Education&#39; from the Categories model</span>
     <span class="n">education_category_obj</span> <span class="o">=</span> <span class="n">Categories</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;Education&#39;</span><span class="p">)</span>    
 
@@ -177,7 +172,6 @@
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">question</span>        </div>
-
 </pre></div>
 
            </div>

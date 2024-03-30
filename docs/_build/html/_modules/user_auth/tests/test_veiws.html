@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>user_auth.tests.test_veiws &mdash; QuizMe 00.00.01 documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=d7bb8d4d"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -89,16 +92,12 @@
 <span class="c1"># import views.</span>
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">views</span>
   
-<div class="viewcode-block" id="UserAuthViewTest">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.UserAuthViewTest">[docs]</a>
-<span class="k">class</span> <span class="nc">UserAuthViewTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="UserAuthViewTest"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.UserAuthViewTest">[docs]</a><span class="k">class</span> <span class="nc">UserAuthViewTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Create a class to test the login, logout and show user view in the user_auth views.</span>
 <span class="sd">    &#39;&#39;&#39;</span>                  
     <span class="c1"># Positive tests &quot;If the correct template is used (login.html)&quot;</span>
-<div class="viewcode-block" id="UserAuthViewTest.test_login_view_valid">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.UserAuthViewTest.test_login_view_valid">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_login_view_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UserAuthViewTest.test_login_view_valid"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.UserAuthViewTest.test_login_view_valid">[docs]</a>    <span class="k">def</span> <span class="nf">test_login_view_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            A function to test if the correct template is rendered from the login view.</span>
 <span class="sd">        &#39;&#39;&#39;</span> 
@@ -109,11 +108,8 @@
         <span class="c1"># The test will pass as the Index view is not rendered in the /user_auth/login url.      </span>
         <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="p">,</span> <span class="s1">&#39;The login page should be rendered to anyone &#39;</span>           </div>
 
-
     <span class="c1"># Positive tests &quot;If the correct template is used (logout.html)&quot;</span>
-<div class="viewcode-block" id="UserAuthViewTest.test_logout_view_valid">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.UserAuthViewTest.test_logout_view_valid">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_logout_view_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UserAuthViewTest.test_logout_view_valid"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.UserAuthViewTest.test_logout_view_valid">[docs]</a>    <span class="k">def</span> <span class="nf">test_logout_view_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            A function to test if the correct template is rendered from the logout view.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -122,11 +118,8 @@
         <span class="c1"># The test will pass as the url is rendered at the /user_auth/login url       </span>
         <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="p">,</span> <span class="s1">&#39;The logout page should be rendered to anyone &#39;</span>  </div>
 
-
     <span class="c1"># Positive tests &quot;If the correct template is used (show_user.html) and it displays the signed in user details.&quot;      </span>
-<div class="viewcode-block" id="UserAuthViewTest.test_show_user">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.UserAuthViewTest.test_show_user">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_show_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="UserAuthViewTest.test_show_user"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.UserAuthViewTest.test_show_user">[docs]</a>    <span class="k">def</span> <span class="nf">test_show_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            A function to test if the correct template is rendered from the show_user view.</span>
 <span class="sd">        &#39;&#39;&#39;</span> 
@@ -139,20 +132,14 @@
         <span class="n">request</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">views</span><span class="o">.</span><span class="n">show_user</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>    </div>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>    </div></div>
 
-
-<div class="viewcode-block" id="test_user_register_view">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view">[docs]</a>
-<span class="k">class</span> <span class="nc">test_user_register_view</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="test_user_register_view"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view">[docs]</a><span class="k">class</span> <span class="nc">test_user_register_view</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">                A class with functions to test the user_register_view.</span>
 <span class="sd">        &#39;&#39;&#39;</span>       
    <span class="c1"># Positive tests &quot;If the correct template is used (register.html)&quot;</span>
-<div class="viewcode-block" id="test_user_register_view.test_register_view_valid">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view.test_register_view_valid">[docs]</a>
-        <span class="k">def</span> <span class="nf">test_register_view_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="test_user_register_view.test_register_view_valid"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view.test_register_view_valid">[docs]</a>        <span class="k">def</span> <span class="nf">test_register_view_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">                A function to test if the correct template is rendered from the register view.</span>
 <span class="sd">            &#39;&#39;&#39;</span> 
@@ -163,10 +150,7 @@
             <span class="c1"># The test will pass as the Index view is not rendered in the /user_auth/register url.      </span>
             <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="p">,</span> <span class="s1">&#39;The register page should be rendered to anyone &#39;</span></div>
 
-
-<div class="viewcode-block" id="test_user_register_view.test_registration_with_invalid_password">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view.test_registration_with_invalid_password">[docs]</a>
-        <span class="k">def</span> <span class="nf">test_registration_with_invalid_password</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="test_user_register_view.test_registration_with_invalid_password"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view.test_registration_with_invalid_password">[docs]</a>        <span class="k">def</span> <span class="nf">test_registration_with_invalid_password</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
             <span class="c1"># Create a new user.        </span>
 <span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">                A function to test if a error message is displyed when a user enters invalid data in the register form.</span>
@@ -184,10 +168,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">messages</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="s2">&quot;Unsuccessful registration. Invalid information.&quot;</span><span class="p">)</span>      </div>
 
-
-<div class="viewcode-block" id="test_user_register_view.test_registration_successful">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view.test_registration_successful">[docs]</a>
-        <span class="k">def</span> <span class="nf">test_registration_successful</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="test_user_register_view.test_registration_successful"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view.test_registration_successful">[docs]</a>        <span class="k">def</span> <span class="nf">test_registration_successful</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">                A function to test if registration is succesful.</span>
 <span class="sd">            &#39;&#39;&#39;</span>  
@@ -205,12 +186,9 @@
             <span class="c1"># Check if a new user was created</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s2">&quot;testuser&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span></div>
 
-
             <span class="c1"># You can also check other things like email sending, etc.</span>
 
-<div class="viewcode-block" id="test_user_register_view.test_registration_with_invalid_data">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view.test_registration_with_invalid_data">[docs]</a>
-        <span class="k">def</span> <span class="nf">test_registration_with_invalid_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="test_user_register_view.test_registration_with_invalid_data"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_user_register_view.test_registration_with_invalid_data">[docs]</a>        <span class="k">def</span> <span class="nf">test_registration_with_invalid_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">                A function to test if user registers with invalid data.</span>
 <span class="sd">            &#39;&#39;&#39;</span>  
@@ -226,26 +204,17 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 
             <span class="c1"># Check if error messages are displayed</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">&quot;Unsuccessful registration. Invalid information.&quot;</span><span class="p">)</span>    </div>
-</div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">&quot;Unsuccessful registration. Invalid information.&quot;</span><span class="p">)</span>    </div></div>
 
-
-<div class="viewcode-block" id="test_authenticate_user_view">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view">[docs]</a>
-<span class="k">class</span> <span class="nc">test_authenticate_user_view</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="test_authenticate_user_view"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view">[docs]</a><span class="k">class</span> <span class="nc">test_authenticate_user_view</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            A class with functions to test the authentificate_user view.</span>
 <span class="sd">    &#39;&#39;&#39;</span>  
-<div class="viewcode-block" id="test_authenticate_user_view.setUp">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.setUp">[docs]</a>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="test_authenticate_user_view.setUp"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Create a test user</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s2">&quot;testUser&quot;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s2">&quot;testPassword&quot;</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="test_authenticate_user_view.test_authenticate_user">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.test_authenticate_user">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_authenticate_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="test_authenticate_user_view.test_authenticate_user"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.test_authenticate_user">[docs]</a>    <span class="k">def</span> <span class="nf">test_authenticate_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            A function to test if a user is authentificated.</span>
 <span class="sd">        &#39;&#39;&#39;</span>  
@@ -256,12 +225,9 @@
         <span class="n">user</span> <span class="o">=</span> <span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;testpass&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">)</span> </div>
-
     
     <span class="c1"># Positive tests &quot;If the correct template is used (show_user.html) and it displays the signed in user details.&quot;  </span>
-<div class="viewcode-block" id="test_authenticate_user_view.test_redirect_if_not_authenticated">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.test_redirect_if_not_authenticated">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_redirect_if_not_authenticated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="test_authenticate_user_view.test_redirect_if_not_authenticated"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.test_redirect_if_not_authenticated">[docs]</a>    <span class="k">def</span> <span class="nf">test_redirect_if_not_authenticated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            A function to test if a user is not authentificated and redirected to login page.</span>
 <span class="sd">        &#39;&#39;&#39;</span> 
@@ -269,10 +235,7 @@
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;user_auth:show_user&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertRedirects</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;/user_auth/login/?next=</span><span class="si">%2F</span><span class="s1">user_auth</span><span class="si">%2F</span><span class="s1">authenticate_user</span><span class="si">%2F</span><span class="s1">show_user&#39;</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="test_authenticate_user_view.test_user_authentication_and_redirection">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.test_user_authentication_and_redirection">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_user_authentication_and_redirection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="test_authenticate_user_view.test_user_authentication_and_redirection"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.test_user_authentication_and_redirection">[docs]</a>    <span class="k">def</span> <span class="nf">test_user_authentication_and_redirection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">                A function to test if a user is redirected after they have been authenticated.</span>
 <span class="sd">        &#39;&#39;&#39;</span>  
@@ -290,11 +253,8 @@
 
         <span class="c1"># Assert that the correct template (&#39;user.html&#39;) is used</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">&quot;user.html&quot;</span><span class="p">)</span></div>
-
     
-<div class="viewcode-block" id="test_authenticate_user_view.test_user_not_authenticated_but_redirected">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.test_user_not_authenticated_but_redirected">[docs]</a>
-    <span class="k">def</span> <span class="nf">test_user_not_authenticated_but_redirected</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="test_authenticate_user_view.test_user_not_authenticated_but_redirected"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.test_authenticate_user_view.test_user_not_authenticated_but_redirected">[docs]</a>    <span class="k">def</span> <span class="nf">test_user_not_authenticated_but_redirected</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">                A function to test if a if a user is redirected after they have been not been authenticated.</span>
 <span class="sd">        &#39;&#39;&#39;</span>  
@@ -303,23 +263,14 @@
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s2">&quot;user_auth:show_user&quot;</span><span class="p">))</span>
 
         <span class="c1"># Assert that the response status code is 302 (Redirect)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">,</span> <span class="s2">&quot;Redirects the user if not logged in&quot;</span><span class="p">)</span></div>
-</div>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">,</span> <span class="s2">&quot;Redirects the user if not logged in&quot;</span><span class="p">)</span></div></div>
 
        
-<div class="viewcode-block" id="TestAuthenticateUser">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.TestAuthenticateUser">[docs]</a>
-<span class="k">class</span> <span class="nc">TestAuthenticateUser</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-<div class="viewcode-block" id="TestAuthenticateUser.setUp">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.TestAuthenticateUser.setUp">[docs]</a>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestAuthenticateUser"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.TestAuthenticateUser">[docs]</a><span class="k">class</span> <span class="nc">TestAuthenticateUser</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestAuthenticateUser.setUp"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.TestAuthenticateUser.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">()</span></div>
 
-
-<div class="viewcode-block" id="TestAuthenticateUser.test_successful_authentication">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.TestAuthenticateUser.test_successful_authentication">[docs]</a>
-    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;user_auth.views.authenticate&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestAuthenticateUser.test_successful_authentication"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.TestAuthenticateUser.test_successful_authentication">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;user_auth.views.authenticate&#39;</span><span class="p">)</span>
     <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;user_auth.views.login&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">test_successful_authentication</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_login</span><span class="p">,</span> <span class="n">mock_authenticate</span><span class="p">):</span>
         <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/login/&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;password&#39;</span><span class="p">})</span>
@@ -331,19 +282,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">HttpResponseRedirect</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="s2">&quot;user_auth:show_user&quot;</span><span class="p">))</span></div>
 
-
-<div class="viewcode-block" id="TestAuthenticateUser.test_failed_authentication">
-<a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.TestAuthenticateUser.test_failed_authentication">[docs]</a>
-    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;user_auth.views.authenticate&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="TestAuthenticateUser.test_failed_authentication"><a class="viewcode-back" href="../../../user_auth.tests.html#user_auth.tests.test_veiws.TestAuthenticateUser.test_failed_authentication">[docs]</a>    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;user_auth.views.authenticate&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">test_failed_authentication</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_authenticate</span><span class="p">):</span>
         <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/login/&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;password&#39;</span><span class="p">})</span>
         <span class="n">mock_authenticate</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">authenticate_user</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
         <span class="n">mock_authenticate</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">HttpResponseRedirect</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="s2">&quot;user_auth:login&quot;</span><span class="p">))</span></div>
-</div>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="s2">&quot;user_auth:login&quot;</span><span class="p">))</span></div></div>
 
   
 </pre></div>
