@@ -411,7 +411,7 @@ class TestFindModel(TestCase):
         # call the get_model function with its args app name & model name
         result = apps.get_model('Education', mock_category_name_ok)
         
-        # assert that the result object is an instance of the same class as mock_model
+        # assert that the result object is an instance of the same class as mock_model ⁵
         # https://docs.python.org/3.7/library/unittest.html?highlight=assertisinstance#unittest.TestCase.assertIsInstance
         # assert that the result is not none, indicating successful retrieval
         self.assertIsInstance(result, type(mock_model), msg='Should check that the response to the function get_model is a model instance.')
@@ -437,7 +437,7 @@ class TestFindModel(TestCase):
         # simulate the behaviour where the model is not found in the apps
         # raise an error when calling find_model() with an invalid category name
         # https://docs.djangoproject.com/en/3.2/topics/testing/tools/#exceptions
-        # according to documentation, an exception not visible to the test client is Http404 
+        # according to documentation, an exception not visible to the test client is Http404 ⁶
         # - :. check response.status_code in test because assertRaises(Http404) gives AssertionError: Http404 not raised
         self.assertEqual(response.status_code, 200, msg='Should check that the status_code is 200 for the error message shown on detail template.')
         # assert that the error message was returned in the response content

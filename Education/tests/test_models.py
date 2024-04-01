@@ -6,9 +6,9 @@
 # This can make individual tests pass but fail when run together.
 # from django.test import TestCase
 
-# https://docs.djangoproject.com/en/5.0/topics/testing/tools/#transactiontestcase
+# https://docs.djangoproject.com/en/3.2/topics/testing/tools/#transactiontestcase
 # import TransactionTestCase because
-# tests rely on database access such as creating or querying models, 
+# tests rely on database access such as creating or querying models¹, 
 # :. create test classes as subclasses of django.test.TestCase rather than unittest.TestCase
 from django.test import TransactionTestCase
 
@@ -31,7 +31,7 @@ from ..models import Categories, Subcategories, Mythology, Science_and_Nature, H
 Create a class to test the Categories model.
 '''        
 # create a class to test the Categories model
-# https://docs.djangoproject.com/en/3.2/topics/testing/overview/#writing-tests
+# https://docs.djangoproject.com/en/3.2/topics/testing/overview/#writing-tests ²
 class TestCategoriesModel(TransactionTestCase):
     def setUp(self):
         # no necessary conditions
@@ -91,7 +91,7 @@ class TestSubcategoriesModel(TransactionTestCase):
                              description = "Category1 description")
         
         # create an instance of Subcategories model with mixer
-        # include the category_ins as the foreign key
+        # include the category_ins as the foreign key³
         # https://stackoverflow.com/questions/44604686/how-to-test-a-model-that-has-a-foreign-key-in-django
         self.subcategory_ins = mixer.blend(Subcategories, subcategory = "Subcategory1", description = "Subcategory1 description", category = self.category_ins)
         

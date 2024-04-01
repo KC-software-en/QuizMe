@@ -6,6 +6,9 @@ quizvenv/
 chosen_quiz_category.json
 quiz_categories.json
 
+# ignore the postresql instructions
+postgresql instructions.txt
+
 # Django #
 *.log
 *.pot
