@@ -29,15 +29,15 @@ class Subcategories(models.Model):
     education_category_obj = Categories.objects.get(category='Education')
 
     # use database foreign keys to indicate relationships between categories and subcategories
-    # - a ForeignKey field to show this many-to-one relationship
-    # set a default category to the primary key (pk) of the 'Education' category object
+    # - a ForeignKey field to show this many-to-one relationship ¹
+    # set a default category to the primary key (pk) of the 'Education' category object²
     # https://docs.djangoproject.com/en/3.2/topics/db/models/#many-to-one-relationships
     # https://dnmtechs.com/setting-default-value-for-foreign-key-attribute-in-django/
     # ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, 
     # - providing further control over the default value
     # https://docs.djangoproject.com/en/3.2/ref/models/fields/#default
     # - according to doc, for fields like ForeignKey that map to model instances, 
-    # - defaults should be the value of the field they reference (pk unless to_field is set) instead of model instances
+    # - defaults should be the value of the field they reference (pk unless to_field is set) instead of model instances³
     category = models.ForeignKey(Categories, on_delete=models.SET_DEFAULT, default=education_category_obj.pk)
 
     # define a field to store the subcategory name as text

@@ -108,7 +108,7 @@ WSGI_APPLICATION = 'QuizMe.wsgi.application'
 # Download link for postgresql
 # https://www.postgresql.org/download/
 
-DATABASE = 2
+DATABASE = 1
 
 if DEBUG and (DATABASE == 1):
     #Use sql database

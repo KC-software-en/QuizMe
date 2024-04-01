@@ -183,7 +183,6 @@ def get_category_names(response):
     return category_names
 
 # define a function that returns the queryset for 10 random objects from the database for each category 
-# https://stackoverflow.com/questions/27270958/patch-multiple-methods-from-different-modules-using-python-mock#:~:text=The%20short%20answer%20is%20no%20you%20cannot%20use,one%20of%20the%20time%20by%20single%20patch%20calls.
 def category_objects(request, category_name):    
     """Retrieve the category queryset from the database based on its category name.
 
@@ -215,7 +214,7 @@ def category_objects(request, category_name):
         print(f"error_message:{error_message}")        
 
     if model != None:
-        # get the 50 questions for the specific category
+        # get the 50 questions for the specific category with objects.all() ¹
         # https://docs.djangoproject.com/en/3.2/topics/db/queries/#retrieving-all-objects    
         all_questions = model.objects.all()    
 
@@ -225,15 +224,15 @@ def category_objects(request, category_name):
         # get the ids for the selection of 10 questions
         # use random to select 10 questions
         # https://docs.python.org/3.7/library/random.html?highlight=random#random.sample
-        # note: random.sample requires a list as its first argument
+        # note: random.sample requires a list as its first argument ²
         question_selection_ids = random.sample(category_question_ids, 10)
 
-        # save the question_selection in a session then it will be accessible in selection view as well
+        # save the question_selection in a session then it will be accessible in selection view as well³
         # https://stackoverflow.com/questions/59776172/how-to-pass-querysets-or-the-context-dictronary-from-one-view-to-another-view
         request.session['question_selection_ids'] = question_selection_ids
 
         # filter the objects based on question_selection_ids
-        # https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut
+        # https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut ⁴
         question_selection = model.objects.filter(pk__in=question_selection_ids)        
 
         # return the selected 10 questions from the database

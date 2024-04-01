@@ -49,7 +49,7 @@ def index(request):
 
 # display the category of the education quiz
 # https://www.youtube.com/watch?v=sgEhb50YSTE
-# get json reponse for trivia categories from open trivia db
+# get json response¹ for trivia categories from open trivia db
 # index category from the dictionary id
 def index_edu(request):
     """A view for the home page of education quizzes.
@@ -151,7 +151,7 @@ def detail(request, category_name, question_id):
         # use the helper function literal_eval of the ast module to convert the str representation of the choices list
         # - in the textfield of the category model into a list
         # https://python.readthedocs.io/en/latest/library/ast.html#ast.literal_eval
-        # note:ast.literal_eval is safer than eval. it only evaluates literals & not arbitrary expressions, 
+        # note:ast.literal_eval is safer than eval. it only evaluates literals & not arbitrary expressions², 
         # - reducing the risk of code injection
         # use in template to iterate over the list of choices dictionaries and access the values for the 'choice' key
         convert_choices_textfield_into_list = ast.literal_eval(question.choices)            
@@ -237,7 +237,7 @@ def selection(request, category_name, question_id):
         # use the helper function literal_eval of the ast module to convert the str representation of the choices list
         # - in the textfield of the category model into a list
         # https://python.readthedocs.io/en/latest/library/ast.html#ast.literal_eval
-        # note:ast.literal_eval is safer than eval. it only evaluates literals & not arbitrary expressions, 
+        # note:ast.literal_eval is safer than eval. it only evaluates literals & not arbitrary expressions², 
         # - reducing the risk of code injection
         # use in template to iterate over the list of choices dictionaries and access the values for the 'choice' key
         convert_choices_textfield_into_list = ast.literal_eval(question.choices)           

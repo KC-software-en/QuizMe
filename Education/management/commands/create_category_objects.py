@@ -1,6 +1,7 @@
+# import Any, BaseCommand, CommandError, CommandParser¹
 # https://docs.djangoproject.com/en/3.2/howto/custom-management-commands/#module-django.core.management
 from typing import Any
-from django.core.management.base import BaseCommand, CommandError, CommandParser
+from django.core.management.base import BaseCommand, CommandError, CommandParser 
 
 # import models
 from ...models import Mythology, History, Science_and_Nature 
@@ -33,7 +34,7 @@ class Command(BaseCommand):
     # define the arguments for object creation
     # https://docs.python.org/3/library/argparse.html#module-argparse
     def add_arguments(self, parser: CommandParser):
-        # add positional arguments        
+        # add positional arguments ²       
         parser.add_argument('category_id', type=int, help='The category_id for the desired quiz subcategory')
         parser.add_argument('category_name', type=str, help='The category_name for the desired quiz subcategory')        
 

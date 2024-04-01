@@ -1,9 +1,9 @@
 # `coverage run manage.py test *App*` where App is optional
-# then run `coverage report`
+# then run `coverage report`¹
 # coverage run --source "Education" manage.py test && coverage report
 
 [run]
-# the files to be excluded from coverage report
+# the files to be excluded from coverage report²
 omit = 
     */migrations/*    
     */settings.py  
