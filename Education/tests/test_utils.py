@@ -371,7 +371,8 @@ class TestCategoryObjects(TransactionTestCase):
         # - ensures that subsequent code execution within the test/(other tests) are not affected by stdout redirection 
         sys.stdout = sys.__stdout__
 
-        # assert that the response is None when an invalid category is provided
+        # assert that the response is None⁶ when an invalid category is provided
+        # https://docs.python.org/3.7/library/unittest.html#assert-methods 
         # assert that the string 'error_message' is present in the captured output.
         self.assertIsNone(response, msg='Should return None for an invalid category.')
         self.assertIn('error_message', captured_output.getvalue(), msg='Should check that the str is present in the stdout for LookupError.')

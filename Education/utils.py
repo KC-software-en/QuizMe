@@ -23,7 +23,7 @@ def get_json_categories():
     :return: The json response
     :rtype: dict or None
     """
-    # get Category Lookup url
+    # get Category Lookup url¹
     category_lookup = 'https://opentdb.com/api_category.php'
     
     # store url in a variable as a json response
@@ -214,7 +214,7 @@ def category_objects(request, category_name):
         print(f"error_message:{error_message}")        
 
     if model != None:
-        # get the 50 questions for the specific category with objects.all() ¹
+        # get the 50 questions for the specific category with objects.all() ²
         # https://docs.djangoproject.com/en/3.2/topics/db/queries/#retrieving-all-objects    
         all_questions = model.objects.all()    
 
@@ -224,15 +224,15 @@ def category_objects(request, category_name):
         # get the ids for the selection of 10 questions
         # use random to select 10 questions
         # https://docs.python.org/3.7/library/random.html?highlight=random#random.sample
-        # note: random.sample requires a list as its first argument ²
+        # note: random.sample requires a list as its first argument ³
         question_selection_ids = random.sample(category_question_ids, 10)
 
-        # save the question_selection in a session then it will be accessible in selection view as well³
+        # save the question_selection in a session then it will be accessible in selection view as well⁴
         # https://stackoverflow.com/questions/59776172/how-to-pass-querysets-or-the-context-dictronary-from-one-view-to-another-view
         request.session['question_selection_ids'] = question_selection_ids
 
         # filter the objects based on question_selection_ids
-        # https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut ⁴
+        # https://docs.djangoproject.com/en/3.2/topics/db/queries/#the-pk-lookup-shortcut ⁵
         question_selection = model.objects.filter(pk__in=question_selection_ids)        
 
         # return the selected 10 questions from the database

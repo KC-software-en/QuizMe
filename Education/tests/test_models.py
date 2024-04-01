@@ -13,8 +13,9 @@
 from django.test import TransactionTestCase
 
 # import mixer
-# The Mixer is a helper to generate instances of Django or SQLAlchemy models. 
-# It’s useful for testing and fixture replacement
+# The Mixer is a helper to generate instances of Django or SQLAlchemy models². 
+# - https://mixer.readthedocs.io/en/latest/quickstart.html
+# - It’s useful for testing and fixture replacement
 from mixer.backend.django import mixer
 
 # import classes from models.py 
@@ -31,7 +32,7 @@ from ..models import Categories, Subcategories, Mythology, Science_and_Nature, H
 Create a class to test the Categories model.
 '''        
 # create a class to test the Categories model
-# https://docs.djangoproject.com/en/3.2/topics/testing/overview/#writing-tests ²
+# https://docs.djangoproject.com/en/3.2/topics/testing/overview/#writing-tests ³
 class TestCategoriesModel(TransactionTestCase):
     def setUp(self):
         # no necessary conditions
@@ -46,7 +47,8 @@ class TestCategoriesModel(TransactionTestCase):
         category_ins = mixer.blend(Categories, category = "Category1",
                              description = "Category1 description")
         
-        # assert instance was correctly created
+        # assert instance was correctly created ⁴
+        # https://docs.python.org/3.7/library/unittest.html#assert-methods 
         # incl a descriptive message with assertion
         # When the test fails, the message will be displayed along with the default error message, 
         # providing more context about what went wrong & helpful for future debugging
@@ -91,7 +93,7 @@ class TestSubcategoriesModel(TransactionTestCase):
                              description = "Category1 description")
         
         # create an instance of Subcategories model with mixer
-        # include the category_ins as the foreign key³
+        # include the category_ins as the foreign key⁵
         # https://stackoverflow.com/questions/44604686/how-to-test-a-model-that-has-a-foreign-key-in-django
         self.subcategory_ins = mixer.blend(Subcategories, subcategory = "Subcategory1", description = "Subcategory1 description", category = self.category_ins)
         
