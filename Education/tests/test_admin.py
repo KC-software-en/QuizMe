@@ -1,12 +1,12 @@
-# https://docs.djangoproject.com/en/5.0/topics/testing/tools/#transactiontestcase
+# https://docs.djangoproject.com/en/3.2/topics/testing/tools/#transactiontestcase 
 # import TransactionTestCase because
 # tests rely on database access such as creating or querying models, 
-# :. create test classes as subclasses of django.test.TestCase rather than unittest.TestCase
+# :. create test classes as subclasses of django.test.TestCase rather than unittest.TestCase¹
 from django.test import TransactionTestCase
 
-# https://docs.djangoproject.com/en/5.0/ref/contrib/admin/#adminsite-objects
+# https://docs.djangoproject.com/en/3.2/ref/contrib/admin/#adminsite-objects
 # register your model instances with site object
-# The site object is an instance of the AdminSite class and represents the default admin site for your Django project
+# The site object is an instance of the AdminSite class and represents the default admin site for your Django project²
 from django.contrib.admin.sites import site
 
 # import admin.py
