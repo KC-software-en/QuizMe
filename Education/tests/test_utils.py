@@ -16,9 +16,9 @@ import random
 # import TestCase
 from unittest import TestCase
 
-# https://docs.djangoproject.com/en/5.0/topics/testing/tools/#transactiontestcase
+# https://docs.djangoproject.com/en/3.2/topics/testing/tools/#transactiontestcase 
 # import TransactionTestCase because
-# tests for category objects rely on database access such as creating or querying models 
+# tests for category objects rely on database access such as creating or querying models¹
 # - this ensures test objects are not created on the admin site
 # :. create test classes as subclasses of django.test.TestCase rather than unittest.TestCase
 from django.test import TransactionTestCase
@@ -43,7 +43,6 @@ import sys
 """
 Create a class to test the functions that request an API response for categorties on Open Trivia DB.
 """
-# https://www.django-rest-framework.org/api-guide/testing/#api-test-cases ######## refer back ###
 # use patch class decorator & provide the import path to the requests.get function in views.py
 # patch the external get function within the requests module, which is used in the views.get_json_categories function
 # - to intercept the HTTP request made by the code and control the response during testing
@@ -54,7 +53,7 @@ class TestJsonResponse(TestCase):
     
     # test successful response for json categories by calling its function from views 
     # https://docs.python.org/3.7/library/unittest.mock.html#the-mock-class
-    # mock_get_request is a parameter representing the function that replaces a mock during the test
+    # mock_get_request is a parameter representing the function that replaces a mock during the test²
     # - represents the requests.get function in the patch decorator, which is called inside the get_json_categories function
     def test_get_json_categories_ok(self, mock_get_request):  
         # create an instance of MagicMock & assign it to the response object
@@ -76,7 +75,7 @@ class TestJsonResponse(TestCase):
         # call the function in views.py that internally call the requests.get
         response = utils.get_json_categories()
 
-        # assert that API response was successfully received & not None
+        # assert that API response was successfully received & not None³
         # assert that the type of json_response is a dict (dictionary) - ensure a python dictionary
         # - https://docs.python.org/3.7/library/unittest.html?highlight=assertisinstance#unittest.TestCase.assertIsInstance
         # - in Python, everything is an object, and data types are implemented as classes
@@ -87,7 +86,7 @@ class TestJsonResponse(TestCase):
         self.assertIn('trivia_categories', response, msg='Should check that the trivia_categories key is present in the dictionary json_response.')        
     
     # test unsuccessful response for json categories by calling its function from views  
-    # https://docs.python.org/3.7/library/unittest.mock.html#the-mock-class
+    # https://docs.python.org/3.7/library/unittest.mock.html#the-mock-class ²
     # mock_get_request is a parameter representing the function that replaces a mock during the test
     # - represents the requests.get function in the patch decorator, which is called inside the get_json_categories function
     def test_get_json_categories_error(self, mock_get_request):  
@@ -332,10 +331,10 @@ class TestCategoryObjects(TransactionTestCase):
         # mock the count() method of the queryset and make it return the desired count        
         # mock the count method on the queryset returned by filter with the side_effect attribute of the mock object to return the desired value 
         # - for AssertionError: <MagicMock name='filter().count()' id='94005744'> != 10 : Should check that question_selection contains 10 objects
-        # use side_effect instead of return_value for AttributeError: 'builtin_function_or_method' object has no attribute 'return_value'
-        # https://docs.python.org/3.7/library/unittest.mock.html#the-mock-class
+        # use side_effect instead of return_value for AttributeError: 'builtin_function_or_method' object has no attribute 'return_value'⁴
+        # https://docs.python.org/3.7/library/unittest.mock.html#the-mock-class ²
         # - & https://docs.python.org/3.7/library/unittest.mock.html#unittest.mock.Mock.side_effect
-        # https://docs.python.org/3.7/library/unittest.mock-examples.html?highlight=lambda#partial-mocking
+        # https://docs.python.org/3.7/library/unittest.mock-examples.html?highlight=lambda#partial-mocking ⁵
         mock_filter.return_value.count.side_effect = lambda:10                 
 
         # set the new dictionary key that stores the mock_question_selection_ids for the session
