@@ -26,7 +26,8 @@ class TestModelRegistration(TransactionTestCase):
     '''
     Create a method to test the Mythology model registration.
     '''
-    # assert that Mythology model was registered with the admin site
+    # assert that Mythology model was registered with the admin site³
+    # - https://docs.python.org/3.7/library/unittest.html#assert-methods
     # - by examining the internal attribute of the AdminSite class in Django - the _registry attribute of the site object.
     # _registry is a dictionary where {model classes:admin classes associated with those models}
     def test_quiz_registration(self):

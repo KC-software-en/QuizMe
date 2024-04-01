@@ -73,10 +73,12 @@
                                             <!-- display the name of the category as the button that takes you to the quiz -->
                                             <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
 
+                                                <!--Mythology image¹-->
                                                 <img src ="{% static 'assets/mythology.png' %}" 
                                                     alt = "Mythology" 
                                                     class = "subcategory_image">
 
+                                                <!-- place a hover overlay²-->
                                                 <div class="subcategory_overlay">
                                                     <div class="subcategory_text">
                                                         {{ category_name }}
@@ -85,10 +87,11 @@
 
                                             </a>    
 
-                                        <!--Science & Nature category-->
+                                        <!--Science & Nature category -->
                                         {% elif category_name == "Science & Nature" %}
                                             <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
 
+                                                <!--Science & Nature image³-->
                                                 <img src ="{% static 'assets/science_and_nature.png' %}" 
                                                 alt = "Science & Nature" 
                                                 class = "subcategory_image">
@@ -112,6 +115,7 @@
                                             <!-- display the name of the category as the button that takes you to the quiz -->
                                             <a href = "{% url 'Education:edu_detail' category_name=category_name question_id=first_question_id %}" class="btn">                                                 
 
+                                                <!--History image⁴-->
                                                 <img src ="{% static 'assets/history.png' %}" 
                                                     alt = "History" 
                                                     class = "subcategory_image">

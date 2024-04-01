@@ -69,6 +69,7 @@ class TestGetSpecificJsonCategoryError(TestCase):
         call_command('create_category_objects', str(category_id), category_name, stderr=out)
 
         # assertions
+        # https://docs.python.org/3.7/library/unittest.html#assert-methods ²
         self.assertIn('Failed to retrieve data from the API', out.getvalue(), 
                       msg='Should check that a str is in the error message for failing to retrieve API response')        
 
@@ -107,9 +108,9 @@ class TestGetSpecificJsonCategoryError(TestCase):
 class TestFindModel(TestCase):
     # create a test that locates a model in the app    
     def test_find_model_success(self, mock_get_model): 
-        # create a MagicMock object to mock the behaviour of the Mythology class
+        # create a MagicMock object to mock the behaviour of the Mythology class³
         # use spec=Mythology to ensure that mock_model behaves like an instance of the Mythology class
-        # https://docs.python.org/3.7/library/unittest.mock.html#the-mock-class² 
+        # https://docs.python.org/3.7/library/unittest.mock.html#the-mock-class 
         # set the return value of mock_get_model to be the mock_model object
         mock_model = MagicMock(spec=Mythology)     
         mock_get_model.return_value = mock_model
@@ -125,7 +126,7 @@ class TestFindModel(TestCase):
         # cast category_id to str because call_command() expects string arguments
         call_command('create_category_objects', str(category_id), category_name, stdout=out)
    
-        # assert that the result object is an instance of the same class as mock_model³
+        # assert that the result object is an instance of the same class as mock_model⁴
         # https://docs.python.org/3.7/library/unittest.html?highlight=assertisinstance#unittest.TestCase.assertIsInstance 
         # assert that the result is not none, indicating successful retrieval
         self.assertIsInstance(mock_get_model.return_value, type(mock_model),
@@ -156,7 +157,7 @@ class TestFindModel(TestCase):
                 
 
 # https://docs.djangoproject.com/en/3.2/topics/testing/tools/#management-commands
-# Management commands can be tested with the call_command() function⁴. 
+# Management commands can be tested with the call_command() function⁵. 
 # The output can be redirected into a StringIO instance
 # create a class that tests the command create_subcategory_objects
 class TestCreateSubcategoryObjects(TransactionTestCase):
