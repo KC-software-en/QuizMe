@@ -39,6 +39,7 @@ def test_register_form_redirect(self):
     })
     self.assertEqual(response.status_code, 302)    
    
+# https://mailtrap.io/blog/django-send-email/  
 class EmailTest(TestCase):
     """ A Class that has a function to test if the automated email gets sent."""
     def test_send_email(self):

@@ -29,6 +29,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 # user_login view.
+# https://docs.djangoproject.com/en/5.0/topics/auth/default/ 
 def user_login(request):
     """
     Renders the login.html template for user login.
@@ -43,6 +44,7 @@ def user_login(request):
 
 
 # This veiw logs the user out.
+#https://docs.djangoproject.com/en/5.0/topics/auth/default/ 
 def user_logout(request):
     """
     Logs out the user and displays a success message.
@@ -55,6 +57,7 @@ def user_logout(request):
     # Deletes the users session.
     logout(request)
     # Message is displayed once the user loggs out.
+    #https://docs.djangoproject.com/en/5.0/ref/contrib/messages/ 
     messages.success(request, ("You were successfully logged out."))
     return render(request, 'logout.html')
 
@@ -80,6 +83,7 @@ def show_user(request):
 
 # This veiw is used to register a new user.
 # Once the user succesfully registers on the website they are automatically sent an email.
+#https://docs.djangoproject.com/en/5.0/topics/auth/default/ 
 def user_register(request):
     """
     Handles user registration.
@@ -100,6 +104,7 @@ def user_register(request):
             # Creates the user.
             user = User.objects.create_user(username=username, email=email, password=password )
             # Once the users are created the email gets sent to the email that has been used to register.
+            # https://docs.djangoproject.com/en/5.0/topics/email/ 
             send_mail(
                 subject=f"Welcome {username} to QuizMe",
                 message="We are glad that you have registered to our quiz website fellow quizee.",
@@ -110,11 +115,14 @@ def user_register(request):
             # Once the email has been sent the user is then saved i the database.
             user.save()
             # This message then gets rendered confiming the registration.
+            #https://docs.djangoproject.com/en/5.0/ref/contrib/messages/ 
             messages.success(request, "Registration successful."),
             storage = get_messages(request)
             # If there is no errors the user is then redirected to the login page.
             for message in storage:
                 return redirect("user_auth:login")
+        #Display an error message if the registration is unsuccessful.
+        #https://docs.djangoproject.com/en/5.0/ref/contrib/messages/ 
         messages.error(request, "Unsuccessful registration. Invalid information.")
     # The form data gets erased and replaced with a new form.    
     form = NewUserForm()
@@ -124,6 +132,7 @@ def user_register(request):
 
 
 #  This veiw is used to authenticate and check if the user already exists.
+#https://docs.djangoproject.com/en/5.0/topics/auth/default/ 
 def authenticate_user(request):
     """
     Authenticates a user based on the provided username and password.
