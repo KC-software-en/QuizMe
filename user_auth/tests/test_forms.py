@@ -38,8 +38,9 @@ def test_register_form_redirect(self):
         'password2': 'password321@1'
     })
     self.assertEqual(response.status_code, 302)    
-   
-# https://mailtrap.io/blog/django-send-email/  
+
+# https://stackoverflow.com/questions/3728528/testing-email-sending-in-django²   
+# https://mailtrap.io/blog/django-send-email/⁵ 
 class EmailTest(TestCase):
     """ A Class that has a function to test if the automated email gets sent."""
     def test_send_email(self):
