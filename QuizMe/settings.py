@@ -35,7 +35,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # retrieve it
 # Create a .env file in your project's root directory and add your SECRET_KEY there.
 # You should also add this file to your .gitignore to ensure it's not committed to your repository
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = 'django-insecure-y_c$+sv5x#*m9*+as*r&zy%q9^@2x)$x=^^-rti-5h9*mxk+r5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -97,6 +97,8 @@ WSGI_APPLICATION = 'QuizMe.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# When populating the postgresql database don't forget to run this command.
+# 'python manage.py migrate --run-sync' to sync the migration into postgresql database.
 
 ### Postgresql database convertion docs. ###
 # !! When populating the postgresql database, populate it as you would populate the sqlite3 db !! #

@@ -1,5 +1,8 @@
 # Django documentation.
-#https://docs.djangoproject.com/en/4.2/topics/testing/advanced/
+# https://docs.djangoproject.com/en/4.2/topics/testing/advanced/¹
+# https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Testing³
+# https://stackoverflow.com/questions/11885211/how-to-write-a-unit-test-for-a-django-view⁴
+
 
 # Import The request factory. 
 # RequestFactory provides a way to generate a request instance that can be used as the first argument to any view.

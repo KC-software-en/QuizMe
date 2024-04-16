@@ -53,6 +53,7 @@
                 <div class="d-flex align-items-center justify-content-end" style="padding-left: 165pt;">
                     <li class="nav-item ps-6 px-4 ms-4" style="color: coral;"> 
                         <!-- show a logged in user -->
+                        <!-- https://stackoverflow.com/questions/57405870/how-to-display-username-at-login-link-in-navbar-after-user-has-logged-in¹ -->
                         {% if user.is_authenticated %}
                             {{user.username}}
                         {% endif %}
@@ -86,7 +87,8 @@
             </div>
         </nav>
         
-        {% block content %}                   
+        {% block content %}        
+        <!-- Introduction paragraph -->           
             <div class="row" style="padding-top: 25pt;">
                 <div class="col-md-12"  style="text-align: center;">
                     <h1><b>Welcome to QuizMe</b></h1>
@@ -121,7 +123,8 @@
                 <div class="col-md-12"  style="text-align: center;">
                     <h1 id="Quiz">Quiz Categories</h1>
                 </div>
-
+                <!-- The slideshow -->
+                <!-- https://codeconvey.com/Tutorials/automatic-image-slider-in-html-css/ -->
                 <input id="sliderSwitch" class="slider__switch" type="checkbox" name="sliderSwitch" hidden />
                     
                 <div class="slider">
@@ -132,7 +135,7 @@
                         
                     </ul>
                   </div>
-
+                  <!-- slideshow button -->
                   <div class="slider__control">
                     <label for="sliderSwitch"></label>
                   </div>
@@ -144,7 +147,7 @@
                 </div>    
 
                 <br>
-
+                <!-- About Us paragraph -->
                 <div class="container"  style="text-align: center;">    
                     <h1>About Us</h1>
                     <p id=index_p  style="font-family: sans-serif">In a world where traditional media is making way for digital experiences,
@@ -157,7 +160,7 @@
                     </p>
                 
                     <br>
-
+                    <!-- Our Mission paragraph -->
                     <h1>Our Mission</h1>
                       <p id=index_p  style="font-family: sans-serif">At QuizMe, we aim to provide quiz masters with a user-friendly interface to define quizzes,
                        
@@ -170,7 +173,7 @@
                   </div>    
 
                   <br>
-
+                  <!-- Quiz categories link -->
                 <div class="col-md-12"  style="text-align: center;">
                     <h4>Find all our quiz categories 
                         <a href="#Quiz" style="color: coral;">

@@ -13,7 +13,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-
+# https://www.pythontutorial.net/django-tutorial/django-registration/¹ 
 class NewUserForm(UserCreationForm):
     """
     This class defines the NewUserForm, which is used to create a form where the user can register.
