@@ -74,7 +74,7 @@ If you have ideas or suggestions, please create an issue or contact us directly.
 
 ## Code of Conduct
 
-Please note that we have a [Code of Conduct](CODE_OF_CONDUCT.md) in place. By participating, you are expected to uphold this code. Be respectful and considerate in all interactions.
+Please note that GitHub has a [Code of Conduct](https://docs.github.com/en/site-policy/github-terms/github-community-code-of-conduct#overview-and-purpose) in place. By participating, you are expected to uphold this code. Be respectful and considerate in all interactions.
 
 ## Getting Help
 
