@@ -20,10 +20,11 @@ MarkupSafe==2.1.5
 mixer==7.2.2
 packaging==23.2
 pluggy==1.2.0
-psycopg2==2.9.9
+psycopg2-binary==2.9.9
 Pygments==2.17.2
 pytest==7.4.3
 python-dateutil==2.8.2
+python-dotenv==1.0.1
 pytz==2023.3.post1
 requests==2.31.0
 six==1.16.0
