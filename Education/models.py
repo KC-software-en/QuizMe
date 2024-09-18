@@ -59,21 +59,14 @@ class Subcategories(models.Model):
 # use Django's built-in object-relational mapping (ORM) & define the relevant classes
 # -each entry in a SQL table represents a single object, this can be converted to a class instance in Python.  
 # create a Mythology class that inherits from django.db.models.Model
-class Mythology(models.Model):      
-    # retrieve the category object representing 'Education' from the Categories model
-    education_category_obj = Categories.objects.get(category='Education')
-    # retrieve the subcategory object representing 'Mythology' from the Subcategories model
-    mythology_subcategory_obj = Subcategories.objects.get(subcategory='Mythology')
-
+class Mythology(models.Model):          
     # use database foreign keys to indicate relationships between Mythology and categories    
     # use database foreign keys to indicate relationships between Mythology and subcategories
-    # - a ForeignKey field to show this many-to-one relationship
-    # set a default category to the primary key (pk) of the 'education_category_obj' object
-    # set the desired default subcategory to the primary key (pk) of the 'mythology_subcategory_obj'
+    # - a ForeignKey field to show this many-to-one relationship    
     # ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, 
-    # - providing further control over the default value
-    category = models.ForeignKey(Categories, on_delete=models.SET_DEFAULT, default=education_category_obj.pk)   
-    subcategory = models.ForeignKey(Subcategories, on_delete=models.CASCADE, default=mythology_subcategory_obj.pk)   
+    # - with cascade all related objects will also be deleted. This is useful for maintaining referential integrity in the database
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE)   
+    subcategory = models.ForeignKey(Subcategories, on_delete=models.CASCADE)   
 
     # set variables that represent question, choices & correct_answer in the quiz
     # use TextField to store the questions

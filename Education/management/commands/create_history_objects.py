@@ -4,7 +4,7 @@ from typing import Any
 from django.core.management.base import BaseCommand, CommandError, CommandParser 
 
 # import models
-from ...models import Mythology, History, Science_and_Nature 
+from ...models import Categories, Subcategories, History
 
 # import the utility functions used within the create_subcategory_object()
 from ...utils import get_specific_json_category, mix_choices
@@ -23,10 +23,8 @@ from django.apps import apps
 Define a class Command that extends BaseCommand. It will create an object for the sub-categories of the Education quiz.
 It is intended for private use by the project creator, not its users.
 '''
-# the custom command can be called using `python manage.py create_category_objects 20 Mythology` to populate Mythology
+# the custom command can be called using `python manage.py create_history_objects 23 History` to populate History
 # be sure to place the desired app name in the handle() before calling the command with its corresponding category_id
-# `python manage.py create_category_objects 17 "Science & Nature"` to populate Science & Nature
-# `python manage.py create_category_objects 23 History` to populate History
 class Command(BaseCommand):
     # define a varible that informs one what the command does
     help = 'Populate the database with quiz objects retrieved from an API'
@@ -38,12 +36,12 @@ class Command(BaseCommand):
         parser.add_argument('category_id', type=int, help='The category_id for the desired quiz subcategory')
         parser.add_argument('category_name', type=str, help='The category_name for the desired quiz subcategory')        
 
-    # create an object for the sub-category (e.g.mythology) quiz data
+    # create an object for the sub-category (e.g.history) quiz data
     def handle(self, *args: Any, **options):        
         category_id = options['category_id']
         category_name = options['category_name']
 
-        # call the get_specific_json_category function to get the data for the mythology category
+        # call the get_specific_json_category function to get the data for the history category
         json_response = get_specific_json_category(quantity=50, category=category_id)
         if json_response == None: 
             self.stderr.write(self.style.ERROR("Failed to retrieve data from the API."))
@@ -121,10 +119,19 @@ class Command(BaseCommand):
                         self.stderr.write(self.style.ERROR(f"Cannot locate the model for the selected category: {category_name}."))                                
 
                     # check that a model was found
-                    if model != None: ##                        
+                    if model != None: ##            
+                        # retrieve the category object representing 'Education' from the Categories model
+                        education_category_obj = Categories.objects.get(category='Education')
+                        # retrieve the subcategory object representing 'History' from the Subcategories model
+                        history_subcategory_obj = Subcategories.objects.get(subcategory='History')
+
                         # create a question object with the above data
                         # this will show on the admin site with the models created for questions & choices
-                        question_object = model.objects.create(question = question_text, choices = mixed_choices, correct_answer = correct_choice['choice']) # index choice from the loop above
+                        question_object = model.objects.create(category = education_category_obj,
+                                                               subcategory = history_subcategory_obj,
+                                                               question = question_text,
+                                                               choices = mixed_choices,
+                                                               correct_answer = correct_choice['choice']) # index choice from the loop above
 
                         # save the object to the database
                         question_object.save()
