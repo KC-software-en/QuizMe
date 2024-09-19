@@ -121,9 +121,27 @@ class Command(BaseCommand):
                     # check that a model was found
                     if model != None: ##            
                         # retrieve the category object representing 'Education' from the Categories model
-                        education_category_obj = Categories.objects.get(category='Education')
+                        # used get_or_create method since a default value was set in the models.py
+                        # the get_or_create returns a tuple (the value and a boolean indicating if it was true for created or false already exists)
+                        # - so remember to unpack it
+                        education_category_obj, category_created = Categories.objects.get_or_create(category='Education')
+
+                        # check if the category was created or indicate that it already exists
+                        if category_created == True:
+                            self.stdout.write(self.style.SUCCESS(f"Created the Education category for Science_and_Nature objects."))
+
+                        else:
+                            self.stdout.write(self.style.NOTICE(f"The Education category for Science_and_Nature objects already exists."))
+                        
                         # retrieve the subcategory object representing 'Science_and_Nature' from the Subcategories model
-                        science_and_nature_subcategory_obj = Subcategories.objects.get(subcategory='Science_and_Nature')
+                        science_and_nature_subcategory_obj, subcategory_created = Subcategories.objects.get_or_create(subcategory='Science_and_Nature')
+
+                        # check if the subcategory was created or indicate that it already exists
+                        if subcategory_created == True:
+                            self.stdout.write(self.style.SUCCESS(f"Created the Science_and_Nature subcategory for Science_and_Nature objects."))
+
+                        else:
+                            self.stdout.write(self.style.NOTICE(f"The Science_and_Nature subcategory for Science_and_Nature objects already exists."))
 
                         # create a question object with the above data
                         # this will show on the admin site with the models created for questions & choices
