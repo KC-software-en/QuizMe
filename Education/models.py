@@ -24,10 +24,7 @@ class Categories(models.Model):
         return self.category
         
 # define a model for the quiz subcategories in the Education app
-class Subcategories(models.Model): 
-    # retrieve the category object representing 'Education' from the Categories model
-    education_category_obj = Categories.objects.get(category='Education')
-
+class Subcategories(models.Model):
     # use database foreign keys to indicate relationships between categories and subcategories
     # - a ForeignKey field to show this many-to-one relationship ¹
     # set a default category to the primary key (pk) of the 'Education' category object²
@@ -38,7 +35,7 @@ class Subcategories(models.Model):
     # https://docs.djangoproject.com/en/3.2/ref/models/fields/#default
     # - according to doc, for fields like ForeignKey that map to model instances, 
     # - defaults should be the value of the field they reference (pk unless to_field is set) instead of model instances³
-    category = models.ForeignKey(Categories, on_delete=models.SET_DEFAULT, default=education_category_obj.pk)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE, default='Education')
 
     # define a field to store the subcategory name as text
     subcategory = models.TextField()
@@ -65,8 +62,8 @@ class Mythology(models.Model):
     # - a ForeignKey field to show this many-to-one relationship    
     # ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, 
     # - with cascade all related objects will also be deleted. This is useful for maintaining referential integrity in the database
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)   
-    subcategory = models.ForeignKey(Subcategories, on_delete=models.CASCADE)   
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE, default='Education')   
+    subcategory = models.ForeignKey(Subcategories, on_delete=models.CASCADE, default='Mythology')   
 
     # set variables that represent question, choices & correct_answer in the quiz
     # use TextField to store the questions
@@ -90,19 +87,14 @@ class Mythology(models.Model):
         return self.question
 
 # create a Science_and_Nature class that inherits from django.db.models.Model
-class Science_and_Nature(models.Model):    
-    # retrieve the category object representing 'Education' from the Categories model
-    education_category_obj = Categories.objects.get(category='Education')
-    # retrieve the subcategory object representing 'Science & Nature' from the Subcategories model
-    science_subcategory_obj = Subcategories.objects.get(subcategory='Science & Nature')
-
-    # use database foreign keys to indicate relationships between Science_and_Nature and categories    
+class Science_and_Nature(models.Model):        
+    # use database foreign keys to indicate relationships between Education and categories    
     # use database foreign keys to indicate relationships between Science_and_Nature and subcategories
     # - a ForeignKey field to show this many-to-one relationship
-    # set the default value to the primary key (pk) of the 'education_category_obj' object
-    # set the default value to the primary key (pk) of the 'science_subcategory_obj' object
-    category = models.ForeignKey(Categories, on_delete=models.SET_DEFAULT, default=education_category_obj.pk)   
-    subcategory = models.ForeignKey(Subcategories, on_delete=models.SET_DEFAULT, default=science_subcategory_obj.pk)   
+    # set the category default value to Education 
+    # set the subcategory default value to Science_and_Nature
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE, default='Education')   
+    subcategory = models.ForeignKey(Subcategories, on_delete=models.CASCADE, default='Science_and_Nature')   
 
     # set variables that represent question, choices & correct_answer in the quiz
     # use TextField to store the questions
@@ -127,19 +119,14 @@ class Science_and_Nature(models.Model):
     
 # create a History class that inherits from django.db.models.Model
 class History(models.Model):      
-    # retrieve the category object representing 'Education' from the Categories model
-    education_category_obj = Categories.objects.get(category='Education')
-    # retrieve the subcategory object representing 'History' from the Subcategories model
-    history_subcategory_obj = Subcategories.objects.get(subcategory='History')
-
     # use database foreign keys to indicate relationships between History and categories
     # call the function to retrieve the desired default category
     # use database foreign keys to indicate relationships between History and subcategories
     # - a ForeignKey field to show this many-to-one relationship
-    # set the default value to the primary key (pk) of the 'education_category_obj' object
-    # set the default value to the primary key (pk) of the 'history_subcategory_obj' object
-    category = models.ForeignKey(Categories, on_delete=models.SET_DEFAULT, default=education_category_obj.pk)   
-    subcategory = models.ForeignKey(Subcategories, on_delete=models.SET_DEFAULT, default=history_subcategory_obj.pk)   
+    # set the category default value to Education
+    # set the subcategory default value to History
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE, default='Education')   
+    subcategory = models.ForeignKey(Subcategories, on_delete=models.CASCADE, default='History')   
 
     # set variables that represent question, choices & correct_answer in the quiz
     # use TextField to store the questions
