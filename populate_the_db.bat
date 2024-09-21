@@ -56,6 +56,8 @@ if %errorlevel% neq 0 (
 )
 
 :: populate the database with the quiz question objects for each subcategory
+:: the custom command can be called using `python manage.py create_category_objects_en kwarg kwarg` to populate subcategory
+:: be sure to place the desired app name in the handle() before calling the command with its corresponding category_id
 python manage.py create_mythology_objects 20 Mythology
 if %errorlevel% neq 0 (
     echo Error: Failed to populate Mythology objects
@@ -72,9 +74,21 @@ if %errorlevel% neq 0 (
     set success=0
 )
 
+python manage.py create_music_objects 12 Music
+if %errorlevel% neq 0 (
+    echo Error: Failed to populate Music objects
+    set success=0
+)
+
 python manage.py create_film_objects 11 Film
 if %errorlevel% neq 0 (
     echo Error: Failed to populate Film objects
+    set success=0
+)
+
+python manage.py create_video_games_objects 15 "Video Games"
+if %errorlevel% neq 0 (
+    echo Error: Failed to populate Video Games objects
     set success=0
 )
 
