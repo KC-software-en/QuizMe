@@ -1,3 +1,4 @@
+:: https://www.tutorialspoint.com/batch_script/batch_script_operators.htm
 :: manage the scope of environment variable changes
 :: start the localisation of environment changes. 
 :: changes to environment variables made after this command are local to the batch file.
