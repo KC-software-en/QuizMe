@@ -62,6 +62,8 @@ class Mythology(models.Model):
     # - a ForeignKey field to show this many-to-one relationship    
     # ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, 
     # - with cascade all related objects will also be deleted. This is useful for maintaining referential integrity in the database
+    # set the category default value to Education 
+    # set the subcategory default value to Mythology
     category = models.ForeignKey(Categories, on_delete=models.CASCADE, default='Education')   
     subcategory = models.ForeignKey(Subcategories, on_delete=models.CASCADE, default='Mythology')   
 
@@ -91,6 +93,8 @@ class Science_and_Nature(models.Model):
     # use database foreign keys to indicate relationships between Education and categories    
     # use database foreign keys to indicate relationships between Science_and_Nature and subcategories
     # - a ForeignKey field to show this many-to-one relationship
+    # ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, 
+    # - providing further control over the default value
     # set the category default value to Education 
     # set the subcategory default value to Science_and_Nature
     category = models.ForeignKey(Categories, on_delete=models.CASCADE, default='Education')   
@@ -119,11 +123,12 @@ class Science_and_Nature(models.Model):
     
 # create a History class that inherits from django.db.models.Model
 class History(models.Model):      
-    # use database foreign keys to indicate relationships between History and categories
-    # call the function to retrieve the desired default category
+    # use database foreign keys to indicate relationships between History and categories    
     # use database foreign keys to indicate relationships between History and subcategories
     # - a ForeignKey field to show this many-to-one relationship
-    # set the category default value to Education
+    # ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, 
+    # - providing further control over the default value
+    # # set the category default value to Education
     # set the subcategory default value to History
     category = models.ForeignKey(Categories, on_delete=models.CASCADE, default='Education')   
     subcategory = models.ForeignKey(Subcategories, on_delete=models.CASCADE, default='History')   
