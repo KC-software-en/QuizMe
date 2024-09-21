@@ -145,7 +145,9 @@ class Command(BaseCommand):
 
                         # create a question object with the above data
                         # this will show on the admin site with the models created for questions & choices
-                        question_object = model.objects.create(category = education_category_obj,
+                        # use get_or_create in the event mythology objects are already in the db
+                        # - it ruturns a tuple, use _ to indicate the boolean is ignored 
+                        question_object, _ = model.objects.get_or_create(category = education_category_obj,
                                                                subcategory = mythology_subcategory_obj,
                                                                question = question_text,
                                                                choices = mixed_choices,
