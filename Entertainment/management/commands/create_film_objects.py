@@ -22,9 +22,6 @@ from django.apps import apps
 Define a class Command that extends BaseCommand. It will create an object for the sub-categories of the Entertainment quiz.
 It is intended for private use by the project creator, not its users.
 '''
-# the custom command can be called using `python manage.py create_category_objects_en kwarg kwarg` to populate subcategory
-# be sure to place the desired app name in the handle() before calling the command with its corresponding category_id
-# `python manage.py create_category_objects_en 12 Music` to populate Music
 class Command(BaseCommand):
     # define a varible that informs one what the command does
     help = 'Populate the database with quiz objects retrieved from an API'
@@ -41,7 +38,7 @@ class Command(BaseCommand):
         category_id = options['category_id']
         category_name = options['category_name']
 
-        # call the get_specific_json_category function to get the data for the mythology category
+        # call the get_specific_json_category function to get the data for the film category
         json_response = get_specific_json_category(quantity=50, category=category_id)
         if json_response == None: 
             self.stderr.write(self.style.ERROR("Failed to retrieve data from the API."))
@@ -145,7 +142,7 @@ class Command(BaseCommand):
                    
                         # create a question object with the above data
                         # this will show on the admin site with the models created for questions & choices                        
-                        # use get_or_create in the event mythology objects are already in the db
+                        # use get_or_create in the event film objects are already in the db
                         # - it ruturns a tuple, use _ to indicate the boolean is ignored 
                         question_object, _ = model.objects.get_or_create(category = entertainment_category_obj,
                                                                subcategory = film_subcategory_obj,
