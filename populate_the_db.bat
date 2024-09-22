@@ -92,6 +92,12 @@ if %errorlevel% neq 0 (
     set success=0
 )
 
+python manage.py create_gen_know_objects 9 "General Knowledge"
+if %errorlevel% neq 0 (
+    echo Error: Failed to populate General Knowledge objects
+    set success=0
+)
+
 :: check if all the commands were successful
 if %success% equ 1 (
     echo Success, all commmands were executed!
