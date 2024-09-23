@@ -27,7 +27,7 @@ class Categories(models.Model):
 class Subcategories(models.Model):
     # use database foreign keys to indicate relationships between categories and subcategories
     # - a ForeignKey field to show this many-to-one relationship ¹
-    # set a default category to the primary key (pk) of the 'Education' category object²
+    # set a default category to Education²
     # https://docs.djangoproject.com/en/3.2/topics/db/models/#many-to-one-relationships
     # https://dnmtechs.com/setting-default-value-for-foreign-key-attribute-in-django/
     # ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, 
