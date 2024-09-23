@@ -30,12 +30,9 @@ Create a model for the quiz subcategories in General Knowledge.
 '''
 # define a model for subcategories in the General Knowledge app
 class Subcategories(models.Model): 
-    # retrieve the category object representing 'General Knowledge' from the Categories model
-    gen_category_obj = Categories.objects.get(category='General Knowledge')
-
     # use database foreign keys to indicate relationships between categories and subcategories
     # - a ForeignKey field to show this many-to-one relationship
-    # set a default category to the primary key (pk) of the 'General Knowledge' category object
+    # set a default category to 'General Knowledge' 
     # https://docs.djangoproject.com/en/3.2/topics/db/models/#many-to-one-relationships
     # https://dnmtechs.com/setting-default-value-for-foreign-key-attribute-in-django/
     # ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, 
@@ -43,7 +40,7 @@ class Subcategories(models.Model):
     # https://docs.djangoproject.com/en/3.2/ref/models/fields/#default
     # - according to doc, for fields like ForeignKey that map to model instances, 
     # - defaults should be the value of the field they reference (pk unless to_field is set) instead of model instances
-    category = models.ForeignKey(Categories, on_delete=models.SET_DEFAULT, default=gen_category_obj.pk)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE, default='General Knowledge')
 
     # define a field to store the subcategory name as text
     subcategory = models.TextField()
@@ -68,15 +65,12 @@ Create a General Knowledge model for the subcategory in the education quiz.
 # -each entry in a SQL table represents a single object, this can be converted to a class instance in Python.  
 # create a General Knowledge class that inherits from django.db.models.Model
 class General_Knowledge(models.Model):      
-    # retrieve the category object representing 'Education' from the Categories model
-    education_category_obj = Categories.objects.get(category='Education')    
-
     # use database foreign keys to indicate relationships between General Knowledge and categories        
     # - a ForeignKey field to show this many-to-one relationship
-    # set a default category to the primary key (pk) of the 'education_category_obj' object    
+    # set a default category to General Knowledge
     # ‘on_delete’ parameter allows one to define the behaviour when the referenced object is deleted, 
-    # - providing further control over the default value
-    category = models.ForeignKey(Categories, on_delete=models.SET_DEFAULT, default=education_category_obj.pk)       
+    # - with cascade all related objects will also be deleted. This is useful for maintaining referential integrity in the database    
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE, default='General Knowledge')       
 
     # set variables that represent question, choices & correct_answer in the quiz
     # use TextField to store the questions
