@@ -4,7 +4,7 @@ from typing import Any
 from django.core.management.base import BaseCommand, CommandError, CommandParser 
 
 # import models
-from ...models import Categories, Subcategories Science_and_Nature 
+from ...models import Categories, Subcategories, Science_and_Nature 
 
 # import the utility functions used within the create_subcategory_object()
 from ...utils import get_specific_json_category, mix_choices
