@@ -74,6 +74,9 @@ You will need to set up your custom Secret Key before running the website
     OR
     + python -m pip install -r requirements.txt
 
+1. Populate the QuizMe database with question objects for the quizzes
+    + In CMD, after the activation of the Virtual Environment, enter `populate_the_db.bat` to run the batch file containing commands to set up your database and create a superuser.
+
 # Usage section
 *Instruct others on how to use your project after they’ve installed it*
 
